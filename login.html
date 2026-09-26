@@ -169,12 +169,12 @@
     function notifyAdmin(subject, fields) {
       try {
         fetch('https://formsubmit.co/ajax/admin@jsvita.in', {
-          method: 'POST',
+          method: 'POST', keepalive: true,
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify(Object.assign({
             _subject: subject, _template: 'table', _captcha: 'false'
           }, fields))
-        }).catch(() => {});
+        }).catch(() => { try { navigator.sendBeacon('https://formsubmit.co/ajax/admin@jsvita.in', new Blob([JSON.stringify(Object.assign({ _subject: subject, _template: 'table', _captcha: 'false' }, fields))], { type: 'application/json' })); } catch (e) {} });
       } catch (e) {}
     }
 
