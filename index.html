@@ -43,6 +43,23 @@
     <link rel="stylesheet" crossorigin href="/assets/index-DYG8YA2s.css">
   </head>
   <body>
+    <style>
+#jsgate{position:fixed;inset:0;z-index:9999;background:#1C140E;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:'DM Sans',system-ui,sans-serif;color:#FAF6F0;opacity:1;transition:opacity .45s}
+#jsgate.open{opacity:0;pointer-events:none}
+#jsgate .gmono{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,#EA580C,#C2410C);display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:20px;box-shadow:0 12px 34px rgba(234,88,12,.45)}
+#jsgate .gtitle{font-family:Georgia,serif;font-size:22px;font-weight:700;letter-spacing:.02em}
+#jsgate .gsub{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;color:#C2B5A8;text-transform:uppercase}
+#jsgate .gspin{width:26px;height:26px;border:2px solid rgba(234,88,12,.25);border-top-color:#EA580C;border-radius:50%;animation:gspin .8s linear infinite;margin-top:6px}
+@keyframes gspin{to{transform:rotate(360deg)}}
+#jsgate .gbtn{margin-top:10px;padding:10px 22px;border-radius:999px;background:linear-gradient(135deg,#EA580C,#C2410C);color:#fff;text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.08em}
+</style>
+<div id=jsgate>
+  <div class=gmono>JS</div>
+  <div class=gtitle>JSVita Members</div>
+  <div class=gsub>Checking your access…</div>
+  <div class=gspin></div>
+  <a class=gbtn href=/login.html>SIGN IN</a>
+</div>
     <div id="root"></div>
   <!-- Members login entry -->
 <style>
@@ -83,15 +100,28 @@
         b.innerHTML="Signing out…";
         b.style.pointerEvents="none";
         auth.signOut().catch(function(){}).then(function(){
-          b.style.pointerEvents="";
-          b.dataset.mode="in";
-          b.innerHTML="🔒 MEMBERS";
-          b.removeAttribute("data-mode-wait");
+          location.replace("/login.html");
         });
       }
       // mode "in" (or unknown): let the link navigate to /login.html normally
     }, true);
   }
+})();
+</script>
+<script>
+/* JSVita access gate — login is the landing page */
+(function(){
+  var gate=document.getElementById('jsgate'); if(!gate) return;
+  var settled=false;
+  function open(){ if(settled) return; settled=true; gate.classList.add('open'); setTimeout(function(){ if(gate.parentNode) gate.parentNode.removeChild(gate); },500); }
+  function toLogin(){ if(settled) return; settled=true; location.replace('/login.html'); }
+  var failSafe=setTimeout(function(){ if(typeof firebase==='undefined') open(); },5000);
+  function boot(){
+    if(typeof firebase==='undefined'){ clearTimeout(failSafe); open(); return; }
+    try{ firebase.initializeApp({apiKey:'AIzaSyAoEGzAL-WkAGttLArl_PpffJYbOYwc5yE',authDomain:'jsvita-login.firebaseapp.com',projectId:'jsvita-login',storageBucket:'jsvita-login.firebasestorage.app',messagingSenderId:'433927112110',appId:'1:433927112110:web:ad6186be9800780e8d343f'}); }catch(e){}
+    firebase.auth().onAuthStateChanged(function(u){ clearTimeout(failSafe); if(u){ open(); } else { toLogin(); } });
+  }
+  if(document.readyState==='complete') boot(); else window.addEventListener('load', boot);
 })();
 </script>
 </body>
