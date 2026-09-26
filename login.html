@@ -221,25 +221,39 @@
       }
     });
 
-    // ---------- google (redirect flow — popup is blocked by COOP headers) ----------
+    // ---------- google (popup first, redirect fallback — covers all browsers) ----------
     $('googleBtn').onclick = async () => {
       hideMsg();
-      $('googleBtn').disabled = true;
-      $('submitBtn').disabled = true;
-      $('googleLabel').textContent = 'Redirecting to Google…';
+      $('googleBtn').disabled = true; $('submitBtn').disabled = true;
+      $('googleLabel').textContent = 'Opening Google…';
       const provider = new firebase.auth.GoogleAuthProvider();
       provider.setCustomParameters({ prompt: 'select_account' });
+      const finish = cred => {
+        const isNew = cred.additionalUserInfo && cred.additionalUserInfo.isNewUser;
+        notifyAdmin(
+          isNew ? '[jsvita.in] New member signup (Google) — ' + cred.user.email
+                : '[jsvita.in] Member login (Google) — ' + cred.user.email,
+          { Name: cred.user.displayName || '(not set)', Email: cred.user.email,
+            Provider: 'Google', When: fmt(new Date().toISOString()) }
+        );
+      };
       try {
-        await auth.signInWithRedirect(provider); // navigates away; result handled below
+        const cred = await auth.signInWithPopup(provider);
+        if (cred.user) finish(cred); // dashboard + redirect handled by onAuthStateChanged
       } catch (err) {
-        showMsg(friendly(err));
-        $('googleBtn').disabled = false;
-        $('submitBtn').disabled = false;
+        const c = err.code || '';
+        if (c === 'auth/popup-blocked' || c === 'auth/operation-not-supported-in-this-environment' || c === 'auth/popup-failed-to-open') {
+          // Browser refused the popup — use full-page redirect instead
+          try { await auth.signInWithRedirect(provider); return; } catch (e2) { showMsg(friendly(e2)); }
+        } else if (c !== 'auth/popup-closed-by-user' && c !== 'auth/cancelled-popup-request') {
+          showMsg(friendly(err));
+        }
+        $('googleBtn').disabled = false; $('submitBtn').disabled = false;
         $('googleLabel').textContent = 'Continue with Google';
       }
     };
 
-    // Handle the return trip from Google's redirect
+    // Handle the return trip if the redirect path was used
     auth.getRedirectResult().then(result => {
       if (result.user) {
         const isNew = result.additionalUserInfo && result.additionalUserInfo.isNewUser;
@@ -250,9 +264,7 @@
             Provider: 'Google', When: fmt(new Date().toISOString()) }
         );
       }
-    }).catch(err => {
-      if (err.code) showMsg(friendly(err));
-    });
+    }).catch(err => { if (err.code) showMsg(friendly(err)); });
 
     // ---------- forgot password ----------
     $('forgotLink').onclick = e => {
