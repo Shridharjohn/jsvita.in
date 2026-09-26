@@ -253,12 +253,15 @@
       return err.message || 'Something went wrong.';
     }
 
-    // ---------- dashboard ----------
+    // ---------- dashboard + redirect to website ----------
+    let goTimer = null;
     auth.onAuthStateChanged(user => {
       busy(false);
+      if (goTimer) { clearTimeout(goTimer); goTimer = null; }
       if (!user) { $('authPanel').style.display = 'block'; $('dash').style.display = 'none'; return; }
       $('authPanel').style.display = 'none';
       $('dash').style.display = 'block';
+      document.querySelector('.badge').textContent = '● SIGNED IN — TAKING YOU TO THE WEBSITE…';
       const initial = (user.displayName || user.email || 'M').trim()[0].toUpperCase();
       $('avatarSlot').innerHTML = user.photoURL
         ? '<img class="avatar" src="' + user.photoURL + '" alt="avatar" referrerpolicy="no-referrer">'
@@ -270,6 +273,7 @@
       $('mSince').textContent = fmt(user.metadata.creationTime);
       $('mSession').textContent = fmt(new Date());
       hideMsg();
+      goTimer = setTimeout(() => window.location.replace('https://jsvita.in/'), 700);
     });
 
     $('logoutBtn').onclick = () => auth.signOut();
