@@ -128,7 +128,6 @@
         <span id="googleLabel">Continue with Google</span>
       </button>
       <p class="fineprint" style="margin-top:12px"><a href="#" id="forgotLink">Forgot password?</a></p>
-      <p class="fineprint" style="margin-top:8px"><a href="#" id="magicLink">✨ Sign in with a one-time email link — no password</a></p>
 
       <div class="msg" id="msg"></div>
       <p class="fineprint haters">Designed for my haters</p>
@@ -280,34 +279,6 @@
         showMsg('Password reset email sent to ' + email + ' — check your inbox (and spam).', true);
       }).catch(err => showMsg(friendly(err)));
     };
-
-    // ---------- one-time email link (passwordless) ----------
-    const MAGIC_URL = 'https://jsvita.in/login.html';
-    $('magicLink').onclick = e => {
-      e.preventDefault(); hideMsg();
-      const email = $('email').value.trim();
-      if (!email) { showMsg('Type your email above first, then press "one-time email link".'); return; }
-      busy(true);
-      auth.sendSignInLinkToEmail(email, { url: MAGIC_URL, handleCodeInApp: true }).then(() => {
-        try { localStorage.setItem('jsvitaEmailForSignIn', email); } catch (err) {}
-        showMsg('✉️ Sign-in link sent to ' + email + ' — open it on this device to finish signing in.', true);
-        busy(false);
-      }).catch(err => { showMsg(friendly(err)); busy(false); });
-    };
-
-    // Returning from an email link? Complete the sign-in automatically.
-    if (auth.isSignInWithEmailLink(window.location.href)) {
-      let em = null;
-      try { em = localStorage.getItem('jsvitaEmailForSignIn'); } catch (err) {}
-      if (!em) em = window.prompt('To finish signing in, confirm the email you used:');
-      if (em) {
-        auth.signInWithEmailLink(em, window.location.href).then(() => {
-          try { localStorage.removeItem('jsvitaEmailForSignIn'); } catch (err) {}
-          notifyAdmin('[jsvita.in] Member login (email link) — ' + em,
-            { Email: em, Provider: 'Email Link', When: fmt(new Date().toISOString()) });
-        }).catch(err => showMsg(friendly(err)));
-      }
-    }
 
     function friendly(err) {
       const c = err.code || '';
