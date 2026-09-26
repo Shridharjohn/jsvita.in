@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#C2410C" />
+  <meta name="description" content="Member login for JSVita — Shridhar John's official members area." />
+  <title>Member Login — JSVita</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <style>
+    :root {
+      --bg: #1C140E; --bg2: #241A13; --card: #2A1F16; --border: #2E241E;
+      --cream: #FAF6F0; --muted: #C2B5A8; --orange: #EA580C; --orange-deep: #C2410C;
+      --good: #4ADE80; --bad: #F87171;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh; background: var(--bg); color: var(--cream);
+      font-family: 'DM Sans', system-ui, sans-serif; display: flex; flex-direction: column;
+    }
+    .glow { position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background: radial-gradient(600px 400px at 70% 10%, rgba(234,88,12,.08), transparent 60%); }
+    header { display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 28px; border-bottom: 1px solid var(--border); position: relative; z-index: 1; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--cream); }
+    .monogram { width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, var(--orange), var(--orange-deep));
+      display: grid; place-items: center; font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 14px; }
+    .brand-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 20px; }
+    .brand-sub { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .25em; color: var(--muted); }
+    .home-link { font-size: 13px; color: var(--muted); text-decoration: none; border: 1px solid var(--border);
+      padding: 8px 14px; border-radius: 999px; transition: .2s; }
+    .home-link:hover { color: var(--cream); border-color: var(--orange); }
+    main { flex: 1; display: grid; place-items: center; padding: 32px 16px; position: relative; z-index: 1; }
+    .panel { width: 100%; max-width: 420px; background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 24px; padding: 36px 32px; box-shadow: 0 24px 60px rgba(0,0,0,.45); }
+    h1 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; }
+    .sub { color: var(--muted); font-size: 14px; margin-top: 6px; }
+    .tabs { display: flex; gap: 6px; background: var(--bg); border: 1px solid var(--border);
+      border-radius: 12px; padding: 4px; margin: 22px 0; }
+    .tab { flex: 1; padding: 9px 0; border: 0; border-radius: 9px; background: transparent; color: var(--muted);
+      font-family: inherit; font-size: 14px; font-weight: 500; cursor: pointer; transition: .2s; }
+    .tab.active { background: var(--orange); color: #fff; }
+    label { display: block; font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--muted); margin: 14px 0 6px; }
+    input { width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--border);
+      background: var(--bg); color: var(--cream); font-family: inherit; font-size: 15px; outline: none; transition: .2s; }
+    input:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(234,88,12,.15); }
+    .btn { width: 100%; margin-top: 18px; padding: 13px; border: 0; border-radius: 12px; cursor: pointer;
+      font-family: inherit; font-size: 15px; font-weight: 700; transition: .2s; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    .btn-primary { background: var(--orange); color: #fff; }
+    .btn-primary:hover { background: var(--orange-deep); box-shadow: 0 8px 24px rgba(234,88,12,.35); }
+    .btn-google { background: var(--card); color: var(--cream); border: 1px solid var(--border); }
+    .btn-google:hover { border-color: var(--orange); }
+    .divider { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 12px; margin: 18px 0 0; }
+    .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .msg { margin-top: 14px; padding: 11px 14px; border-radius: 10px; font-size: 14px; display: none; }
+    .msg.err { background: rgba(248,113,113,.12); color: var(--bad); border: 1px solid rgba(248,113,113,.3); }
+    .msg.ok { background: rgba(74,222,128,.1); color: var(--good); border: 1px solid rgba(74,222,128,.3); }
+    .fineprint { margin-top: 18px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); text-align: center; }
+    .fineprint a { color: var(--orange); text-decoration: none; }
+    .spinner { width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.35); border-top-color: #fff;
+      border-radius: 50%; animation: spin .7s linear infinite; display: none; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    /* dashboard */
+    #dash { display: none; text-align: center; }
+    .avatar { width: 76px; height: 76px; border-radius: 50%; border: 3px solid var(--orange);
+      object-fit: cover; margin: 0 auto 16px; display: block; }
+    .avatar-fallback { width: 76px; height: 76px; border-radius: 50%; margin: 0 auto 16px;
+      background: linear-gradient(135deg, var(--orange), var(--orange-deep)); display: grid; place-items: center;
+      font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 700; color: #fff; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; letter-spacing: .12em; color: var(--good); border: 1px solid rgba(74,222,128,.35);
+      background: rgba(74,222,128,.08); border-radius: 999px; padding: 6px 12px; margin-bottom: 14px; }
+    .meta { margin-top: 18px; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; text-align: left; }
+    .meta-row { display: flex; justify-content: space-between; gap: 12px; padding: 11px 16px; font-size: 14px;
+      border-bottom: 1px solid var(--border); }
+    .meta-row:last-child { border-bottom: 0; }
+    .meta-row .k { color: var(--muted); }
+    .meta-row .v { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; text-align: right; word-break: break-all; }
+    footer { padding: 18px; text-align: center; font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; color: var(--muted); border-top: 1px solid var(--border); position: relative; z-index: 1; }
+    @media (max-width: 480px) { .panel { padding: 28px 22px; } h1 { font-size: 24px; } }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+  <header>
+    <a class="brand" href="/">
+      <span class="monogram">JS</span>
+      <span><span class="brand-name">JSVita</span><br><span class="brand-sub">MEMBERS</span></span>
+    </a>
+    <a class="home-link" href="/">← Back to jsvita.in</a>
+  </header>
+
+  <main>
+    <!-- AUTH PANEL -->
+    <section class="panel" id="authPanel">
+      <h1 id="title">Welcome back</h1>
+      <p class="sub" id="subtitle">Sign in to your JSVita members area.</p>
+
+      <div class="tabs">
+        <button class="tab active" id="tabLogin" type="button">Sign in</button>
+        <button class="tab" id="tabSignup" type="button">Create account</button>
+      </div>
+
+      <form id="authForm" novalidate>
+        <label for="email">Email</label>
+        <input id="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+        <label for="pass">Password</label>
+        <input id="pass" type="password" autocomplete="current-password" placeholder="••••••••" minlength="6" required>
+        <button class="btn btn-primary" id="submitBtn" type="submit">
+          <span class="spinner" id="spin"></span><span id="submitLabel">Sign in</span>
+        </button>
+      </form>
+
+      <div class="divider">or</div>
+      <button class="btn btn-google" id="googleBtn" type="button">
+        <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.5 6.1 29.5 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.5 6.1 29.5 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
+        Continue with Google
+      </button>
+
+      <div class="msg" id="msg"></div>
+      <p class="fineprint">New signups & logins are reported to <a href="mailto:admin@jsvita.in">admin@jsvita.in</a></p>
+    </section>
+
+    <!-- MEMBER DASHBOARD -->
+    <section class="panel" id="dash">
+      <div class="badge">● MEMBER ACCESS GRANTED</div>
+      <div id="avatarSlot"></div>
+      <h1 id="dashName">Member</h1>
+      <p class="sub" id="dashEmail"></p>
+      <div class="meta">
+        <div class="meta-row"><span class="k">Provider</span><span class="v" id="mProvider">—</span></div>
+        <div class="meta-row"><span class="k">Member since</span><span class="v" id="mSince">—</span></div>
+        <div class="meta-row"><span class="k">This session</span><span class="v" id="mSession">—</span></div>
+        <div class="meta-row"><span class="k">Status</span><span class="v" style="color:var(--good)">Active ✓</span></div>
+      </div>
+      <button class="btn btn-google" id="logoutBtn" type="button">Sign out</button>
+    </section>
+  </main>
+
+  <footer>© 2026 Shridhar John · jsvita.in members</footer>
+
+  <script>
+    // ---------- Firebase ----------
+    const firebaseConfig = {
+      apiKey: "AIzaSyAoEGzAL-WkAGttLArl_PpffJYbOYwc5yE",
+      authDomain: "jsvita-login.firebaseapp.com",
+      projectId: "jsvita-login",
+      storageBucket: "jsvita-login.firebasestorage.app",
+      messagingSenderId: "433927112110",
+      appId: "1:433927112110:web:ad6186be9800780e8d343f"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // ---------- helpers ----------
+    const $ = id => document.getElementById(id);
+    const showMsg = (text, ok) => { const m = $('msg'); m.textContent = text; m.className = 'msg ' + (ok ? 'ok' : 'err'); m.style.display = 'block'; };
+    const hideMsg = () => { $('msg').style.display = 'none'; };
+    const busy = on => { $('spin').style.display = on ? 'inline-block' : 'none'; $('submitBtn').disabled = on; $('googleBtn').disabled = on; };
+
+    // Email notify via FormSubmit (already activated for jsvita.in form)
+    function notifyAdmin(subject, fields) {
+      try {
+        fetch('https://formsubmit.co/ajax/admin@jsvita.in', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(Object.assign({
+            _subject: subject, _template: 'table', _captcha: 'false'
+          }, fields))
+        }).catch(() => {});
+      } catch (e) {}
+    }
+
+    function fmt(d) {
+      return d ? new Date(d).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }) : '—';
+    }
+
+    // ---------- tabs ----------
+    let mode = 'login';
+    function setMode(m) {
+      mode = m; hideMsg();
+      $('tabLogin').classList.toggle('active', m === 'login');
+      $('tabSignup').classList.toggle('active', m === 'signup');
+      $('title').textContent = m === 'login' ? 'Welcome back' : 'Join JSVita';
+      $('subtitle').textContent = m === 'login' ? 'Sign in to your JSVita members area.' : 'Create your free members account in seconds.';
+      $('submitLabel').textContent = m === 'login' ? 'Sign in' : 'Create my account';
+      $('pass').setAttribute('autocomplete', m === 'login' ? 'current-password' : 'new-password');
+    }
+    $('tabLogin').onclick = () => setMode('login');
+    $('tabSignup').onclick = () => setMode('signup');
+
+    // ---------- email/password ----------
+    $('authForm').addEventListener('submit', async e => {
+      e.preventDefault(); hideMsg();
+      const email = $('email').value.trim(), pass = $('pass').value;
+      if (!email || pass.length < 6) { showMsg('Enter a valid email and a password of at least 6 characters.'); return; }
+      busy(true);
+      try {
+        if (mode === 'signup') {
+          const cred = await auth.createUserWithEmailAndPassword(email, pass);
+          notifyAdmin('[jsvita.in] New member signup — ' + email, {
+            Name: cred.user.displayName || '(not set)', Email: email,
+            Provider: 'Email/Password', 'Member since': fmt(cred.user.metadata.creationTime)
+          });
+        } else {
+          await auth.signInWithEmailAndPassword(email, pass);
+          notifyAdmin('[jsvita.in] Member login — ' + email, {
+            Email: email, Provider: 'Email/Password', When: fmt(new Date().toISOString())
+          });
+        }
+      } catch (err) {
+        showMsg(friendly(err)); busy(false);
+      }
+    });
+
+    // ---------- google ----------
+    $('googleBtn').onclick = async () => {
+      hideMsg(); busy(true);
+      try {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        provider.setCustomParameters({ prompt: 'select_account' });
+        const cred = await auth.signInWithPopup(provider);
+        const isNew = cred.additionalUserInfo && cred.additionalUserInfo.isNewUser;
+        notifyAdmin(
+          isNew ? '[jsvita.in] New member signup (Google) — ' + cred.user.email
+                : '[jsvita.in] Member login (Google) — ' + cred.user.email,
+          { Name: cred.user.displayName || '(not set)', Email: cred.user.email,
+            Provider: 'Google', When: fmt(new Date().toISOString()) }
+        );
+      } catch (err) {
+        if (err.code !== 'auth/popup-closed-by-user' && err.code !== 'auth/cancelled-popup-request')
+          showMsg(friendly(err));
+        busy(false);
+      }
+    };
+
+    function friendly(err) {
+      const c = err.code || '';
+      if (c.includes('invalid-email')) return 'That email address doesn\'t look right.';
+      if (c.includes('wrong-password') || c.includes('invalid-credential')) return 'Wrong email or password.';
+      if (c.includes('user-not-found')) return 'No account with that email — switch to "Create account".';
+      if (c.includes('email-already-in-use')) return 'That email already has an account — switch to "Sign in".';
+      if (c.includes('weak-password')) return 'Password too weak — use at least 6 characters.';
+      if (c.includes('too-many-requests')) return 'Too many attempts — wait a minute and try again.';
+      if (c.includes('network')) return 'Network problem — check your connection.';
+      return err.message || 'Something went wrong.';
+    }
+
+    // ---------- dashboard ----------
+    auth.onAuthStateChanged(user => {
+      busy(false);
+      if (!user) { $('authPanel').style.display = 'block'; $('dash').style.display = 'none'; return; }
+      $('authPanel').style.display = 'none';
+      $('dash').style.display = 'block';
+      const initial = (user.displayName || user.email || 'M').trim()[0].toUpperCase();
+      $('avatarSlot').innerHTML = user.photoURL
+        ? '<img class="avatar" src="' + user.photoURL + '" alt="avatar" referrerpolicy="no-referrer">'
+        : '<div class="avatar-fallback">' + initial + '</div>';
+      $('dashName').textContent = user.displayName || 'Member';
+      $('dashEmail').textContent = user.email;
+      $('mProvider').textContent = user.isAnonymous ? 'Anonymous' :
+        (user.providerData[0] && user.providerData[0].providerId === 'google.com' ? 'Google' : 'Email / Password');
+      $('mSince').textContent = fmt(user.metadata.creationTime);
+      $('mSession').textContent = fmt(new Date());
+      hideMsg();
+    });
+
+    $('logoutBtn').onclick = () => auth.signOut();
+  </script>
+</body>
+</html>
