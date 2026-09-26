@@ -76,7 +76,7 @@
   var btn=null;
   function init(){
     if(!window.firebase||!firebase.initializeApp)return;
-    try{firebase.initializeApp({apiKey:"AIzaSyAoEGzAL-WkAGttLArl_PpffJYbOYwc5yE",authDomain:"jsvita-login.firebaseapp.com",projectId:"jsvita-login",storageBucket:"jsvita-login.firebasestorage.app",messagingSenderId:"433927112110",appId:"1:433927112110:web:ad6186be9800780e8d343f"});}catch(e){}
+    try{firebase.initializeApp({apiKey:"AIzaSyAoEGzAL-WkAGttLArl_PpffJYbOYwc5yE",authDomain:"auth.jsvita.in",projectId:"jsvita-login",storageBucket:"jsvita-login.firebasestorage.app",messagingSenderId:"433927112110",appId:"1:433927112110:web:ad6186be9800780e8d343f"});}catch(e){}
     var auth=firebase.auth();
     function paint(u){
       btn=document.querySelector(".jsv-members-btn");
@@ -118,7 +118,7 @@
   var failSafe=setTimeout(function(){ if(typeof firebase==='undefined') open(); },5000);
   function boot(){
     if(typeof firebase==='undefined'){ clearTimeout(failSafe); open(); return; }
-    try{ firebase.initializeApp({apiKey:'AIzaSyAoEGzAL-WkAGttLArl_PpffJYbOYwc5yE',authDomain:'jsvita-login.firebaseapp.com',projectId:'jsvita-login',storageBucket:'jsvita-login.firebasestorage.app',messagingSenderId:'433927112110',appId:'1:433927112110:web:ad6186be9800780e8d343f'}); }catch(e){}
+    try{ firebase.initializeApp({apiKey:'AIzaSyAoEGzAL-WkAGttLArl_PpffJYbOYwc5yE',authDomain:'auth.jsvita.in',projectId:'jsvita-login',storageBucket:'jsvita-login.firebasestorage.app',messagingSenderId:'433927112110',appId:'1:433927112110:web:ad6186be9800780e8d343f'}); }catch(e){}
     firebase.auth().onAuthStateChanged(function(u){ clearTimeout(failSafe); if(u){ open(); } else { toLogin(); } });
   }
   if(document.readyState==='complete') boot(); else window.addEventListener('load', boot);
