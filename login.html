@@ -14,8 +14,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <style>
     :root {
-      --bg: #1C140E; --bg2: #241A13; --card: #2A1F16; --border: #2E241E;
-      --cream: #FAF6F0; --muted: #C2B5A8; --orange: #EA580C; --orange-deep: #C2410C;
+      --bg: #0b0806; --bg2: #14100c; --card: #1c1610; --border: #26201a;
+      --cream: #f7f1e8; --muted: #b3a493; --orange: #ff8a3d; --orange-deep: #C2410C;
       --good: #4ADE80; --bad: #F87171;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,7 +24,8 @@
       font-family: 'DM Sans', system-ui, sans-serif; display: flex; flex-direction: column;
     }
     .glow { position: fixed; inset: 0; pointer-events: none; z-index: 0;
-      background: radial-gradient(600px 400px at 70% 10%, rgba(234,88,12,.08), transparent 60%); }
+      background: radial-gradient(700px 460px at 72% 8%, rgba(255,138,61,.09), transparent 58%), radial-gradient(560px 420px at 8% 100%, rgba(194,65,12,.07), transparent 55%); }
+    .panel, input, .tab, .btn { transition: background-color .35s, border-color .35s, color .35s; }
     header { display: flex; justify-content: space-between; align-items: center;
       padding: 18px 28px; border-bottom: 1px solid var(--border); position: relative; z-index: 1; }
     .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--cream); }
@@ -88,6 +89,7 @@
       font-size: 11px; color: var(--muted); border-top: 1px solid var(--border); position: relative; z-index: 1; }
     @media (max-width: 480px) { .panel { padding: 28px 22px; } h1 { font-size: 24px; } }
   </style>
+<!-- obsidian-ember -->
 </head>
 <body>
   <div class="glow"></div>
