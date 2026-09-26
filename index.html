@@ -52,26 +52,46 @@
 </style>
 <a class="jsv-members-btn" href="/login.html">&#128274; MEMBERS</a>
 <script>
-/* JSVita member session chip — shows logged-in state on the main site */
+<script>
+/* JSVita member session chip v2 — state read at click time (always 1-click sign out) */
 (function(){
   var s=document.createElement("script");s.src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js";document.head.appendChild(s);
   var s2=document.createElement("script");s2.src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js";s2.onload=init;document.head.appendChild(s2);
+  var btn=null;
   function init(){
     if(!window.firebase||!firebase.initializeApp)return;
     try{firebase.initializeApp({apiKey:"AIzaSyAoEGzAL-WkAGttLArl_PpffJYbOYwc5yE",authDomain:"jsvita-login.firebaseapp.com",projectId:"jsvita-login",storageBucket:"jsvita-login.firebasestorage.app",messagingSenderId:"433927112110",appId:"1:433927112110:web:ad6186be9800780e8d343f"});}catch(e){}
     var auth=firebase.auth();
-    auth.onAuthStateChanged(function(u){
-      var btn=document.querySelector(".jsv-members-btn");
+    function paint(u){
+      btn=document.querySelector(".jsv-members-btn");
       if(!btn)return;
       if(u){
         var name=(u.displayName||u.email||"Member").split(" ")[0];
+        btn.dataset.mode="out";
         btn.innerHTML="👋 "+name+" &middot; Sign out";
-        btn.onclick=function(e){e.preventDefault();auth.signOut();};
       } else {
+        btn.dataset.mode="in";
         btn.innerHTML="🔒 MEMBERS";
-        btn.onclick=null;
       }
-    });
+    }
+    auth.onAuthStateChanged(paint);
+    // one permanent listener — decides at click time, never re-registered
+    document.addEventListener("click", function(e){
+      var b = e.target.closest ? e.target.closest(".jsv-members-btn") : null;
+      if(!b) return;
+      if(b.dataset.mode==="out"){
+        e.preventDefault();
+        b.innerHTML="Signing out…";
+        b.style.pointerEvents="none";
+        auth.signOut().catch(function(){}).then(function(){
+          b.style.pointerEvents="";
+          b.dataset.mode="in";
+          b.innerHTML="🔒 MEMBERS";
+          b.removeAttribute("data-mode-wait");
+        });
+      }
+      // mode "in" (or unknown): let the link navigate to /login.html normally
+    }, true);
   }
 })();
 </script>
