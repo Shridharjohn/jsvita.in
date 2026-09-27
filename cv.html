@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shridhar John — Résumé</title>
+<meta name="description" content="Résumé of Shridhar John — Cafe & Operations Manager, Bangalore. 3+ years across hospitality operations, inventory management, and team leadership." />
+<meta name="robots" content="noindex" />
+<style>
+  :root{
+    --ink:#1a120b; --ink2:#4a3c2f; --muted:#7a6a58;
+    --accent:#C2410C; --accent2:#EA580C; --line:#e4d8c8; --chipbg:#f7f1e8;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  body{
+    font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+    color:var(--ink); background:#efe7db; line-height:1.45; font-size:10.5pt;
+  }
+  .page{
+    max-width:800px; margin:24px auto; background:#fff;
+    box-shadow:0 10px 40px rgba(26,18,11,.14);
+  }
+  /* ---------- header ---------- */
+  header{
+    background:linear-gradient(135deg,#1C140E 0%,#2a1c12 100%);
+    color:#FAF6F0; padding:34px 44px 28px; display:flex; gap:24px; align-items:center;
+  }
+  .monogram{
+    width:74px;height:74px;border-radius:16px;flex:none;
+    background:linear-gradient(135deg,var(--accent2),var(--accent));
+    display:grid;place-items:center;
+    font-family:Georgia,serif;font-weight:700;font-size:30px;
+    box-shadow:0 10px 26px rgba(234,88,12,.45);
+  }
+  header h1{font-family:Georgia,serif;font-size:27pt;line-height:1.08;letter-spacing:.01em}
+  header .role{color:#FFB380;font-size:12.5pt;margin-top:4px;font-weight:600}
+  header .tag{color:#C2B5A8;font-size:9.5pt;margin-top:6px;font-style:italic}
+  .contactbar{
+    background:#14100c; color:#e7ddcf;
+    display:flex; flex-wrap:wrap; gap:6px 26px;
+    padding:10px 44px; font-size:9pt;
+  }
+  .contactbar span{white-space:nowrap}
+  .contactbar b{color:#FFB380;font-weight:600;margin-right:5px}
+  a{color:inherit;text-decoration:none}
+  /* ---------- body ---------- */
+  main{padding:26px 44px 40px}
+  section{margin-bottom:22px}
+  h2{
+    font-family:Georgia,serif; font-size:12.5pt; color:var(--accent);
+    text-transform:uppercase; letter-spacing:.14em; font-weight:700;
+    border-bottom:2px solid var(--line); padding-bottom:5px; margin-bottom:12px;
+  }
+  .job{margin-bottom:14px; break-inside:avoid}
+  .job-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .job h3{font-size:11.5pt;color:var(--ink)}
+  .job h3 em{font-style:normal;color:var(--accent);font-weight:600}
+  .job .period{
+    font-size:9pt;color:var(--muted);white-space:nowrap;
+    font-family:'Consolas',monospace;letter-spacing:.03em;
+  }
+  .job .loc{font-size:9pt;color:var(--muted);margin-bottom:4px}
+  .job .sum{font-size:9.8pt;color:var(--ink2);margin-bottom:5px}
+  .job ul{margin-left:16px}
+  .job li{font-size:9.6pt;color:var(--ink2);margin-bottom:2px}
+  .job li::marker{color:var(--accent2)}
+  .badge{
+    display:inline-block;background:var(--accent);color:#fff;font-size:7.5pt;
+    letter-spacing:.1em;padding:2px 8px;border-radius:99px;vertical-align:2px;
+    text-transform:uppercase;font-weight:700;margin-left:8px;
+  }
+  .skills{display:grid;grid-template-columns:1fr 1fr;gap:12px 26px}
+  .sg h3{font-size:10pt;color:var(--ink);margin-bottom:5px}
+  .chips{display:flex;flex-wrap:wrap;gap:5px}
+  .chip{
+    background:var(--chipbg);border:1px solid var(--line);border-radius:99px;
+    padding:2.5px 10px;font-size:8.6pt;color:var(--ink2);white-space:nowrap;
+  }
+  .edu{display:flex;justify-content:space-between;gap:14px;margin-bottom:8px;break-inside:avoid}
+  .edu h3{font-size:10.5pt}
+  .edu .cred{font-size:9.4pt;color:var(--ink2)}
+  .edu .loc{font-size:9pt;color:var(--muted)}
+  .langs{display:flex;gap:18px;font-size:9.8pt;color:var(--ink2)}
+  .langs b{color:var(--ink)}
+  footer{
+    border-top:1px solid var(--line); margin:0 44px; padding:12px 0 22px;
+    font-size:8.4pt; color:var(--muted); display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+  }
+  /* ---------- print ---------- */
+  @page{size:A4;margin:0}
+  @media print{
+    body{background:#fff}
+    .page{margin:0;box-shadow:none;max-width:none}
+    .noprint{display:none!important}
+  }
+  /* ---------- floating action bar (screen only) ---------- */
+  .actions{
+    position:fixed; bottom:22px; left:50%; transform:translateX(-50%);
+    display:flex; gap:10px; z-index:50;
+  }
+  .actions a,.actions button{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 22px;border-radius:999px;border:0;cursor:pointer;
+    background:linear-gradient(135deg,#EA580C,#C2410C);color:#fff;
+    font-family:'Consolas',monospace;font-size:12.5px;letter-spacing:.06em;
+    text-decoration:none;box-shadow:0 10px 28px rgba(234,88,12,.4);transition:.25s;
+  }
+  .actions .ghost{background:#14100c;color:#e7ddcf;box-shadow:0 10px 28px rgba(0,0,0,.35)}
+  .actions a:hover,.actions button:hover{transform:translateY(-3px)}
+  @media (max-width:640px){
+    header{padding:26px 22px 22px;flex-direction:column;text-align:center;gap:14px}
+    .contactbar{padding:10px 22px;justify-content:center}
+    main{padding:22px 22px 34px}
+    footer{margin:0 22px}
+    .skills{grid-template-columns:1fr}
+    .actions{bottom:14px;width:calc(100% - 28px);justify-content:center}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="monogram">SJ</div>
+    <div>
+      <h1>Shridhar John</h1>
+      <div class="role">Cafe &amp; Operations Manager</div>
+      <div class="tag">Bridging artisanal hospitality with data-driven operations</div>
+    </div>
+  </header>
+
+  <div class="contactbar">
+    <span><b>LOC</b> Bangalore, Karnataka, India</span>
+    <span><b>TEL</b> <a href="tel:+916361792699">+91 63617 92699</a></span>
+    <span><b>MAIL</b> <a href="mailto:admin@jsvita.in">admin@jsvita.in</a></span>
+    <span><b>WEB</b> <a href="https://jsvita.in">jsvita.in</a></span>
+  </div>
+
+  <main>
+    <section>
+      <h2>Profile</h2>
+      <p style="font-size:10.2pt;color:var(--ink2)">
+        Cafe and operations manager with 3+ years across hospitality, quick-commerce retail,
+        and client-facing operations. Hands-on with food-safety discipline, inventory control,
+        staff training, and audit-ready record keeping — currently running daily cafe operations
+        for Q-MIN under Roots Corporation Limited.
+      </p>
+    </section>
+
+    <section>
+      <h2>Experience</h2>
+
+      <div class="job">
+        <div class="job-top">
+          <h3>Cafe Manager <em>— Q-MIN, Roots Corporation Limited</em><span class="badge">Current</span></h3>
+          <span class="period">06.2026 — Present</span>
+        </div>
+        <div class="loc">Bangalore, Karnataka</div>
+        <p class="sum">Running daily cafe operations for Q-MIN under Roots Corporation — supervising service periods, safeguarding food safety, and keeping records audit-ready.</p>
+        <ul>
+          <li>Supervised baristas and cashiers during service periods, keeping queues moving and quality consistent.</li>
+          <li>Supported training for new team members on company procedures and service standards.</li>
+          <li>Maintained food-safety standards and sanitation routines.</li>
+          <li>Worked with vendors on deliveries and product availability.</li>
+          <li>Kept records, reports, and logs current for daily operations.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-top">
+          <h3>Cafe ICO — Zepto <em>— Geddit Convenience Private Limited</em></h3>
+          <span class="period">06.2024 — 06.2026</span>
+        </div>
+        <div class="loc">Bangalore, KA</div>
+        <p class="sum">Operated the Cafe ICO format inside Zepto's quick-commerce ecosystem — inventory discipline, hygiene, and machine safety on every shift.</p>
+        <ul>
+          <li>Improved product shelf life through careful rotation and inventory stocking practices.</li>
+          <li>Monitored inventory levels and reported restocking needs to management promptly.</li>
+          <li>Trained new employees on safe machinery operation procedures.</li>
+          <li>Organized workspace at shift end to support next-day production prep.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-top">
+          <h3>Recovery Executive <em>— SR9 Association</em></h3>
+          <span class="period">04.2024 — 05.2024</span>
+        </div>
+        <div class="loc">Bangalore, KA</div>
+        <p class="sum">Managed recovery of overdue dues with accurate records and a respectful, process-first approach.</p>
+        <ul>
+          <li>Collected dues from customers while preserving relationships.</li>
+          <li>Kept accurate records of collection activity and updated customer files.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-top">
+          <h3>Receptionist <em>— Alcott Hotels and Resorts</em></h3>
+          <span class="period">06.2023 — 2024</span>
+        </div>
+        <div class="loc">Karnataka, India</div>
+        <p class="sum">First point of contact for guests — front-desk operations, cash accuracy, and friendly issue resolution.</p>
+        <ul>
+          <li>Handled cash and cash equivalents with care and accuracy.</li>
+          <li>Maintained an organized filing system for confidential client records.</li>
+          <li>Supported customer satisfaction by resolving issues with friendly, knowledgeable service.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Skills</h2>
+      <div class="skills">
+        <div class="sg">
+          <h3>Cafe &amp; Store Operations</h3>
+          <div class="chips">
+            <span class="chip">Cafe operations</span><span class="chip">Store operations</span>
+            <span class="chip">Cafe inventory management</span><span class="chip">Inventory control</span>
+            <span class="chip">Stock rotation</span><span class="chip">Food safety practices</span>
+            <span class="chip">Cash handling</span><span class="chip">Record keeping</span>
+          </div>
+        </div>
+        <div class="sg">
+          <h3>People &amp; Leadership</h3>
+          <div class="chips">
+            <span class="chip">Team leadership</span><span class="chip">Staff management</span>
+            <span class="chip">Employee training</span><span class="chip">Team training</span>
+            <span class="chip">Employee scheduling</span><span class="chip">Shift scheduling</span>
+            <span class="chip">Time management</span><span class="chip">Multitasking</span>
+          </div>
+        </div>
+        <div class="sg">
+          <h3>Guest &amp; Client Relations</h3>
+          <div class="chips">
+            <span class="chip">Customer service</span><span class="chip">Client relations</span>
+            <span class="chip">Front-desk operations</span><span class="chip">Clear communication</span>
+            <span class="chip">Problem solving</span><span class="chip">Marketing expertise</span>
+          </div>
+        </div>
+        <div class="sg">
+          <h3>Tech &amp; Digital</h3>
+          <div class="chips">
+            <span class="chip">Google Workspace</span><span class="chip">Digital marketing</span>
+            <span class="chip">Website development</span><span class="chip">Technical support</span>
+            <span class="chip">Artificial Intelligence</span><span class="chip">Business development</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <div class="edu">
+        <div>
+          <h3>Stella Maris College</h3>
+          <div class="cred">Higher Secondary / Pre-University Course (PUC)</div>
+        </div>
+        <div class="loc">Karnataka, India</div>
+      </div>
+      <div class="edu">
+        <div>
+          <h3>Shree Jnana Bharathi School</h3>
+          <div class="cred">Secondary Education</div>
+        </div>
+        <div class="loc">Karnataka, India</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Languages</h2>
+      <div class="langs">
+        <span><b>Kannada</b> — native</span>
+        <span><b>English</b> — professional</span>
+        <span><b>Hindi</b> — conversational</span>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Shridhar John — Cafe &amp; Operations Manager, Bangalore</span>
+    <span>jsvita.in · admin@jsvita.in · +91 63617 92699</span>
+  </footer>
+</div>
+
+<div class="actions noprint">
+  <button onclick="window.print()" title="Save as PDF">&#11015;&#65039; DOWNLOAD PDF</button>
+  <a class="ghost" href="/">&#8592; BACK TO SITE</a>
+</div>
+
+</body>
+</html>
