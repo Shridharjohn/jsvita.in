@@ -227,10 +227,10 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
         Print CV
       </button>
-      <button class="abtn" id="pdfBtn">
+      <a class="abtn" href="/Shridhar-John-CV.pdf" download="Shridhar-John-CV.pdf">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Download PDF
-      </button>
+      </a>
       <button class="abtn" id="shareBtn">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
         Share
@@ -412,30 +412,8 @@
         } else { say("Copy the URL from the address bar"); }
       });
 
-      /* ---------- live PDF export: prints exactly what is rendered ----------
-         The browser's Save-as-PDF produces vector, selectable, ATS-friendly text
-         from the live DOM — always the latest content, no static file involved. */
-      var pdfBtn = document.getElementById("pdfBtn");
-      function exportPdf(fromAuto) {
-        var tip = "In the dialog choose \u201CSave as PDF\u201D as the destination";
-        if (!sessionStorage.getItem("jsvPdfTip")) {
-          say(tip);
-          try { sessionStorage.setItem("jsvPdfTip", "1"); } catch (e) {}
-          setTimeout(function () { window.print(); }, 900);
-        } else {
-          if (!fromAuto) say("Preparing your PDF\u2026");
-          setTimeout(function () { window.print(); }, 250);
-        }
-        pdfBtn.classList.add("loading");
-        setTimeout(function () { pdfBtn.classList.remove("loading"); }, 1200);
-      }
-      pdfBtn.addEventListener("click", function () { exportPdf(false); });
-
-      /* auto-open the export dialog when arriving via ?download=1 (site-wide buttons) */
-      if (location.search.indexOf("download=1") !== -1) {
-        try { history.replaceState(null, "", location.pathname); } catch (e) {}
-        setTimeout(function () { exportPdf(true); }, 1400);
-      }
+      /* PDF is server-rendered from this exact page by GitHub Actions on every
+         content change — the Download PDF button is a plain instant download. */
 
       var qr = document.querySelector(".qrbox img");
       if (qr) {
