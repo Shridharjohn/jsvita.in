@@ -248,6 +248,43 @@ section#top > .mx-auto { position: relative; }
 }
 .jsv-hero-social svg { width: 20px; height: 20px; }
 
+/* ---------- 6c. Small premium nav download icon (next to theme toggle) ---------- */
+.jsv-nav-cv {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  color: #e8d9ae;
+  background: rgba(212,175,55,.08);
+  border: 1px solid rgba(212,175,55,.4);
+  transition: transform .25s ease, background .25s ease, border-color .25s ease, color .25s ease, box-shadow .25s ease;
+}
+.jsv-nav-cv:hover {
+  transform: translateY(-1px) scale(1.05);
+  color: #f0d57c;
+  background: rgba(212,175,55,.16);
+  border-color: rgba(212,175,55,.7);
+  box-shadow: 0 8px 22px -8px rgba(212,175,55,.55);
+}
+.jsv-nav-cv:active { transform: scale(.94); }
+.jsv-nav-cv svg { width: 17px; height: 17px; }
+
+/* ---------- 11. Smooth scroll-reveal for sections ---------- */
+html { scroll-behavior: smooth; }
+.jsv-reveal {
+  opacity: 0;
+  transform: translateY(34px);
+  transition: opacity .8s cubic-bezier(.22,.61,.36,1), transform .8s cubic-bezier(.22,.61,.36,1);
+  will-change: opacity, transform;
+}
+.jsv-reveal.jsv-in { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .jsv-reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
+
 /* ---------- 7. Old hero elements suppressed ---------- */
 .jsv-hero-hide { display: none !important; }
 
@@ -285,8 +322,8 @@ section#top > .mx-auto { position: relative; }
     </style>
     <script data-pg="hero-premium">(function () {
   "use strict";
-  if (window.__jsvHeroV4) return;
-  window.__jsvHeroV4 = true;
+  if (window.__jsvHeroV5) return;
+  window.__jsvHeroV5 = true;
 
   var NAME = "Shridhar John";
   var SUB_KEY = "hospitality professional";
@@ -394,13 +431,10 @@ section#top > .mx-auto { position: relative; }
       cta.className = "jsv-hero-ctas jsv-fade jsv-fade-d4";
       cta.style.cssText = "display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;align-items:center;";
       cta.innerHTML =
-      '<a class="jsv-btn-gold" href="#contact" data-testid="hero-cta-contact-link">' +
-      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>' +
-      "Contact Me</a>" +
       '<a class="jsv-btn-ghost" href="/Shridhar-John-CV.pdf" target="_blank" rel="noopener" data-testid="cv-view-btn">' +
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>' +
       "View CV</a>" +
-      '<a class="jsv-btn-ghost" href="/Shridhar-John-CV.pdf" download="Shridhar-John-CV.pdf" data-testid="cv-download-btn">' +
+      '<a class="jsv-btn-gold" href="/Shridhar-John-CV.pdf" download="Shridhar-John-CV.pdf" data-testid="cv-download-btn">' +
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>' +
       "Download CV</a>";
     anchor.parentNode.insertBefore(cta, anchor.nextSibling);
@@ -446,7 +480,25 @@ section#top > .mx-auto { position: relative; }
 
   function run() {
     var s1 = step1(), s2 = step2(), s3 = step3(), s4 = step4(), s5 = step5();
-    return s1 && s2 && s3 && s4 && s5;
+    var s6 = step6();
+    return s1 && s2 && s3 && s4 && s5 && s6;
+  }
+
+  /* ---- Step 6: small premium Download CV icon next to the dark-mode toggle ---- */
+  function step6() {
+    if (document.querySelector(".jsv-nav-cv")) return true;
+    var toggle = document.querySelector('[data-testid="theme-toggle-btn"]');
+    if (!toggle || !toggle.parentNode) return false;
+    var a = document.createElement("a");
+    a.className = "jsv-nav-cv";
+    a.href = "/Shridhar-John-CV.pdf";
+    a.setAttribute("download", "Shridhar-John-CV.pdf");
+    a.setAttribute("aria-label", "Download CV");
+    a.setAttribute("title", "Download CV");
+    a.setAttribute("data-testid", "nav-cv-icon");
+    a.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>';
+    toggle.parentNode.insertBefore(a, toggle.nextSibling);
+    return true;
   }
 
   var done = run();
@@ -463,6 +515,27 @@ section#top > .mx-auto { position: relative; }
     };
     arm();
   }
+
+  /* ---- Step 7: smooth scroll-reveal for every section (luxury, once) ---- */
+  function initReveal() {
+    if (window.__jsvReveal) return;
+    var els = document.querySelectorAll("main > section:not(#top), main > section#contact");
+    if (!els.length) return;
+    window.__jsvReveal = true;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    els.forEach(function (el) { el.classList.add("jsv-reveal"); });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add("jsv-in"); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
+    els.forEach(function (el) { io.observe(el); });
+  }
+  var revTries = 0;
+  var revIv = setInterval(function () {
+    initReveal();
+    if (window.__jsvReveal || ++revTries > 60) clearInterval(revIv);
+  }, 400);
 })();
 </script>
 </style>
@@ -470,13 +543,6 @@ section#top > .mx-auto { position: relative; }
   <body>
     <div id="root"></div>
   <!-- Members login entry -->
-<style>
-.jsv-members-btn{position:fixed;top:74px;right:20px;z-index:70;display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:999px;background:linear-gradient(120deg,#f0d57c,#d4af37 45%,#b8860b);color:#1a1206;font-family:"DM Sans Variable",system-ui,sans-serif;font-size:13px;font-weight:800;letter-spacing:.04em;text-decoration:none;box-shadow:0 10px 30px rgba(212,175,55,.35),inset 0 1px 0 rgba(255,255,255,.4);transition:.25s;border:1px solid rgba(255,235,190,.5)}
-.jsv-members-btn:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(212,175,55,.5),inset 0 1px 0 rgba(255,255,255,.45)}
-@media(max-width:640px){.jsv-members-btn{top:60px;right:12px;padding:9px 15px;font-size:12px}}
-</style>
-<a class="jsv-members-btn" href="/Shridhar-John-CV.pdf" download="Shridhar-John-CV.pdf" aria-label="Download CV">Download CV</a>
-
 <script>
 /* JSVita gate v2 — signed-out visitors go to /login.html; splash removed */
 (function(){
