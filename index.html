@@ -596,12 +596,26 @@ html { scroll-behavior: smooth; }
       so.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>';
       so.addEventListener("click", doSignOut);
       a.parentNode.insertBefore(so, a.nextSibling);
+      /* apply already-known auth state (fixes race where auth fired before icon existed) */
+      if (authState.ready && authState.signedIn) so.classList.add("jsv-show");
+    } else if (authState.ready && authState.signedIn) {
+      document.querySelector(".jsv-nav-signout").classList.add("jsv-show");
     }
     return true;
   }
 
   /* ---- Step 7: auth-aware sign-out (Firebase) + 3D JSVita exit overlay ---- */
   var authState = { ready: false, signedIn: false };
+  var FB_CFG = { apiKey: "AIzaSyAoEGzAL-WkAGttLArl_PpffJYbOYwc5yE", authDomain: "auth.jsvita.in", projectId: "jsvita-login", storageBucket: "jsvita-login.firebasestorage.app", messagingSenderId: "433927112110", appId: "1:433927112110:web:ad6186be9800780e8d343f" };
+  function ensureApp() {
+    try { if (!firebase.apps || !firebase.apps.length) firebase.initializeApp(FB_CFG); } catch (e) {}
+  }
+  function paintSignout(u) {
+    authState.ready = true;
+    authState.signedIn = !!u;
+    var b = document.querySelector(".jsv-nav-signout");
+    if (b) b.classList.toggle("jsv-show", !!u);
+  }
   function doSignOut() {
     var ov = document.querySelector(".jsv-3d-overlay");
     if (ov) ov.classList.add("show");
@@ -611,17 +625,20 @@ html { scroll-behavior: smooth; }
       try { sessionStorage.setItem("jsgateSkip", "1"); } catch (e) {}
       location.replace("/login.html");
     };
-    try {
+    var load = function (src, ok) {
       var s = document.createElement("script");
-      s.src = "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js";
-      s.onload = function () {
-        try {
-          var a2 = firebase.auth();
-          a2.signOut().catch(function () {}).then(go);
-        } catch (e) { setTimeout(go, 900); }
-      };
-      s.onerror = function () { setTimeout(go, 900); };
+      s.src = src; s.onload = ok; s.onerror = function () { setTimeout(go, 600); };
       document.head.appendChild(s);
+    };
+    try {
+      load("https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js", function () {
+        load("https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js", function () {
+          try {
+            ensureApp();
+            firebase.auth().signOut().catch(function () {}).then(go);
+          } catch (e) { setTimeout(go, 600); }
+        });
+      });
       /* guarantee navigation even if Firebase stalls */
       setTimeout(go, 2600);
     } catch (e) { go(); }
@@ -629,27 +646,19 @@ html { scroll-behavior: smooth; }
   function watchAuth() {
     if (window.__jsvAuthWatch) return;
     window.__jsvAuthWatch = true;
-    function boot() {
-      if (typeof firebase === "undefined") return;
-      try {
-        var a2 = firebase.auth();
-        a2.onAuthStateChanged(function (u) {
-          authState.ready = true;
-          authState.signedIn = !!u;
-          var b = document.querySelector(".jsv-nav-signout");
-          if (b) b.classList.toggle("jsv-show", !!u);
-        });
-      } catch (e) {}
-    }
-    var s = document.createElement("script");
-    s.src = "https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js";
-    s.onload = function () {
-      var s2 = document.createElement("script");
-      s2.src = "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js";
-      s2.onload = boot;
-      document.head.appendChild(s2);
+    var load = function (src, ok) {
+      var s = document.createElement("script");
+      s.src = src; s.onload = ok; s.onerror = function () {};
+      document.head.appendChild(s);
     };
-    document.head.appendChild(s);
+    load("https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js", function () {
+      load("https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js", function () {
+        try {
+          ensureApp();
+          firebase.auth().onAuthStateChanged(paintSignout);
+        } catch (e) {}
+      });
+    });
   }
   watchAuth();
 
