@@ -499,8 +499,12 @@
       if (went) return;
       went = true;
       try { sessionStorage.setItem('jsgateSkip', '1'); } catch (e) {}
-      $('welcomeOverlay').classList.add('show');
-      setTimeout(() => window.location.replace('https://jsvita.in/'), 1400);
+      const ov = $('welcomeOverlay');
+      const sub = ov.querySelector('.welcome-sub');
+      ov.classList.add('show');
+      if (sub) sub.textContent = 'Welcome back';
+      setTimeout(() => { if (sub) sub.textContent = 'Opening your experience…'; }, 1200);
+      setTimeout(() => window.location.replace('https://jsvita.in/'), 2600);
     });
 
     // ---------- ripple effect on all buttons ----------

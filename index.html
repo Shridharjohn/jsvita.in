@@ -285,6 +285,80 @@ html { scroll-behavior: smooth; }
   html { scroll-behavior: auto; }
 }
 
+/* ---------- 6d. Sign out icon (auth-aware, 3D flip hover) ---------- */
+.jsv-nav-signout {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  color: #e8d9ae;
+  background: rgba(212,175,55,.08);
+  border: 1px solid rgba(212,175,55,.4);
+  transition: transform .5s cubic-bezier(.4,0,.2,1), background .25s ease, border-color .25s ease, color .25s ease, box-shadow .25s ease;
+  transform-style: preserve-3d;
+}
+.jsv-nav-signout.jsv-show { display: inline-flex; }
+.jsv-nav-signout:hover {
+  transform: perspective(500px) rotateY(360deg);
+  color: #f0d57c;
+  background: rgba(212,175,55,.16);
+  border-color: rgba(212,175,55,.7);
+  box-shadow: 0 8px 22px -8px rgba(212,175,55,.55);
+}
+.jsv-nav-signout svg { width: 17px; height: 17px; pointer-events: none; }
+
+/* ---------- 12. 3D JSVita sign-out overlay ---------- */
+.jsv-3d-overlay {
+  position: fixed; inset: 0; z-index: 9998;
+  display: none; place-items: center;
+  background: rgba(5,5,5,.95);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  perspective: 1100px;
+}
+.jsv-3d-overlay.show { display: grid; animation: jsv3dFade .4s ease both; }
+.jsv-3d-inner { text-align: center; transform-style: preserve-3d; }
+.jsv-3d-mono {
+  width: 110px; height: 110px; border-radius: 26px; margin: 0 auto;
+  background: linear-gradient(135deg, #f7d774, #d4af37 45%, #b8860b);
+  display: grid; place-items: center;
+  font-family: "JetBrains Mono Variable", monospace; font-weight: 700; font-size: 40px; color: #1a1206;
+  box-shadow: 0 24px 70px rgba(212,175,55,.5), inset 0 1px 0 rgba(255,255,255,.4);
+  transform-style: preserve-3d;
+  animation: jsv3dFlip 1.5s cubic-bezier(.4,0,.2,1) both, goldPulse3d 2s ease-in-out .4s infinite;
+}
+@keyframes jsv3dFlip {
+  0%   { transform: rotateY(0deg) rotateX(0deg) scale(.5); opacity: 0; }
+  25%  { opacity: 1; }
+  100% { transform: rotateY(720deg) rotateX(12deg) scale(1); opacity: 1; }
+}
+@keyframes goldPulse3d {
+  0%,100% { box-shadow: 0 24px 70px rgba(212,175,55,.45); }
+  50%     { box-shadow: 0 24px 90px rgba(247,215,116,.65); }
+}
+.jsv-3d-word {
+  margin-top: 20px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 30px; font-weight: 800; letter-spacing: .3em; text-transform: uppercase;
+  background: linear-gradient(100deg, #fdf8ec, #f4e3b2 30%, #d4af37 58%, #f7d774 78%, #fdf8ec);
+  background-size: 200% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: jsv3dRise .7s cubic-bezier(.22,.61,.36,1) .35s both, jsvShimmer 3s ease-in-out infinite;
+}
+.jsv-3d-sub {
+  margin-top: 10px;
+  font-family: "JetBrains Mono Variable", monospace; font-size: 10.5px;
+  letter-spacing: .3em; text-transform: uppercase; color: #e8d9ae;
+  animation: jsv3dRise .7s cubic-bezier(.22,.61,.36,1) .55s both;
+}
+@keyframes jsv3dFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes jsv3dRise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .jsv-nav-signout:hover { transform: none; }
+  .jsv-3d-mono, .jsv-3d-word, .jsv-3d-sub { animation-duration: .01s !important; animation-iteration-count: 1 !important; }
+}
+
 /* ---------- 7. Old hero elements suppressed ---------- */
 .jsv-hero-hide { display: none !important; }
 
@@ -322,8 +396,8 @@ html { scroll-behavior: smooth; }
     </style>
     <script data-pg="hero-premium">(function () {
   "use strict";
-  if (window.__jsvHeroV5) return;
-  window.__jsvHeroV5 = true;
+  if (window.__jsvHeroV6) return;
+  window.__jsvHeroV6 = true;
 
   var NAME = "Shridhar John";
   var SUB_KEY = "hospitality professional";
@@ -484,6 +558,19 @@ html { scroll-behavior: smooth; }
     return s1 && s2 && s3 && s4 && s5 && s6;
   }
 
+  /* ---- 3D JSVita overlay markup (used by sign-out) ---- */
+  (function inject3d() {
+    if (document.querySelector(".jsv-3d-overlay")) return;
+    var ov = document.createElement("div");
+    ov.className = "jsv-3d-overlay";
+    ov.innerHTML = '<div class="jsv-3d-inner">' +
+      '<div class="jsv-3d-mono">JS</div>' +
+      '<div class="jsv-3d-word">JSVita</div>' +
+      '<div class="jsv-3d-sub">Signed out — see you soon</div>' +
+      '</div>';
+    (document.body || document.documentElement).appendChild(ov);
+  })();
+
   /* ---- Step 6: small premium Download CV icon next to the dark-mode toggle ---- */
   function step6() {
     if (document.querySelector(".jsv-nav-cv")) return true;
@@ -498,8 +585,73 @@ html { scroll-behavior: smooth; }
     a.setAttribute("data-testid", "nav-cv-icon");
     a.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>';
     toggle.parentNode.insertBefore(a, toggle.nextSibling);
+    /* sign-out icon goes right after the CV icon (CV download, then sign out) */
+    if (!document.querySelector(".jsv-nav-signout")) {
+      var so = document.createElement("button");
+      so.type = "button";
+      so.className = "jsv-nav-signout";
+      so.setAttribute("aria-label", "Sign out");
+      so.setAttribute("title", "Sign out");
+      so.setAttribute("data-testid", "nav-signout-icon");
+      so.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>';
+      so.addEventListener("click", doSignOut);
+      a.parentNode.insertBefore(so, a.nextSibling);
+    }
     return true;
   }
+
+  /* ---- Step 7: auth-aware sign-out (Firebase) + 3D JSVita exit overlay ---- */
+  var authState = { ready: false, signedIn: false };
+  function doSignOut() {
+    var ov = document.querySelector(".jsv-3d-overlay");
+    if (ov) ov.classList.add("show");
+    var done = false;
+    var go = function () {
+      if (done) return; done = true;
+      try { sessionStorage.setItem("jsgateSkip", "1"); } catch (e) {}
+      location.replace("/login.html");
+    };
+    try {
+      var s = document.createElement("script");
+      s.src = "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js";
+      s.onload = function () {
+        try {
+          var a2 = firebase.auth();
+          a2.signOut().catch(function () {}).then(go);
+        } catch (e) { setTimeout(go, 900); }
+      };
+      s.onerror = function () { setTimeout(go, 900); };
+      document.head.appendChild(s);
+      /* guarantee navigation even if Firebase stalls */
+      setTimeout(go, 2600);
+    } catch (e) { go(); }
+  }
+  function watchAuth() {
+    if (window.__jsvAuthWatch) return;
+    window.__jsvAuthWatch = true;
+    function boot() {
+      if (typeof firebase === "undefined") return;
+      try {
+        var a2 = firebase.auth();
+        a2.onAuthStateChanged(function (u) {
+          authState.ready = true;
+          authState.signedIn = !!u;
+          var b = document.querySelector(".jsv-nav-signout");
+          if (b) b.classList.toggle("jsv-show", !!u);
+        });
+      } catch (e) {}
+    }
+    var s = document.createElement("script");
+    s.src = "https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js";
+    s.onload = function () {
+      var s2 = document.createElement("script");
+      s2.src = "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js";
+      s2.onload = boot;
+      document.head.appendChild(s2);
+    };
+    document.head.appendChild(s);
+  }
+  watchAuth();
 
   var done = run();
   if (!done) {
