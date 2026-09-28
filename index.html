@@ -370,7 +370,14 @@ html:not(.jsv-boot) section#top .lg\:col-span-5 { visibility: visible; }
 .jsv-boot section#top .lg\:col-span-5 { animation: jsvBootReveal .01s 3s forwards; }
 
 /* ---------- 14. Portrait & NOW card premium styling ---------- */
+/* portrait must fill its wrapper so the NOW card anchors to the real image corner,
+   not to a stretched grid cell (previously floated 80px below the photo) */
+.dark section#top div:has(> img[data-testid="hero-portrait"]) {
+  height: 100%;
+}
 .dark section#top img[data-testid="hero-portrait"] {
+  height: 100%;
+  object-position: center 22%;
   border: 1px solid rgba(212,175,55,.35);
   box-shadow: 0 30px 80px -30px rgba(0,0,0,.9), 0 0 60px -20px rgba(212,175,55,.25), inset 0 1px 0 rgba(247,215,116,.1);
   transition: transform .6s cubic-bezier(.22,.61,.36,1), box-shadow .6s;
@@ -393,6 +400,20 @@ html:not(.jsv-boot) section#top .lg\:col-span-5 { visibility: visible; }
   box-shadow: 0 18px 44px -18px rgba(0,0,0,.85), 0 0 34px -12px rgba(212,175,55,.4), inset 0 1px 0 rgba(247,215,116,.1);
 }
 .dark [data-testid="hero-current-role-card"] p:first-child { color: #F7D774 !important; }
+/* NOW card typography: premium hierarchy inside the card */
+.dark [data-testid="hero-current-role-card"] p:nth-child(2) {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  letter-spacing: .01em;
+}
+.dark [data-testid="hero-current-role-card"] p:nth-child(3) {
+  font-size: 12.5px;
+  color: #B8B8B8;
+  margin-top: 3px;
+}
+/* light-mode NOW card anchors identically */
+html:not(.dark) section#top div:has(> img[data-testid="hero-portrait"]) { height: 100%; }
+html:not(.dark) section#top img[data-testid="hero-portrait"] { height: 100%; object-position: center 22%; }
 
 /* ---------- 16. Light mode: hero system adapts (perfect toggle sync) ---------- */
 html:not(.dark) .jsv-hero-card {
@@ -529,6 +550,16 @@ html:not(.dark) header.jsv-scrolled { box-shadow: 0 22px 55px -20px rgba(84,60,1
   .jsv-hero-card { border-radius: 22px; padding: 26px 20px 30px; }
   .jsv-hero-role { letter-spacing: .1em; gap: 8px; }
   .jsv-btn-gold, .jsv-btn-ghost { width: 100%; justify-content: center; }
+  /* NOW card: show on mobile too, compact, still flush on the portrait corner */
+  [data-testid="hero-current-role-card"] {
+    display: block !important;
+    padding: 12px 16px !important;
+    bottom: -16px !important;
+    left: 0 !important;
+    border-radius: 13px !important;
+  }
+  [data-testid="hero-current-role-card"] p:nth-child(2) { font-size: 15px !important; }
+  [data-testid="hero-current-role-card"] p:nth-child(3) { font-size: 11.5px !important; }
 }
 
 /* ---------- 10. Print: hide hero enhancements ---------- */
