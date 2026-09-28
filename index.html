@@ -272,6 +272,72 @@ section#top > .mx-auto { position: relative; }
 .jsv-nav-cv:active { transform: scale(.94); }
 .jsv-nav-cv svg { width: 17px; height: 17px; }
 
+/* ---------- 6c2. CV attention system (hello / idle shimmer / loading) ---------- */
+.jsv-nav-view { position: relative; overflow: hidden; -webkit-backdrop-filter: blur(10px) saturate(140%); backdrop-filter: blur(10px) saturate(140%); }
+.jsv-nav-view::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(110deg, transparent 34%, rgba(255,246,214,.55) 50%, transparent 66%);
+  transform: translateX(-140%);
+}
+.jsv-nav-view:hover { color: #f0d57c; box-shadow: 0 0 0 1px rgba(212,175,55,.22), 0 8px 24px -8px rgba(212,175,55,.55), 0 0 16px -4px rgba(247,215,116,.4); }
+.jsv-nav-view:hover svg { transform: translateY(-2px); }
+.jsv-nav-view svg { transition: transform .3s cubic-bezier(.22,.61,.36,1); }
+/* shine sweep helper — fires on .jsv-cv-hello and .jsv-cv-att */
+.jsv-cv-hello::after, .jsv-cv-att::after { animation: jsvCvShine 1.1s cubic-bezier(.4,0,.2,1) forwards; }
+@keyframes jsvCvShine { to { transform: translateX(140%); } }
+/* hello: icon floats up 3px + soft gold pulse ring; button shimmers once */
+.jsv-cv-hello svg { animation: jsvCvFloat 1.5s cubic-bezier(.22,.61,.36,1); }
+@keyframes jsvCvFloat {
+  0%,100% { transform: translateY(0); }
+  35% { transform: translateY(-3px); }
+  60% { transform: translateY(-1px); }
+}
+.jsv-cv-hello::before {
+  content: ""; position: absolute; inset: -4px; border-radius: 13px; pointer-events: none;
+  box-shadow: 0 0 0 0 rgba(247,215,116,.5);
+  animation: jsvCvPulse 1.4s ease-out;
+}
+@keyframes jsvCvPulse {
+  0% { box-shadow: 0 0 0 0 rgba(247,215,116,.45); }
+  100% { box-shadow: 0 0 0 12px rgba(247,215,116,0); }
+}
+/* idle attention (every 10s): shimmer + single icon bounce + brief glow rise */
+.jsv-cv-att svg { animation: jsvCvBounce 1.3s cubic-bezier(.22,.61,.36,1); }
+@keyframes jsvCvBounce {
+  0%,100% { transform: translateY(0); }
+  30% { transform: translateY(-3px); }
+  55% { transform: translateY(0); }
+  72% { transform: translateY(-1px); }
+}
+.jsv-cv-att { transition: box-shadow .5s ease; }
+.jsv-cv-att { animation: jsvCvGlow 1.3s ease; }
+@keyframes jsvCvGlow {
+  0%,100% { box-shadow: inset 0 1px 0 rgba(247,215,116,.1); }
+  40% { box-shadow: 0 0 22px -4px rgba(212,175,55,.5), inset 0 1px 0 rgba(247,215,116,.18); }
+}
+/* hero ghost button shimmer target needs a positioned surface */
+a[data-testid="cv-view-btn"] { position: relative; overflow: hidden; }
+a[data-testid="cv-view-btn"]::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(110deg, transparent 36%, rgba(255,246,214,.4) 50%, transparent 64%);
+  transform: translateX(-140%);
+}
+a[data-testid="cv-view-btn"].jsv-cv-hello::after, a[data-testid="cv-view-btn"].jsv-cv-att::after { animation: jsvCvShine 1.1s cubic-bezier(.4,0,.2,1) forwards; }
+a[data-testid="cv-view-btn"].jsv-cv-hello { animation: jsvBtnGlow 1.4s ease; }
+@keyframes jsvBtnGlow {
+  0%,100% { box-shadow: 0 0 0 rgba(212,175,55,0); }
+  40% { box-shadow: 0 10px 34px -10px rgba(212,175,55,.55); }
+}
+/* click feedback: icon scale .95, brief gold pulse on the control */
+.jsv-cv-loading svg { animation: jsvCvClick .45s cubic-bezier(.22,.61,.36,1); }
+@keyframes jsvCvClick { 0%,100% { transform: scale(1); } 40% { transform: scale(.95); } }
+.jsv-cv-loading { animation: jsvCvGlow 1.3s ease; }
+@media (prefers-reduced-motion: reduce) {
+  .jsv-cv-hello, .jsv-cv-att, .jsv-cv-loading { animation: none; }
+  .jsv-cv-hello svg, .jsv-cv-att svg, .jsv-cv-loading svg { animation: none; }
+  .jsv-cv-hello::after, .jsv-cv-att::after { animation: none; }
+}
+
 /* ---------- 11. Smooth scroll-reveal for sections ---------- */html { scroll-behavior:smooth; scroll-padding-top:96px; }
 html, body { overflow-x:clip; }
 .jsv-reveal {
@@ -286,7 +352,7 @@ html, body { overflow-x:clip; }
   html { scroll-behavior: auto; }
 }
 
-/* ---------- 6d. Sign out icon (auth-aware, 3D flip hover) ---------- */
+/* ---------- 6d. Sign out icon (auth-aware, Apple-style micro-interactions) ---------- */
 .jsv-nav-signout {
   display: none;
   align-items: center;
@@ -297,18 +363,67 @@ html, body { overflow-x:clip; }
   color: #e8d9ae;
   background: rgba(212,175,55,.08);
   border: 1px solid rgba(212,175,55,.4);
-  transition: transform .5s cubic-bezier(.4,0,.2,1), background .25s ease, border-color .25s ease, color .25s ease, box-shadow .25s ease;
-  transform-style: preserve-3d;
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  backdrop-filter: blur(10px) saturate(140%);
+  box-shadow: inset 0 1px 0 rgba(247,215,116,.1);
+  position: relative;
+  overflow: hidden;
+  transition: transform .45s cubic-bezier(.22,.61,.36,1), background .3s ease, border-color .3s ease,
+    color .3s ease, box-shadow .45s ease, opacity .45s ease;
+  will-change: transform;
 }
-.jsv-nav-signout.jsv-show { display: inline-flex; }
-.jsv-nav-signout:hover {
-  transform: perspective(500px) rotateY(360deg);
-  color: #f0d57c;
-  background: rgba(212,175,55,.16);
-  border-color: rgba(212,175,55,.7);
-  box-shadow: 0 8px 22px -8px rgba(212,175,55,.55);
+/* smooth fade-in once auth confirms the member is signed in */
+.jsv-nav-signout.jsv-show { display: inline-flex; animation: jsvSoIn .65s cubic-bezier(.22,.61,.36,1) both; }
+@keyframes jsvSoIn {
+  from { opacity: 0; transform: translateY(-6px) scale(.9); }
+  to { opacity: 1; transform: none; }
 }
-.jsv-nav-signout svg { width: 17px; height: 17px; pointer-events: none; }
+/* premium shine sweep (runs once per hover entry, subtle) */
+.jsv-nav-signout::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(110deg, transparent 34%, rgba(255,246,214,.5) 50%, transparent 66%);
+  transform: translateX(-140%);
+  opacity: 0;
+  pointer-events: none;
+}
+@media (hover: hover) {
+  .jsv-nav-signout:hover {
+    transform: scale(1.03);
+    color: #f0d57c;
+    background: rgba(212,175,55,.14);
+    border-color: rgba(212,175,55,.75);
+    box-shadow: 0 0 0 1px rgba(212,175,55,.25), 0 8px 26px -8px rgba(212,175,55,.6),
+      0 0 18px -4px rgba(247,215,116,.45), inset 0 1px 0 rgba(247,215,116,.16);
+  }
+  .jsv-nav-signout:hover::after { opacity: 1; animation: jsvSoShine 1.05s cubic-bezier(.4,0,.2,1) .05s forwards; }
+  /* door-exit icon: slides right 4px, returns smoothly */
+  .jsv-nav-signout:hover svg { transform: translateX(4px); }
+}
+@keyframes jsvSoShine { to { transform: translateX(140%); } }
+.jsv-nav-signout:active { transform: scale(.94); }
+/* click state: scale down + glow fades before the page transition */
+.jsv-nav-signout.jsv-bye {
+  transform: scale(.96) !important;
+  box-shadow: inset 0 1px 0 rgba(247,215,116,.06) !important;
+  border-color: rgba(212,175,55,.3) !important;
+  opacity: .75;
+  pointer-events: none;
+}
+.jsv-nav-signout svg { width: 17px; height: 17px; pointer-events: none; transition: transform .45s cubic-bezier(.22,.61,.36,1); }
+/* elegant click ripple */
+.jsv-nav-signout .jsv-rip {
+  position: absolute; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle, rgba(255,246,214,.55) 0%, rgba(212,175,55,.25) 55%, transparent 70%);
+  transform: scale(0); animation: jsvSoRip .6s ease-out forwards;
+}
+@keyframes jsvSoRip { to { transform: scale(2.8); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .jsv-nav-signout, .jsv-nav-signout svg { transition: none; }
+  .jsv-nav-signout.jsv-show { animation: none; }
+  .jsv-nav-signout:hover::after { animation: none; opacity: 0; }
+  .jsv-nav-signout:hover svg { transform: none; }
+}
 
 /* ---------- 12. 3D JSVita sign-out overlay ---------- */
 .jsv-3d-overlay {
@@ -759,8 +874,50 @@ html:not(.dark) header.jsv-scrolled { box-shadow: 0 22px 55px -20px rgba(84,60,1
   function run() {
     var s1 = step1(), s2 = step2(), s3 = step3(), s4 = step4(), s5 = step5();
     var s6 = step6();
-    initNavSpy(); initStagger(); initStats(); initDust(); initCurrently(); initNavScroll();
+    initNavSpy(); initStagger(); initStats(); initDust(); initCurrently(); initNavScroll(); initCvAttention();
     return s1 && s2 && s3 && s4 && s5 && s6;
+  }
+
+  /* ---- Step 7: CV attention system — hello float, idle shimmer, Preparing CV… ---- */
+  function initCvAttention() {
+    if (window.__jsvCvAtt) return;
+    window.__jsvCvAtt = true;
+    /* resolve targets lazily — React may mount them after this init runs */
+    function targets() {
+      return [
+        document.querySelector(".jsv-nav-view"),
+        document.querySelector('[data-testid="cv-view-btn"]')
+      ];
+    }
+    function pulse(cls, life) {
+      targets().forEach(function (el) {
+        if (!el) return;
+        el.classList.remove(cls);
+        void el.offsetWidth; /* restart animation if mid-flight */
+        el.classList.add(cls);
+        setTimeout(function () { el.classList.remove(cls); }, life);
+      });
+    }
+    /* one-time hello, 1.5s after load: icon floats up 3px + gold pulse, shimmer crosses the button */
+    setTimeout(function () { pulse("jsv-cv-hello", 1600); }, 1500);
+    /* idle attention every 10s — brief, elegant, skipped while the tab is hidden */
+    setInterval(function () {
+      if (!document.hidden) pulse("jsv-cv-att", 1400);
+    }, 10000);
+    /* delegated click (capture): icon scale .95 + gold pulse + "Preparing CV…" — download still starts natively */
+    document.addEventListener("click", function (e) {
+      var dl = e.target.closest && e.target.closest('[data-testid="cv-download-btn"], .jsv-nav-cv:not(.jsv-nav-view)');
+      if (!dl) return;
+      dl.classList.remove("jsv-cv-loading");
+      void dl.offsetWidth;
+      dl.classList.add("jsv-cv-loading");
+      setTimeout(function () { dl.classList.remove("jsv-cv-loading"); }, 1400);
+      if (dl.matches('[data-testid="cv-download-btn"]') && dl.dataset.orig === undefined) {
+        dl.dataset.orig = dl.innerHTML;
+        dl.innerHTML = dl.innerHTML.replace("Download CV", "Preparing CV…");
+        setTimeout(function () { dl.innerHTML = dl.dataset.orig; delete dl.dataset.orig; }, 1700);
+      }
+    }, true);
   }
 
   /* ---- 3D JSVita overlay markup (used by sign-out) ---- */
@@ -917,7 +1074,7 @@ html:not(.dark) header.jsv-scrolled { box-shadow: 0 22px 55px -20px rgba(84,60,1
       vw.setAttribute("aria-label", "View CV");
       vw.setAttribute("title", "View CV — interactive resume");
       vw.setAttribute("data-testid", "nav-cv-view-icon");
-      vw.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>';
+      vw.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><circle cx="9.2" cy="9.5" r="1.4"></circle><path d="M8.5 13.5h7"></path><path d="M8.5 17h5"></path></svg>';
       toggle.parentNode.insertBefore(vw, toggle.nextSibling);
     }
     var a = document.createElement("a");
@@ -937,8 +1094,19 @@ html:not(.dark) header.jsv-scrolled { box-shadow: 0 22px 55px -20px rgba(84,60,1
       so.setAttribute("aria-label", "Sign out");
       so.setAttribute("title", "Sign out");
       so.setAttribute("data-testid", "nav-signout-icon");
-      so.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>';
-      so.addEventListener("click", doSignOut);
+    so.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>';
+    so.addEventListener("click", doSignOut);
+    so.addEventListener("pointerdown", function (e) {
+      var r = so.getBoundingClientRect();
+      var size = Math.max(r.width, r.height);
+      var rip = document.createElement("span");
+      rip.className = "jsv-rip";
+      rip.style.width = rip.style.height = size + "px";
+      rip.style.left = (e.clientX - r.left - size / 2) + "px";
+      rip.style.top = (e.clientY - r.top - size / 2) + "px";
+      so.appendChild(rip);
+      setTimeout(function () { rip.remove(); }, 650);
+    });
       a.parentNode.insertBefore(so, a.nextSibling);
       /* apply already-known auth state (fixes race where auth fired before icon existed) */
       if (authState.ready && authState.signedIn) so.classList.add("jsv-show");
@@ -962,7 +1130,14 @@ html:not(.dark) header.jsv-scrolled { box-shadow: 0 22px 55px -20px rgba(84,60,1
   }
   function doSignOut() {
     var ov = document.querySelector(".jsv-3d-overlay");
-    if (ov) ov.classList.add("show");
+    var btn = document.querySelector(".jsv-nav-signout");
+    /* 1. button scales down, 2. gold glow fades (jsv-bye), 4. "Signing Out…" caption */
+    if (btn) btn.classList.add("jsv-bye");
+    if (ov) {
+      var sub = ov.querySelector(".jsv-3d-sub");
+      if (sub) sub.textContent = "Signing Out…";
+      ov.classList.add("show");
+    }
     var done = false;
     var go = function () {
       if (done) return; done = true;

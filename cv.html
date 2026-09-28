@@ -71,9 +71,35 @@
       width:100%;max-width:860px;background:#fff;color:var(--ink);
       border-radius:14px;overflow:hidden;position:relative;
       box-shadow:0 40px 110px -30px rgba(0,0,0,.9), 0 0 80px -30px rgba(212,175,55,.35);
-      animation:sheetIn .9s var(--ease) both;
+      animation:sheetIn 1s var(--ease) both;
     }
-    @keyframes sheetIn{from{opacity:0;transform:translateY(26px) scale(.985)}to{opacity:1;transform:none}}
+    @keyframes sheetIn{from{opacity:0;transform:translateY(34px) scale(.97)}to{opacity:1;transform:none}}
+
+    /* ---- cinematic open choreography ---- */
+    .bar{animation:barIn .7s var(--ease) both}
+    @keyframes barIn{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:none}}
+    .bar .abtn{animation:btnIn .55s var(--ease) both}
+    .bar .abtn:nth-child(2){animation-delay:.25s}.bar .abtn:nth-child(3){animation-delay:.31s}
+    .bar .abtn:nth-child(4){animation-delay:.37s}.bar .abtn:nth-child(5){animation-delay:.43s}
+    .bar .abtn:nth-child(6){animation-delay:.49s}.bar .abtn:nth-child(7){animation-delay:.55s}
+    .bar .abtn:nth-child(8){animation-delay:.61s}
+    @keyframes btnIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+    .bmono{animation:monoIn .8s var(--ease) .15s both}
+    @keyframes monoIn{from{opacity:0;transform:scale(.7) rotate(-8deg)}to{opacity:1;transform:none}}
+    .cv-name{animation:nameIn .9s var(--ease) .35s both}
+    @keyframes nameIn{from{opacity:0;transform:translateY(18px);filter:blur(6px)}to{opacity:1;transform:none;filter:blur(0)}}
+    .cv-tag,.cv-sub{animation:fadeUp .7s var(--ease) .6s both}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+    .photo{animation:photoIn .9s var(--ease) .5s both}
+    @keyframes photoIn{from{opacity:0;transform:scale(.92) rotate(-1.5deg)}to{opacity:1;transform:none}}
+    .qrbox{animation:qrIn .8s var(--ease) .75s both}
+    @keyframes qrIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:none}}
+    main section{animation:secIn .7s var(--ease) both}
+    main section:nth-of-type(1){animation-delay:.55s}main section:nth-of-type(2){animation-delay:.65s}
+    main section:nth-of-type(3){animation-delay:.75s}main section:nth-of-type(4){animation-delay:.85s}
+    main section:nth-of-type(5){animation-delay:.95s}main section:nth-of-type(6){animation-delay:1.05s}
+    main section:nth-of-type(7){animation-delay:1.15s}main section:nth-of-type(8){animation-delay:1.25s}
+    @keyframes secIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 
     .cv-top{
       display:grid;grid-template-columns:1fr 236px;gap:26px;align-items:center;
