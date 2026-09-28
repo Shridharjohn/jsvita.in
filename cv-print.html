@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV Print — Shridhar John | JSVita</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{ --gold:#D4AF37; --prem:#F7D774; --deep:#8a6a14; --ink:#1a1a1a; --soft:#444; --rule:#e8dcb8; }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'DM Sans',system-ui,sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased}
+    @page{size:A4;margin:9mm 10mm}
+    .sheet{width:210mm;min-height:296mm;margin:0 auto;padding:2mm 0 6mm}
+
+    /* ---------- header ---------- */
+    .top{display:grid;grid-template-columns:1fr 118px;gap:16px;align-items:center;padding-bottom:10px;border-bottom:2.5px solid var(--gold)}
+    .eyebrow{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.3em;color:var(--deep);text-transform:uppercase;margin-bottom:5px}
+    h1{font-family:'Playfair Display',serif;font-weight:800;font-size:33px;line-height:1.03;color:#141414}
+    .tag{margin-top:5px;font-size:12px;font-style:italic;color:#6b5d33}
+    .sub{margin-top:3px;font-size:10.5px;color:#666;letter-spacing:.03em}
+    .sub i{font-style:normal;color:var(--deep);padding:0 .35em}
+    .side{display:flex;flex-direction:column;align-items:center;gap:7px}
+    .photo{width:96px;height:114px;object-fit:cover;object-position:center 22%;border-radius:8px;border:1.5px solid var(--gold)}
+    .qr{display:flex;flex-direction:column;align-items:center;gap:2px;border:1px solid var(--gold);border-radius:7px;padding:4px 6px;background:#fff}
+    .qr img{width:58px;height:58px;display:block}
+    .qr span{font-family:'JetBrains Mono',monospace;font-size:5.5px;letter-spacing:.16em;color:#8a6a14;text-transform:uppercase}
+
+    /* ---------- sections ---------- */
+    section{padding:7px 0 2px}
+    section + section{border-top:1px solid var(--rule)}
+    h2{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:#141414;display:flex;align-items:center;gap:10px;margin-bottom:8px}
+    h2::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+    h2 b{color:var(--deep)}
+
+    .about p{font-size:10.6px;line-height:1.55;color:var(--soft);margin-bottom:4px}
+    .about p:last-child{margin-bottom:0}
+    .about b{color:#141414}
+
+    .skills{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+    .sg{border:1px solid var(--rule);border-radius:8px;padding:8px 10px}
+    .sg b{font-size:10.5px;color:#141414;display:block;margin-bottom:5px}
+    .chips{display:flex;flex-wrap:wrap;gap:4px}
+    .chip{font-size:8.5px;padding:2.5px 8px;border-radius:999px;background:#faf4e2;border:1px solid #eadfb9;color:#6b5d33}
+
+    .edurow{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+    .edu{border:1px solid var(--rule);border-radius:8px;padding:7px 10px;background:#fffdf7}
+    .edu b{display:block;font-size:10.5px;color:#141414}
+    .edu span{display:block;font-size:9px;color:#777;margin-top:2px}
+
+    /* ---------- experience ---------- */
+    .job{margin-bottom:6px}
+    .job:last-child{margin-bottom:0}
+    .jh{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}
+    .jh b{font-size:11.5px;color:#141414}
+    .jh .co{font-size:10px;color:#6b5d33;font-weight:700}
+    .jh time{font-family:'JetBrains Mono',monospace;font-size:8.5px;color:#8a6a14;white-space:nowrap}
+    .badge-now{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:6.5px;letter-spacing:.16em;color:#1a1206;background:linear-gradient(120deg,var(--prem),var(--gold));padding:1.5px 6px;border-radius:999px;margin-left:6px;vertical-align:1.5px}
+    .job ul{margin:4px 0 0 13px}
+    .job li{font-size:9.3px;color:#555;line-height:1.45;margin-bottom:1px}
+
+    /* ---------- contact ---------- */
+    .cgrid{display:grid;grid-template-columns:1fr 1fr;gap:5px 18px}
+    .cl{display:flex;gap:8px;align-items:baseline;font-size:10px;color:var(--soft)}
+    .cl b{color:#141414;min-width:70px;font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;font-family:'JetBrains Mono',monospace}
+    .cl a{color:#8a6a14;text-decoration:none;font-weight:600}
+    .socials{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+    .soc{display:inline-flex;align-items:center;font-size:9px;font-weight:700;color:#6b5d33;border:1px solid #eadfb9;background:#fffdf7;padding:4px 10px;border-radius:999px;text-decoration:none}
+
+    .foot{margin-top:8px;padding-top:6px;border-top:1px solid var(--rule);text-align:center;font-family:'JetBrains Mono',monospace;font-size:7px;letter-spacing:.18em;color:#999}
+
+    section, .job, .sg, .edu { break-inside: avoid; }
+    .top { break-after: avoid; }
+  </style>
+</head>
+<body>
+  <div class="sheet">
+
+    <!-- ================= PAGE 1 ================= -->
+    <header class="top">
+      <div>
+        <p class="eyebrow">Founder of JSVita</p>
+        <h1>Shridhar John</h1>
+        <p class="tag">"Not waiting for opportunities. Creating them."</p>
+        <p class="sub">SSLC Student<i>•</i>Future Lawyer<i>•</i>Tech Entrepreneur</p>
+      </div>
+      <div class="side">
+        <img class="photo" src="shridhar-portrait.jpg" alt="Shridhar John" />
+        <div class="qr">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=960x960&data=https%3A%2F%2Fjsvita.in&color=1a1a1a&bgcolor=ffffff&qzone=1" alt="QR — jsvita.in" width="58" height="58" />
+          <span>Scan → jsvita.in</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="about">
+      <h2><b>01</b> Profile</h2>
+      <p>Results-driven operations professional with <b>3+ years</b> across hospitality, quick-commerce, recovery, and front-desk roles — cafe operations, inventory control, food safety, team training, and customer experience. Currently Cafe Manager at <b>Q-MIN, Roots Corporation Limited</b>, Bangalore.</p>
+      <p>Founder of <b>JSVita</b> — a personal technology and business venture — with working strengths in Google Workspace, digital marketing, and web development. Languages: Kannada, English, Hindi.</p>
+    </section>
+
+    <section>
+      <h2><b>02</b> Core Skills</h2>
+      <div class="skills">
+        <div class="sg"><b>Cafe &amp; Store Operations</b>
+          <div class="chips"><span class="chip">Cafe operations</span><span class="chip">Inventory control</span><span class="chip">Stock rotation</span><span class="chip">Food safety</span><span class="chip">Cash handling</span><span class="chip">Record keeping</span></div></div>
+        <div class="sg"><b>People &amp; Leadership</b>
+          <div class="chips"><span class="chip">Team leadership</span><span class="chip">Staff management</span><span class="chip">Employee training</span><span class="chip">Scheduling</span><span class="chip">Time management</span></div></div>
+        <div class="sg"><b>Guest &amp; Client Relations</b>
+          <div class="chips"><span class="chip">Customer service</span><span class="chip">Client relations</span><span class="chip">Front desk</span><span class="chip">Communication</span><span class="chip">Problem solving</span></div></div>
+        <div class="sg"><b>Tech &amp; Digital</b>
+          <div class="chips"><span class="chip">Google Workspace</span><span class="chip">Digital marketing</span><span class="chip">Web development</span><span class="chip">Technical support</span><span class="chip">Continuous learning</span></div></div>
+      </div>
+    </section>
+
+    <section>
+      <h2><b>03</b> Education</h2>
+      <div class="edurow">
+        <div class="edu"><b>Shree Jnana Bharathi School</b><span>Pre-University Course (PUC) — Karnataka, India</span></div>
+        <div class="edu"><b>Stella Maris College</b><span>Pre-University Course (PUC) — Karnataka, India</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2><b>04</b> Certifications &amp; Training</h2>
+      <div class="chips">
+        <span class="chip">Food Safety &amp; Sanitation — Roots Corporation</span>
+        <span class="chip">Safe Machinery Operation — Zepto Cafe ICO</span>
+        <span class="chip">Google Workspace</span>
+        <span class="chip">Digital Marketing &amp; Web</span>
+      </div>
+    </section>
+
+    <section>
+      <h2><b>05</b> Experience</h2>
+
+      <div class="job">
+        <div class="jh"><span><b>Cafe Manager — Q-MIN</b><span class="badge-now">CURRENT</span></span><time>06.2026 — Present</time></div>
+        <p class="co" style="font-size:10px;color:#6b5d33;font-weight:700;margin-top:2px">Roots Corporation Limited · Bangalore</p>
+        <ul>
+          <li>Run daily cafe operations — supervising baristas and cashiers, service periods, and shift handoffs.</li>
+          <li>Safeguard food safety and sanitation routines; keep records, reports, and logs audit-ready.</li>
+          <li>Train new team members on procedures and service standards; coordinate vendor deliveries.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="jh"><span><b>Cafe ICO — Zepto</b></span><time>06.2024 — 06.2026</time></div>
+        <p class="co" style="font-size:10px;color:#6b5d33;font-weight:700;margin-top:2px">Geddit Convenience Private Limited · Bangalore, KA</p>
+        <ul>
+          <li>Operated the Cafe ICO format inside Zepto quick-commerce — inventory discipline and hygiene on every shift.</li>
+          <li>Improved product shelf life through rotation and stocking practices; reported restocking needs promptly.</li>
+          <li>Trained new employees on safe machinery operation; organized workspace for next-day production prep.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="jh"><span><b>Recovery Executive</b></span><time>04.2024 — 05.2024</time></div>
+        <p class="co" style="font-size:10px;color:#6b5d33;font-weight:700;margin-top:2px">SR9 Association · Bangalore</p>
+        <ul>
+          <li>Recovered overdue dues while preserving customer relationships; kept accurate collection records.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="jh"><span><b>Receptionist</b></span><time>06.2023 — 2024</time></div>
+        <p class="co" style="font-size:10px;color:#6b5d33;font-weight:700;margin-top:2px">Alcott Hotels and Resorts · India</p>
+        <ul>
+          <li>First point of contact for guests — front desk operations and cash handling with care and accuracy.</li>
+          <li>Maintained confidential client records; resolved issues with friendly, knowledgeable service.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2><b>06</b> Contact &amp; Links</h2>
+      <div class="cgrid">
+        <div class="cl"><b>Website</b><a href="https://jsvita.in">jsvita.in</a></div>
+        <div class="cl"><b>Email</b><a href="mailto:admin@jsvita.in">admin@jsvita.in</a></div>
+        <div class="cl"><b>Phone</b><a href="tel:+916361792699">+91 63617 92699</a></div>
+        <div class="cl"><b>WhatsApp</b><a href="https://wa.me/916361792699">+91 63617 92699</a></div>
+        <div class="cl"><b>Location</b><span>Bangalore, Karnataka, India</span></div>
+        <div class="cl"><b>Languages</b><span>Kannada · English · Hindi</span></div>
+      </div>
+      <div class="socials">
+        <a class="soc" href="https://www.linkedin.com/in/jsvita" target="_blank" rel="noopener">LinkedIn — linkedin.com/in/jsvita</a>
+        <a class="soc" href="https://wa.me/916361792699" target="_blank" rel="noopener">WhatsApp Chat</a>
+        <a class="soc" href="https://jsvita.in" rel="noopener">jsvita.in</a>
+      </div>
+    </section>
+
+    <div class="foot">SHRIDHAR JOHN · JSVITA · JSVITA.IN</div>
+  </div>
+</body>
+</html>
