@@ -272,8 +272,8 @@ section#top > .mx-auto { position: relative; }
 .jsv-nav-cv:active { transform: scale(.94); }
 .jsv-nav-cv svg { width: 17px; height: 17px; }
 
-/* ---------- 11. Smooth scroll-reveal for sections ---------- */
-html { scroll-behavior: smooth; }
+/* ---------- 11. Smooth scroll-reveal for sections ---------- */html { scroll-behavior:smooth; scroll-padding-top:96px; }
+html, body { overflow-x:clip; }
 .jsv-reveal {
   opacity: 0;
   transform: translateY(34px);
@@ -389,6 +389,8 @@ html:not(.jsv-boot) section#top .lg\:col-span-5 { visibility: visible; }
   /* sit flush on the portrait's bottom-left corner */
   left: 0 !important;
   bottom: -18px !important;
+  z-index: 2;
+  box-shadow: 0 18px 44px -18px rgba(0,0,0,.85), 0 0 34px -12px rgba(212,175,55,.4), inset 0 1px 0 rgba(247,215,116,.1);
 }
 .dark [data-testid="hero-current-role-card"] p:first-child { color: #F7D774 !important; }
 
@@ -443,6 +445,14 @@ html:not(.dark) .jsv-nav-signout {
   a { color: inherit !important; text-decoration: none !important; }
 }
 
+/* ---------- 6f. Navbar icon trio: perfect alignment & centering ---------- */
+header [data-testid="theme-toggle-btn"], .jsv-nav-cv, .jsv-nav-signout { flex: 0 0 auto; vertical-align: middle; }
+header [data-testid="theme-toggle-btn"] svg, .jsv-nav-cv svg, .jsv-nav-signout svg { display: block; }
+
+/* ---------- 6g. Hero action rows perfectly centered ---------- */
+section#top .jsv-hero-ctas { justify-content: center; }
+section#top .jsv-hero-social { justify-content: center; }
+
 /* ---------- 6e. Theme toggle icon: match the gold-bordered icon set ---------- */
 .dark header [data-testid="theme-toggle-btn"] {
   width: 36px;
@@ -484,6 +494,14 @@ html:not(.dark) header [data-testid="theme-toggle-btn"] {
 html:not(.dark) main label { color: #574E45 !important; }
 html:not(.dark) main input, html:not(.dark) main textarea, html:not(.dark) main select { color: #1c1917 !important; }
 
+/* ---------- 18. Navbar scroll states (fixes top-of-page artifacts) ---------- */
+header { will-change: transform; transform: translateZ(0); }
+header.jsv-scrolled { box-shadow: 0 22px 55px -18px rgba(0,0,0,.85), inset 0 1px 0 rgba(247,215,116,.09) !important; }
+html:not(.dark) header.jsv-scrolled { box-shadow: 0 22px 55px -20px rgba(84,60,10,.3) !important; }
+/* give the page top padding so the floating navbar never overlaps hero content */
+.dark section#top, html:not(.dark) section#top { padding-top: 40px; }
+.dark section#top > .mx-auto, html:not(.dark) section#top > .mx-auto { padding-top: 64px; }
+
 /* ---------- 7. Old hero elements suppressed ---------- */
 .jsv-hero-hide { display: none !important; }
 
@@ -521,8 +539,8 @@ html:not(.dark) main input, html:not(.dark) main textarea, html:not(.dark) main 
     </style>
     <script data-pg="hero-premium">(function () {
   "use strict";
-  if (window.__jsvHeroV9) return;
-  window.__jsvHeroV9 = true;
+  if (window.__jsvHeroV10) return;
+  window.__jsvHeroV10 = true;
 
   /* boot state: hide raw (unstyled) hero until step1/step2 enhance it — prevents old-style flash on refresh.
    * CSS includes a 3s failsafe auto-reveal in case enhancement ever fails. */
@@ -710,7 +728,7 @@ html:not(.dark) main input, html:not(.dark) main textarea, html:not(.dark) main 
   function run() {
     var s1 = step1(), s2 = step2(), s3 = step3(), s4 = step4(), s5 = step5();
     var s6 = step6();
-    initNavSpy(); initStagger(); initStats(); initDust(); initCurrently();
+    initNavSpy(); initStagger(); initStats(); initDust(); initCurrently(); initNavScroll();
     return s1 && s2 && s3 && s4 && s5 && s6;
   }
 
@@ -726,6 +744,23 @@ html:not(.dark) main input, html:not(.dark) main textarea, html:not(.dark) main 
       '</div>';
     (document.body || document.documentElement).appendChild(ov);
   })();
+
+  /* ---- Step 5g: navbar scroll polish — shadow/elevation when scrolled, safe at top ---- */
+  function initNavScroll() {
+    if (window.__jsvNavScroll) return;
+    var hd = document.querySelector("header");
+    if (!hd) return;
+    window.__jsvNavScroll = true;
+    var ticking = false;
+    function update() {
+      ticking = false;
+      hd.classList.toggle("jsv-scrolled", window.scrollY > 24);
+    }
+    window.addEventListener("scroll", function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    update();
+  }
 
   /* ---- Step 5b: floating glass navbar gold active indicator ---- */
   function initNavSpy() {
