@@ -635,12 +635,15 @@ html { scroll-behavior: smooth; }
         load("https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js", function () {
           try {
             ensureApp();
-            firebase.auth().signOut().catch(function () {}).then(go);
-          } catch (e) { setTimeout(go, 600); }
+            firebase.auth().signOut().catch(function () {}).then(function () {
+              /* let the 3D flip (1.5s) play before navigating */
+              setTimeout(go, 1600);
+            });
+          } catch (e) { setTimeout(go, 1600); }
         });
       });
       /* guarantee navigation even if Firebase stalls */
-      setTimeout(go, 2600);
+      setTimeout(go, 3600);
     } catch (e) { go(); }
   }
   function watchAuth() {
