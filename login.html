@@ -138,8 +138,10 @@
     .divider { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 12px; margin-top: 18px; }
     .divider::before, .divider::after { content: ''; flex: 1; height: 1px;
       background: linear-gradient(90deg, transparent, rgba(212,175,55,.35), transparent); }
-    .fineprint { margin-top: 16px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); text-align: center; }
-    .fineprint a { color: var(--glow); text-decoration: none; }
+    .fineprint { margin-top: 16px; font-family: 'DM Sans', system-ui, sans-serif; font-size: 13px; color: var(--muted); text-align: center; }
+    .fineprint a { color: var(--glow); text-decoration: none; font-weight: 600; letter-spacing: .01em;
+      border-bottom: 1px solid rgba(212,175,55,.35); padding-bottom: 1px; transition: color .25s, border-color .25s, text-shadow .25s; }
+    .fineprint a:hover { color: var(--prem); border-color: var(--gold); text-shadow: 0 0 16px rgba(247,215,116,.5); }
     .haters { font-size: 11.5px; font-weight: 800; color: var(--gold); letter-spacing: .14em; text-transform: uppercase;
       text-shadow: 0 0 14px rgba(212,175,55,.4); margin-top: 18px; }
     .msg { margin-top: 14px; padding: 11px 14px; border-radius: 10px; font-size: 14px; display: none; }
@@ -248,7 +250,7 @@
   <header>
     <a class="brand" href="/">
       <span class="monogram">JS</span>
-      <span><span class="brand-name">JSVita</span><br><span class="brand-sub">MEMBERS</span></span>
+      <span><span class="brand-name">JSVita</span></span>
     </a>
     <a href="/" style="font-size:13px;color:var(--muted);text-decoration:none;border:1px solid rgba(212,175,55,.25);padding:8px 14px;border-radius:999px;transition:.2s">← Back to site</a>
   </header>

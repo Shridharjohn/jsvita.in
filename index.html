@@ -443,6 +443,47 @@ html:not(.dark) .jsv-nav-signout {
   a { color: inherit !important; text-decoration: none !important; }
 }
 
+/* ---------- 6e. Theme toggle icon: match the gold-bordered icon set ---------- */
+.dark header [data-testid="theme-toggle-btn"] {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #e8d9ae;
+  background: rgba(212,175,55,.08);
+  border: 1px solid rgba(212,175,55,.4);
+  transition: transform .25s ease, background .25s ease, border-color .25s ease, color .25s ease, box-shadow .25s ease;
+}
+.dark header [data-testid="theme-toggle-btn"]:hover {
+  transform: translateY(-1px) scale(1.05);
+  color: #f0d57c;
+  background: rgba(212,175,55,.16);
+  border-color: rgba(212,175,55,.7);
+  box-shadow: 0 8px 22px -8px rgba(212,175,55,.55);
+}
+html:not(.dark) header [data-testid="theme-toggle-btn"] {
+  color: #8a6a14;
+  background: rgba(212,175,55,.1);
+  border-color: rgba(184,134,11,.4);
+}
+
+/* ---------- 17. Contact form: readable labels & fields in both themes ---------- */
+.dark main form label, .dark main label { color: #C9BFAF !important; }
+.dark main input, .dark main textarea, .dark main select {
+  color: #F7F1E8 !important;
+  background: rgba(5,5,5,.55) !important;
+  border-color: rgba(212,175,55,.28) !important;
+}
+.dark main input:focus, .dark main textarea:focus, .dark main select:focus {
+  border-color: rgba(212,175,55,.7) !important;
+  box-shadow: 0 0 0 3px rgba(212,175,55,.15) !important;
+}
+.dark main ::placeholder { color: #8d8275 !important; opacity: 1; }
+html:not(.dark) main label { color: #574E45 !important; }
+html:not(.dark) main input, html:not(.dark) main textarea, html:not(.dark) main select { color: #1c1917 !important; }
+
 /* ---------- 7. Old hero elements suppressed ---------- */
 .jsv-hero-hide { display: none !important; }
 
