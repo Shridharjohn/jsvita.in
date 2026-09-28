@@ -98,7 +98,6 @@
       <span class="monogram">JS</span>
       <span><span class="brand-name">JSVita</span><br><span class="brand-sub">MEMBERS</span></span>
     </a>
-    <span class="home-link" style="cursor:default;color:var(--orange);border-color:rgba(234,88,12,.4)">&#128274; MEMBERS ONLY</span>
   </header>
 
   <main>
@@ -292,27 +291,12 @@
       return err.message || 'Something went wrong.';
     }
 
-    // ---------- dashboard + redirect to website ----------
-    let goTimer = null;
+    // ---------- redirect to website (no dashboard popup) ----------
     auth.onAuthStateChanged(user => {
       busy(false);
-      if (goTimer) { clearTimeout(goTimer); goTimer = null; }
       if (!user) { $('authPanel').style.display = 'block'; $('dash').style.display = 'none'; return; }
-      $('authPanel').style.display = 'none';
-      $('dash').style.display = 'block';
-      document.querySelector('.badge').textContent = '● SIGNED IN — TAKING YOU TO THE WEBSITE…';
-      const initial = (user.displayName || user.email || 'M').trim()[0].toUpperCase();
-      $('avatarSlot').innerHTML = user.photoURL
-        ? '<img class="avatar" src="' + user.photoURL + '" alt="avatar" referrerpolicy="no-referrer">'
-        : '<div class="avatar-fallback">' + initial + '</div>';
-      $('dashName').textContent = user.displayName || 'Member';
-      $('dashEmail').textContent = user.email;
-      $('mProvider').textContent = user.isAnonymous ? 'Anonymous' :
-        (user.providerData[0] && user.providerData[0].providerId === 'google.com' ? 'Google' : 'Email / Password');
-      $('mSince').textContent = fmt(user.metadata.creationTime);
-      $('mSession').textContent = fmt(new Date());
-      hideMsg();
-      goTimer = setTimeout(() => window.location.replace('https://jsvita.in/'), 700);
+      // Signed in — go straight to the website
+      window.location.replace('https://jsvita.in/');
     });
 
     $('logoutBtn').onclick = () => auth.signOut();

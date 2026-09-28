@@ -220,6 +220,34 @@ section#top > .mx-auto { position: relative; }
 }
 .jsv-btn-ghost svg, .jsv-btn-gold svg { width: 17px; height: 17px; flex: 0 0 auto; }
 
+/* ---------- 6b. Social row: LinkedIn / WhatsApp / Mail ---------- */
+.jsv-hero-social {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 26px;
+}
+.jsv-hero-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  color: #e8d9ae;
+  background: rgba(212,175,55,.06);
+  border: 1px solid rgba(212,175,55,.35);
+  transition: transform .25s ease, background .25s ease, border-color .25s ease, color .25s ease, box-shadow .25s ease;
+}
+.jsv-hero-social a:hover {
+  transform: translateY(-2px);
+  color: #f0d57c;
+  background: rgba(212,175,55,.14);
+  border-color: rgba(212,175,55,.65);
+  box-shadow: 0 12px 28px -12px rgba(212,175,55,.45);
+}
+.jsv-hero-social svg { width: 20px; height: 20px; }
+
 /* ---------- 7. Old hero elements suppressed ---------- */
 .jsv-hero-hide { display: none !important; }
 
@@ -257,8 +285,8 @@ section#top > .mx-auto { position: relative; }
     </style>
     <script data-pg="hero-premium">(function () {
   "use strict";
-  if (window.__jsvHeroV2) return;
-  window.__jsvHeroV2 = true;
+  if (window.__jsvHeroV3) return;
+  window.__jsvHeroV3 = true;
 
   var NAME = "Shridhar John";
   var SUB_KEY = "hospitality professional";
@@ -345,17 +373,25 @@ section#top > .mx-auto { position: relative; }
     return false;
   }
 
-  /* ---- Step 3: CTA row (Contact Me / Download Resume) ---- */
+  /* ---- Step 3: CTA row + social row (WhatsApp / LinkedIn / Mail) ---- */
+  var SOCIAL =
+    '<a href="https://www.linkedin.com/in/jsvita" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn — linkedin.com/in/jsvita">' +
+    '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z"/></svg></a>' +
+    '<a href="https://wa.me/916361792699" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp — +91 63617 92699">' +
+    '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.1 4.49.71.3 1.27.49 1.7.63.72.23 1.37.2 1.88.12.58-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 1 1 8.38 4.63m8.42-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.15 1.6 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.16-3.47-8.41"/></svg></a>' +
+    '<a href="mailto:admin@jsvita.in" aria-label="Email" title="admin@jsvita.in">' +
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>';
+
   function step3() {
-    if (document.querySelector(".jsv-hero-ctas")) return true;
-    var root = document.querySelector("section#top .lg\\:col-span-7");
-    if (!root) return false;
-    var sub = document.querySelector(".jsv-hero-sub");
-    var anchor = sub ? sub.parentNode : root.querySelector("h1").parentNode;
-    var cta = document.createElement("div");
-    cta.className = "jsv-hero-ctas jsv-fade jsv-fade-d4";
-    cta.style.cssText = "display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;align-items:center;";
-    cta.innerHTML =
+    if (!document.querySelector(".jsv-hero-ctas")) {
+      var root = document.querySelector("section#top .lg\\:col-span-7");
+      if (!root) return false;
+      var sub = document.querySelector(".jsv-hero-sub");
+      var anchor = sub ? sub.parentNode : root.querySelector("h1").parentNode;
+      var cta = document.createElement("div");
+      cta.className = "jsv-hero-ctas jsv-fade jsv-fade-d4";
+      cta.style.cssText = "display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;align-items:center;";
+      cta.innerHTML =
       '<a class="jsv-btn-gold" href="#contact" data-testid="hero-cta-contact-link">' +
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>' +
       "Contact Me</a>" +
@@ -363,6 +399,15 @@ section#top > .mx-auto { position: relative; }
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>' +
       "Download Resume</a>";
     anchor.parentNode.insertBefore(cta, anchor.nextSibling);
+    }
+    if (!document.querySelector(".jsv-hero-social")) {
+      var ctaRow = document.querySelector(".jsv-hero-ctas");
+      if (!ctaRow) return false;
+      var soc = document.createElement("div");
+      soc.className = "jsv-hero-social jsv-fade jsv-fade-d5";
+      soc.innerHTML = SOCIAL;
+      ctaRow.parentNode.insertBefore(soc, ctaRow.nextSibling);
+    }
     return true;
   }
 
@@ -427,7 +472,7 @@ section#top > .mx-auto { position: relative; }
 .jsv-members-btn:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(234,88,12,.55)}
 @media(max-width:640px){.jsv-members-btn{bottom:14px;right:14px;padding:10px 15px}}
 </style>
-<a class="jsv-members-btn" href="/login.html">&#128274; MEMBERS</a>
+<a class="jsv-members-btn" href="/login.html" style="display:none" aria-label="Sign out"></a>
 <script>
 /* JSVita member session chip v2 — state read at click time (always 1-click sign out) */
 (function(){
@@ -442,12 +487,12 @@ section#top > .mx-auto { position: relative; }
       btn=document.querySelector(".jsv-members-btn");
       if(!btn)return;
       if(u){
-        var name=(u.displayName||u.email||"Member").split(" ")[0];
         btn.dataset.mode="out";
-        btn.innerHTML="👋 "+name+" &middot; Sign out";
+        btn.style.display="inline-flex";
+        btn.innerHTML="Sign out";
       } else {
         btn.dataset.mode="in";
-        btn.innerHTML="🔒 MEMBERS";
+        btn.style.display="none";
       }
     }
     auth.onAuthStateChanged(paint);
