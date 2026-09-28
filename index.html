@@ -802,7 +802,7 @@ html:not(.dark) header.jsv-scrolled { box-shadow: 0 22px 55px -20px rgba(84,60,1
       '<a class="jsv-btn-ghost" href="/cv.html" data-testid="cv-view-btn">' +
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>' +
       "View CV</a>" +
-      '<a class="jsv-btn-gold" href="/cv.html?download=1" data-testid="cv-download-btn">' +
+      '<a class="jsv-btn-gold" href="/Shridhar-John-CV.pdf" download="Shridhar-John-CV.pdf" data-testid="cv-download-btn">' +
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>' +
       "Download CV</a>";
     anchor.parentNode.insertBefore(cta, anchor.nextSibling);
@@ -1079,9 +1079,10 @@ html:not(.dark) header.jsv-scrolled { box-shadow: 0 22px 55px -20px rgba(84,60,1
     }
     var a = document.createElement("a");
     a.className = "jsv-nav-cv";
-    a.href = "/cv.html?download=1";
+    a.href = "/Shridhar-John-CV.pdf";
+    a.setAttribute("download", "Shridhar-John-CV.pdf");
     a.setAttribute("aria-label", "Download CV");
-    a.setAttribute("title", "Download CV (live PDF export)");
+    a.setAttribute("title", "Download CV (instant PDF)");
     a.setAttribute("data-testid", "nav-cv-icon");
     a.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>';
     toggle.parentNode.insertBefore(a, toggle.nextSibling);
