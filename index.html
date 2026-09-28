@@ -285,8 +285,8 @@ section#top > .mx-auto { position: relative; }
     </style>
     <script data-pg="hero-premium">(function () {
   "use strict";
-  if (window.__jsvHeroV3) return;
-  window.__jsvHeroV3 = true;
+  if (window.__jsvHeroV4) return;
+  window.__jsvHeroV4 = true;
 
   var NAME = "Shridhar John";
   var SUB_KEY = "hospitality professional";
@@ -375,12 +375,14 @@ section#top > .mx-auto { position: relative; }
 
   /* ---- Step 3: CTA row + social row (WhatsApp / LinkedIn / Mail) ---- */
   var SOCIAL =
-    '<a href="https://www.linkedin.com/in/jsvita" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn — linkedin.com/in/jsvita">' +
-    '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z"/></svg></a>' +
     '<a href="https://wa.me/916361792699" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp — +91 63617 92699">' +
     '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.1 4.49.71.3 1.27.49 1.7.63.72.23 1.37.2 1.88.12.58-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 1 1 8.38 4.63m8.42-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.15 1.6 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.16-3.47-8.41"/></svg></a>' +
+    '<a href="https://www.linkedin.com/in/jsvita" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn — linkedin.com/in/jsvita">' +
+    '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z"/></svg></a>' +
     '<a href="mailto:admin@jsvita.in" aria-label="Email" title="admin@jsvita.in">' +
-    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>';
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>' +
+    '<a href="tel:+916361792699" aria-label="Call" title="Call — +91 63617 92699">' +
+    '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></a>';
 
   function step3() {
     if (!document.querySelector(".jsv-hero-ctas")) {
@@ -395,9 +397,12 @@ section#top > .mx-auto { position: relative; }
       '<a class="jsv-btn-gold" href="#contact" data-testid="hero-cta-contact-link">' +
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>' +
       "Contact Me</a>" +
+      '<a class="jsv-btn-ghost" href="/Shridhar-John-CV.pdf" target="_blank" rel="noopener" data-testid="cv-view-btn">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>' +
+      "View CV</a>" +
       '<a class="jsv-btn-ghost" href="/Shridhar-John-CV.pdf" download="Shridhar-John-CV.pdf" data-testid="cv-download-btn">' +
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>' +
-      "Download Resume</a>";
+      "Download CV</a>";
     anchor.parentNode.insertBefore(cta, anchor.nextSibling);
     }
     if (!document.querySelector(".jsv-hero-social")) {
@@ -424,9 +429,24 @@ section#top > .mx-auto { position: relative; }
     return true;
   }
 
+  /* ---- Step 5: premium contact icon row in the Contact section ---- */
+  function step5() {
+    var sec = document.getElementById("contact");
+    if (!sec) return false;
+    if (sec.querySelector(".jsv-hero-social")) return true;
+    var ul = sec.querySelector("ul");
+    if (!ul) return false;
+    var row = document.createElement("div");
+    row.className = "jsv-hero-social jsv-fade";
+    row.style.marginTop = "24px";
+    row.innerHTML = SOCIAL;
+    ul.parentNode.insertBefore(row, ul.nextSibling);
+    return true;
+  }
+
   function run() {
-    var s1 = step1(), s2 = step2(), s3 = step3(), s4 = step4();
-    return s1 && s2 && s3 && s4;
+    var s1 = step1(), s2 = step2(), s3 = step3(), s4 = step4(), s5 = step5();
+    return s1 && s2 && s3 && s4 && s5;
   }
 
   var done = run();
@@ -468,11 +488,11 @@ section#top > .mx-auto { position: relative; }
     <div id="root"></div>
   <!-- Members login entry -->
 <style>
-.jsv-members-btn{position:fixed;bottom:22px;right:22px;z-index:60;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:999px;background:linear-gradient(135deg,#EA580C,#C2410C);color:#fff;font-family:"JetBrains Mono",monospace;font-size:12.5px;letter-spacing:.06em;text-decoration:none;box-shadow:0 10px 28px rgba(234,88,12,.4);transition:.25s}
-.jsv-members-btn:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(234,88,12,.55)}
-@media(max-width:640px){.jsv-members-btn{bottom:14px;right:14px;padding:10px 15px}}
+.jsv-members-btn{position:fixed;top:74px;right:20px;z-index:70;display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:999px;background:linear-gradient(120deg,#f0d57c,#d4af37 45%,#b8860b);color:#1a1206;font-family:"DM Sans Variable",system-ui,sans-serif;font-size:13px;font-weight:800;letter-spacing:.04em;text-decoration:none;box-shadow:0 10px 30px rgba(212,175,55,.35),inset 0 1px 0 rgba(255,255,255,.4);transition:.25s;border:1px solid rgba(255,235,190,.5)}
+.jsv-members-btn:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(212,175,55,.5),inset 0 1px 0 rgba(255,255,255,.45)}
+@media(max-width:640px){.jsv-members-btn{top:60px;right:12px;padding:9px 15px;font-size:12px}}
 </style>
-<a class="jsv-members-btn" href="/login.html" style="display:none" aria-label="Sign out"></a>
+<a class="jsv-members-btn" href="/login.html" style="display:none" aria-label="Sign out">Sign Out</a>
 <script>
 /* JSVita member session chip v2 — state read at click time (always 1-click sign out) */
 (function(){
@@ -489,7 +509,7 @@ section#top > .mx-auto { position: relative; }
       if(u){
         btn.dataset.mode="out";
         btn.style.display="inline-flex";
-        btn.innerHTML="Sign out";
+        btn.innerHTML="Sign Out";
       } else {
         btn.dataset.mode="in";
         btn.style.display="none";
