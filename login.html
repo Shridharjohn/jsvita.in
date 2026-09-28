@@ -340,6 +340,7 @@
       if (!user) { $('authPanel').style.display = 'block'; $('dash').style.display = 'none'; return; }
       if (went) return;
       went = true;
+      try { sessionStorage.setItem('jsgateSkip', '1'); } catch (e) {}
       $('authPanel').style.display = 'none';
       var ov = document.getElementById('welcomeOverlay');
       if (ov) ov.classList.add('show');

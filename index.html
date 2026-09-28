@@ -39,7 +39,7 @@
       content="https://jsvita.in/shridhar-portrait.jpg"
     />
     <title>Shridhar John — Hospitality Operations Leader | Entrepreneur</title>
-    <script type="module" crossorigin src="/assets/index-BUFmtw49.js?v=4"></script>
+    <script type="module" crossorigin src="/assets/index-BUFmtw49.js?v=5"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-DYG8YA2s.css">
   <style data-theme="obsidian-ember">
 /* ===== Obsidian Ember — premium dark theme ===== */
@@ -468,23 +468,6 @@ section#top > .mx-auto { position: relative; }
 </style>
 </head>
   <body>
-    <style>
-#jsgate{position:fixed;inset:0;z-index:9999;background:#1C140E;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:'DM Sans',system-ui,sans-serif;color:#FAF6F0;opacity:1;transition:opacity .45s}
-#jsgate.open{opacity:0;pointer-events:none}
-#jsgate .gmono{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,#EA580C,#C2410C);display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:20px;box-shadow:0 12px 34px rgba(234,88,12,.45)}
-#jsgate .gtitle{font-family:Georgia,serif;font-size:22px;font-weight:700;letter-spacing:.02em}
-#jsgate .gsub{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;color:#C2B5A8;text-transform:uppercase}
-#jsgate .gspin{width:26px;height:26px;border:2px solid rgba(234,88,12,.25);border-top-color:#EA580C;border-radius:50%;animation:gspin .8s linear infinite;margin-top:6px}
-@keyframes gspin{to{transform:rotate(360deg)}}
-#jsgate .gbtn{margin-top:10px;padding:10px 22px;border-radius:999px;background:linear-gradient(135deg,#EA580C,#C2410C);color:#fff;text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.08em}
-</style>
-<div id=jsgate>
-  <div class=gmono>JS</div>
-  <div class=gtitle>JSVita Members</div>
-  <div class=gsub>Checking your access…</div>
-  <div class=gspin></div>
-  <a class=gbtn href=/login.html>SIGN IN</a>
-</div>
     <div id="root"></div>
   <!-- Members login entry -->
 <style>
@@ -492,61 +475,19 @@ section#top > .mx-auto { position: relative; }
 .jsv-members-btn:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(212,175,55,.5),inset 0 1px 0 rgba(255,255,255,.45)}
 @media(max-width:640px){.jsv-members-btn{top:60px;right:12px;padding:9px 15px;font-size:12px}}
 </style>
-<a class="jsv-members-btn" href="/login.html" style="display:none" aria-label="Sign out">Sign Out</a>
+<a class="jsv-members-btn" href="/Shridhar-John-CV.pdf" download="Shridhar-John-CV.pdf" aria-label="Download CV">Download CV</a>
+
 <script>
-/* JSVita member session chip v2 — state read at click time (always 1-click sign out) */
+/* JSVita gate v2 — signed-out visitors go to /login.html; splash removed */
 (function(){
+  try{ if(sessionStorage.getItem('jsgateSkip')==='1'){ sessionStorage.removeItem('jsgateSkip'); return; } }catch(e){}
   var s=document.createElement("script");s.src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js";document.head.appendChild(s);
-  var s2=document.createElement("script");s2.src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js";s2.onload=init;document.head.appendChild(s2);
-  var btn=null;
-  function init(){
-    if(!window.firebase||!firebase.initializeApp)return;
-    try{firebase.initializeApp({apiKey:"AIzaSyAoEGzAL-WkAGttLArl_PpffJYbOYwc5yE",authDomain:"auth.jsvita.in",projectId:"jsvita-login",storageBucket:"jsvita-login.firebasestorage.app",messagingSenderId:"433927112110",appId:"1:433927112110:web:ad6186be9800780e8d343f"});}catch(e){}
-    var auth=firebase.auth();
-    function paint(u){
-      btn=document.querySelector(".jsv-members-btn");
-      if(!btn)return;
-      if(u){
-        btn.dataset.mode="out";
-        btn.style.display="inline-flex";
-        btn.innerHTML="Sign Out";
-      } else {
-        btn.dataset.mode="in";
-        btn.style.display="none";
-      }
-    }
-    auth.onAuthStateChanged(paint);
-    // one permanent listener — decides at click time, never re-registered
-    document.addEventListener("click", function(e){
-      var b = e.target.closest ? e.target.closest(".jsv-members-btn") : null;
-      if(!b) return;
-      if(b.dataset.mode==="out"){
-        e.preventDefault();
-        b.innerHTML="Signing out…";
-        b.style.pointerEvents="none";
-        auth.signOut().catch(function(){}).then(function(){
-          location.replace("/login.html");
-        });
-      }
-      // mode "in" (or unknown): let the link navigate to /login.html normally
-    }, true);
-  }
-})();
-</script>
-<script>
-/* JSVita access gate — login is the landing page */
-(function(){
-  var gate=document.getElementById('jsgate'); if(!gate) return;
-  var settled=false;
-  function open(){ if(settled) return; settled=true; gate.classList.add('open'); setTimeout(function(){ if(gate.parentNode) gate.parentNode.removeChild(gate); },500); }
-  function toLogin(){ if(settled) return; settled=true; location.replace('/login.html'); }
-  var failSafe=setTimeout(function(){ if(typeof firebase==='undefined') open(); },5000);
+  var s2=document.createElement("script");s2.src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js";s2.onload=boot;document.head.appendChild(s2);
   function boot(){
-    if(typeof firebase==='undefined'){ clearTimeout(failSafe); open(); return; }
+    if(typeof firebase==='undefined') return;
     try{ firebase.initializeApp({apiKey:'AIzaSyAoEGzAL-WkAGttLArl_PpffJYbOYwc5yE',authDomain:'auth.jsvita.in',projectId:'jsvita-login',storageBucket:'jsvita-login.firebasestorage.app',messagingSenderId:'433927112110',appId:'1:433927112110:web:ad6186be9800780e8d343f'}); }catch(e){}
-    firebase.auth().onAuthStateChanged(function(u){ clearTimeout(failSafe); if(u){ open(); } else { toLogin(); } });
+    firebase.auth().onAuthStateChanged(function(u){ if(!u){ location.replace('/login.html'); } });
   }
-  if(document.readyState==='complete') boot(); else window.addEventListener('load', boot);
 })();
 </script>
 </body>
