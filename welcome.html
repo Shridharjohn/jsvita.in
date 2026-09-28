@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#050505" />
+  <meta name="description" content="Welcome to the JSVita ecosystem." />
+  <title>Welcome — JSVita</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&family=DM+Sans:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <style>
+    :root{
+      --bg:#050505; --bg2:#0B0B0B;
+      --gold:#D4AF37; --prem:#F7D774; --deep:#b8860b;
+      --cream:#FFFFFF; --muted:#B8B8B8; --border:rgba(212,175,55,.25);
+      --ease:cubic-bezier(.4,0,.2,1);
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      background:
+        radial-gradient(900px 600px at 78% -8%, rgba(212,175,55,.12), transparent 62%),
+        radial-gradient(700px 520px at -10% 108%, rgba(184,134,11,.10), transparent 58%),
+        linear-gradient(180deg,#050505 0%,#0B0B0B 55%,#050505 100%);
+      color:var(--cream);
+      font-family:'DM Sans',system-ui,sans-serif;
+      overflow:hidden;
+      -webkit-font-smoothing:antialiased;
+    }
+    ::selection{background:rgba(212,175,55,.35)}
+
+    /* ---------- ambient layers ---------- */
+    #dust{position:fixed;inset:0;z-index:1;pointer-events:none}
+    .halo{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;opacity:.5}
+    .halo.a{width:46vmax;height:46vmax;top:-18vmax;right:-14vmax;background:radial-gradient(circle,rgba(212,175,55,.14),transparent 65%);animation:breathe 9s ease-in-out infinite}
+    .halo.b{width:38vmax;height:38vmax;bottom:-16vmax;left:-12vmax;background:radial-gradient(circle,rgba(184,134,11,.11),transparent 65%);animation:breathe 11s ease-in-out 1.2s infinite}
+    @keyframes breathe{0%,100%{opacity:.42;transform:scale(1)}50%{opacity:.62;transform:scale(1.06)}}
+
+    /* ---------- stage ---------- */
+    .stage{
+      position:relative;z-index:2;min-height:100vh;min-height:100svh;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      text-align:center;padding:24px;
+    }
+    .stage>*{opacity:0;transform:translateY(22px);will-change:transform,opacity}
+    body.go .stage>*{animation:rise .85s var(--ease) both}
+    @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+    /* 1 — logo monogram */
+    .mono-logo{
+      width:76px;height:76px;border-radius:20px;
+      display:grid;place-items:center;
+      font-family:'JetBrains Mono',monospace;font-weight:700;font-size:26px;color:#1a1206;
+      background:linear-gradient(135deg,var(--prem),var(--gold) 45%,var(--deep));
+      box-shadow:0 14px 44px rgba(212,175,55,.42), inset 0 1px 0 rgba(255,255,255,.55);
+      margin-bottom:30px;
+      animation-name:logoIn !important;
+      transform:translateY(22px);
+    }
+    body.go .mono-logo{animation:logoIn 1s var(--ease) .1s both, glowPulse 3.4s ease-in-out 1.2s infinite}
+    @keyframes logoIn{0%{opacity:0;transform:translateY(26px) scale(.86)}60%{opacity:1}100%{opacity:1;transform:none}}
+    @keyframes glowPulse{0%,100%{box-shadow:0 14px 44px rgba(212,175,55,.42), inset 0 1px 0 rgba(255,255,255,.55)}50%{box-shadow:0 14px 60px rgba(247,215,116,.66), 0 0 90px rgba(212,175,55,.28), inset 0 1px 0 rgba(255,255,255,.6)}}
+
+    /* 2 — eyebrow + heading */
+    .eyebrow{
+      font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;
+      letter-spacing:.42em;text-indent:.42em;color:var(--prem);text-transform:uppercase;
+      margin-bottom:14px;
+    }
+    body.go .eyebrow{animation-delay:.7s}
+    .brand{
+      font-family:'Playfair Display',serif;font-weight:800;
+      font-size:clamp(3.4rem,13vw,6.8rem);
+      line-height:1.02;letter-spacing:.01em;
+      background:linear-gradient(100deg,var(--deep) 0%,var(--gold) 28%,var(--prem) 46%,#fff6d8 52%,var(--prem) 58%,var(--gold) 74%,var(--deep) 100%);
+      background-size:220% 100%;
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      filter:drop-shadow(0 6px 30px rgba(212,175,55,.28));
+    }
+    body.go .brand{animation:zoomIn .8s var(--ease) 1s both, sweep 3.6s linear 1.9s infinite}
+    @keyframes zoomIn{0%{opacity:0;transform:scale(.88)}100%{opacity:1;transform:scale(1)}}
+    @keyframes sweep{0%{background-position:130% 0}100%{background-position:-130% 0}}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+    /* 3 — tagline typewriter */
+    .tagline{
+      margin-top:26px;min-height:1.6em;
+      font-family:'DM Sans',sans-serif;font-weight:500;
+      font-size:clamp(1.02rem,2.8vw,1.4rem);
+      color:#E9E2D4;letter-spacing:.01em;
+    }
+    body.go .tagline{animation:fadeIn .5s ease 1.9s both}
+    .caret{
+      display:inline-block;width:2px;height:1.05em;margin-left:3px;vertical-align:-0.15em;
+      background:var(--prem);box-shadow:0 0 10px rgba(247,215,116,.8);
+      opacity:0;
+    }
+    body.go .caret{animation:blink 1s step-end infinite}
+    body.go .caret.on{opacity:1}
+    @keyframes blink{0%,55%{opacity:1}56%,100%{opacity:0}}
+
+    /* 4 — subtitle */
+    .subtitle{
+      margin-top:18px;font-size:clamp(.92rem,2.4vw,1.08rem);font-weight:500;
+      color:var(--muted);letter-spacing:.04em;
+    }
+    .subtitle i{font-style:normal;color:var(--gold);padding:0 .45em}
+    body.go .subtitle{animation-delay:3.55s}
+
+    /* 7 — Enter Dashboard */
+    .enter{
+      margin-top:44px;display:inline-flex;align-items:center;gap:12px;
+      min-height:52px;padding:15px 36px;border-radius:999px;
+      font-family:'DM Sans',sans-serif;font-weight:700;font-size:15.5px;letter-spacing:.03em;
+      color:#1a1206;text-decoration:none;position:relative;overflow:hidden;
+      background:linear-gradient(120deg,var(--prem),var(--gold) 48%,var(--deep));
+      border:1px solid rgba(255,235,190,.55);
+      box-shadow:0 16px 44px rgba(212,175,55,.38), inset 0 1px 0 rgba(255,255,255,.5);
+      transition:transform .25s var(--ease), box-shadow .25s var(--ease);
+      pointer-events:none;
+    }
+    body.go .enter{animation-delay:4.15s;pointer-events:auto}
+    .enter .arrow{transition:transform .3s var(--ease)}
+    @media(hover:hover){
+      .enter:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 22px 60px rgba(247,215,116,.5), 0 0 70px rgba(212,175,55,.3), inset 0 1px 0 rgba(255,255,255,.55)}
+      .enter:hover .arrow{transform:translateX(4px)}
+    }
+    .enter:active{transform:scale(.96)}
+    .ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.45);transform:scale(0);animation:rip .65s ease-out forwards;pointer-events:none}
+    @keyframes rip{to{transform:scale(2.6);opacity:0}}
+
+    /* status line (gate) */
+    .status{
+      position:fixed;left:0;right:0;bottom:calc(18px + env(safe-area-inset-bottom));z-index:3;
+      text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;
+      letter-spacing:.18em;color:rgba(184,178,168,.55);text-transform:uppercase;
+      opacity:0;transition:opacity .4s;pointer-events:none;
+    }
+    .status.show{opacity:1}
+    .status .spin{display:inline-block;width:12px;height:12px;border:1.5px solid rgba(212,175,55,.25);border-top-color:var(--gold);border-radius:50%;vertical-align:-2px;margin-right:8px;animation:spin 1s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* ---------- reduced motion ---------- */
+    @media (prefers-reduced-motion:reduce){
+      body.go .stage>*, .mono-logo, .brand{animation-duration:.01s !important;animation-delay:0s !important;animation-iteration-count:1 !important}
+      .halo{animation:none}
+      #dust{display:none}
+      .caret{display:none}
+    }
+    @media (max-width:520px){
+      .mono-logo{width:64px;height:64px;border-radius:17px;font-size:22px;margin-bottom:26px}
+      .enter{min-height:50px;padding:14px 30px;font-size:14.5px}
+      .tagline{min-height:2.9em;max-width:21ch}
+    }
+  </style>
+</head>
+<body>
+  <div class="halo a" aria-hidden="true"></div>
+  <div class="halo b" aria-hidden="true"></div>
+  <canvas id="dust" aria-hidden="true"></canvas>
+
+  <main class="stage">
+    <div class="mono-logo" aria-hidden="true">JS</div>
+    <p class="eyebrow">Welcome to</p>
+    <h1 class="brand">JSVita</h1>
+    <p class="tagline"><span id="typed"></span><span class="caret" id="caret"></span></p>
+    <p class="subtitle">SSLC Student<i>•</i>Future Lawyer<i>•</i>Tech Entrepreneur</p>
+    <a class="enter" id="enterBtn" href="https://jsvita.in/">Enter Dashboard <span class="arrow">→</span></a>
+  </main>
+
+  <div class="status" id="status"><span class="spin"></span><span id="statusText">Preparing your experience</span></div>
+
+  <script>
+    (function () {
+      "use strict";
+      var TAGLINE = "Not waiting for opportunities. Creating them.";
+      var reduced = false;
+      try { reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
+
+      var typed = document.getElementById("typed");
+      var caret = document.getElementById("caret");
+      var statusEl = document.getElementById("status");
+      var statusText = document.getElementById("statusText");
+      var played = false, authDone = false;
+
+      function say(msg){ statusText.textContent = msg; statusEl.classList.add("show"); }
+
+      /* ---------- typewriter ---------- */
+      function startType() {
+        if (reduced) { typed.textContent = TAGLINE; return; }
+        caret.classList.add("on");
+        var i = 0;
+        (function tick() {
+          if (i <= TAGLINE.length) {
+            typed.textContent = TAGLINE.slice(0, i);
+            i += 1;
+            setTimeout(tick, 34 + Math.random() * 26);
+          } else {
+            setTimeout(function(){ caret.classList.remove("on"); }, 1600);
+          }
+        })();
+      }
+
+      /* ---------- cinematic start ---------- */
+      function play() {
+        if (played) return;
+        played = true;
+        document.body.classList.add("go");
+        statusEl.classList.remove("show");
+        if (reduced) { typed.textContent = TAGLINE; }
+        else { setTimeout(startType, 2050); }
+        startDust();
+      }
+
+      /* ---------- gold dust particles ---------- */
+      var dustStarted = false;
+      function startDust() {
+        if (dustStarted || reduced) return;
+        dustStarted = true;
+        var cv = document.getElementById("dust"), ctx = cv.getContext("2d");
+        var W, H, P = [];
+        var COUNT = (window.innerWidth < 640) ? 36 : 64;
+        function size() {
+          W = cv.width = window.innerWidth * devicePixelRatio;
+          H = cv.height = window.innerHeight * devicePixelRatio;
+          cv.style.width = window.innerWidth + "px";
+          cv.style.height = window.innerHeight + "px";
+        }
+        size();
+        window.addEventListener("resize", size, { passive: true });
+        function mk() {
+          return {
+            x: Math.random() * W, y: Math.random() * H,
+            r: (Math.random() * 1.7 + .6) * devicePixelRatio,
+            vy: -(Math.random() * .16 + .05) * devicePixelRatio,
+            vx: (Math.random() - .5) * .1 * devicePixelRatio,
+            tw: Math.random() * Math.PI * 2,
+            ts: Math.random() * .02 + .008
+          };
+        }
+        for (var i = 0; i < COUNT; i++) P.push(mk());
+        var running = true;
+        document.addEventListener("visibilitychange", function(){ running = !document.hidden; if (running) requestAnimationFrame(loop); });
+        function loop() {
+          if (!running) return;
+          ctx.clearRect(0, 0, W, H);
+          for (var i = 0; i < P.length; i++) {
+            var p = P[i];
+            p.x += p.vx; p.y += p.vy; p.tw += p.ts;
+            if (p.y < -10) { p.y = H + 10; p.x = Math.random() * W; }
+            if (p.x < -10) p.x = W + 10; else if (p.x > W + 10) p.x = -10;
+            var a = .22 + Math.sin(p.tw) * .18;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, 6.2832);
+            ctx.fillStyle = "rgba(226,190,92," + a.toFixed(3) + ")";
+            ctx.fill();
+          }
+          requestAnimationFrame(loop);
+        }
+        requestAnimationFrame(loop);
+      }
+
+      /* ---------- auth gate ---------- */
+      try {
+        firebase.initializeApp({
+          apiKey: "AIzaSyAoEGzAL-WkAGttLArl_PpffJYbOYwc5yE",
+          authDomain: "auth.jsvita.in",
+          projectId: "jsvita-login",
+          storageBucket: "jsvita-login.firebasestorage.app",
+          messagingSenderId: "433927112110",
+          appId: "1:433927112110:web:ad6186be9800780e8d343f"
+        });
+      } catch (e) {}
+      try {
+        firebase.auth().onAuthStateChanged(function (u) {
+          authDone = true;
+          if (u) { play(); }
+          else {
+            say("Not signed in — taking you to login");
+            setTimeout(function () { location.replace("/login.html"); }, 1300);
+          }
+        });
+      } catch (e) { play(); }
+      /* network failsafe: never trap the visitor on a blank screen */
+      setTimeout(function () { if (!authDone && !played) play(); }, 4500);
+      if (!played) say("Preparing your experience");
+
+      /* ---------- Enter Dashboard ---------- */
+      document.getElementById("enterBtn").addEventListener("click", function () {
+        try { sessionStorage.setItem("jsgateSkip", "1"); } catch (e) {}
+      });
+
+      /* ---------- ripple on the button ---------- */
+      document.addEventListener("pointerdown", function (e) {
+        var b = e.target.closest(".enter");
+        if (!b) return;
+        var r = b.getBoundingClientRect();
+        var size = Math.max(r.width, r.height);
+        var rip = document.createElement("span");
+        rip.className = "ripple";
+        rip.style.width = rip.style.height = size + "px";
+        rip.style.left = (e.clientX - r.left - size / 2) + "px";
+        rip.style.top = (e.clientY - r.top - size / 2) + "px";
+        b.appendChild(rip);
+        setTimeout(function () { rip.remove(); }, 700);
+      }, { passive: true });
+    })();
+  </script>
+</body>
+</html>

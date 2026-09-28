@@ -351,14 +351,6 @@
     © 2026 Shridhar John · jsvita.in
   </footer>
 
-  <div class="welcome-overlay" id="welcomeOverlay">
-    <div class="welcome-inner">
-      <div class="welcome-mono">JS</div>
-      <div class="welcome-name">Welcome to JSVita</div>
-      <div class="welcome-sub">Preparing your experience…</div>
-    </div>
-  </div>
-
   <script>
     // ---------- Firebase ----------
     const firebaseConfig = {
@@ -513,12 +505,7 @@
       if (went) return;
       went = true;
       try { sessionStorage.setItem('jsgateSkip', '1'); } catch (e) {}
-      const ov = $('welcomeOverlay');
-      const sub = ov.querySelector('.welcome-sub');
-      ov.classList.add('show');
-      if (sub) sub.textContent = 'Welcome back';
-      setTimeout(() => { if (sub) sub.textContent = 'Opening your experience…'; }, 1200);
-      setTimeout(() => window.location.replace('https://jsvita.in/'), 2600);
+      window.location.replace('/welcome.html');
     });
 
     // ---------- ripple effect on all buttons ----------
