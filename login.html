@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content" />
   <meta name="theme-color" content="#050505" />
   <meta name="description" content="Member login for JSVita — Shridhar John's official members area." />
   <title>Member Login — JSVita</title>
@@ -47,6 +47,7 @@
     .auth-card {
       position: relative; width: min(880px, 100%); min-height: 560px;
       border-radius: 24px; overflow: hidden; isolation: isolate;
+      transform: translateZ(0); will-change: transform, opacity;
       background: linear-gradient(160deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
       -webkit-backdrop-filter: blur(18px) saturate(130%); backdrop-filter: blur(18px) saturate(130%);
       border: 1px solid var(--border);
@@ -73,7 +74,9 @@
     .form-pane {
       position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center;
       padding: 46px clamp(28px, 6vw, 64px);
-      transition: transform .7s var(--ease-lux), opacity .7s var(--ease-lux);
+      transition: transform .65s var(--ease-lux), opacity .65s var(--ease-lux);
+      transform: translateZ(0); will-change: transform, opacity;
+      -webkit-font-smoothing: antialiased;
     }
     .pane-login  { width: 55%; }
     .pane-signup { left: auto; width: 55%; opacity: 0; transform: translateX(80px); pointer-events: none; }
@@ -114,7 +117,8 @@
       transition: transform .25s var(--ease-lux), box-shadow .25s, filter .25s, border-color .25s, background .25s; }
     .btn:hover { transform: scale(1.03); }
     .btn:active { animation: press .3s var(--ease-lux); }
-    @keyframes press { 0% { transform: scale(1); } 40% { transform: scale(.96); } 100% { transform: scale(1); } }
+    @keyframes press { 0% { transform: scale(1); } 40% { transform: scale(.97); } 100% { transform: scale(1); } }
+    @media (hover: none) { .btn:hover { transform: none; } .btn:active { transform: scale(.97); } }
     .btn-primary { background: linear-gradient(120deg, var(--glow), var(--gold) 48%, var(--gold-deep)); color: #1a1206;
       border: 1px solid rgba(255,235,190,.5);
       box-shadow: 0 12px 32px -8px rgba(212,175,55,.45), inset 0 1px 0 rgba(255,255,255,.4); }
@@ -151,13 +155,15 @@
         linear-gradient(150deg, rgba(212,175,55,.14), rgba(11,8,6,.92) 55%, rgba(5,5,5,.96));
       border-left: 1px solid rgba(212,175,55,.28);
       display: grid; place-items: center;
-      transition: transform .7s var(--ease-lux), clip-path .7s var(--ease-lux);
-      will-change: transform;
+      transition: transform .65s var(--ease-lux), clip-path .65s var(--ease-lux);
+      will-change: transform, opacity;
+      transform: translateZ(0);
     }
     .mode-signup .overlay { transform: translateX(-68%); clip-path: polygon(0 0, 76% 0, 100% 100%, 0 100%); }
     .ov-inner { width: 62%; text-align: center; }
     .ov-side { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
-      padding: 0 10%; transition: opacity .7s var(--ease-lux), transform .7s var(--ease-lux); }
+      padding: 0 10%; transition: opacity .65s var(--ease-lux), transform .65s var(--ease-lux);
+      transform: translateZ(0); will-change: transform, opacity; }
     .ov-signin  { opacity: 1; transform: translateX(0); }
     .ov-create  { opacity: 0; transform: translateX(-80px); pointer-events: none; }
     .mode-signup .ov-signin { opacity: 0; transform: translateX(80px); pointer-events: none; }
@@ -182,18 +188,24 @@
       .scene { padding: 20px 12px; align-items: stretch; }
       .auth-card { min-height: 640px; }
       .panes { min-height: 600px; }
-      .pane-login, .pane-signup { width: 100%; padding: 40px 26px; }
+      /* forms own the full card; the gold band is a compact bottom sheet so it never covers inputs */
+      .pane-login, .pane-signup {
+        width: 100%; padding: 40px 26px 220px; justify-content: flex-start; padding-top: 44px;
+        overflow-y: auto;
+      }
       .pane-signup { transform: translateY(80px); }
       .mode-signup .pane-login { transform: translateY(-80px); }
       .overlay {
-        top: auto; bottom: -6%; left: -6%; width: 112%; height: 46%;
-        clip-path: polygon(0 22%, 100% 0, 100% 100%, 0 100%);
+        top: auto; bottom: -2%; left: -6%; width: 112%; height: 200px;
+        clip-path: polygon(0 30%, 100% 0, 100% 100%, 0 100%);
       }
-      .mode-signup .overlay { transform: translateY(-116%); clip-path: polygon(0 0, 100% 0, 100% 78%, 0 100%); }
+      /* band stays put; the diagonal re-tilts + content crossfades (still animated) */
+      .mode-signup .overlay { transform: none; clip-path: polygon(0 0, 100% 18%, 100% 100%, 0 100%); }
       .ov-inner { width: 86%; }
-      .ov-title { font-size: 24px; }
-      .ov-sub { font-size: 13px; }
-      .ov-btn { padding: 12px 28px; }
+      .ov-logo { width: 38px; height: 38px; border-radius: 11px; font-size: 13px; margin-bottom: 8px; }
+      .ov-title { font-size: 20px; }
+      .ov-sub { font-size: 12px; margin-top: 5px; }
+      .ov-btn { padding: 11px 26px; margin-top: 10px; }
     }
 
     /* ---------- welcome overlay (post-login) ---------- */
@@ -521,6 +533,23 @@
       b.appendChild(rip);
       setTimeout(() => rip.remove(), 700);
     }, { passive: true });
+
+    // ---------- mobile keyboard handling: keep active input visible ----------
+    (function () {
+      var vv = window.visualViewport;
+      if (!vv) return;
+      var onShift = function () {
+        var el = document.activeElement;
+        if (el && (el.tagName === 'INPUT')) {
+          try { el.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch (e) {}
+        }
+      };
+      vv.addEventListener('resize', onShift);
+      // iOS: focus/blur safety net
+      document.addEventListener('focusin', function (e) {
+        if (e.target.tagName === 'INPUT') setTimeout(onShift, 320);
+      });
+    })();
 
     // ---------- floating gold particles (rAF, subtle, cheap) ----------
     (function () {

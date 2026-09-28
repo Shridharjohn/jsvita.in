@@ -396,8 +396,8 @@ html { scroll-behavior: smooth; }
     </style>
     <script data-pg="hero-premium">(function () {
   "use strict";
-  if (window.__jsvHeroV6) return;
-  window.__jsvHeroV6 = true;
+  if (window.__jsvHeroV7) return;
+  window.__jsvHeroV7 = true;
 
   var NAME = "Shridhar John";
   var SUB_KEY = "hospitality professional";
@@ -555,6 +555,7 @@ html { scroll-behavior: smooth; }
   function run() {
     var s1 = step1(), s2 = step2(), s3 = step3(), s4 = step4(), s5 = step5();
     var s6 = step6();
+    initNavSpy(); initStagger(); initStats(); initDust();
     return s1 && s2 && s3 && s4 && s5 && s6;
   }
 
@@ -570,6 +571,117 @@ html { scroll-behavior: smooth; }
       '</div>';
     (document.body || document.documentElement).appendChild(ov);
   })();
+
+  /* ---- Step 5b: floating glass navbar gold active indicator ---- */
+  function initNavSpy() {
+    if (window.__jsvNavSpy) return;
+    var links = document.querySelectorAll("header nav a[href^='#']");
+    if (links.length < 2) return;
+    window.__jsvNavSpy = true;
+    var map = {};
+    links.forEach(function (a) {
+      var id = a.getAttribute("href").slice(1);
+      var sec = document.getElementById(id);
+      if (sec) map[id] = a;
+    });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          Object.keys(map).forEach(function (k) { map[k].classList.remove("jsv-active"); });
+          if (map[en.target.id]) map[en.target.id].classList.add("jsv-active");
+        }
+      });
+    }, { rootMargin: "-35% 0px -55% 0px" });
+    Object.keys(map).forEach(function (k) { io.observe(document.getElementById(k)); });
+  }
+
+  /* ---- Step 5c: staggered children for About/Experience/Skills lists ---- */
+  function initStagger() {
+    if (window.__jsvStagger) return;
+    var targets = document.querySelectorAll("main section ul, main section ol");
+    if (!targets.length) return;
+    window.__jsvStagger = true;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add("jsv-in"); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.06 });
+    targets.forEach(function (el) {
+      el.classList.add("jsv-stagger");
+      io.observe(el);
+    });
+  }
+
+  /* ---- Step 5d: animated statistics (count up once) ---- */
+  function initStats() {
+    if (window.__jsvStats) return;
+    var region = document.querySelector("[aria-label='Career statistics']");
+    if (!region) return;
+    window.__jsvStats = true;
+    var nums = region.querySelectorAll("p");
+    var statEls = [];
+    for (var i = 0; i < nums.length; i++) {
+      var t = nums[i].textContent.trim();
+      if (/^\d+\+?$/.test(t)) statEls.push({ el: nums[i], target: parseInt(t, 10), suffix: t.indexOf("+") !== -1 ? "+" : "" });
+    }
+    if (!statEls.length) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        io.unobserve(en.target);
+        statEls.forEach(function (s) {
+          var start = null, dur = 1400;
+          function step(ts) {
+            if (!start) start = ts;
+            var p = Math.min((ts - start) / dur, 1);
+            var eased = 1 - Math.pow(1 - p, 3);
+            s.el.textContent = Math.round(s.target * eased) + s.suffix;
+            if (p < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+        });
+      });
+    }, { threshold: 0.4 });
+    io.observe(region);
+  }
+
+  /* ---- Step 5e: homepage gold dust particles ---- */
+  function initDust() {
+    if (window.__jsvDust || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var c = document.createElement("canvas");
+    c.id = "jsvDust";
+    (document.body || document.documentElement).appendChild(c);
+    var ctx = c.getContext("2d");
+    var W, H, parts = [];
+    function resize() {
+      W = c.width = window.innerWidth; H = c.height = window.innerHeight;
+      var n = Math.min(40, Math.floor(W * H / 30000));
+      parts = [];
+      for (var i = 0; i < n; i++) parts.push({
+        x: Math.random() * W, y: Math.random() * H,
+        r: Math.random() * 1.6 + .4, vx: (Math.random() - .5) * .1, vy: -(Math.random() * .15 + .03),
+        a: Math.random() * .4 + .12, tw: Math.random() * 6.28
+      });
+    }
+    function tick() {
+      ctx.clearRect(0, 0, W, H);
+      for (var i = 0; i < parts.length; i++) {
+        var p = parts[i];
+        p.x += p.vx; p.y += p.vy; p.tw += .012;
+        if (p.y < -6) { p.y = H + 6; p.x = Math.random() * W; }
+        if (p.x < -6) p.x = W + 6; else if (p.x > W + 6) p.x = -6;
+        ctx.beginPath();
+        ctx.fillStyle = "rgba(212,175,55," + (p.a * (.6 + .4 * Math.sin(p.tw))).toFixed(3) + ")";
+        ctx.arc(p.x, p.y, p.r, 0, 6.2832);
+        ctx.fill();
+      }
+      requestAnimationFrame(tick);
+    }
+    resize();
+    window.addEventListener("resize", resize, { passive: true });
+    requestAnimationFrame(tick);
+    window.__jsvDust = true;
+  }
 
   /* ---- Step 6: small premium Download CV icon next to the dark-mode toggle ---- */
   function step6() {
@@ -703,7 +815,75 @@ html { scroll-behavior: smooth; }
 })();
 </script>
 </style>
-</head>
+<style data-pg="jsv-brand">
+
+/* ================= JSVITA LUXURY DESIGN SYSTEM v2 ================= */
+:root { --jsv-bg:#050505; --jsv-bg2:#0B0B0B; --jsv-gold:#D4AF37; --jsv-premium:#F7D774;
+  --jsv-border:rgba(212,175,55,.25); --jsv-text2:#B8B8B8; }
+html { scroll-behavior:smooth; background:var(--jsv-bg); }
+html, body { color-scheme:dark; }
+body, .dark body { background:
+  radial-gradient(900px 600px at 78% -4%, rgba(212,175,55,.09), transparent 60%),
+  radial-gradient(700px 520px at -6% 100%, rgba(184,134,11,.07), transparent 55%),
+  linear-gradient(180deg, #050505 0%, #0B0B0B 50%, #050505 100%) !important; }
+/* force every section onto luxury black */
+.dark section { background:transparent !important; }
+.dark section#top { background:transparent !important; }
+/* glass panels: cards inside sections (experience items, skill tabs, contact box, stat cards) */
+.dark main .rounded-3xl, .dark main .rounded-2xl, .dark main .rounded-xl {
+  background:linear-gradient(160deg, rgba(255,255,255,.045), rgba(255,255,255,.015)) !important;
+  -webkit-backdrop-filter:blur(14px) saturate(130%); backdrop-filter:blur(14px) saturate(130%);
+  border:1px solid var(--jsv-border) !important;
+  box-shadow:0 24px 60px -28px rgba(0,0,0,.85), inset 0 1px 0 rgba(247,215,116,.08);
+  transition:transform .45s cubic-bezier(.22,.61,.36,1), border-color .45s, box-shadow .45s;
+}
+.dark main .rounded-3xl:hover, .dark main .rounded-2xl:hover {
+  transform:translateY(-4px);
+  border-color:rgba(212,175,55,.5) !important;
+  box-shadow:0 30px 70px -26px rgba(0,0,0,.9), 0 0 40px -14px rgba(212,175,55,.35), inset 0 1px 0 rgba(247,215,116,.12);
+}
+/* glass navbar */
+header { position:fixed !important; top:10px; left:50%; transform:translateX(-50%);
+  width:min(1120px, calc(100% - 24px)); z-index:80; border-radius:18px;
+  background:rgba(5,5,5,.55) !important;
+  -webkit-backdrop-filter:blur(18px) saturate(140%); backdrop-filter:blur(18px) saturate(140%);
+  border:1px solid var(--jsv-border);
+  box-shadow:0 18px 50px -18px rgba(0,0,0,.8), inset 0 1px 0 rgba(247,215,116,.07); }
+.dark header nav a { position:relative; transition:color .3s; }
+.dark header nav a::after { content:""; position:absolute; left:12px; right:12px; bottom:-6px; height:2px; border-radius:2px;
+  background:linear-gradient(90deg, var(--jsv-premium), var(--jsv-gold)); transform:scaleX(0); transform-origin:center;
+  transition:transform .35s cubic-bezier(.22,.61,.36,1); }
+.dark header nav a:hover::after, .dark header nav a.jsv-active::after { transform:scaleX(1); }
+.dark header nav a.jsv-active { color:#F7D774 !important; }
+/* gold ambient text selection + scrollbar */
+::selection { background:rgba(212,175,55,.35); color:#fff; }
+::-webkit-scrollbar { width:10px; } ::-webkit-scrollbar-track { background:#050505; }
+::-webkit-scrollbar-thumb { background:linear-gradient(180deg, rgba(212,175,55,.5), rgba(184,134,11,.3)); border-radius:8px; }
+/* premium footer */
+.dark footer { background:linear-gradient(180deg, transparent, rgba(212,175,55,.05)) !important;
+  border-top:1px solid var(--jsv-border) !important; position:relative; }
+.dark footer::before { content:""; position:absolute; top:0; left:20%; right:20%; height:1px;
+  background:linear-gradient(90deg, transparent, rgba(247,215,116,.6), transparent); }
+/* stats gold numerals */
+.dark #top .font-mono, .dark main .text-3xl, .dark main .text-4xl { }
+/* stagger reveal children */
+.jsv-stagger > * { opacity:0; transform:translateY(26px);
+  transition:opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1);
+  will-change:opacity, transform; }
+.jsv-stagger.jsv-in > * { opacity:1; transform:translateY(0); }
+.jsv-stagger.jsv-in > *:nth-child(1){transition-delay:.05s} .jsv-stagger.jsv-in > *:nth-child(2){transition-delay:.14s}
+.jsv-stagger.jsv-in > *:nth-child(3){transition-delay:.23s} .jsv-stagger.jsv-in > *:nth-child(4){transition-delay:.32s}
+.jsv-stagger.jsv-in > *:nth-child(5){transition-delay:.41s} .jsv-stagger.jsv-in > *:nth-child(6){transition-delay:.5s}
+.jsv-stagger.jsv-in > *:nth-child(n+7){transition-delay:.6s}
+/* homepage gold dust canvas */
+#jsvDust { position:fixed; inset:0; z-index:1; pointer-events:none; }
+@media (prefers-reduced-motion: reduce) {
+  .jsv-stagger > * { opacity:1 !important; transform:none !important; transition:none !important; }
+  html { scroll-behavior:auto; } #jsvDust { display:none; }
+}
+
+</style>
+  </head></head>
   <body>
     <div id="root"></div>
   <!-- Members login entry -->
