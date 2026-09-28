@@ -3,7 +3,11 @@
   <!-- <html lang="en" class="dark"> — uncomment for dark-by-default (replace the tag above; `dark` is a Tailwind variant, never `@apply` it) -->
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/jsvita-logo.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
     <meta name="theme-color" content="#b8860b" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -271,6 +275,71 @@ section#top > .mx-auto { position: relative; }
 }
 .jsv-nav-cv:active { transform: scale(.94); }
 .jsv-nav-cv svg { width: 17px; height: 17px; }
+
+/* ---------- 6c3. Switch pill (homepage ↔ CV view) — gold glass, floating glow ---------- */
+.jsv-nav-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 999px;
+  font-family: "DM Sans Variable", system-ui, sans-serif;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  text-decoration: none;
+  color: #F7D774;
+  background: linear-gradient(120deg, rgba(212,175,55,.16), rgba(212,175,55,.05));
+  border: 1px solid rgba(212,175,55,.7);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  backdrop-filter: blur(10px) saturate(140%);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transform: translateZ(0);
+  transition: transform .3s cubic-bezier(.22,.61,.36,1), border-color .3s ease, color .3s ease;
+}
+.jsv-nav-switch::before { /* floating glow — opacity only, GPU-composited */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  box-shadow: 0 0 20px -4px rgba(212,175,55,.6), 0 8px 24px -12px rgba(212,175,55,.45);
+  opacity: .35;
+  animation: jsvSwPulse 3s ease-in-out infinite;
+  will-change: opacity;
+  pointer-events: none;
+}
+@keyframes jsvSwPulse { 0%,100% { opacity: .3; } 50% { opacity: .85; } }
+.jsv-nav-switch svg { width: 15px; height: 15px; flex: 0 0 auto; }
+.jsv-nav-switch:hover {
+  transform: translateZ(0) scale(1.05);
+  color: #ffe9a8;
+  border-color: rgba(247,215,116,.9);
+}
+.jsv-nav-switch:hover::before { opacity: 1; }
+.jsv-nav-switch:active { transform: translateZ(0) scale(.96); }
+.jsv-nav-switch .sw-rip {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(255,246,214,.6) 0%, rgba(212,175,55,.28) 55%, transparent 70%);
+  transform: scale(0);
+  animation: jsvSwRip .55s ease-out forwards;
+}
+@keyframes jsvSwRip { to { transform: scale(2.8); opacity: 0; } }
+/* page exit/arrival: 200ms fade + slide-in from right (translate3d + opacity only) */
+.jsv-nav-switch.page-out { opacity: 0; transform: translate3d(-14px,0,0); transition: opacity .2s ease, transform .2s ease; }
+@media (max-width: 640px) {
+  .jsv-nav-switch { padding: 0 10px; font-size: 11.5px; gap: 5px; }
+  .jsv-nav-switch span { display: none; } /* icon-only on small phones to prevent shift */
+  .jsv-nav-switch { width: 36px; justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .jsv-nav-switch, .jsv-nav-switch::before { transition: none; animation: none; }
+}
 
 /* ---------- 6c2. CV attention system (hello / idle shimmer / loading) ---------- */
 .jsv-nav-view { position: relative; overflow: hidden; -webkit-backdrop-filter: blur(10px) saturate(140%); backdrop-filter: blur(10px) saturate(140%); }
@@ -871,10 +940,44 @@ html:not(.dark) header.jsv-scrolled { box-shadow: 0 22px 55px -20px rgba(84,60,1
     }
   }
 
+  /* official JSVita Vita Mark — inline for zero extra requests */
+  var jvLogo = '<svg class="jv-logo" width="38" height="38" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><defs><linearGradient id="jvGold" x1="12" y1="4" x2="52" y2="60" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#F7D774"/><stop offset=".45" stop-color="#D4AF37"/><stop offset=".78" stop-color="#B8860B"/><stop offset="1" stop-color="#F0D57C"/></linearGradient><linearGradient id="jvGoldDeep" x1="8" y1="0" x2="56" y2="64" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFE9A8"/><stop offset=".5" stop-color="#D4AF37"/><stop offset="1" stop-color="#8a6a14"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="url(#jvGoldDeep)"/><rect x="1" y="1" width="62" height="62" rx="15" fill="none" stroke="rgba(255,246,214,.55)" stroke-width="1.4"/><g fill="none" stroke="#1A1206" stroke-width="5.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 15 v21 a8.5 8.5 0 0 1 -8.5 8.5 h-1"/><path d="M42 49 V28 a8.5 8.5 0 0 1 8.5 -8.5 h1"/><path d="M42 22 c-9 -6 -22 -2 -20 8 c1.5 7.5 12 6.5 13 13 c1.5 8 -9 12 -17 7"/></g><path d="M32 6 l3.4 7.2 7.2 3.4 -7.2 3.4 -3.4 7.2 -3.4 -7.2 -7.2 -3.4 7.2 -3.4 z" fill="#FFF6D8" opacity=".92"/></svg>';
+
+  function paintBrandLogo() {
+    /* React renders an inline SVG monogram (data-testid=logo-mark) — swap it wholesale */
+    var old = document.querySelector('header svg[data-testid="logo-mark"], svg[data-testid="logo-mark"]');
+    if (old && !old.__jvReplaced) {
+      var size = Math.round(old.getBoundingClientRect().width) || 36;
+      var wrap = document.createElement("span");
+      wrap.innerHTML = jvLogo.replace('width="38" height="38"', 'width="' + size + '" height="' + size + '"');
+      var fresh = wrap.firstChild;
+      old.parentNode.replaceChild(fresh, old);
+      fresh.__jvReplaced = true;
+      return true;
+    }
+    /* fallback: any plain JS text tile in the header */
+    var cand = document.querySelectorAll("header span, header div");
+    for (var i = 0; i < cand.length; i++) {
+      var el = cand[i];
+      if (el.childElementCount === 0 && el.textContent.trim() === "JS" && el.offsetWidth <= 60 && el.offsetHeight <= 60) {
+        el.innerHTML = jvLogo;
+        el.style.display = "inline-grid";
+        el.style.placeItems = "center";
+        return true;
+      }
+    }
+    return false;
+  }
   function run() {
     var s1 = step1(), s2 = step2(), s3 = step3(), s4 = step4(), s5 = step5();
     var s6 = step6();
     initNavSpy(); initStagger(); initStats(); initDust(); initCurrently(); initNavScroll(); initCvAttention();
+    paintBrandLogo();
+    /* React mounts asynchronously — retry until the monogram exists (max ~8s) */
+    (function logoLoop(tries) {
+      if (paintBrandLogo()) return;
+      if (tries > 0) setTimeout(function () { logoLoop(tries - 1); }, 350);
+    })(24);
     return s1 && s2 && s3 && s4 && s5 && s6;
   }
 
@@ -1066,6 +1169,17 @@ html:not(.dark) header.jsv-scrolled { box-shadow: 0 22px 55px -20px rgba(84,60,1
     if (document.querySelector(".jsv-nav-cv")) return true;
     var toggle = document.querySelector('[data-testid="theme-toggle-btn"]');
     if (!toggle || !toggle.parentNode) return false;
+    /* Switch pill: jumps to the CV viewer (mirrors the cv.html "Switch to Web") */
+    if (!document.querySelector(".jsv-nav-switch")) {
+      var sp = document.createElement("a");
+      sp.className = "jsv-nav-switch";
+      sp.href = "/cv.html";
+      sp.setAttribute("aria-label", "Switch to CV view");
+      sp.setAttribute("title", "Switch to CV view");
+      sp.setAttribute("data-testid", "nav-switch-pill");
+      sp.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h13"/><polyline points="13 3 17 7 13 11"/><path d="M20 17H7"/><polyline points="11 13 7 17 11 21"/></svg><span>CV View</span>';
+      toggle.parentNode.insertBefore(sp, toggle);
+    }
     /* view CV (interactive viewer page) icon goes before the download icon */
     if (!document.querySelector(".jsv-nav-view")) {
       var vw = document.createElement("a");
@@ -1096,6 +1210,27 @@ html:not(.dark) header.jsv-scrolled { box-shadow: 0 22px 55px -20px rgba(84,60,1
       so.setAttribute("data-testid", "nav-signout-icon");
     so.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>';
     so.addEventListener("click", doSignOut);
+    /* switch pill: tap ripple + fade-out when View Transitions unavailable */
+    var sp = document.querySelector(".jsv-nav-switch");
+    if (sp) {
+      sp.addEventListener("pointerdown", function (e) {
+        var r = sp.getBoundingClientRect();
+        var s = Math.max(r.width, r.height);
+        var rip = document.createElement("span");
+        rip.className = "sw-rip";
+        rip.style.width = rip.style.height = s + "px";
+        rip.style.left = (e.clientX - r.left - s / 2) + "px";
+        rip.style.top = (e.clientY - r.top - s / 2) + "px";
+        sp.appendChild(rip);
+        setTimeout(function () { rip.remove(); }, 600);
+      });
+      sp.addEventListener("click", function (e) {
+        if (document.startViewTransition) return;
+        e.preventDefault();
+        sp.classList.add("page-out");
+        setTimeout(function () { location.href = "/cv.html"; }, 190);
+      });
+    }
     so.addEventListener("pointerdown", function (e) {
       var r = so.getBoundingClientRect();
       var size = Math.max(r.width, r.height);

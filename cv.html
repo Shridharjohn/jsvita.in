@@ -6,7 +6,10 @@
   <meta name="theme-color" content="#050505" />
   <meta name="description" content="Executive CV — Shridhar John, founder of JSVita. Hospitality operations leader. Print-ready A4 resume." />
   <title>CV — Shridhar John | JSVita</title>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="/jsvita-logo.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
@@ -176,6 +179,38 @@
 
     footer.pagefoot{text-align:center;padding:18px;color:#999;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em}
 
+    /* ---------- Switch to Web: gold glass pill, floating glow (opacity-only, GPU) ---------- */
+    .abtn.jsv-switch{
+      position:relative;overflow:hidden;isolation:isolate;
+      color:#F7D774;
+      background:linear-gradient(120deg,rgba(212,175,55,.16),rgba(212,175,55,.05));
+      border-color:rgba(212,175,55,.7);
+      -webkit-backdrop-filter:blur(10px) saturate(140%);backdrop-filter:blur(10px) saturate(140%);
+      transform:translateZ(0);
+      transition:transform .3s cubic-bezier(.22,.61,.36,1), border-color .3s ease, color .3s ease;
+    }
+    .abtn.jsv-switch::before{ /* floating gold glow — animated via opacity only (60fps) */
+      content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;
+      box-shadow:0 0 22px -4px rgba(212,175,55,.6), 0 8px 26px -12px rgba(212,175,55,.5);
+      opacity:.35;animation:swPulse 3s ease-in-out infinite;
+      will-change:opacity;pointer-events:none;
+    }
+    @keyframes swPulse{0%,100%{opacity:.3}50%{opacity:.85}}
+    .abtn.jsv-switch:hover{transform:translateZ(0) scale(1.05);color:#ffe9a8;border-color:rgba(247,215,116,.9)}
+    .abtn.jsv-switch:hover::before{opacity:1}
+    .abtn.jsv-switch:active{transform:translateZ(0) scale(.96)}
+    .abtn.jsv-switch .sw-rip{position:absolute;border-radius:50%;pointer-events:none;
+      background:radial-gradient(circle, rgba(255,246,214,.6) 0%, rgba(212,175,55,.28) 55%, transparent 70%);
+      transform:scale(0);animation:swRip .55s ease-out forwards}
+    @keyframes swRip{to{transform:scale(2.8);opacity:0}}
+    /* exit fade (200ms) when the browser lacks View Transitions */
+    .abtn.jsv-switch.page-out{opacity:0;transform:translate3d(-14px,0,0);
+      transition:opacity .2s ease, transform .2s ease}
+
+    /* arrival slide-in from right (GPU: translate3d + opacity) */
+    body{animation:pageIn .38s cubic-bezier(.22,.61,.36,1) both}
+    @keyframes pageIn{from{opacity:0;transform:translate3d(24px,0,0)}to{opacity:1;transform:none}}
+
     /* toast */
     #toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);opacity:0;z-index:99;
       background:rgba(20,15,8,.92);border:1px solid var(--border);color:#F7D774;font-size:13px;font-weight:600;
@@ -224,7 +259,7 @@
   <div class="bar">
     <div class="bar-in">
       <a class="brand" href="/">
-        <span class="bmono">JS</span>
+        <svg class="jv-logo" width="38" height="38" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><defs><linearGradient id="jvGold" x1="12" y1="4" x2="52" y2="60" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#F7D774"/><stop offset=".45" stop-color="#D4AF37"/><stop offset=".78" stop-color="#B8860B"/><stop offset="1" stop-color="#F0D57C"/></linearGradient><linearGradient id="jvGoldDeep" x1="8" y1="0" x2="56" y2="64" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFE9A8"/><stop offset=".5" stop-color="#D4AF37"/><stop offset="1" stop-color="#8a6a14"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="url(#jvGoldDeep)"/><rect x="1" y="1" width="62" height="62" rx="15" fill="none" stroke="rgba(255,246,214,.55)" stroke-width="1.4"/><g fill="none" stroke="#1A1206" stroke-width="5.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 15 v21 a8.5 8.5 0 0 1 -8.5 8.5 h-1"/><path d="M42 49 V28 a8.5 8.5 0 0 1 8.5 -8.5 h1"/><path d="M42 22 c-9 -6 -22 -2 -20 8 c1.5 7.5 12 6.5 13 13 c1.5 8 -9 12 -17 7"/></g><path d="M32 6 l3.4 7.2 7.2 3.4 -7.2 3.4 -3.4 7.2 -3.4 -7.2 -7.2 -3.4 7.2 -3.4 z" fill="#FFF6D8" opacity=".92"/></svg>
         <span><span class="bname">JSVita</span><br><span class="bsub">CURRICULUM VITAE</span></span>
       </a>
       <button class="abtn gold" onclick="window.print()" title="Print or save as PDF">
@@ -241,6 +276,10 @@
       </button>
       <a class="abtn" href="https://www.linkedin.com/in/jsvita" target="_blank" rel="noopener">in · LinkedIn</a>
       <a class="abtn" href="https://jsvita.in" rel="noopener">🌐 Website</a>
+      <a class="abtn jsv-switch" id="switchBtn" href="/" aria-label="Switch to the full JSVita website" title="Switch to the full JSVita website">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h13"/><polyline points="13 3 17 7 13 11"/><path d="M20 17H7"/><polyline points="11 13 7 17 11 21"/></svg>
+        Switch to Web
+      </a>
       <a class="abtn" href="https://wa.me/916361792699" target="_blank" rel="noopener">WhatsApp</a>
       <a class="abtn" href="tel:+916361792699">Call</a>
     </div>
@@ -414,6 +453,27 @@
           navigator.clipboard.writeText(location.href).then(function () { say("Link copied — share it anywhere"); },
             function () { say("Could not copy link"); });
         } else { say("Copy the URL from the address bar"); }
+      });
+
+      /* Switch to Web: tap ripple + graceful fade-out exit (View Transitions handle
+         the fancy path in Chrome; this is the lightweight fallback) */
+      var sw = document.getElementById("switchBtn");
+      sw.addEventListener("pointerdown", function (e) {
+        var r = sw.getBoundingClientRect();
+        var s = Math.max(r.width, r.height);
+        var rip = document.createElement("span");
+        rip.className = "sw-rip";
+        rip.style.width = rip.style.height = s + "px";
+        rip.style.left = (e.clientX - r.left - s / 2) + "px";
+        rip.style.top = (e.clientY - r.top - s / 2) + "px";
+        sw.appendChild(rip);
+        setTimeout(function () { rip.remove(); }, 600);
+      });
+      sw.addEventListener("click", function (e) {
+        if (document.startViewTransition) return; /* native transition handles it */
+        e.preventDefault();
+        sw.classList.add("page-out");
+        setTimeout(function () { location.href = "/"; }, 190);
       });
 
       /* PDF is server-rendered from this exact page by GitHub Actions on every
