@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Connect with Shridhar John — founder of JSVita. Download the CV, reach out on WhatsApp, LinkedIn, email, or scan the QR." />
+  <title>Connect — JSVita</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#000000; --panel:rgba(255,255,255,.045);
+      --gold:#D4AF37; --prem:#F7D774; --deep:#b8860b;
+      --cream:#FFFFFF; --muted:#B8B8B8; --border:rgba(212,175,55,.25);
+      --ease:cubic-bezier(.22,.61,.36,1);
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      background:
+        radial-gradient(1000px 640px at 78% -10%, rgba(212,175,55,.10), transparent 62%),
+        radial-gradient(760px 540px at -12% 108%, rgba(184,134,11,.08), transparent 58%),
+        #000;
+      color:var(--cream);
+      font-family:'DM Sans',system-ui,sans-serif;
+      -webkit-font-smoothing:antialiased;
+      overflow-x:clip;
+      min-height:100vh;
+    }
+    ::selection{background:rgba(212,175,55,.35)}
+    ::-webkit-scrollbar{width:10px} ::-webkit-scrollbar-track{background:#000}
+    ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,rgba(212,175,55,.5),rgba(184,134,11,.3));border-radius:8px}
+
+    #dust{position:fixed;inset:0;z-index:0;pointer-events:none}
+    .wrap{position:relative;z-index:1;max-width:1060px;margin:0 auto;padding:clamp(48px,7vw,96px) 20px 40px;text-align:center}
+
+    /* ---------- reveal on scroll ---------- */
+    .reveal{opacity:0;transform:translateY(26px);will-change:transform,opacity;
+      transition:opacity .85s var(--ease),transform .85s var(--ease)}
+    .reveal.in{opacity:1;transform:none}
+
+    /* ---------- hero ---------- */
+    .mono{width:74px;height:74px;border-radius:20px;margin:0 auto 26px;display:grid;place-items:center;
+      font-family:'JetBrains Mono',monospace;font-weight:700;font-size:25px;color:#1a1206;
+      background:linear-gradient(135deg,var(--prem),var(--gold) 45%,var(--deep));
+      box-shadow:0 14px 44px rgba(212,175,55,.42), inset 0 1px 0 rgba(255,255,255,.55);
+      animation:monoPulse 3.4s ease-in-out infinite}
+    @keyframes monoPulse{0%,100%{box-shadow:0 14px 44px rgba(212,175,55,.42), inset 0 1px 0 rgba(255,255,255,.55)}
+      50%{box-shadow:0 14px 62px rgba(247,215,116,.62), 0 0 90px rgba(212,175,55,.26), inset 0 1px 0 rgba(255,255,255,.6)}}
+    h1.brand{
+      font-family:'Playfair Display',serif;font-weight:800;line-height:1.04;letter-spacing:.01em;
+      font-size:clamp(3.2rem,10vw,5.6rem);
+      background:linear-gradient(100deg,var(--deep) 0%,var(--gold) 28%,var(--prem) 46%,#fff6d8 52%,var(--prem) 58%,var(--gold) 74%,var(--deep) 100%);
+      background-size:220% 100%;
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      filter:drop-shadow(0 6px 30px rgba(212,175,55,.25));
+      animation:sweep 6s linear infinite;
+    }
+    @keyframes sweep{0%{background-position:130% 0}100%{background-position:-130% 0}}
+    .tagline{margin-top:18px;font-size:clamp(1.05rem,2.6vw,1.35rem);font-weight:500;color:#E9E2D4}
+    .subtitle{margin-top:12px;font-size:clamp(.9rem,2.2vw,1.05rem);color:var(--muted);letter-spacing:.04em}
+    .subtitle i{font-style:normal;color:var(--gold);padding:0 .45em}
+
+    /* ---------- magnetic CV button ---------- */
+    .cv-zone{margin:46px auto 10px;display:flex;justify-content:center}
+    .btn-cv{
+      position:relative;display:inline-flex;align-items:center;gap:13px;overflow:hidden;
+      padding:19px 46px;border-radius:999px;text-decoration:none;
+      font-family:'DM Sans',sans-serif;font-weight:800;font-size:17px;letter-spacing:.03em;color:#1a1206;
+      background:linear-gradient(120deg,var(--prem),var(--gold) 48%,var(--deep));
+      border:1px solid rgba(255,235,190,.55);
+      box-shadow:0 18px 50px rgba(212,175,55,.4), inset 0 1px 0 rgba(255,255,255,.5);
+      transition:box-shadow .3s var(--ease), filter .3s;
+      transform:translateZ(0);will-change:transform;
+    }
+    .btn-cv::after{ /* shine sweep */
+      content:"";position:absolute;inset:0;
+      background:linear-gradient(110deg,transparent 32%,rgba(255,255,255,.6) 50%,transparent 68%);
+      transform:translateX(-130%);animation:shine 3.4s ease-in-out infinite;pointer-events:none;
+    }
+    @keyframes shine{0%,55%{transform:translateX(-130%)}85%,100%{transform:translateX(130%)}}
+    .btn-cv:hover{filter:brightness(1.06);box-shadow:0 24px 70px rgba(247,215,116,.55), 0 0 90px rgba(212,175,55,.3), inset 0 1px 0 rgba(255,255,255,.55)}
+    .btn-cv:active{transform:scale(.97)}
+    .btn-cv svg{flex:0 0 auto}
+
+    /* ---------- contact cards ---------- */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:52px}
+    .card{
+      position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:14px;
+      padding:26px 24px;border-radius:20px;text-decoration:none;text-align:left;
+      color:var(--cream);
+      background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+      -webkit-backdrop-filter:blur(14px) saturate(130%);backdrop-filter:blur(14px) saturate(130%);
+      border:1px solid var(--border);
+      box-shadow:0 24px 60px -28px rgba(0,0,0,.9), inset 0 1px 0 rgba(247,215,116,.08);
+      transition:transform .45s var(--ease), border-color .45s, box-shadow .45s;
+    }
+    .card:hover{
+      transform:translateY(-6px);border-color:rgba(212,175,55,.6);
+      box-shadow:0 32px 74px -26px rgba(0,0,0,.95), 0 0 46px -14px rgba(212,175,55,.45), inset 0 1px 0 rgba(247,215,116,.14);
+    }
+    .card .ic{width:48px;height:48px;border-radius:13px;display:grid;place-items:center;color:var(--prem);
+      background:rgba(212,175,55,.1);border:1px solid var(--border);transition:.3s var(--ease)}
+    .card:hover .ic{background:rgba(212,175,55,.2);transform:scale(1.07) rotate(-3deg)}
+    .card .k{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--prem)}
+    .card b{font-size:16.5px;font-weight:700;color:var(--cream)}
+    .card span.v{font-size:13px;color:var(--muted);word-break:break-all}
+
+    /* ---------- QR ---------- */
+    .qr-zone{margin-top:60px;display:flex;justify-content:center}
+    .qr{
+      display:inline-flex;flex-direction:column;align-items:center;gap:16px;
+      padding:26px 30px;border-radius:24px;
+      background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+      -webkit-backdrop-filter:blur(14px) saturate(130%);backdrop-filter:blur(14px) saturate(130%);
+      border:1px solid rgba(212,175,55,.45);
+      box-shadow:0 26px 70px -28px rgba(0,0,0,.9), 0 0 60px -18px rgba(212,175,55,.35), inset 0 1px 0 rgba(247,215,116,.1);
+      position:relative;
+    }
+    .qr::before{content:"";position:absolute;inset:-1px;border-radius:24px;padding:1px;pointer-events:none;
+      background:linear-gradient(140deg,rgba(247,215,116,.7),transparent 40%,transparent 60%,rgba(212,175,55,.5));
+      -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;mask-composite:exclude}
+    .qr img{width:216px;height:216px;border-radius:12px;display:block;background:#000}
+    .qr .cap{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--prem)}
+
+    footer{position:relative;z-index:1;text-align:center;padding:30px 20px 40px;color:var(--muted);
+      font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.08em}
+    footer::before{content:"";display:block;max-width:520px;height:1px;margin:0 auto 26px;
+      background:linear-gradient(90deg,transparent,rgba(247,215,116,.5),transparent)}
+
+    @media (min-width:1001px){ .grid{grid-template-columns:repeat(5,1fr)} .card{padding:22px 18px} }
+    @media (max-width:1000px) and (min-width:641px){
+      .grid{grid-template-columns:1fr 1fr}
+      .card:last-child{grid-column:1/-1;flex-direction:row;align-items:center}
+    }
+    @media (max-width:640px){
+      .btn-cv{width:100%;justify-content:center;padding:18px 30px}
+      .grid{grid-template-columns:1fr 1fr}
+      .card{padding:20px 18px}
+      .card:last-child{grid-column:1/-1}
+    }
+    @media (max-width:430px){ .grid{grid-template-columns:1fr} }
+    @media (prefers-reduced-motion:reduce){
+      .reveal{transition:none;opacity:1;transform:none}
+      .btn-cv::after,.mono,h1.brand{animation:none}
+      #dust{display:none}
+      html{scroll-behavior:auto}
+    }
+  </style>
+</head>
+<body>
+  <canvas id="dust" aria-hidden="true"></canvas>
+
+  <main class="wrap">
+    <div class="mono reveal" aria-hidden="true">JS</div>
+    <h1 class="brand reveal">JSVita</h1>
+    <p class="tagline reveal">"Not waiting for opportunities. Creating them."</p>
+    <p class="subtitle reveal">SSLC Student<i>•</i>Future Lawyer<i>•</i>Tech Entrepreneur</p>
+
+    <div class="cv-zone reveal">
+      <a class="btn-cv" id="cvBtn" href="/Shridhar-John-CV.pdf" download>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download CV
+      </a>
+    </div>
+
+    <div class="grid">
+      <a class="card reveal" href="https://jsvita.in" rel="noopener">
+        <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+        <span><span class="k">Website</span><br><b>Visit Website</b><br><span class="v">jsvita.in</span></span>
+      </a>
+      <a class="card reveal" href="https://www.linkedin.com/in/jsvita" target="_blank" rel="noopener">
+        <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.55V9h3.57v11.45z"/></svg></span>
+        <span><span class="k">LinkedIn</span><br><b>LinkedIn Profile</b><br><span class="v">linkedin.com/in/jsvita</span></span>
+      </a>
+      <a class="card reveal" href="https://wa.me/916361792699" target="_blank" rel="noopener">
+        <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.1 4.49.71.3 1.27.49 1.7.63.72.23 1.37.2 1.88.12.58-.09 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35zM12.04 21.5h-.01a9.4 9.4 0 0 1-4.79-1.31l-.34-.2-3.56.93.95-3.47-.22-.36a9.38 9.38 0 0 1-1.44-5.01c0-5.19 4.23-9.41 9.42-9.41 2.51 0 4.88.98 6.65 2.76a9.34 9.34 0 0 1 2.76 6.66c0 5.19-4.23 9.41-9.42 9.41zm8.01-17.42A11.32 11.32 0 0 0 12.03.75C5.77.75.68 5.84.68 12.09c0 1.99.52 3.94 1.51 5.65L.5 23.25l5.65-1.48a11.35 11.35 0 0 0 5.88 1.51h.01c6.26 0 11.35-5.09 11.35-11.34 0-3.03-1.18-5.88-3.34-8.02z"/></svg></span>
+        <span><span class="k">WhatsApp</span><br><b>Chat on WhatsApp</b><br><span class="v">+91 63617 92699</span></span>
+      </a>
+      <a class="card reveal" href="tel:+916361792699">
+        <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.34 1.79.65 2.63a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.45-1.22a2 2 0 0 1 2.11-.45c.84.31 1.73.53 2.63.65A2 2 0 0 1 22 16.92z"/></svg></span>
+        <span><span class="k">Phone</span><br><b>Call Me</b><br><span class="v">+91 63617 92699</span></span>
+      </a>
+      <a class="card reveal" href="mailto:admin@jsvita.in">
+        <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m22 7-10 6L2 7"/></svg></span>
+        <span><span class="k">Email</span><br><b>Email Me</b><br><span class="v">admin@jsvita.in</span></span>
+      </a>
+    </div>
+
+    <div class="qr-zone reveal">
+      <div class="qr">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=432x432&data=https%3A%2F%2Fjsvita.in&color=D4AF37&bgcolor=000000&qzone=2" alt="QR code linking to jsvita.in" width="216" height="216" loading="lazy" />
+        <span class="cap">Scan to Explore JSVita</span>
+      </div>
+    </div>
+  </main>
+
+  <footer>© 2026 JSVita. All Rights Reserved.</footer>
+
+  <script>
+    (function () {
+      "use strict";
+      var reduced = false;
+      try { reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
+
+      /* ---------- reveal on scroll ---------- */
+      var els = document.querySelectorAll(".reveal");
+      if ("IntersectionObserver" in window && !reduced) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (en.isIntersecting) {
+              var i = [...document.querySelectorAll(".reveal")].indexOf(en.target);
+              en.target.style.transitionDelay = Math.min(i * 70, 420) + "ms";
+              en.target.classList.add("in");
+              io.unobserve(en.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        els.forEach(function (el) { io.observe(el); });
+      } else {
+        els.forEach(function (el) { el.classList.add("in"); });
+      }
+
+      /* ---------- magnetic CV button ---------- */
+      var btn = document.getElementById("cvBtn");
+      if (btn && !reduced && matchMedia("(hover:hover)").matches) {
+        btn.addEventListener("pointermove", function (e) {
+          var r = btn.getBoundingClientRect();
+          var x = (e.clientX - r.left - r.width / 2) * 0.18;
+          var y = (e.clientY - r.top - r.height / 2) * 0.28;
+          btn.style.transform = "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px)";
+        });
+        btn.addEventListener("pointerleave", function () { btn.style.transform = ""; });
+      }
+
+      /* ---------- gold dust particles ---------- */
+      if (!reduced) {
+        var cv = document.getElementById("dust"), ctx = cv.getContext("2d");
+        var W, H, P = [];
+        var COUNT = (window.innerWidth < 640) ? 34 : 60;
+        function size() {
+          W = cv.width = window.innerWidth * devicePixelRatio;
+          H = cv.height = window.innerHeight * devicePixelRatio;
+          cv.style.width = window.innerWidth + "px";
+          cv.style.height = window.innerHeight + "px";
+        }
+        size();
+        window.addEventListener("resize", size, { passive: true });
+        function mk() {
+          return {
+            x: Math.random() * W, y: Math.random() * H,
+            r: (Math.random() * 1.7 + .6) * devicePixelRatio,
+            vy: -(Math.random() * .16 + .05) * devicePixelRatio,
+            vx: (Math.random() - .5) * .1 * devicePixelRatio,
+            tw: Math.random() * Math.PI * 2,
+            ts: Math.random() * .02 + .008
+          };
+        }
+        for (var i = 0; i < COUNT; i++) P.push(mk());
+        var running = true;
+        document.addEventListener("visibilitychange", function () { running = !document.hidden; if (running) requestAnimationFrame(loop); });
+        function loop() {
+          if (!running) return;
+          ctx.clearRect(0, 0, W, H);
+          for (var i = 0; i < P.length; i++) {
+            var p = P[i];
+            p.x += p.vx; p.y += p.vy; p.tw += p.ts;
+            if (p.y < -10) { p.y = H + 10; p.x = Math.random() * W; }
+            if (p.x < -10) p.x = W + 10; else if (p.x > W + 10) p.x = -10;
+            var a = .22 + Math.sin(p.tw) * .18;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, 6.2832);
+            ctx.fillStyle = "rgba(226,190,92," + a.toFixed(3) + ")";
+            ctx.fill();
+          }
+          requestAnimationFrame(loop);
+        }
+        requestAnimationFrame(loop);
+      }
+    })();
+  </script>
+</body>
+</html>
