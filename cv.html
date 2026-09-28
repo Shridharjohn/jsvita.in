@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#050505" />
+  <meta name="description" content="Executive CV — Shridhar John, founder of JSVita. Hospitality operations leader. Print-ready A4 resume." />
+  <title>CV — Shridhar John | JSVita</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --gold:#D4AF37; --prem:#F7D774; --deep:#b8860b;
+      --border:rgba(212,175,55,.28); --ease:cubic-bezier(.22,.61,.36,1);
+      --ink:#1a1a1a; --ink-soft:#444;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      background:
+        radial-gradient(1000px 620px at 80% -10%, rgba(212,175,55,.10), transparent 60%),
+        radial-gradient(760px 520px at -12% 108%, rgba(184,134,11,.08), transparent 58%),
+        #050505;
+      font-family:'DM Sans',system-ui,sans-serif;
+      -webkit-font-smoothing:antialiased;
+      color:#fff; overflow-x:clip;
+    }
+    ::selection{background:rgba(212,175,55,.35)}
+    ::-webkit-scrollbar{width:10px} ::-webkit-scrollbar-track{background:#050505}
+    ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,rgba(212,175,55,.5),rgba(184,134,11,.3));border-radius:8px}
+
+    /* ================= action bar ================= */
+    .bar{
+      position:sticky;top:0;z-index:50;
+      background:rgba(5,5,5,.72);
+      -webkit-backdrop-filter:blur(16px) saturate(140%);backdrop-filter:blur(16px) saturate(140%);
+      border-bottom:1px solid var(--border);
+    }
+    .bar-in{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:10px;padding:12px 18px;flex-wrap:wrap}
+    .bar .brand{display:flex;align-items:center;gap:10px;margin-right:auto;text-decoration:none;color:#fff}
+    .bmono{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;color:#1a1206;
+      font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;
+      background:linear-gradient(135deg,var(--prem),var(--gold) 45%,var(--deep));
+      box-shadow:0 8px 26px rgba(212,175,55,.35)}
+    .bname{font-family:'Playfair Display',serif;font-weight:700;font-size:19px;line-height:1}
+    .bsub{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.28em;color:#B8B8B8;margin-top:3px}
+    .abtn{
+      display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;
+      font-size:13.5px;font-weight:700;text-decoration:none;cursor:pointer;white-space:nowrap;
+      color:#F7D774;background:rgba(212,175,55,.07);border:1px solid var(--border);
+      transition:.25s var(--ease);font-family:inherit;
+    }
+    .abtn:hover{background:rgba(212,175,55,.16);border-color:rgba(212,175,55,.6);transform:translateY(-2px);
+      box-shadow:0 12px 30px -12px rgba(212,175,55,.5)}
+    .abtn:active{transform:scale(.96)}
+    .abtn.gold{
+      color:#1a1206;background:linear-gradient(120deg,var(--prem),var(--gold) 48%,var(--deep));
+      border-color:rgba(255,235,190,.55);position:relative;overflow:hidden;
+      box-shadow:0 12px 36px rgba(212,175,55,.4), inset 0 1px 0 rgba(255,255,255,.5);
+    }
+    .abtn.gold::after{content:"";position:absolute;inset:0;
+      background:linear-gradient(110deg,transparent 32%,rgba(255,255,255,.6) 50%,transparent 68%);
+      transform:translateX(-130%);animation:shine 3.6s ease-in-out infinite;pointer-events:none}
+    @keyframes shine{0%,55%{transform:translateX(-130%)}85%,100%{transform:translateX(130%)}}
+    .abtn.gold:hover{filter:brightness(1.06);box-shadow:0 18px 50px rgba(247,215,116,.55), inset 0 1px 0 rgba(255,255,255,.55)}
+
+    /* ================= A4 sheet ================= */
+    .stage{max-width:1180px;margin:0 auto;padding:34px 18px 70px;display:flex;justify-content:center}
+    .sheet{
+      width:100%;max-width:860px;background:#fff;color:var(--ink);
+      border-radius:14px;overflow:hidden;position:relative;
+      box-shadow:0 40px 110px -30px rgba(0,0,0,.9), 0 0 80px -30px rgba(212,175,55,.35);
+      animation:sheetIn .9s var(--ease) both;
+    }
+    @keyframes sheetIn{from{opacity:0;transform:translateY(26px) scale(.985)}to{opacity:1;transform:none}}
+
+    .cv-top{
+      display:grid;grid-template-columns:1fr 236px;gap:26px;align-items:center;
+      padding:38px 44px 30px;border-bottom:3px solid var(--gold);position:relative;
+      background:linear-gradient(180deg,#fffdf7 0%,#fff 100%);
+    }
+    .cv-top::after{content:"";position:absolute;bottom:-3px;left:0;right:0;height:3px;
+      background:linear-gradient(90deg,transparent,var(--prem),var(--deep),transparent);opacity:.8}
+    .eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.32em;color:var(--deep);text-transform:uppercase;margin-bottom:10px}
+    h1.cv-name{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(34px,5vw,46px);line-height:1.05;color:#141414}
+    .cv-tag{margin-top:10px;font-size:15.5px;font-style:italic;color:#6b5d33}
+    .cv-sub{margin-top:6px;font-size:13.5px;color:#666;letter-spacing:.03em}
+    .cv-sub i{font-style:normal;color:var(--deep);padding:0 .4em}
+    .side{display:flex;flex-direction:column;align-items:center;gap:14px}
+    .photo{width:196px;height:236px;object-fit:cover;object-position:center 22%;border-radius:12px;
+      border:2px solid var(--gold);box-shadow:0 14px 34px -14px rgba(0,0,0,.45)}
+    .qrbox{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 12px;border:1.5px solid var(--gold);
+      border-radius:10px;background:#fff}
+    .qrbox img{width:118px;height:118px;display:block}
+    .qrbox span{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.18em;color:#8a6a14;text-transform:uppercase}
+
+    main{padding:8px 44px 40px}
+    section{padding:22px 0 6px}
+    section + section{border-top:1px solid #eee3c3}
+    h2{
+      font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:700;letter-spacing:.3em;
+      text-transform:uppercase;color:#141414;display:flex;align-items:center;gap:14px;margin-bottom:16px;
+    }
+    h2::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+    h2 b{color:var(--deep)}
+
+    .about p{font-size:14.5px;line-height:1.75;color:var(--ink-soft);margin-bottom:9px}
+    .about p:last-child{margin-bottom:0}
+
+    .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .edu{border:1px solid #eee3c3;border-radius:10px;padding:14px 16px;background:#fffdf7}
+    .edu b{display:block;font-size:14.5px;color:#141414}
+    .edu span{display:block;font-size:12.5px;color:#777;margin-top:4px;line-height:1.5}
+
+    .skills{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .skgroup{border:1px solid #eee3c3;border-radius:10px;padding:14px 16px}
+    .skgroup b{font-size:13.5px;color:#141414;display:block;margin-bottom:8px}
+    .chips{display:flex;flex-wrap:wrap;gap:6px}
+    .chip{font-size:11.5px;padding:4px 10px;border-radius:999px;background:#faf4e2;border:1px solid #eadfb9;color:#6b5d33}
+
+    .certs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .cert{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ink-soft);line-height:1.55}
+    .cert::before{content:"◆";color:var(--gold);font-size:10px;margin-top:3px}
+    .cert b{color:#141414}
+
+    .proj{border-left:2px solid var(--gold);padding:2px 0 2px 16px;margin-bottom:14px}
+    .proj b{font-size:14.5px;color:#141414}
+    .proj p{font-size:13px;color:var(--ink-soft);margin-top:4px;line-height:1.6}
+
+    .job{margin-bottom:20px}
+    .job:last-child{margin-bottom:0}
+    .job-head{display:flex;justify-content:space-between;gap:14px;align-items:baseline;flex-wrap:wrap}
+    .job-head b{font-size:15.5px;color:#141414}
+    .job-head .co{font-size:13.5px;color:#6b5d33;font-weight:700}
+    .job-head time{font-family:'JetBrains Mono',monospace;font-size:11px;color:#8a6a14;letter-spacing:.06em;white-space:nowrap}
+    .job .sum{font-size:13px;color:var(--ink-soft);margin-top:5px;line-height:1.6}
+    .job ul{margin:8px 0 0 16px}
+    .job li{font-size:12.5px;color:#555;line-height:1.65;margin-bottom:3px}
+    .badge-now{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.18em;
+      color:#1a1206;background:linear-gradient(120deg,var(--prem),var(--gold));padding:3px 9px;border-radius:999px;margin-left:8px;vertical-align:2px}
+
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px 22px}
+    .cline{display:flex;gap:10px;align-items:baseline;font-size:13.5px;color:var(--ink-soft)}
+    .cline b{color:#141414;min-width:86px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-family:'JetBrains Mono',monospace}
+    .cline a{color:#8a6a14;text-decoration:none;font-weight:600}
+    .socials{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+    .soc{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;color:#6b5d33;
+      border:1px solid #eadfb9;background:#fffdf7;padding:7px 14px;border-radius:999px;text-decoration:none}
+
+    footer.pagefoot{text-align:center;padding:18px;color:#999;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em}
+
+    /* toast */
+    #toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);opacity:0;z-index:99;
+      background:rgba(20,15,8,.92);border:1px solid var(--border);color:#F7D774;font-size:13px;font-weight:600;
+      padding:11px 22px;border-radius:999px;transition:.35s var(--ease);pointer-events:none;
+      -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+    #toast.show{opacity:1;transform:translateX(-50%)}
+
+    /* ================= MOBILE ================= */
+    @media (max-width:760px){
+      .cv-top{grid-template-columns:1fr;justify-items:center;text-align:center;padding:28px 22px 24px}
+      .side{order:-1}
+      main{padding:4px 22px 32px}
+      .edu-grid,.skills,.certs,.contact-grid{grid-template-columns:1fr}
+      .bar-in{padding:10px 12px}
+      .abtn{padding:9px 12px;font-size:12.5px}
+      .bname{font-size:16px}
+    }
+
+    /* ================= PRINT: pure A4 ================= */
+    @page{size:A4;margin:12mm 11mm}
+    @media print{
+      html,body{background:#fff !important}
+      .bar,#dust,footer.pagefoot,#toast{display:none !important}
+      .stage{padding:0;max-width:none;display:block}
+      .sheet{box-shadow:none;border-radius:0;max-width:none;width:100%;animation:none;opacity:1 !important;transform:none !important}
+      .cv-top{padding:0 0 14px}
+      main{padding:0}
+      section{padding:12px 0 4px;break-inside:avoid}
+      .job{break-inside:avoid}
+      *{animation:none !important;transition:none !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+      .abtn-print-hint{display:none}
+    }
+    @media (prefers-reduced-motion:reduce){
+      .sheet{animation:none}
+      .abtn.gold::after{animation:none}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ ACTION BAR (hidden in print) ============ -->
+  <div class="bar">
+    <div class="bar-in">
+      <a class="brand" href="/">
+        <span class="bmono">JS</span>
+        <span><span class="bname">JSVita</span><br><span class="bsub">CURRICULUM VITAE</span></span>
+      </a>
+      <button class="abtn gold" onclick="window.print()" title="Print or save as PDF">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Print CV
+      </button>
+      <a class="abtn" href="/Shridhar-John-CV.pdf" download>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download PDF
+      </a>
+      <button class="abtn" id="shareBtn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        Share
+      </button>
+      <a class="abtn" href="https://www.linkedin.com/in/jsvita" target="_blank" rel="noopener">in · LinkedIn</a>
+      <a class="abtn" href="https://jsvita.in" rel="noopener">🌐 Website</a>
+      <a class="abtn" href="https://wa.me/916361792699" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="abtn" href="tel:+916361792699">Call</a>
+    </div>
+  </div>
+
+  <!-- ============ A4 SHEET ============ -->
+  <div class="stage">
+    <article class="sheet">
+
+      <header class="cv-top">
+        <div>
+          <p class="eyebrow">Founder of JSVita</p>
+          <h1 class="cv-name">Shridhar John</h1>
+          <p class="cv-tag">"Not waiting for opportunities. Creating them."</p>
+          <p class="cv-sub">SSLC Student<i>•</i>Future Lawyer<i>•</i>Tech Entrepreneur</p>
+        </div>
+        <div class="side">
+          <img class="photo" src="/shridhar-portrait.jpg" alt="Shridhar John" />
+          <div class="qrbox">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=480x480&data=https%3A%2F%2Fjsvita.in&color=1a1a1a&bgcolor=ffffff&qzone=1" alt="QR — jsvita.in" width="118" height="118" loading="lazy" />
+            <span>Scan → jsvita.in</span>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section class="about">
+          <h2><b>01</b> About Me</h2>
+          <p>Results-driven operations and customer service professional with over 3 years of experience across hospitality, retail operations, inventory management, customer relations, and team leadership.</p>
+          <p>Proven ability to manage daily operations, train staff, maintain service quality, and improve operational efficiency — from cafe floors and quick-commerce kitchens to hotel front desks.</p>
+          <p>Passionate about technology, digital marketing, and continuous learning, I bring a modern, data-friendly mindset to every shift I run — and I'm building JSVita, a personal venture focused on technology and business development.</p>
+        </section>
+
+        <section>
+          <h2><b>02</b> Education</h2>
+          <div class="edu-grid">
+            <div class="edu"><b>Shree Jnana Bharathi School</b><span>Higher Secondary / Pre-University Course (PUC) — Karnataka, India</span></div>
+            <div class="edu"><b>Stella Maris College</b><span>Higher Secondary / Pre-University Course (PUC) — Karnataka, India</span></div>
+          </div>
+        </section>
+
+        <section>
+          <h2><b>03</b> Skills</h2>
+          <div class="skills">
+            <div class="skgroup"><b>Cafe &amp; Store Operations</b>
+              <div class="chips"><span class="chip">Cafe operations</span><span class="chip">Store operations</span><span class="chip">Inventory control</span><span class="chip">Stock rotation</span><span class="chip">Food safety</span><span class="chip">Cash handling</span><span class="chip">Record keeping</span></div></div>
+            <div class="skgroup"><b>People &amp; Leadership</b>
+              <div class="chips"><span class="chip">Team leadership</span><span class="chip">Staff management</span><span class="chip">Employee training</span><span class="chip">Scheduling</span><span class="chip">Time management</span><span class="chip">Multitasking</span></div></div>
+            <div class="skgroup"><b>Guest &amp; Client Relations</b>
+              <div class="chips"><span class="chip">Customer service</span><span class="chip">Client relations</span><span class="chip">Front desk</span><span class="chip">Communication</span><span class="chip">Problem solving</span><span class="chip">Marketing</span></div></div>
+            <div class="skgroup"><b>Tech &amp; Digital</b>
+              <div class="chips"><span class="chip">Technical support</span><span class="chip">Google Workspace</span><span class="chip">Digital marketing</span><span class="chip">Website development</span><span class="chip">Continuous learning</span></div></div>
+          </div>
+        </section>
+
+        <section>
+          <h2><b>04</b> Certifications &amp; Training</h2>
+          <div class="certs">
+            <div class="cert"><span><b>Food Safety &amp; Sanitation</b> — in-role training, Roots Corporation (Q-MIN)</span></div>
+            <div class="cert"><span><b>Safe Machinery Operation</b> — certified training, Geddit Convenience (Zepto Cafe ICO)</span></div>
+            <div class="cert"><span><b>Google Workspace</b> — self-directed productivity &amp; docs mastery</span></div>
+            <div class="cert"><span><b>Digital Marketing &amp; Web</b> — continuous self-study, applied to JSVita</span></div>
+          </div>
+        </section>
+
+        <section>
+          <h2><b>05</b> Projects</h2>
+          <div class="proj"><b>JSVita — Personal Brand &amp; Technology Venture</b>
+            <p>Founder. Designed, built, and operate jsvita.in — a premium personal-brand platform with a members-only login system, Firebase authentication, and a luxury black-gold identity across web, CV, and connect channels.</p></div>
+          <div class="proj"><b>Q-MIN Cafe Operations Buildout</b>
+            <p>Own the daily operating rhythm of a flagship cafe — vendor coordination, audit-ready records, service training, and shift handover systems.</p></div>
+          <div class="proj" style="margin-bottom:0"><b>Zepto Cafe ICO — Format Operations</b>
+            <p>Ran a quick-commerce cafe format end-to-end: inventory discipline, hygiene standards, machinery safety, and next-day production prep.</p></div>
+        </section>
+
+        <section>
+          <h2><b>06</b> Experience</h2>
+
+          <div class="job">
+            <div class="job-head"><span><b>Cafe Manager — Q-MIN</b><span class="badge-now">CURRENT</span></span><time>06.2026 — Present</time></div>
+            <p class="sum"><span class="co">Roots Corporation Limited · Bangalore</span> — Running daily cafe operations for Q-MIN under Roots Corporation — supervising service periods, safeguarding food safety, and keeping records audit-ready.</p>
+            <ul>
+              <li>Supervised baristas and cashiers during service periods, keeping queues moving and quality consistent.</li>
+              <li>Supported training for new team members on company procedures and service standards.</li>
+              <li>Trained staff on inventory handling, safety rules, and scan accuracy.</li>
+              <li>Helped manage cafe opening, closing, and shift handoffs; worked with vendors on deliveries.</li>
+              <li>Maintained food safety standards, sanitation routines, records, reports, and logs.</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <div class="job-head"><span><b>Cafe ICO — Zepto</b></span><time>06.2024 — 06.2026</time></div>
+            <p class="sum"><span class="co">Geddit Convenience Private Limited · Bangalore, KA</span> — Operated the Cafe ICO format inside Zepto's quick-commerce ecosystem — inventory discipline, hygiene, and machine safety on every shift.</p>
+            <ul>
+              <li>Improved product shelf life through careful rotation and inventory stocking practices.</li>
+              <li>Monitored inventory levels and reported restocking needs to management promptly.</li>
+              <li>Trained new employees on safe machinery operation procedures.</li>
+              <li>Organized workspace at shift end to support next-day production prep.</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <div class="job-head"><span><b>Recovery Executive</b></span><time>04.2024 — 05.2024</time></div>
+            <p class="sum"><span class="co">SR9 Association · Bangalore</span> — Managed recovery of overdue dues with accurate records and a respectful, process-first approach.</p>
+            <ul>
+              <li>Collected dues from customers while preserving relationships.</li>
+              <li>Kept accurate records of collection activity and updated customer files.</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <div class="job-head"><span><b>Receptionist</b></span><time>06.2023 — 2024</time></div>
+            <p class="sum"><span class="co">Alcott Hotels and Resorts · India</span> — First point of contact for guests — front desk operations, cash accuracy, and friendly issue resolution.</p>
+            <ul>
+              <li>Handled cash and cash equivalents with care and accuracy.</li>
+              <li>Maintained an organized filing system for confidential client records.</li>
+              <li>Supported customer satisfaction by resolving issues with friendly, knowledgeable service.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2><b>07</b> Contact Information</h2>
+          <div class="contact-grid">
+            <div class="cline"><b>Website</b><a href="https://jsvita.in">jsvita.in</a></div>
+            <div class="cline"><b>Email</b><a href="mailto:admin@jsvita.in">admin@jsvita.in</a></div>
+            <div class="cline"><b>Phone</b><a href="tel:+916361792699">+91 63617 92699</a></div>
+            <div class="cline"><b>WhatsApp</b><a href="https://wa.me/916361792699">+91 63617 92699</a></div>
+            <div class="cline"><b>Location</b><span>Bangalore, Karnataka, India</span></div>
+            <div class="cline"><b>Languages</b><span>Kannada · English · Hindi</span></div>
+          </div>
+          <div class="socials">
+            <a class="soc" href="https://www.linkedin.com/in/jsvita" target="_blank" rel="noopener">in · LinkedIn — /jsvita</a>
+            <a class="soc" href="https://wa.me/916361792699" target="_blank" rel="noopener">WhatsApp Chat</a>
+            <a class="soc" href="https://jsvita.in" rel="noopener">🌐 jsvita.in</a>
+          </div>
+        </section>
+
+        <section>
+          <h2><b>08</b> Interests</h2>
+          <div class="chips">
+            <span class="chip">Digital Marketing</span><span class="chip">Artificial Intelligence</span><span class="chip">Technology Exploration</span>
+            <span class="chip">Website Development</span><span class="chip">Google Workspace</span><span class="chip">Business Development</span><span class="chip">Continuous Learning</span>
+          </div>
+        </section>
+      </main>
+
+      <footer class="pagefoot" style="border-top:1px solid #eee3c3">SHRIDHAR JOHN · JSVITA · JSVITA.IN</footer>
+    </article>
+  </div>
+
+  <div id="toast" role="status"></div>
+
+  <script>
+    (function () {
+      "use strict";
+      var toast = document.getElementById("toast"), t;
+      function say(msg) {
+        toast.textContent = msg;
+        toast.classList.add("show");
+        clearTimeout(t);
+        t = setTimeout(function () { toast.classList.remove("show"); }, 2200);
+      }
+
+      /* Share: native sheet on mobile, clipboard fallback */
+      document.getElementById("shareBtn").addEventListener("click", function () {
+        var data = { title: "Shridhar John — CV", text: "Executive CV of Shridhar John, founder of JSVita", url: location.href };
+        if (navigator.share) {
+          navigator.share(data).catch(function () {});
+        } else if (navigator.clipboard) {
+          navigator.clipboard.writeText(location.href).then(function () { say("Link copied — share it anywhere"); },
+            function () { say("Could not copy link"); });
+        } else { say("Copy the URL from the address bar"); }
+      });
+
+      /* QR high-res swap for print quality */
+      var qr = document.querySelector(".qrbox img");
+      if (qr) {
+        var hi = new Image();
+        hi.onload = function () { qr.src = hi.src; };
+        hi.src = "https://api.qrserver.com/v1/create-qr-code/?size=960x960&data=https%3A%2F%2Fjsvita.in&color=1a1a1a&bgcolor=ffffff&qzone=1";
+      }
+    })();
+  </script>
+</body>
+</html>
