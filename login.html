@@ -3,186 +3,339 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#C2410C" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#050505" />
   <meta name="description" content="Member login for JSVita — Shridhar John's official members area." />
   <title>Member Login — JSVita</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <style>
     :root {
-      --bg: #0b0806; --bg2: #14100c; --card: #1c1610; --border: #26201a;
-      --cream: #f7f1e8; --muted: #b3a493; --orange: #ff8a3d; --orange-deep: #C2410C;
-      --good: #4ADE80; --bad: #F87171;
+      --bg: #050505;
+      --gold: #D4AF37;
+      --glow: #F7D774;
+      --gold-deep: #b8860b;
+      --cream: #f7f1e8;
+      --muted: #b3a493;
+      --card: rgba(255,255,255,.04);
+      --border: rgba(212,175,55,.22);
+      --good: #4ADE80;
+      --bad: #F87171;
+      --ease-lux: cubic-bezier(0.4, 0, 0.2, 1);
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
     body {
       min-height: 100vh; background: var(--bg); color: var(--cream);
-      font-family: 'DM Sans', system-ui, sans-serif; display: flex; flex-direction: column;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      display: flex; flex-direction: column; overflow-x: hidden;
     }
+
+    /* ---------- ambient background: glows + gold dust ---------- */
     .glow { position: fixed; inset: 0; pointer-events: none; z-index: 0;
-      background: radial-gradient(700px 460px at 72% 8%, rgba(255,138,61,.09), transparent 58%), radial-gradient(560px 420px at 8% 100%, rgba(194,65,12,.07), transparent 55%); }
-    .panel, input, .tab, .btn { transition: background-color .35s, border-color .35s, color .35s; }
+      background:
+        radial-gradient(760px 500px at 74% 6%, rgba(212,175,55,.10), transparent 58%),
+        radial-gradient(600px 460px at 6% 96%, rgba(184,134,11,.08), transparent 55%);
+    }
+    #dust { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+    /* ---------- entrance ---------- */
+    .scene { flex: 1; display: grid; place-items: center; padding: 34px 16px; position: relative; z-index: 2; }
+    .auth-card {
+      position: relative; width: min(880px, 100%); min-height: 560px;
+      border-radius: 24px; overflow: hidden; isolation: isolate;
+      background: linear-gradient(160deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      -webkit-backdrop-filter: blur(18px) saturate(130%); backdrop-filter: blur(18px) saturate(130%);
+      border: 1px solid var(--border);
+      box-shadow: 0 40px 90px -30px rgba(0,0,0,.85), inset 0 1px 0 rgba(247,215,116,.10);
+      animation: cardIn .8s var(--ease-lux) both;
+    }
+    @keyframes cardIn { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: scale(1); } }
+    .auth-card::after { content: ""; position: absolute; top: 0; left: 10%; right: 10%; height: 1px; z-index: 5;
+      background: linear-gradient(90deg, transparent, rgba(247,215,116,.6), transparent); pointer-events: none; }
+
+    /* ---------- brand row ---------- */
     header { display: flex; justify-content: space-between; align-items: center;
-      padding: 18px 28px; border-bottom: 1px solid var(--border); position: relative; z-index: 1; }
+      padding: 18px 28px; border-bottom: 1px solid rgba(212,175,55,.14); position: relative; z-index: 3; }
     .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--cream); }
-    .monogram { width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, var(--orange), var(--orange-deep));
-      display: grid; place-items: center; font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 14px; }
+    .monogram { width: 38px; height: 38px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--glow), var(--gold) 45%, var(--gold-deep));
+      display: grid; place-items: center; font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px; color: #1a1206;
+      box-shadow: 0 8px 26px rgba(212,175,55,.35); }
     .brand-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 20px; }
     .brand-sub { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .25em; color: var(--muted); }
-    .home-link { font-size: 13px; color: var(--muted); text-decoration: none; border: 1px solid var(--border);
-      padding: 8px 14px; border-radius: 999px; transition: .2s; }
-    .home-link:hover { color: var(--cream); border-color: var(--orange); }
-    main { flex: 1; display: grid; place-items: center; padding: 32px 16px; position: relative; z-index: 1; }
-    .panel { width: 100%; max-width: 420px; background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 24px; padding: 36px 32px; box-shadow: 0 24px 60px rgba(0,0,0,.45); }
-    h1 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; }
-    .sub { color: var(--muted); font-size: 14px; margin-top: 6px; }
-    .tabs { display: flex; gap: 6px; background: var(--bg); border: 1px solid var(--border);
-      border-radius: 12px; padding: 4px; margin: 22px 0; }
-    .tab { flex: 1; padding: 9px 0; border: 0; border-radius: 9px; background: transparent; color: var(--muted);
-      font-family: inherit; font-size: 14px; font-weight: 500; cursor: pointer; transition: .2s; }
-    .tab.active { background: var(--orange); color: #fff; }
-    label { display: block; font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
-      color: var(--muted); margin: 14px 0 6px; }
-    input { width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--border);
-      background: var(--bg); color: var(--cream); font-family: inherit; font-size: 15px; outline: none; transition: .2s; }
-    input:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(234,88,12,.15); }
-    .btn { width: 100%; margin-top: 18px; padding: 13px; border: 0; border-radius: 12px; cursor: pointer;
-      font-family: inherit; font-size: 15px; font-weight: 700; transition: .2s; display: flex; align-items: center; justify-content: center; gap: 10px; }
-    .btn-primary { background: var(--orange); color: #fff; }
-    .btn-primary:hover { background: var(--orange-deep); box-shadow: 0 8px 24px rgba(234,88,12,.35); }
-    .btn-google { background: var(--card); color: var(--cream); border: 1px solid var(--border); }
-    .btn-google:hover { border-color: var(--orange); }
-    .divider { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 12px; margin: 18px 0 0; }
-    .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    /* ---------- form panes ---------- */
+    .panes { position: relative; min-height: 520px; }
+    .form-pane {
+      position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center;
+      padding: 46px clamp(28px, 6vw, 64px);
+      transition: transform .7s var(--ease-lux), opacity .7s var(--ease-lux);
+    }
+    .pane-login  { width: 55%; }
+    .pane-signup { left: auto; width: 55%; opacity: 0; transform: translateX(80px); pointer-events: none; }
+    .mode-signup .pane-login  { opacity: 0; transform: translateX(-80px); pointer-events: none; }
+    .mode-signup .pane-signup { opacity: 1; transform: translateX(0); pointer-events: auto; }
+
+    .form-title { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 700; }
+    .form-sub { color: var(--muted); font-size: 14px; margin-top: 6px; }
+
+    /* floating-label fields */
+    .field { position: relative; margin-top: 26px; }
+    .field input {
+      width: 100%; padding: 15px 16px; border-radius: 12px;
+      border: 1px solid rgba(212,175,55,.28); background: rgba(5,5,5,.55);
+      color: var(--cream); font-family: inherit; font-size: 15px; outline: none;
+      transition: border-color .25s, box-shadow .25s, background .25s;
+    }
+    .field input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(212,175,55,.16), 0 0 22px rgba(247,215,116,.14);
+      background: rgba(5,5,5,.75);
+    }
+    .field label {
+      position: absolute; left: 14px; top: 15px; padding: 0 6px; pointer-events: none;
+      color: var(--muted); font-size: 14.5px; letter-spacing: .02em;
+      transition: transform .22s var(--ease-lux), color .22s, font-size .22s, background .22s;
+    }
+    .field input:focus + label,
+    .field input:not(:placeholder-shown) + label {
+      transform: translateY(-26px); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--glow); background: #0a0908; border-radius: 6px;
+    }
+
+    /* ---------- buttons: gold, ripple, press ---------- */
+    .btn { position: relative; overflow: hidden; width: 100%; margin-top: 18px; padding: 14px; border: 0; border-radius: 13px; cursor: pointer;
+      font-family: inherit; font-size: 15px; font-weight: 800; letter-spacing: .01em;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      transition: transform .25s var(--ease-lux), box-shadow .25s, filter .25s, border-color .25s, background .25s; }
+    .btn:hover { transform: scale(1.03); }
+    .btn:active { animation: press .3s var(--ease-lux); }
+    @keyframes press { 0% { transform: scale(1); } 40% { transform: scale(.96); } 100% { transform: scale(1); } }
+    .btn-primary { background: linear-gradient(120deg, var(--glow), var(--gold) 48%, var(--gold-deep)); color: #1a1206;
+      border: 1px solid rgba(255,235,190,.5);
+      box-shadow: 0 12px 32px -8px rgba(212,175,55,.45), inset 0 1px 0 rgba(255,255,255,.4); }
+    .btn-primary:hover { filter: brightness(1.06); box-shadow: 0 18px 44px -8px rgba(212,175,55,.6), inset 0 1px 0 rgba(255,255,255,.45); }
+    .btn-glass { background: rgba(212,175,55,.07); color: var(--glow); border: 1px solid rgba(212,175,55,.4); }
+    .btn-glass:hover { background: rgba(212,175,55,.13); border-color: rgba(212,175,55,.65); box-shadow: 0 14px 34px -12px rgba(212,175,55,.4); }
+    .ripple { position: absolute; border-radius: 50%; transform: scale(0); pointer-events: none;
+      background: radial-gradient(circle, rgba(255,246,214,.65) 0%, rgba(212,175,55,.25) 60%, transparent 70%);
+      animation: rip .65s var(--ease-lux) forwards; }
+    @keyframes rip { to { transform: scale(3.2); opacity: 0; } }
+
+    .spinner { width: 16px; height: 16px; border: 2px solid rgba(26,18,6,.35); border-top-color: #1a1206;
+      border-radius: 50%; animation: spin .7s linear infinite; display: none; }
+    .btn-glass .spinner { border-color: rgba(247,215,116,.35); border-top-color: var(--glow); }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .divider { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 12px; margin-top: 18px; }
+    .divider::before, .divider::after { content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,.35), transparent); }
+    .fineprint { margin-top: 16px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); text-align: center; }
+    .fineprint a { color: var(--glow); text-decoration: none; }
+    .haters { font-size: 11.5px; font-weight: 800; color: var(--gold); letter-spacing: .14em; text-transform: uppercase;
+      text-shadow: 0 0 14px rgba(212,175,55,.4); margin-top: 18px; }
     .msg { margin-top: 14px; padding: 11px 14px; border-radius: 10px; font-size: 14px; display: none; }
     .msg.err { background: rgba(248,113,113,.12); color: var(--bad); border: 1px solid rgba(248,113,113,.3); }
     .msg.ok { background: rgba(74,222,128,.1); color: var(--good); border: 1px solid rgba(74,222,128,.3); }
-    .fineprint { margin-top: 18px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); text-align: center; }
-    .fineprint a { color: var(--orange); text-decoration: none; }
-    .haters { font-size: 11.5px; font-weight: 800; color: var(--orange); letter-spacing: .14em; text-transform: uppercase;
-      text-shadow: 0 0 14px rgba(234,88,12,.4); margin-top: 20px; }
-    .spinner { width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.35); border-top-color: #fff;
-      border-radius: 50%; animation: spin .7s linear infinite; display: none; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    /* dashboard */
-    #dash { display: none; text-align: center; }
-    .avatar { width: 76px; height: 76px; border-radius: 50%; border: 3px solid var(--orange);
-      object-fit: cover; margin: 0 auto 16px; display: block; }
-    .avatar-fallback { width: 76px; height: 76px; border-radius: 50%; margin: 0 auto 16px;
-      background: linear-gradient(135deg, var(--orange), var(--orange-deep)); display: grid; place-items: center;
-      font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 700; color: #fff; }
-    .badge { display: inline-flex; align-items: center; gap: 6px; font-family: 'JetBrains Mono', monospace;
-      font-size: 11px; letter-spacing: .12em; color: var(--good); border: 1px solid rgba(74,222,128,.35);
-      background: rgba(74,222,128,.08); border-radius: 999px; padding: 6px 12px; margin-bottom: 14px; }
-    .meta { margin-top: 18px; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; text-align: left; }
-    .meta-row { display: flex; justify-content: space-between; gap: 12px; padding: 11px 16px; font-size: 14px;
-      border-bottom: 1px solid var(--border); }
-    .meta-row:last-child { border-bottom: 0; }
-    .meta-row .k { color: var(--muted); }
-    .meta-row .v { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; text-align: right; word-break: break-all; }
-    footer { padding: 18px; text-align: center; font-family: 'JetBrains Mono', monospace;
-      font-size: 11px; color: var(--muted); border-top: 1px solid var(--border); position: relative; z-index: 1; }
-    footer a:hover { color: var(--orange); border-color: var(--orange); transform: translateY(-2px); }
-    /* premium welcome overlay (Apple-style) */
-    .welcome-overlay { position: fixed; inset: 0; z-index: 100; display: none; place-items: center;
-      background: rgba(11,8,6,.97); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
-    .welcome-overlay.show { display: grid; animation: woFade .45s ease both; }
-    .welcome-inner { text-align: center; animation: woUp .8s cubic-bezier(.22,.61,.36,1) both; }
-    .welcome-mono { width: 64px; height: 64px; border-radius: 18px; margin: 0 auto 18px;
-      background: linear-gradient(135deg, #f0d57c, #d4af37 45%, #b8860b); display: grid; place-items: center;
-      font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 22px; color: #1a1206;
-      box-shadow: 0 18px 50px rgba(212,175,55,.4); animation: woPulse 1.6s ease-in-out infinite; }
-    .welcome-name { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 800;
-      background: linear-gradient(100deg, #fdf8ec 0%, #f4e3b2 30%, #d4af37 58%, #f0d57c 78%, #fdf8ec 100%);
+
+    /* ---------- diagonal sliding overlay ---------- */
+    .overlay {
+      position: absolute; top: -10%; left: 42%; width: 62%; height: 120%; z-index: 4;
+      clip-path: polygon(24% 0, 100% 0, 100% 100%, 0 100%);
+      background:
+        radial-gradient(420px 300px at 70% 20%, rgba(247,215,116,.16), transparent 60%),
+        linear-gradient(150deg, rgba(212,175,55,.14), rgba(11,8,6,.92) 55%, rgba(5,5,5,.96));
+      border-left: 1px solid rgba(212,175,55,.28);
+      display: grid; place-items: center;
+      transition: transform .7s var(--ease-lux), clip-path .7s var(--ease-lux);
+      will-change: transform;
+    }
+    .mode-signup .overlay { transform: translateX(-68%); clip-path: polygon(0 0, 76% 0, 100% 100%, 0 100%); }
+    .ov-inner { width: 62%; text-align: center; }
+    .ov-side { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 0 10%; transition: opacity .7s var(--ease-lux), transform .7s var(--ease-lux); }
+    .ov-signin  { opacity: 1; transform: translateX(0); }
+    .ov-create  { opacity: 0; transform: translateX(-80px); pointer-events: none; }
+    .mode-signup .ov-signin { opacity: 0; transform: translateX(80px); pointer-events: none; }
+    .mode-signup .ov-create { opacity: 1; transform: translateX(0); pointer-events: auto; }
+
+    .ov-logo { width: 64px; height: 64px; border-radius: 18px; margin-bottom: 22px;
+      background: linear-gradient(135deg, var(--glow), var(--gold) 45%, var(--gold-deep));
+      display: grid; place-items: center; font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 22px; color: #1a1206;
+      animation: logoIn 1s var(--ease-lux) both, goldPulse 2.6s ease-in-out 1s infinite; }
+    @keyframes logoIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes goldPulse { 0%,100% { box-shadow: 0 14px 40px rgba(212,175,55,.35); } 50% { box-shadow: 0 14px 58px rgba(247,215,116,.6); } }
+    .ov-title { font-family: 'Playfair Display', serif; font-size: clamp(26px, 3.4vw, 34px); font-weight: 800; line-height: 1.15;
+      background: linear-gradient(100deg, #fdf8ec 0%, #f4e3b2 30%, var(--gold) 58%, var(--glow) 78%, #fdf8ec 100%);
       background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
-      animation: jswShimmer 2.4s ease-in-out infinite; }
+      animation: shimmer 7s ease-in-out infinite; }
+    @keyframes shimmer { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+    .ov-sub { margin-top: 12px; color: #e8d9ae; font-size: 14.5px; line-height: 1.6; max-width: 30ch; }
+    .ov-btn { width: auto; padding: 13px 34px; margin-top: 24px; }
+
+    /* ---------- mobile (iPhone 14 Plus and below): vertical slide ---------- */
+    @media (max-width: 820px) {
+      .scene { padding: 20px 12px; align-items: stretch; }
+      .auth-card { min-height: 640px; }
+      .panes { min-height: 600px; }
+      .pane-login, .pane-signup { width: 100%; padding: 40px 26px; }
+      .pane-signup { transform: translateY(80px); }
+      .mode-signup .pane-login { transform: translateY(-80px); }
+      .overlay {
+        top: auto; bottom: -6%; left: -6%; width: 112%; height: 46%;
+        clip-path: polygon(0 22%, 100% 0, 100% 100%, 0 100%);
+      }
+      .mode-signup .overlay { transform: translateY(-116%); clip-path: polygon(0 0, 100% 0, 100% 78%, 0 100%); }
+      .ov-inner { width: 86%; }
+      .ov-title { font-size: 24px; }
+      .ov-sub { font-size: 13px; }
+      .ov-btn { padding: 12px 28px; }
+    }
+
+    /* ---------- welcome overlay (post-login) ---------- */
+    .welcome-overlay { position: fixed; inset: 0; z-index: 100; display: none; place-items: center;
+      background: rgba(5,5,5,.97); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+    .welcome-overlay.show { display: grid; animation: woFade .45s ease both; }
+    .welcome-inner { text-align: center; animation: woUp .8s var(--ease-lux) both; }
+    .welcome-mono { width: 64px; height: 64px; border-radius: 18px; margin: 0 auto 18px;
+      background: linear-gradient(135deg, var(--glow), var(--gold) 45%, var(--gold-deep)); display: grid; place-items: center;
+      font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 22px; color: #1a1206;
+      box-shadow: 0 18px 50px rgba(212,175,55,.4); animation: goldPulse 1.6s ease-in-out infinite; }
+    .welcome-name { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 800;
+      background: linear-gradient(100deg, #fdf8ec 0%, #f4e3b2 30%, var(--gold) 58%, var(--glow) 78%, #fdf8ec 100%);
+      background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+      animation: shimmer 2.4s ease-in-out infinite; }
     .welcome-sub { margin-top: 12px; font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
       letter-spacing: .3em; text-transform: uppercase; color: #e8d9ae; }
     @keyframes woFade { from { opacity: 0; } to { opacity: 1; } }
     @keyframes woUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
-    @keyframes woPulse { 0%,100% { box-shadow: 0 18px 50px rgba(212,175,55,.35); } 50% { box-shadow: 0 18px 64px rgba(212,175,55,.55); } }
-    @keyframes jswShimmer { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
-    @media (max-width: 480px) { .welcome-name { font-size: 30px; } }
-    @media (max-width: 480px) { .panel { padding: 28px 22px; } h1 { font-size: 24px; } }
+
+    footer { padding: 16px; text-align: center; font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; color: var(--muted); border-top: 1px solid rgba(212,175,55,.14); position: relative; z-index: 1; }
+    footer a { color: #e8d9ae; text-decoration: none; }
+    #footSocial { display: flex; gap: 12px; justify-content: center; margin-bottom: 12px; }
+    #footSocial a { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 11px;
+      color: #e8d9ae; background: rgba(212,175,55,.06); border: 1px solid rgba(212,175,55,.35); transition: .25s var(--ease-lux); }
+    #footSocial a:hover { color: var(--glow); border-color: var(--gold); transform: translateY(-2px); box-shadow: 0 10px 24px -10px rgba(212,175,55,.5); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .auth-card, .ov-logo, .ov-title, .welcome-inner, .welcome-mono, .welcome-name { animation: none !important; }
+      .form-pane, .overlay, .ov-side { transition-duration: .01s !important; }
+      #dust { display: none; }
+    }
   </style>
-<!-- obsidian-ember -->
 </head>
 <body>
   <div class="glow"></div>
+  <canvas id="dust" aria-hidden="true"></canvas>
+
   <header>
     <a class="brand" href="/">
       <span class="monogram">JS</span>
       <span><span class="brand-name">JSVita</span><br><span class="brand-sub">MEMBERS</span></span>
     </a>
+    <a href="/" style="font-size:13px;color:var(--muted);text-decoration:none;border:1px solid rgba(212,175,55,.25);padding:8px 14px;border-radius:999px;transition:.2s">← Back to site</a>
   </header>
 
-  <main>
-    <!-- AUTH PANEL -->
-    <section class="panel" id="authPanel">
-      <h1 id="title">Welcome back</h1>
-      <p class="sub" id="subtitle">Sign in to your JSVita members area.</p>
+  <main class="scene">
+    <section class="auth-card" id="authCard" data-mode="login">
+      <div class="panes">
+        <!-- LOGIN -->
+        <div class="form-pane pane-login" id="paneLogin">
+          <h1 class="form-title">Welcome back</h1>
+          <p class="form-sub">Sign in to your JSVita members area.</p>
+          <form id="authFormLogin" novalidate>
+            <div class="field">
+              <input id="email" type="email" autocomplete="email" placeholder=" " required>
+              <label for="email">Email</label>
+            </div>
+            <div class="field">
+              <input id="pass" type="password" autocomplete="current-password" placeholder=" " minlength="6" required>
+              <label for="pass">Password</label>
+            </div>
+            <button class="btn btn-primary" id="submitBtn" type="submit">
+              <span class="spinner" id="spin"></span><span id="submitLabel">Sign in</span>
+            </button>
+          </form>
+          <div class="divider">or</div>
+          <button class="btn btn-glass" id="googleBtn" type="button">
+            <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.5 6.1 29.5 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.5 6.1 29.5 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
+            <span id="googleLabel">Continue with Google</span>
+          </button>
+          <p class="fineprint"><a href="#" id="forgotLink">Forgot password?</a></p>
+          <div class="msg" id="msg"></div>
+          <p class="fineprint haters">Designed for my haters</p>
+        </div>
 
-      <div class="tabs">
-        <button class="tab active" id="tabLogin" type="button">Sign in</button>
-        <button class="tab" id="tabSignup" type="button">Create account</button>
+        <!-- SIGNUP -->
+        <div class="form-pane pane-signup" id="paneSignup">
+          <h1 class="form-title">Join JSVita</h1>
+          <p class="form-sub">Create your free members account in seconds.</p>
+          <form id="authFormSignup" novalidate>
+            <div class="field">
+              <input id="email2" type="email" autocomplete="email" placeholder=" " required>
+              <label for="email2">Email</label>
+            </div>
+            <div class="field">
+              <input id="pass2" type="password" autocomplete="new-password" placeholder=" " minlength="6" required>
+              <label for="pass2">Create password</label>
+            </div>
+            <button class="btn btn-primary" id="submitBtn2" type="submit">
+              <span class="spinner" id="spin2"></span><span id="submitLabel2">Create my account</span>
+            </button>
+          </form>
+          <div class="divider">or</div>
+          <button class="btn btn-glass" id="googleBtn2" type="button">
+            <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.5 6.1 29.5 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.5 6.1 29.5 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
+            <span id="googleLabel2">Continue with Google</span>
+          </button>
+          <div class="msg" id="msg2"></div>
+        </div>
+
+        <!-- SLIDING DIAGONAL OVERLAY -->
+        <div class="overlay" id="overlay">
+          <div class="ov-side ov-signin">
+            <div class="ov-inner">
+              <div class="ov-logo">JS</div>
+              <h2 class="ov-title">New here?</h2>
+              <p class="ov-sub">Create your JSVita account and step inside the members area.</p>
+              <button class="btn btn-primary ov-btn" id="goSignup" type="button">Create Account</button>
+            </div>
+          </div>
+          <div class="ov-side ov-create">
+            <div class="ov-inner">
+              <div class="ov-logo">JS</div>
+              <h2 class="ov-title">Welcome back</h2>
+              <p class="ov-sub">Already a member? Sign in and continue your journey.</p>
+              <button class="btn btn-primary ov-btn" id="goLogin" type="button">Sign In</button>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <form id="authForm" novalidate>
-        <label for="email">Email</label>
-        <input id="email" type="email" autocomplete="email" placeholder="you@example.com" required>
-        <label for="pass">Password</label>
-        <input id="pass" type="password" autocomplete="current-password" placeholder="••••••••" minlength="6" required>
-        <button class="btn btn-primary" id="submitBtn" type="submit">
-          <span class="spinner" id="spin"></span><span id="submitLabel">Sign in</span>
-        </button>
-      </form>
-
-      <div class="divider">or</div>
-      <button class="btn btn-google" id="googleBtn" type="button">
-        <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.5 6.1 29.5 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.5 6.1 29.5 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
-        <span id="googleLabel">Continue with Google</span>
-      </button>
-      <p class="fineprint" style="margin-top:12px"><a href="#" id="forgotLink">Forgot password?</a></p>
-
-      <div class="msg" id="msg"></div>
-      <p class="fineprint haters">Designed for my haters</p>
     </section>
+  </main>
 
-    <!-- MEMBER DASHBOARD (never shown; instant premium redirect instead) -->
-    <section class="panel" id="dash" style="display:none">
-      <div id="avatarSlot"></div>
-      <h1 id="dashName">Member</h1>
-      <p class="sub" id="dashEmail"></p>
-      <div class="meta">
-        <div class="meta-row"><span class="k">Provider</span><span class="v" id="mProvider">—</span></div>
-        <div class="meta-row"><span class="k">Member since</span><span class="v" id="mSince">—</span></div>
-        <div class="meta-row"><span class="k">This session</span><span class="v" id="mSession">—</span></div>
-        <div class="meta-row"><span class="k">Status</span><span class="v" style="color:var(--good)">Active ✓</span></div>
-      </div>
-      <button class="btn btn-google" id="logoutBtn" type="button">Sign out</button>
-    </section>
-  </main>    <footer id="siteFooter" style="display:flex;flex-direction:column;align-items:center;gap:12px">
-      <div id="footSocial" style="display:flex;gap:12px">
-        <a href="https://wa.me/916361792699" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp" style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:11px;color:#e8d9ae;background:rgba(212,175,55,.06);border:1px solid rgba(212,175,55,.35);transition:.25s">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.1 4.49.71.3 1.27.49 1.7.63.72.23 1.37.2 1.88.12.58-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 1 1 8.38 4.63m8.42-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.15 1.6 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.16-3.47-8.41"/></svg>
-        </a>
-        <a href="https://www.linkedin.com/in/jsvita" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn" style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:11px;color:#e8d9ae;background:rgba(212,175,55,.06);border:1px solid rgba(212,175,55,.35);transition:.25s">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z"/></svg>
-        </a>
-        <a href="mailto:admin@jsvita.in" aria-label="Email" title="Email" style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:11px;color:#e8d9ae;background:rgba(212,175,55,.06);border:1px solid rgba(212,175,55,.35);transition:.25s">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </a>
-        <a href="tel:+916361792699" aria-label="Call" title="Call +91 63617 92699" style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:11px;color:#e8d9ae;background:rgba(212,175,55,.06);border:1px solid rgba(212,175,55,.35);transition:.25s">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-        </a>
-      </div>
-      © 2026 Shridhar John · jsvita.in
-    </footer>
+  <footer id="siteFooter">
+    <div id="footSocial">
+      <a href="https://wa.me/916361792699" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.1 4.49.71.3 1.27.49 1.7.63.72.23 1.37.2 1.88.12.58-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 1 1 8.38 4.63m8.42-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.15 1.6 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.16-3.47-8.41"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/jsvita" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+      </a>
+      <a href="mailto:admin@jsvita.in" aria-label="Email" title="Email">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+      <a href="tel:+916361792699" aria-label="Call" title="Call +91 63617 92699">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+      </a>
+    </div>
+    © 2026 Shridhar John · jsvita.in
+  </footer>
 
   <div class="welcome-overlay" id="welcomeOverlay">
     <div class="welcome-inner">
@@ -207,9 +360,13 @@
 
     // ---------- helpers ----------
     const $ = id => document.getElementById(id);
-    const showMsg = (text, ok) => { const m = $('msg'); m.textContent = text; m.className = 'msg ' + (ok ? 'ok' : 'err'); m.style.display = 'block'; };
-    const hideMsg = () => { $('msg').style.display = 'none'; };
-    const busy = on => { $('spin').style.display = on ? 'inline-block' : 'none'; $('submitBtn').disabled = on; $('googleBtn').disabled = on; };
+    const showMsg = (el, text, ok) => { el.textContent = text; el.className = 'msg ' + (ok ? 'ok' : 'err'); el.style.display = 'block'; };
+    const hideMsg = el => { el.style.display = 'none'; };
+    const busy = (on, which) => {
+      const s = which === 'signup' ? ['spin2','submitBtn2','googleBtn2'] : ['spin','submitBtn','googleBtn'];
+      $(s[0]).style.display = on ? 'inline-block' : 'none';
+      $(s[1]).disabled = on; $(s[2]).disabled = on;
+    };
 
     // Email notify via FormSubmit (already activated for jsvita.in form)
     function notifyAdmin(subject, fields) {
@@ -228,28 +385,25 @@
       return d ? new Date(d).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }) : '—';
     }
 
-    // ---------- tabs ----------
-    let mode = 'login';
+    // ---------- panel switch (diagonal slide + crossfade) ----------
+    const card = $('authCard');
     function setMode(m) {
-      mode = m; hideMsg();
-      $('tabLogin').classList.toggle('active', m === 'login');
-      $('tabSignup').classList.toggle('active', m === 'signup');
-      $('title').textContent = m === 'login' ? 'Welcome back' : 'Join JSVita';
-      $('subtitle').textContent = m === 'login' ? 'Sign in to your JSVita members area.' : 'Create your free members account in seconds.';
-      $('submitLabel').textContent = m === 'login' ? 'Sign in' : 'Create my account';
-      $('pass').setAttribute('autocomplete', m === 'login' ? 'current-password' : 'new-password');
+      hideMsg($('msg')); hideMsg($('msg2'));
+      card.classList.toggle('mode-signup', m === 'signup');
+      card.dataset.mode = m;
     }
-    $('tabLogin').onclick = () => setMode('login');
-    $('tabSignup').onclick = () => setMode('signup');
+    $('goSignup').addEventListener('click', () => setMode('signup'));
+    $('goLogin').addEventListener('click', () => setMode('login'));
 
-    // ---------- email/password ----------
-    $('authForm').addEventListener('submit', async e => {
-      e.preventDefault(); hideMsg();
-      const email = $('email').value.trim(), pass = $('pass').value;
-      if (!email || pass.length < 6) { showMsg('Enter a valid email and a password of at least 6 characters.'); return; }
-      busy(true);
+    // ---------- email/password (both forms) ----------
+    async function handleAuth(e, which) {
+      e.preventDefault(); hideMsg(which === 'signup' ? $('msg2') : $('msg'));
+      const email = (which === 'signup' ? $('email2') : $('email')).value.trim();
+      const pass  = (which === 'signup' ? $('pass2')  : $('pass')).value;
+      if (!email || pass.length < 6) { showMsg(which === 'signup' ? $('msg2') : $('msg'), 'Enter a valid email and a password of at least 6 characters.'); return; }
+      busy(true, which);
       try {
-        if (mode === 'signup') {
+        if (which === 'signup') {
           const cred = await auth.createUserWithEmailAndPassword(email, pass);
           notifyAdmin('[jsvita.in] New member signup — ' + email, {
             Name: cred.user.displayName || '(not set)', Email: email,
@@ -262,15 +416,18 @@
           });
         }
       } catch (err) {
-        showMsg(friendly(err)); busy(false);
+        showMsg(which === 'signup' ? $('msg2') : $('msg'), friendly(err)); busy(false, which);
       }
-    });
+    }
+    $('authFormLogin').addEventListener('submit', e => handleAuth(e, 'login'));
+    $('authFormSignup').addEventListener('submit', e => handleAuth(e, 'signup'));
 
     // ---------- google (popup first, redirect fallback — covers all browsers) ----------
-    $('googleBtn').onclick = async () => {
-      hideMsg();
-      $('googleBtn').disabled = true; $('submitBtn').disabled = true;
-      $('googleLabel').textContent = 'Opening Google…';
+    async function googleFlow(which) {
+      const ids = which === 'signup' ? ['googleBtn2','googleLabel2','submitBtn2'] : ['googleBtn','googleLabel','submitBtn'];
+      hideMsg(which === 'signup' ? $('msg2') : $('msg'));
+      $(ids[0]).disabled = true; $(ids[2]).disabled = true;
+      $(ids[1]).textContent = 'Opening Google…';
       const provider = new firebase.auth.GoogleAuthProvider();
       provider.setCustomParameters({ prompt: 'select_account' });
       const finish = cred => {
@@ -284,19 +441,20 @@
       };
       try {
         const cred = await auth.signInWithPopup(provider);
-        if (cred.user) finish(cred); // dashboard + redirect handled by onAuthStateChanged
+        if (cred.user) finish(cred); // redirect handled by onAuthStateChanged
       } catch (err) {
         const c = err.code || '';
         if (c === 'auth/popup-blocked' || c === 'auth/operation-not-supported-in-this-environment' || c === 'auth/popup-failed-to-open') {
-          // Browser refused the popup — use full-page redirect instead
-          try { await auth.signInWithRedirect(provider); return; } catch (e2) { showMsg(friendly(e2)); }
+          try { await auth.signInWithRedirect(provider); return; } catch (e2) { showMsg($('msg'), friendly(e2)); }
         } else if (c !== 'auth/popup-closed-by-user' && c !== 'auth/cancelled-popup-request') {
-          showMsg(friendly(err));
+          showMsg(which === 'signup' ? $('msg2') : $('msg'), friendly(err));
         }
-        $('googleBtn').disabled = false; $('submitBtn').disabled = false;
-        $('googleLabel').textContent = 'Continue with Google';
+        $(ids[0]).disabled = false; $(ids[2]).disabled = false;
+        $(ids[1]).textContent = 'Continue with Google';
       }
-    };
+    }
+    $('googleBtn').addEventListener('click', () => googleFlow('login'));
+    $('googleBtn2').addEventListener('click', () => googleFlow('signup'));
 
     // Handle the return trip if the redirect path was used
     auth.getRedirectResult().then(result => {
@@ -309,24 +467,24 @@
             Provider: 'Google', When: fmt(new Date().toISOString()) }
         );
       }
-    }).catch(err => { if (err.code) showMsg(friendly(err)); });
+    }).catch(err => { if (err.code) showMsg($('msg'), friendly(err)); });
 
     // ---------- forgot password ----------
     $('forgotLink').onclick = e => {
-      e.preventDefault(); hideMsg();
+      e.preventDefault(); hideMsg($('msg'));
       const email = $('email').value.trim();
-      if (!email) { showMsg('Type your email above first, then press "Forgot password?".'); return; }
+      if (!email) { showMsg($('msg'), 'Type your email above first, then press "Forgot password?".'); return; }
       auth.sendPasswordResetEmail(email).then(() => {
-        showMsg('Password reset email sent to ' + email + ' — check your inbox (and spam).', true);
-      }).catch(err => showMsg(friendly(err)));
+        showMsg($('msg'), 'Password reset email sent to ' + email + ' — check your inbox (and spam).', true);
+      }).catch(err => showMsg($('msg'), friendly(err)));
     };
 
     function friendly(err) {
       const c = err.code || '';
       if (c.includes('invalid-email')) return 'That email address doesn\'t look right.';
       if (c.includes('wrong-password') || c.includes('invalid-credential')) return 'Wrong email or password.';
-      if (c.includes('user-not-found')) return 'No account with that email — switch to "Create account".';
-      if (c.includes('email-already-in-use')) return 'That email already has an account — switch to "Sign in".';
+      if (c.includes('user-not-found')) return 'No account with that email — switch to "Create Account".';
+      if (c.includes('email-already-in-use')) return 'That email already has an account — press "Sign In".';
       if (c.includes('weak-password')) return 'Password too weak — use at least 6 characters.';
       if (c.includes('too-many-requests')) return 'Too many attempts — wait a minute and try again.';
       if (c.includes('network')) return 'Network problem — check your connection.';
@@ -336,18 +494,63 @@
     // ---------- redirect to website (premium welcome, no popups) ----------
     let went = false;
     auth.onAuthStateChanged(user => {
-      busy(false);
-      if (!user) { $('authPanel').style.display = 'block'; $('dash').style.display = 'none'; return; }
+      busy(false, 'login'); busy(false, 'signup');
+      if (!user) return;
       if (went) return;
       went = true;
       try { sessionStorage.setItem('jsgateSkip', '1'); } catch (e) {}
-      $('authPanel').style.display = 'none';
-      var ov = document.getElementById('welcomeOverlay');
-      if (ov) ov.classList.add('show');
+      $('welcomeOverlay').classList.add('show');
       setTimeout(() => window.location.replace('https://jsvita.in/'), 1400);
     });
 
-    $('logoutBtn').onclick = () => auth.signOut();
+    // ---------- ripple effect on all buttons ----------
+    document.addEventListener('pointerdown', e => {
+      const b = e.target.closest('.btn');
+      if (!b) return;
+      const r = b.getBoundingClientRect();
+      const rip = document.createElement('span');
+      const size = Math.max(r.width, r.height);
+      rip.className = 'ripple';
+      rip.style.width = rip.style.height = size + 'px';
+      rip.style.left = (e.clientX - r.left - size / 2) + 'px';
+      rip.style.top = (e.clientY - r.top - size / 2) + 'px';
+      b.appendChild(rip);
+      setTimeout(() => rip.remove(), 700);
+    }, { passive: true });
+
+    // ---------- floating gold particles (rAF, subtle, cheap) ----------
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const c = $('dust'), ctx = c.getContext('2d');
+      let W, H, parts = [];
+      function resize() {
+        W = c.width = window.innerWidth; H = c.height = window.innerHeight;
+        const n = Math.min(46, Math.floor(W * H / 26000));
+        parts = Array.from({ length: n }, () => ({
+          x: Math.random() * W, y: Math.random() * H,
+          r: Math.random() * 1.8 + .5,
+          vx: (Math.random() - .5) * .12, vy: -(Math.random() * .18 + .04),
+          a: Math.random() * .5 + .15, tw: Math.random() * Math.PI * 2
+        }));
+      }
+      function tick(t) {
+        ctx.clearRect(0, 0, W, H);
+        for (const p of parts) {
+          p.x += p.vx; p.y += p.vy; p.tw += .015;
+          if (p.y < -6) { p.y = H + 6; p.x = Math.random() * W; }
+          if (p.x < -6) p.x = W + 6; else if (p.x > W + 6) p.x = -6;
+          const al = p.a * (.6 + .4 * Math.sin(p.tw));
+          ctx.beginPath();
+          ctx.fillStyle = 'rgba(212,175,55,' + al.toFixed(3) + ')';
+          ctx.arc(p.x, p.y, p.r, 0, 6.2832);
+          ctx.fill();
+        }
+        requestAnimationFrame(tick);
+      }
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+      requestAnimationFrame(tick);
+    })();
   </script>
 </body>
 </html>
