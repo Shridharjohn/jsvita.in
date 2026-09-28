@@ -39,7 +39,7 @@
       content="https://jsvita.in/shridhar-portrait.jpg"
     />
     <title>Shridhar John — Hospitality Operations Leader | Entrepreneur</title>
-    <script type="module" crossorigin src="/assets/index-BUFmtw49.js?v=5"></script>
+    <script type="module" crossorigin src="/assets/index-BUFmtw49.js?v=6"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-DYG8YA2s.css">
   <style data-theme="obsidian-ember">
 /* ===== Obsidian Ember — premium dark theme ===== */
@@ -359,6 +359,38 @@ html { scroll-behavior: smooth; }
   .jsv-3d-mono, .jsv-3d-word, .jsv-3d-sub { animation-duration: .01s !important; animation-iteration-count: 1 !important; }
 }
 
+/* ---------- 13. Boot state: suppress raw hero flash until enhanced ---------- */
+.jsv-boot section#top .lg\:col-span-7 > * { visibility: hidden; }
+.jsv-boot section#top .lg\:col-span-5 { visibility: hidden; }
+html:not(.jsv-boot) section#top .lg\:col-span-7 > *,
+html:not(.jsv-boot) section#top .lg\:col-span-5 { visibility: visible; }
+@keyframes jsvBootReveal { to { visibility: visible; } }
+.jsv-boot section#top .lg\:col-span-7 > *,
+.jsv-boot section#top .lg\:col-span-5 { animation: jsvBootReveal .01s 3s forwards; }
+
+/* ---------- 14. Portrait & NOW card premium styling ---------- */
+.dark section#top img[data-testid="hero-portrait"] {
+  border: 1px solid rgba(212,175,55,.35);
+  box-shadow: 0 30px 80px -30px rgba(0,0,0,.9), 0 0 60px -20px rgba(212,175,55,.25), inset 0 1px 0 rgba(247,215,116,.1);
+  transition: transform .6s cubic-bezier(.22,.61,.36,1), box-shadow .6s;
+  transform: translateZ(0);
+}
+.dark section#top img[data-testid="hero-portrait"]:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 36px 90px -30px rgba(0,0,0,.95), 0 0 80px -18px rgba(212,175,55,.4), inset 0 1px 0 rgba(247,215,116,.12);
+}
+.dark section#top img[data-testid="hero-portrait"]::before { content: ""; }
+.dark [data-testid="hero-current-role-card"] {
+  background: linear-gradient(160deg, rgba(255,255,255,.05), rgba(255,255,255,.02)) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(130%); backdrop-filter: blur(14px) saturate(130%);
+  border: 1px solid rgba(212,175,55,.35) !important;
+  border-radius: 16px;
+  box-shadow: 0 18px 44px -18px rgba(0,0,0,.85), inset 0 1px 0 rgba(247,215,116,.1);
+}
+.dark [data-testid="hero-current-role-card"] p:first-child { color: #F7D774 !important; }
+/* gold ring wrap for portrait (subtle frame) */
+.dark section#top .lg\:col-span-5 { position: relative; }
+
 /* ---------- 7. Old hero elements suppressed ---------- */
 .jsv-hero-hide { display: none !important; }
 
@@ -396,8 +428,12 @@ html { scroll-behavior: smooth; }
     </style>
     <script data-pg="hero-premium">(function () {
   "use strict";
-  if (window.__jsvHeroV7) return;
-  window.__jsvHeroV7 = true;
+  if (window.__jsvHeroV8) return;
+  window.__jsvHeroV8 = true;
+
+  /* boot state: hide raw (unstyled) hero until step1/step2 enhance it — prevents old-style flash on refresh.
+   * CSS includes a 3s failsafe auto-reveal in case enhancement ever fails. */
+  try { document.documentElement.classList.add("jsv-boot"); } catch (e) {}
 
   var NAME = "Shridhar John";
   var SUB_KEY = "hospitality professional";
@@ -458,6 +494,7 @@ html { scroll-behavior: smooth; }
       roleEl.appendChild(item);
     }
     h1.appendChild(roleEl);
+    try { document.documentElement.classList.remove("jsv-boot"); } catch (e) {}
     return true;
   }
 
