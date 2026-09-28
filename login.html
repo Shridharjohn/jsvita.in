@@ -243,6 +243,8 @@
       #dust { display: none; }
     }
   </style>
+  <link rel="canonical" href="https://jsvita.in/login" />
+  <script>if(/\.html$/.test(location.pathname))location.replace(location.pathname.replace(/\.html$/,"")+location.search+location.hash);</script>
 </head>
 <body>
   <div class="glow"></div>
@@ -505,7 +507,7 @@
       if (went) return;
       went = true;
       try { sessionStorage.setItem('jsgateSkip', '1'); } catch (e) {}
-      window.location.replace('/welcome.html');
+      window.location.replace('/welcome');
     });
 
     // ---------- ripple effect on all buttons ----------

@@ -83,6 +83,8 @@
     @keyframes rise { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:none; } }
     @media (prefers-reduced-motion:reduce){ .card,.gate .mono{animation:none} .card,.pill,.launch .ic{transition:none} }
   </style>
+  <link rel="canonical" href="https://jsvita.in/admin" />
+  <script>if(/\.html$/.test(location.pathname))location.replace(location.pathname.replace(/\.html$/,"")+location.search+location.hash);</script>
 </head>
 <body>
   <header>
@@ -113,7 +115,7 @@
           <span class="ic">👥</span>
           <span><b>Members</b><span>Manage accounts in Firebase Auth</span></span>
         </a>
-        <a class="card launch" href="/cv.html" target="_blank" rel="noopener">
+        <a class="card launch" href="/cv" target="_blank" rel="noopener">
           <span class="ic">📄</span>
           <span><b>Live CV</b><span>View the deployed resume PDF</span></span>
         </a>
@@ -147,7 +149,7 @@
         document.getElementById("meta").innerHTML = tag;
       } else {
         document.getElementById("gateMsg").textContent = u ? "This account does not have admin access." : "Not signed in.";
-        setTimeout(function () { location.href = "/login.html"; }, 1200);
+        setTimeout(function () { location.href = "/login"; }, 1200);
       }
     });
   </script>

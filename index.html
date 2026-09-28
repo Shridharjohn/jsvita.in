@@ -868,7 +868,7 @@ html:not(.dark) header.jsv-scrolled { box-shadow: 0 22px 55px -20px rgba(84,60,1
       cta.className = "jsv-hero-ctas jsv-fade jsv-fade-d4";
       cta.style.cssText = "display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;align-items:center;";
       cta.innerHTML =
-      '<a class="jsv-btn-ghost" href="/cv.html" data-testid="cv-view-btn">' +
+      '<a class="jsv-btn-ghost" href="/cv" data-testid="cv-view-btn">' +
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>' +
       "View CV</a>" +
       '<a class="jsv-btn-gold" href="/Shridhar-John-CV.pdf" download="Shridhar-John-CV.pdf" data-testid="cv-download-btn">' +
@@ -1173,7 +1173,7 @@ html:not(.dark) header.jsv-scrolled { box-shadow: 0 22px 55px -20px rgba(84,60,1
     if (!document.querySelector(".jsv-nav-switch")) {
       var sp = document.createElement("a");
       sp.className = "jsv-nav-switch";
-      sp.href = "/cv.html";
+      sp.href = "/cv";
       sp.setAttribute("aria-label", "Switch to CV view");
       sp.setAttribute("title", "Switch to CV view");
       sp.setAttribute("data-testid", "nav-switch-pill");
@@ -1184,7 +1184,7 @@ html:not(.dark) header.jsv-scrolled { box-shadow: 0 22px 55px -20px rgba(84,60,1
     if (!document.querySelector(".jsv-nav-view")) {
       var vw = document.createElement("a");
       vw.className = "jsv-nav-cv jsv-nav-view";
-      vw.href = "/cv.html";
+      vw.href = "/cv";
       vw.setAttribute("aria-label", "View CV");
       vw.setAttribute("title", "View CV — interactive resume");
       vw.setAttribute("data-testid", "nav-cv-view-icon");
@@ -1228,7 +1228,7 @@ html:not(.dark) header.jsv-scrolled { box-shadow: 0 22px 55px -20px rgba(84,60,1
         if (document.startViewTransition) return;
         e.preventDefault();
         sp.classList.add("page-out");
-        setTimeout(function () { location.href = "/cv.html"; }, 190);
+        setTimeout(function () { location.href = "/cv"; }, 190);
       });
     }
     so.addEventListener("pointerdown", function (e) {
@@ -1277,7 +1277,7 @@ html:not(.dark) header.jsv-scrolled { box-shadow: 0 22px 55px -20px rgba(84,60,1
     var go = function () {
       if (done) return; done = true;
       try { sessionStorage.setItem("jsgateSkip", "1"); } catch (e) {}
-      location.replace("/login.html");
+      location.replace("/login");
     };
     var load = function (src, ok) {
       var s = document.createElement("script");
@@ -1437,7 +1437,7 @@ html:not(.dark) #jsvDust { opacity:.35; }
     <div id="root"></div>
   <!-- Members login entry -->
 <script>
-/* JSVita gate v2 — signed-out visitors go to /login.html; splash removed */
+/* JSVita gate v2 — signed-out visitors go to /login; splash removed */
 (function(){
   try{ if(sessionStorage.getItem('jsgateSkip')==='1'){ sessionStorage.removeItem('jsgateSkip'); return; } }catch(e){}
   var s=document.createElement("script");s.src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js";document.head.appendChild(s);
@@ -1445,7 +1445,7 @@ html:not(.dark) #jsvDust { opacity:.35; }
   function boot(){
     if(typeof firebase==='undefined') return;
     try{ firebase.initializeApp({apiKey:'AIzaSyAoEGzAL-WkAGttLArl_PpffJYbOYwc5yE',authDomain:'auth.jsvita.in',projectId:'jsvita-login',storageBucket:'jsvita-login.firebasestorage.app',messagingSenderId:'433927112110',appId:'1:433927112110:web:ad6186be9800780e8d343f'}); }catch(e){}
-    firebase.auth().onAuthStateChanged(function(u){ if(!u){ location.replace('/login.html'); } });
+    firebase.auth().onAuthStateChanged(function(u){ if(!u){ location.replace('/login'); } });
   }
 })();
 </script>

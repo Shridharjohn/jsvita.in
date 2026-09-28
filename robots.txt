@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /welcome
+Sitemap: https://jsvita.in/sitemap.xml

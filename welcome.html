@@ -161,6 +161,8 @@
       .tagline{min-height:2.9em;max-width:21ch}
     }
   </style>
+  <link rel="canonical" href="https://jsvita.in/welcome" />
+  <script>if(/\.html$/.test(location.pathname))location.replace(location.pathname.replace(/\.html$/,"")+location.search+location.hash);</script>
 </head>
 <body>
   <div class="halo a" aria-hidden="true"></div>
@@ -285,7 +287,7 @@
           if (u) { play(); }
           else {
             say("Not signed in — taking you to login");
-            setTimeout(function () { location.replace("/login.html"); }, 1300);
+            setTimeout(function () { location.replace("/login"); }, 1300);
           }
         });
       } catch (e) { play(); }
