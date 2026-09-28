@@ -201,7 +201,11 @@
       .bar,#dust,footer.pagefoot,#toast{display:none !important}
       .stage{padding:0;max-width:none;display:block}
       .sheet{box-shadow:none;border-radius:0;max-width:none;width:100%;animation:none;opacity:1 !important;transform:none !important}
-      .cv-top{padding:0 0 14px}
+      /* keep the executive two-column header at A4 width (narrower than the mobile breakpoint) */
+      .cv-top{grid-template-columns:1fr 190px !important;gap:18px !important;padding:0 0 14px !important;text-align:left !important}
+      .cv-top .side{order:2 !important}
+      .photo{width:158px !important;height:190px !important}
+      .qrbox img{width:96px !important;height:96px !important}
       main{padding:0}
       section{padding:12px 0 4px;break-inside:avoid}
       .job{break-inside:avoid}
