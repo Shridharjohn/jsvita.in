@@ -294,10 +294,133 @@ section#top > .mx-auto { position: relative; }
   50% { transform: translateY(-7px); }
 }
 
-/* ---------- 2c. Footer: mark only, centered brand ---------- */
-footer .jv-footer-brand {
-  display: block;
-  filter: drop-shadow(0 2px 10px rgba(212, 175, 55, 0.35));
+/* ---------- 2c. Footer: futuristic luxury aura — energy core + rings + dust + wordmark ---------- */
+footer.jsv-footer-aura {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  padding: 74px 20px 66px;
+  background: transparent !important;
+  border-top: none !important;
+  min-height: 300px;
+}
+/* ambient background glow bleeding onto the black canvas (cinematic) */
+footer.jsv-footer-aura::before {
+  content: "";
+  position: absolute;
+  inset: -40% 0;
+  background: radial-gradient(52% 70% at 50% 62%, rgba(212, 175, 55, 0.13), rgba(212, 175, 55, 0.045) 48%, transparent 74%);
+  pointer-events: none;
+  z-index: 0;
+}
+.jsv-aura {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: min(560px, 92%);
+  height: 240px;
+}
+/* energy core: layered glow (inner + outer + ambient) with a slow power pulse */
+.jsv-aura-glow {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background:
+    radial-gradient(closest-side, rgba(247, 215, 116, 0.28), rgba(212, 175, 55, 0.12) 42%, transparent 70%);
+  animation: jsvCorePulse 4.4s ease-in-out infinite;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+.jsv-aura-glow::after { /* inner hot core */
+  content: "";
+  position: absolute;
+  inset: 26%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 246, 214, 0.22), transparent 72%);
+  filter: blur(6px);
+}
+@keyframes jsvCorePulse {
+  0%, 100% { transform: scale(0.92); opacity: 0.75; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+/* light rings: thin transparent gold, three depths, different speeds */
+.jsv-aura-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 175, 55, 0.32);
+  box-shadow: 0 0 22px -6px rgba(212, 175, 55, 0.28), inset 0 0 18px -8px rgba(247, 215, 116, 0.2);
+  will-change: transform;
+  pointer-events: none;
+}
+.jsv-aura-ring.r1 { width: 250px; height: 250px; animation: jsvSpin 26s linear infinite; }
+.jsv-aura-ring.r2 {
+  width: 330px; height: 330px;
+  border-color: rgba(212, 175, 55, 0.2);
+  animation: jsvSpin 44s linear infinite reverse;
+}
+.jsv-aura-ring.r3 {
+  width: 420px; height: 420px;
+  border-style: dashed;
+  border-color: rgba(212, 175, 55, 0.12);
+  animation: jsvSpin 70s linear infinite;
+}
+@keyframes jsvSpin { to { transform: rotate(360deg); } }
+/* orbiting dust canvas */
+.jsv-aura-dust {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+/* JSVita: metallic gold wordmark with glass sweep, floating gently */
+.jsv-aura-word {
+  position: relative;
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 800;
+  font-size: clamp(2.6rem, 7vw, 4.2rem);
+  letter-spacing: 0.12em;
+  line-height: 1;
+  background: linear-gradient(100deg, #fdf8ec 0%, #f7d774 24%, #d4af37 50%, #f0d57c 68%, #b8860b 86%, #f3e5ab 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+  filter: drop-shadow(0 0 18px rgba(212, 175, 55, 0.35)) drop-shadow(0 4px 26px rgba(212, 175, 55, 0.28));
+  animation: jsvAuraFloat 6s ease-in-out infinite, jsvAuraSheen 7s ease-in-out 1.2s infinite;
+  will-change: transform, background-position;
+  cursor: default;
+}
+@keyframes jsvAuraFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+@keyframes jsvAuraSheen {
+  0%, 55%, 100% { background-position: 220% 0; }
+  78% { background-position: -60% 0; }
+}
+/* desktop hover: aura expands, dust activates (JS boost), shine intensifies */
+@media (hover: hover) and (pointer: fine) {
+  .jsv-aura:hover .jsv-aura-glow { transform: scale(1.16); opacity: 1; transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.6s ease; }
+  .jsv-aura:hover .jsv-aura-ring { border-color: rgba(247, 215, 116, 0.42); }
+  .jsv-aura:hover .jsv-aura-word { animation-duration: 6s, 3.2s; }
+}
+.jsv-aura-glow { transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.6s ease; }
+@media (max-width: 640px) {
+  footer.jsv-footer-aura { padding: 56px 14px 50px; min-height: 240px; }
+  .jsv-aura { height: 190px; }
+  .jsv-aura-glow { width: 220px; height: 220px; }
+  .jsv-aura-ring.r1 { width: 190px; height: 190px; }
+  .jsv-aura-ring.r2 { width: 250px; height: 250px; }
+  .jsv-aura-ring.r3 { width: 310px; height: 310px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .jsv-aura-glow, .jsv-aura-ring, .jsv-aura-word { animation: none !important; }
+  .jsv-aura-dust { display: none; }
 }
 
 /* ---------- 2d. Navbar brand = logo only (wordmark retired) ---------- */
@@ -1521,23 +1644,71 @@ html:not(.dark) .jsv-nav-view:hover { color: #241a05 !important; }
     }
     return false;
   }
-  /* Footer brand text (React-rendered) → official mark, no text */
+  /* Footer: futuristic luxury aura — energy core + rotating rings + orbiting gold dust + JSVita wordmark only */
   function paintFooterLogo() {
     var footer = document.querySelector("footer");
     if (!footer) return false;
-    var done = footer.querySelector(".jv-footer-brand");
-    var p = footer.querySelector("p.font-heading");
-    if (p && (!done || !p.contains(done))) {
-      var size = 40;
-      var wrap = document.createElement("span");
-      wrap.innerHTML = jvLogo.replace('width="38" height="38"', 'width="' + size + '" height="' + size + '"').replace('class="jv-logo"', 'class="jv-logo jv-footer-brand"');
-      var fresh = wrap.firstChild;
-      fresh.__jvReplaced = true;
-      p.innerHTML = "";
-      p.appendChild(fresh);
-      return true;
+    if (footer.querySelector(".jsv-aura")) return true;
+    var core = document.createElement("div");
+    core.className = "jsv-aura";
+    core.setAttribute("role", "img");
+    core.setAttribute("aria-label", "JSVita");
+    core.innerHTML =
+      '<span class="jsv-aura-glow" aria-hidden="true"></span>' +
+      '<span class="jsv-aura-ring r1" aria-hidden="true"></span>' +
+      '<span class="jsv-aura-ring r2" aria-hidden="true"></span>' +
+      '<span class="jsv-aura-ring r3" aria-hidden="true"></span>' +
+      '<canvas class="jsv-aura-dust" aria-hidden="true"></canvas>' +
+      '<span class="jsv-aura-word">JSVita</span>';
+    footer.insertBefore(core, footer.firstChild);
+    /* strip every other footer child — display ONLY the aura wordmark */
+    var kids = [].slice.call(footer.children);
+    kids.forEach(function (k) { if (k !== core && !k.classList.contains("jsv-aura")) k.remove(); });
+    footer.classList.add("jsv-footer-aura");
+    /* orbiting gold dust — rAF canvas, pauses when tab hidden, reduced-motion aware */
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      var cv = core.querySelector(".jsv-aura-dust"), ctx = cv.getContext("2d");
+      var W = 0, H = 0, ps = [];
+      function size() {
+        var r = core.getBoundingClientRect();
+        W = cv.width = Math.max(120, Math.round(r.width));
+        H = cv.height = Math.max(90, Math.round(r.height));
+        ps = [];
+        for (var i = 0; i < 16; i++) ps.push({
+          rx: (W / 2) * (0.45 + Math.random() * 0.5),
+          ry: (H / 2) * (0.3 + Math.random() * 0.5),
+          a: Math.random() * 6.2832,
+          sp: (0.0016 + Math.random() * 0.0026) * (Math.random() > 0.5 ? 1 : -1),
+          r: 0.6 + Math.random() * 1.3,
+          tw: Math.random() * 6.2832
+        });
+      }
+      size();
+      window.addEventListener("resize", size, { passive: true });
+      var boost = 1;
+      core.addEventListener("pointerenter", function () { boost = 2.4; });
+      core.addEventListener("pointerleave", function () { boost = 1; });
+      (function tick() {
+        ctx.clearRect(0, 0, W, H);
+        var cx = W / 2, cy = H / 2;
+        for (var i = 0; i < ps.length; i++) {
+          var p = ps[i];
+          p.a += p.sp * boost;
+          p.tw += 0.03;
+          var x = cx + Math.cos(p.a) * p.rx;
+          var y = cy + Math.sin(p.a) * p.ry;
+          var al = (0.25 + 0.55 * Math.abs(Math.sin(p.tw))) * Math.min(1, boost);
+          ctx.beginPath();
+          ctx.fillStyle = "rgba(247,215,116," + al.toFixed(3) + ")";
+          ctx.arc(x, y, p.r, 0, 6.2832);
+          ctx.fill();
+        }
+        if (!document.hidden) requestAnimationFrame(tick); else setTimeout(tick, 400);
+      })();
+    } else {
+      core.querySelector(".jsv-aura-dust").remove();
     }
-    return !!done;
+    return true;
   }
 
   function run() {
