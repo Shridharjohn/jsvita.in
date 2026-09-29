@@ -1026,6 +1026,232 @@ html:not(.dark) header [data-testid="theme-toggle-btn"] {
   border-color: rgba(184,134,11,.4);
 }
 
+/* ============================================================
+   20. LUXURY CONTACT EXPERIENCE — mark + rings + dust + glass form
+   Form stays the primary CTA; everything else is aura. GPU-only.
+   ============================================================ */
+section#contact {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding-top: 90px !important;
+  padding-bottom: 40px !important;
+}
+/* ambient cinematic glow */
+section#contact::before {
+  content: "";
+  position: absolute;
+  inset: -10% 0;
+  z-index: -2;
+  background:
+    radial-gradient(640px 420px at 50% 8%, rgba(212, 175, 55, 0.1), transparent 66%),
+    radial-gradient(900px 600px at 50% 108%, rgba(184, 134, 11, 0.07), transparent 62%);
+  pointer-events: none;
+}
+.jsv-contact-dust {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+/* intro: mark with rings + metallic title + subtitle */
+.jsv-contact-intro {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 44px;
+}
+.jsv-contact-mark {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  margin-bottom: 20px;
+  display: grid;
+  place-items: center;
+  animation: jvCtFloat 6s ease-in-out infinite;
+  will-change: transform;
+}
+.jsv-contact-mark .jv-logo {
+  width: 96px;
+  height: 96px;
+  display: block;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 12px 34px rgba(212, 175, 55, 0.42)) drop-shadow(0 0 22px rgba(247, 215, 116, 0.25));
+  transition: filter 0.5s ease;
+}
+.jsv-contact-intro:hover .jv-logo {
+  filter: drop-shadow(0 12px 40px rgba(247, 215, 116, 0.6)) drop-shadow(0 0 32px rgba(255, 246, 214, 0.4));
+}
+/* rotating rings behind the mark */
+.jsv-contact-mark .cring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 0 18px -6px rgba(212, 175, 55, 0.25), inset 0 0 14px -8px rgba(247, 215, 116, 0.18);
+  pointer-events: none;
+  will-change: transform;
+}
+.jsv-contact-mark .c1 { inset: -30%; animation: jvCtSpin 26s linear infinite; }
+.jsv-contact-mark .c2 { inset: -52%; border-color: rgba(212, 175, 55, 0.18); border-style: dashed; animation: jvCtSpin 46s linear infinite reverse; }
+.jsv-contact-mark .c3 { inset: -76%; border-color: rgba(212, 175, 55, 0.1); animation: jvCtSpin 72s linear infinite; }
+@keyframes jvCtSpin { to { transform: rotate(360deg); } }
+@keyframes jvCtFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+.jsv-contact-title {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 5.4vw, 3.1rem);
+  letter-spacing: 0.02em;
+  line-height: 1.08;
+  margin: 0 0 12px;
+  background: linear-gradient(100deg, #fdf8ec 0%, #f7d774 24%, #d4af37 50%, #f0d57c 68%, #b8860b 86%, #f3e5ab 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: jvCtSheen 7s ease-in-out 1s infinite;
+}
+@keyframes jvCtSheen {
+  0%, 56%, 100% { background-position: 220% 0; }
+  78% { background-position: -60% 0; }
+}
+.jsv-contact-sub {
+  margin: 0;
+  font-size: clamp(0.98rem, 2vw, 1.15rem);
+  color: #cfc6b8;
+  letter-spacing: 0.01em;
+}
+/* grid: form becomes the single centered pane */
+section#contact .jsv-contact-grid {
+  position: relative;
+  z-index: 1;
+  grid-template-columns: 1fr !important;
+  max-width: 720px;
+  margin: 0 auto;
+}
+section#contact .jsv-contact-formpane {
+  position: relative;
+  border-radius: 24px;
+  padding: clamp(26px, 4vw, 40px) !important;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015)) !important;
+  border: 1px solid rgba(212, 175, 55, 0.3) !important;
+  backdrop-filter: blur(20px) saturate(145%);
+  -webkit-backdrop-filter: blur(20px) saturate(145%);
+  box-shadow: 0 40px 100px -30px rgba(0, 0, 0, 0.9), 0 0 60px -24px rgba(212, 175, 55, 0.35), inset 0 1px 0 rgba(247, 215, 116, 0.1) !important;
+}
+section#contact .jsv-contact-formpane::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 8%; right: 8%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(247, 215, 116, 0.5), transparent);
+}
+/* inputs: gold focus glow + floating labels */
+section#contact .jsv-fwrap { position: relative; }
+/* float the form's own <label> elements */
+section#contact .jsv-fwrap > label {
+  position: absolute;
+  left: 14px;
+  top: 15px;
+  padding: 0 6px;
+  margin: 0;
+  color: #8d8275;
+  font-size: 13.5px;
+  pointer-events: none;
+  transition: transform 0.22s cubic-bezier(0.22, 0.61, 0.36, 1), color 0.22s, font-size 0.22s, background 0.22s;
+  z-index: 2;
+}
+/* label floats when its field is focused or filled (JS toggles .jsv-up for label-first DOM) */
+section#contact input:focus ~ label,
+section#contact textarea:focus ~ label,
+section#contact .jsv-fwrap.jsv-up > label {
+  transform: translateY(-23px);
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #f7d774;
+  background: #0d0b08;
+  border-radius: 6px;
+}
+/* room for the floated label above textarea's first line */
+section#contact textarea { padding-top: 22px !important; }
+section#contact input:focus,
+section#contact textarea:focus,
+section#contact select:focus {
+  border-color: rgba(212, 175, 55, 0.8) !important;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.18), 0 0 26px -6px rgba(247, 215, 116, 0.35) !important;
+}
+/* send button: metallic gold with sweep (ripple rides the existing jsv-rip system) */
+section#contact [data-testid="contact-submit-button"] {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f7d774 0%, #d4af37 52%, #c39a20 100%) !important;
+  border: 1px solid rgba(255, 246, 214, 0.55) !important;
+  color: #241a05 !important;
+  font-weight: 700;
+  box-shadow: 0 12px 30px -10px rgba(212, 175, 55, 0.65), inset 0 1px 0 rgba(255, 246, 214, 0.6) !important;
+  transition: transform 0.25s cubic-bezier(0.22, 0.61, 0.36, 1), filter 0.25s, box-shadow 0.25s;
+}
+section#contact [data-testid="contact-submit-button"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 34%, rgba(255, 251, 235, 0.5) 50%, transparent 66%);
+  transform: translateX(-140%);
+  animation: jvCtBtn 5.5s ease-in-out 2s infinite;
+  pointer-events: none;
+}
+@keyframes jvCtBtn {
+  0%, 80%, 100% { transform: translateX(-140%); }
+  92% { transform: translateX(140%); }
+}
+@media (hover: hover) {
+  section#contact [data-testid="contact-submit-button"]:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.07);
+    box-shadow: 0 16px 40px -10px rgba(212, 175, 55, 0.8), 0 0 26px -6px rgba(247, 215, 116, 0.45), inset 0 1px 0 rgba(255, 246, 214, 0.75) !important;
+  }
+}
+section#contact [data-testid="contact-submit-button"]:active { transform: scale(0.97); }
+/* footer line */
+.jsv-contact-foot {
+  position: relative;
+  z-index: 1;
+  margin-top: 46px;
+  padding-top: 22px;
+  text-align: center;
+  font-family: "JetBrains Mono Variable", "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #8d8275;
+}
+.jsv-contact-foot::before {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 1px;
+  margin: 0 auto 18px;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
+}
+@media (max-width: 640px) {
+  section#contact { padding-top: 64px !important; }
+  .jsv-contact-mark, .jsv-contact-mark .jv-logo { width: 76px; height: 76px; }
+  .jsv-contact-intro { margin-bottom: 30px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .jsv-contact-mark, .jsv-contact-mark .cring, .jsv-contact-title, .jsv-contact-dust { animation: none !important; }
+  .jsv-contact-dust { display: none; }
+}
+
 /* ---------- 17. Contact form: readable labels & fields in both themes ---------- */
 .dark main form label, .dark main label { color: #C9BFAF !important; }
 .dark main input, .dark main textarea, .dark main select {
@@ -1580,29 +1806,117 @@ html:not(.dark) .jsv-nav-view:hover { color: #241a05 !important; }
     return true;
   }
 
-  /* ---- Step 5f: 'Currently:' line → luxury DM Sans pill ---- */
+  /* ---- Step 5f: contact section → Luxury JSVita Contact Experience ----
+     Form (all 5 fields + button) is the primary CTA; everything else is aura. */
   function initCurrently() {
     if (window.__jsvCur) return;
     var sec = document.getElementById("contact");
     if (!sec) return;
-    var hit = sec.querySelector("span, p");
-    var walker = document.createTreeWalker(sec, NodeFilter.SHOW_TEXT, null);
-    var node;
-    while ((node = walker.nextNode())) {
-      if (node.textContent.indexOf("Currently:") !== -1) {
-        var el = node.parentElement;
-        if (el) {
-          el.style.fontFamily = '"DM Sans Variable", "DM Sans", system-ui, sans-serif';
-          el.style.fontSize = "14px";
-          el.style.letterSpacing = ".01em";
-          el.style.color = "#B8B8B8";
-          var strong = el.querySelector("b, strong");
-          if (strong) strong.style.color = "#F7D774";
-        }
-        window.__jsvCur = true;
-        return;
-      }
+    var grid = sec.querySelector("form") && sec.querySelector("form").closest(".grid");
+    if (!grid) return;
+    window.__jsvCur = true;
+
+    /* 1. intro: mark + heading + subtitle above the whole grid */
+    if (!grid.previousElementSibling || !grid.previousElementSibling.classList.contains("jsv-contact-intro")) {
+      var intro = document.createElement("div");
+      intro.className = "jsv-contact-intro";
+      intro.innerHTML =
+        '<div class="jsv-contact-mark" aria-hidden="true"><span class="cring c1"></span><span class="cring c2"></span><span class="cring c3"></span>' + jvLogo + '</div>' +
+        '<h2 class="jsv-contact-title">Contact JSVita</h2>' +
+        '<p class="jsv-contact-sub">Let\u2019s build something extraordinary together.</p>';
+      grid.parentNode.insertBefore(intro, grid);
     }
+    /* retire the old header block (eyebrow + "Let's talk operations") — re-applied if React re-renders */
+    (function hideOldHeader(tries) {
+      var old = sec.querySelector(":scope > div > .max-w-2xl");
+      if (old && old.style.display !== "none") old.style.display = "none";
+      if (tries > 0) setTimeout(function () { hideOldHeader(tries - 1); }, 800);
+    })(12);
+
+    /* 2. strip clutter: the entire left column (Direct lines + Currently card) */
+    var left = grid.children[0];
+    if (left && !left.querySelector("form")) left.remove();
+    /* social icon row + any legacy CTA row inside the section */
+    var soc = sec.querySelector(".jsv-hero-social"); if (soc) soc.remove();
+    var ctas = sec.querySelector(".jsv-hero-ctas"); if (ctas) ctas.remove();
+    /* make the form the single centerpiece */
+    var formPane = grid.querySelector("form").parentElement;
+    if (formPane) formPane.classList.add("jsv-contact-formpane");
+    grid.classList.add("jsv-contact-grid");
+
+    /* 3. aura canvas + footer inside the section */
+    if (!sec.querySelector(".jsv-contact-dust")) {
+      var cv = document.createElement("canvas");
+      cv.className = "jsv-contact-dust";
+      cv.setAttribute("aria-hidden", "true");
+      sec.insertBefore(cv, sec.firstChild);
+    }
+    if (!sec.querySelector(".jsv-contact-foot")) {
+      var foot = document.createElement("div");
+      foot.className = "jsv-contact-foot";
+      foot.textContent = "\u00A9 2026 JSVita. All Rights Reserved.";
+      sec.appendChild(foot);
+    }
+
+    /* 4. floating labels: the label sits before the input, so JS tracks filled/focus state */
+    function floatify(input) {
+      if (!input || input.dataset.jsvFloat) return;
+      input.dataset.jsvFloat = "1";
+      input.setAttribute("placeholder", " ");
+      var wrap = input.parentElement;
+      if (wrap && !wrap.classList.contains("jsv-fwrap")) wrap.classList.add("jsv-fwrap");
+      function sync() {
+        var filled = input.value && input.value.length > 0;
+        wrap.classList.toggle("jsv-up", filled || document.activeElement === input);
+      }
+      input.addEventListener("focus", sync);
+      input.addEventListener("blur", sync);
+      input.addEventListener("input", sync);
+      sync();
+    }
+    ["contact-name", "contact-email", "contact-organization", "contact-message"].forEach(function (id) {
+      floatify(document.getElementById(id));
+    });
+
+    /* 5. gold dust inside the section (cheap rAF, pauses hidden) */
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && !window.__jsvCvDust) {
+      window.__jsvCvDust = true;
+      var canvas = sec.querySelector(".jsv-contact-dust");
+      var cctx = canvas.getContext("2d"), CW, CH, cps = [];
+      function csize() {
+        var r = sec.getBoundingClientRect();
+        CW = canvas.width = r.width; CH = canvas.height = Math.min(r.height, 1400);
+        cps = [];
+        for (var i = 0; i < 26; i++) cps.push({
+          x: Math.random() * CW, y: Math.random() * CH,
+          r: Math.random() * 1.4 + .4,
+          vx: (Math.random() - .5) * .1, vy: -(Math.random() * .12 + .03),
+          a: Math.random() * .35 + .1, tw: Math.random() * 6.2832
+        });
+      }
+      csize();
+      window.addEventListener("resize", csize, { passive: true });
+      (function ctick() {
+        cctx.clearRect(0, 0, CW, CH);
+        for (var i = 0; i < cps.length; i++) {
+          var p = cps[i];
+          p.x += p.vx; p.y += p.vy; p.tw += .014;
+          if (p.y < -6) { p.y = CH + 6; p.x = Math.random() * CW; }
+          if (p.x < -6) p.x = CW + 6; else if (p.x > CW + 6) p.x = -6;
+          cctx.beginPath();
+          cctx.fillStyle = "rgba(247,215,116," + (p.a * (.6 + .4 * Math.sin(p.tw))).toFixed(3) + ")";
+          cctx.arc(p.x, p.y, p.r, 0, 6.2832);
+          cctx.fill();
+        }
+        if (!document.hidden) requestAnimationFrame(ctick); else setTimeout(ctick, 400);
+      })();
+    }
+    /* reveal on scroll */
+    if (!sec.classList.contains("jsv-reveal")) sec.classList.add("jsv-reveal");
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { sec.classList.add("jsv-in"); io.disconnect(); } });
+    }, { threshold: 0.05 });
+    io.observe(sec);
   }
 
   /* official JSVita mark — references shared defs; ensures the defs block exists */
