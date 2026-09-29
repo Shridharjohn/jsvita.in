@@ -229,6 +229,61 @@ section#top > .mx-auto { position: relative; }
   animation: jsvGlassSheen 0.9s cubic-bezier(0.4, 0, 0.2, 1) 1;
 }
 
+/* ---- founder signature: SHRIDHAR JOHN ---- */
+.jsv-brand-name {
+  position: relative;
+  margin: 20px 0 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.05rem, 2.6vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: 0.38em;
+  text-indent: 0.38em; /* optically centers the tracked caps */
+  line-height: 1.2;
+  background: linear-gradient(100deg, #fdf8ec 0%, #f7d774 26%, #d4af37 52%, #f0d57c 70%, #b8860b 88%, #f3e5ab 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 14px rgba(212, 175, 55, 0.35)) drop-shadow(0 2px 12px rgba(212, 175, 55, 0.22));
+  opacity: 0;
+  transform: translateY(10px);
+  animation:
+    jsvNameIn 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 1.15s both,
+    jsvNameSheen 6.5s ease-in-out 2.4s infinite,
+    jsvNameFloat 5.2s ease-in-out 2.1s infinite;
+  will-change: transform, background-position;
+}
+@keyframes jsvNameIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes jsvNameSheen {
+  0%, 60%, 100% { background-position: 220% 0; }
+  82% { background-position: -60% 0; }
+}
+@keyframes jsvNameFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+/* hover on desktop: shine + glow intensify */
+@media (hover: hover) and (pointer: fine) {
+  .jsv-brand-block:hover .jsv-brand-name {
+    animation-duration: 0.9s, 3.4s, 5.2s;
+  }
+}
+/* signature rule flanking the tagline */
+.jsv-brand-name + .jsv-brand-tag {
+  margin-top: 10px;
+}
+.jsv-brand-name::after {
+  content: "";
+  display: block;
+  width: min(320px, 60%);
+  height: 1px;
+  margin: 14px auto 0;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.55), transparent);
+}
+
 /* ---- tagline ---- */
 .jsv-brand-tag {
   margin: 18px 0 0;
@@ -265,7 +320,7 @@ section#top > .mx-auto { position: relative; }
   .jsv-brand-logo { margin-bottom: 18px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .jsv-brand-logo, .jsv-brand-logo::before, .jsv-brand-ch, .jsv-brand-tag, .jsv-brand-word::after {
+  .jsv-brand-logo, .jsv-brand-logo::before, .jsv-brand-ch, .jsv-brand-tag, .jsv-brand-word::after, .jsv-brand-name {
     animation: none !important;
     opacity: 1;
     transform: none;
@@ -1727,7 +1782,8 @@ html:not(.dark) .jsv-nav-view:hover { color: #241a05 !important; }
       block.innerHTML =
         '<div class="jsv-brand-logo" aria-hidden="true">' + jvLogo + '</div>' +
         '<div class="jsv-brand-word" role="heading" aria-level="2" aria-label="JSVita"></div>' +
-        '<p class="jsv-brand-tag">Not waiting for opportunities.<br>Creating them.</p>';
+        '<p class="jsv-brand-name">SHRIDHAR JOHN</p>' +
+        '<p class="jsv-brand-tag">The Name Behind JSVita.</p>';
       anchor.parentNode.insertBefore(block, anchor.nextSibling);
       /* letter-by-letter reveal (1.5s total, starts immediately) */
       var word = block.querySelector(".jsv-brand-word");
