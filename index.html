@@ -104,6 +104,175 @@ section#top > .mx-auto { position: relative; }
   background: linear-gradient(90deg, transparent, rgba(240,213,124,.75), transparent);
 }
 
+/* ============================================================
+   1b. HERO BRAND BLOCK — animated JSVita identity centerpiece
+   Logo + letter-by-letter wordmark + tagline. GPU-only motion.
+   ============================================================ */
+.jsv-brand-block {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 44px;
+  isolation: isolate;
+}
+/* soft spotlight cone behind everything */
+.jsv-brand-block::before {
+  content: "";
+  position: absolute;
+  top: -140px;
+  left: 50%;
+  width: 640px;
+  height: 640px;
+  transform: translateX(-50%);
+  background: radial-gradient(closest-side, rgba(212, 175, 55, 0.14), rgba(212, 175, 55, 0.05) 45%, transparent 72%);
+  pointer-events: none;
+  z-index: -2;
+}
+
+/* ---- logo: large, floating, breathing, wrapped in a dynamic gold aura ---- */
+.jsv-brand-logo {
+  position: relative;
+  width: 128px;
+  height: 128px;
+  margin-bottom: 26px;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.22, 1.2, 0.36, 1);
+  will-change: transform;
+  animation:
+    jsvLogoIn 0.9s cubic-bezier(0.22, 1.2, 0.36, 1) 0.05s both,
+    jsvBrandFloat 6s ease-in-out 0.95s infinite;
+}
+.jsv-brand-logo .jv-logo {
+  width: 128px;
+  height: 128px;
+  display: block;
+  filter: drop-shadow(0 14px 34px rgba(212, 175, 55, 0.4)) drop-shadow(0 0 22px rgba(247, 215, 116, 0.25));
+}
+/* dynamic aura: breathes with the logo */
+.jsv-brand-logo::before {
+  content: "";
+  position: absolute;
+  inset: -46%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(212, 175, 55, 0.32), rgba(212, 175, 55, 0.1) 52%, transparent 74%);
+  z-index: -1;
+  animation: jsvAuraPulse 4.2s ease-in-out 1s infinite;
+  will-change: opacity, transform;
+  pointer-events: none;
+}
+@keyframes jsvLogoIn {
+  from { opacity: 0; transform: scale(0.7); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes jsvBrandFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-9px) scale(1.025); }
+}
+@keyframes jsvAuraPulse {
+  0%, 100% { opacity: 0.55; transform: scale(0.96); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+/* desktop hover: spring tilt (JS-driven transform) + expanded glow */
+@media (hover: hover) and (pointer: fine) {
+  .jsv-brand-block:hover .jsv-brand-logo::before { opacity: 1.35; }
+  .jsv-brand-block:hover .jsv-brand-word { filter: brightness(1.18); }
+}
+.jsv-brand-word, .jsv-brand-tag { transition: filter 0.45s ease; }
+
+/* ---- JSVita wordmark: gold gradient letters, glass sheen, executive spacing ---- */
+.jsv-brand-word {
+  position: relative;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(3.4rem, 9vw, 5.6rem);
+  font-weight: 800;
+  letter-spacing: 0.045em;
+  line-height: 1.05;
+  display: inline-block;
+}
+.jsv-brand-ch {
+  display: inline-block;
+  background: linear-gradient(105deg, #fdf8ec 0%, #f7d774 22%, #d4af37 48%, #f0d57c 66%, #b8860b 88%, #f3e5ab 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0;
+  transform: translateY(16px) scale(0.82);
+  filter: blur(5px);
+  animation: jsvChIn 0.42s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  will-change: transform, opacity, filter;
+}
+@keyframes jsvChIn {
+  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+/* glass reflection: slow diagonal sheen gliding over the letters */
+.jsv-brand-word::after {
+  content: "";
+  position: absolute;
+  top: -6%;
+  bottom: -6%;
+  left: -30%;
+  width: 34%;
+  background: linear-gradient(105deg, transparent, rgba(255, 251, 235, 0.35) 50%, transparent);
+  transform: skewX(-18deg) translateX(-140%);
+  animation: jsvGlassSheen 5.5s ease-in-out 2.2s infinite;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+@keyframes jsvGlassSheen {
+  0% { transform: skewX(-18deg) translateX(-140%); }
+  38%, 100% { transform: skewX(-18deg) translateX(560%); }
+}
+/* mobile tap: one-shot shine sweep across the text */
+.jsv-brand-word.jsv-brand-shine::after {
+  animation: jsvGlassSheen 0.9s cubic-bezier(0.4, 0, 0.2, 1) 1;
+}
+
+/* ---- tagline ---- */
+.jsv-brand-tag {
+  margin: 18px 0 0;
+  font-family: "DM Sans Variable", system-ui, sans-serif;
+  font-size: clamp(1.02rem, 2.2vw, 1.22rem);
+  font-weight: 500;
+  letter-spacing: 0.015em;
+  line-height: 1.55;
+  color: #cfc6b8;
+  opacity: 0;
+  animation: jsvTagIn 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) 1.25s both;
+}
+@keyframes jsvTagIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---- mobile touch ripple ---- */
+.jsv-brand-rip {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(247, 215, 116, 0.4) 0%, rgba(212, 175, 55, 0.16) 45%, transparent 68%);
+  transform: scale(0);
+  animation: jsvBrandRip 0.7s ease-out forwards;
+  z-index: 3;
+}
+@keyframes jsvBrandRip { to { transform: scale(1); opacity: 0; } }
+
+/* ---- responsive + reduced motion ---- */
+@media (max-width: 640px) {
+  .jsv-brand-block { margin-top: 30px; }
+  .jsv-brand-logo, .jsv-brand-logo .jv-logo { width: 96px; height: 96px; }
+  .jsv-brand-logo { margin-bottom: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .jsv-brand-logo, .jsv-brand-logo::before, .jsv-brand-ch, .jsv-brand-tag, .jsv-brand-word::after {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
 /* ---------- 2. Badge: mark + FOUNDER (no text brand) ---------- */
 .jsv-badge-mark .jv-logo {
   width: 22px;
@@ -687,7 +856,7 @@ html:not(.dark) .jsv-nav-signout {
 @media print {
   @page { margin: 14mm; }
   html, body { background: #fff !important; color: #1c1917 !important; }
-  header, #jsvDust, .jsv-3d-overlay, [data-print-hide], .jsv-hero-ctas, .jsv-hero-social { display: none !important; }
+  header, #jsvDust, .jsv-3d-overlay, [data-print-hide], .jsv-hero-ctas, .jsv-brand-block, .jsv-hero-social { display: none !important; }
   section { background: none !important; box-shadow: none !important; }
   .jsv-hero-card { background: none !important; border: none !important; box-shadow: none !important; backdrop-filter: none !important; }
   .jsv-hero-name { color: #17110b !important; -webkit-text-fill-color: #17110b !important; filter: none !important; background: none !important; }
@@ -1185,7 +1354,8 @@ html:not(.dark) .jsv-nav-view:hover { color: #241a05 !important; }
     return false;
   }
 
-  /* ---- Step 3: CTA row + social row (WhatsApp / LinkedIn / Mail) ---- */
+  /* ---- Step 3: hero brand block — logo + letter-by-letter JSVita + tagline + socials ----
+     (the old View/Download CV buttons are retired; the navbar and CV pages carry that journey) */
   var SOCIAL =
     '<a href="https://wa.me/916361792699" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp — +91 63617 92699">' +
     '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.1 4.49.71.3 1.27.49 1.7.63.72.23 1.37.2 1.88.12.58-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 1 1 8.38 4.63m8.42-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.15 1.6 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.16-3.47-8.41"/></svg></a>' +
@@ -1197,30 +1367,64 @@ html:not(.dark) .jsv-nav-view:hover { color: #241a05 !important; }
     '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></a>';
 
   function step3() {
-    if (!document.querySelector(".jsv-hero-ctas")) {
+    if (!document.querySelector(".jsv-brand-block")) {
       var root = document.querySelector("section#top .lg\\:col-span-7");
       if (!root) return false;
       var sub = document.querySelector(".jsv-hero-sub");
       var anchor = sub ? sub.parentNode : root.querySelector("h1").parentNode;
-      var cta = document.createElement("div");
-      cta.className = "jsv-hero-ctas jsv-fade jsv-fade-d4";
-      cta.style.cssText = "display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;align-items:center;";
-      cta.innerHTML =
-      '<a class="jsv-btn-ghost" href="/cv" data-testid="cv-view-btn">' +
-      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>' +
-      "View CV</a>" +
-      '<a class="jsv-btn-gold" href="/Shridhar-John-CV.pdf" download="Shridhar-John-CV.pdf" data-testid="cv-download-btn">' +
-      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>' +
-      "Download CV</a>";
-    anchor.parentNode.insertBefore(cta, anchor.nextSibling);
+      var block = document.createElement("div");
+      block.className = "jsv-brand-block";
+      block.setAttribute("data-testid", "hero-brand-block");
+      block.innerHTML =
+        '<div class="jsv-brand-logo" aria-hidden="true">' + jvLogo + '</div>' +
+        '<div class="jsv-brand-word" role="heading" aria-level="2" aria-label="JSVita"></div>' +
+        '<p class="jsv-brand-tag">Not waiting for opportunities.<br>Creating them.</p>';
+      anchor.parentNode.insertBefore(block, anchor.nextSibling);
+      /* letter-by-letter reveal (1.5s total, starts immediately) */
+      var word = block.querySelector(".jsv-brand-word");
+      var letters = "JSVita".split("");
+      letters.forEach(function (ch, i) {
+        var s = document.createElement("span");
+        s.className = "jsv-brand-ch";
+        s.textContent = ch;
+        s.style.animationDelay = (0.45 + i * 0.12) + "s";
+        word.appendChild(s);
+      });
+      /* desktop: spring 3D tilt toward the pointer */
+      var logo = block.querySelector(".jsv-brand-logo");
+      if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+        block.addEventListener("pointermove", function (e) {
+          var r = logo.getBoundingClientRect();
+          var dx = (e.clientX - (r.left + r.width / 2)) / r.width;
+          var dy = (e.clientY - (r.top + r.height / 2)) / r.height;
+          logo.style.transform = "perspective(700px) rotateY(" + (dx * 14).toFixed(1) + "deg) rotateX(" + (-dy * 14).toFixed(1) + "deg) scale(1.04)";
+        });
+        block.addEventListener("pointerleave", function () { logo.style.transform = ""; });
+      } else {
+        /* mobile: touch ripple + shine sweep on tap */
+        block.addEventListener("pointerdown", function (e) {
+          var r = block.getBoundingClientRect();
+          var size = Math.max(r.width, r.height) * 1.4;
+          var rip = document.createElement("span");
+          rip.className = "jsv-brand-rip";
+          rip.style.width = rip.style.height = size + "px";
+          rip.style.left = (e.clientX - r.left - size / 2) + "px";
+          rip.style.top = (e.clientY - r.top - size / 2) + "px";
+          block.appendChild(rip);
+          setTimeout(function () { rip.remove(); }, 750);
+          word.classList.remove("jsv-brand-shine");
+          void word.offsetWidth;
+          word.classList.add("jsv-brand-shine");
+        }, { passive: true });
+      }
     }
     if (!document.querySelector(".jsv-hero-social")) {
-      var ctaRow = document.querySelector(".jsv-hero-ctas");
-      if (!ctaRow) return false;
+      var brandBlock = document.querySelector(".jsv-brand-block");
+      if (!brandBlock) return false;
       var soc = document.createElement("div");
       soc.className = "jsv-hero-social jsv-fade jsv-fade-d5";
       soc.innerHTML = SOCIAL;
-      ctaRow.parentNode.insertBefore(soc, ctaRow.nextSibling);
+      brandBlock.parentNode.insertBefore(soc, brandBlock.nextSibling);
     }
     return true;
   }
