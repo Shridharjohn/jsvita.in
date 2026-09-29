@@ -1882,7 +1882,7 @@ html:not(.dark) .jsv-nav-view:hover { color: #241a05 !important; }
     var go = function () {
       if (done) return; done = true;
       try { sessionStorage.setItem("jsgateSkip", "1"); } catch (e) {}
-      location.replace("/login");
+      location.replace("/jsvita/login");
     };
     var load = function (src, ok) {
       var s = document.createElement("script");
@@ -2050,7 +2050,7 @@ html:not(.dark) #jsvDust { opacity:.35; }
   function boot(){
     if(typeof firebase==='undefined') return;
     try{ firebase.initializeApp({apiKey:'AIzaSyAoEGzAL-WkAGttLArl_PpffJYbOYwc5yE',authDomain:'auth.jsvita.in',projectId:'jsvita-login',storageBucket:'jsvita-login.firebasestorage.app',messagingSenderId:'433927112110',appId:'1:433927112110:web:ad6186be9800780e8d343f'}); }catch(e){}
-    firebase.auth().onAuthStateChanged(function(u){ if(!u){ location.replace('/login'); } });
+    firebase.auth().onAuthStateChanged(function(u){ if(!u){ location.replace('/jsvita/login'); } });
   }
 })();
 </script>

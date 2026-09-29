@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/jsvita-logo.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#050505" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Authenticating — JSVita</title>
+  <link rel="canonical" href="https://jsvita.in/jsvita/auth" />
+  <script>if(/\.html$/.test(location.pathname))location.replace(location.pathname.replace(/\.html$/,"")+location.search+location.hash);</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--gold:#D4AF37;--glow:#F7D774;--deep:#8a6a14;--muted:#b3a493}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{min-height:100vh;display:grid;place-items:center;background:radial-gradient(900px 640px at 50% 30%, #101010 0%, #050505 70%);font-family:'DM Sans',system-ui,sans-serif;color:#f7f1e8;overflow:hidden}
+    .wrap{text-align:center;padding:24px;position:relative;z-index:1}
+    .mark{width:88px;height:88px;margin:0 auto 26px;animation:jvIn .5s cubic-bezier(.22,.61,.36,1) both, jvFloat 2.8s ease-in-out .55s infinite;filter:drop-shadow(0 10px 30px rgba(212,175,55,.45))}
+    .mark svg{width:100%;height:100%;display:block}
+    @keyframes jvIn{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+    @keyframes jvFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+    h1{font-family:'Playfair Display',serif;font-size:22px;letter-spacing:.04em;font-weight:700;background:linear-gradient(105deg,#fdf8ec,#f7d774 40%,#d4af37 70%,#f3e5ab);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:14px}
+    .bar{width:210px;height:2px;border-radius:2px;margin:0 auto;background:rgba(212,175,55,.15);overflow:hidden;position:relative}
+    .bar::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,var(--glow),transparent);transform:translateX(-100%);animation:jvSweep 1.15s cubic-bezier(.4,0,.2,1) infinite}
+    @keyframes jvSweep{to{transform:translateX(100%)}}
+    .st{margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);min-height:14px}
+    .ring{position:fixed;inset:0;pointer-events:none;background:radial-gradient(560px 420px at 50% 46%, rgba(212,175,55,.09), transparent 70%);animation:jvRing 3.6s ease-in-out infinite}
+    @keyframes jvRing{0%,100%{opacity:.7}50%{opacity:1}}
+    @media (prefers-reduced-motion:reduce){.mark,.bar::after,.ring{animation:none}}
+  </style>
+</head>
+<body>
+  <div class="ring" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="mark" id="mk"><svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><g transform="translate(120,120)"><polygon points="0,-105 91,-52 91,52 0,105 -91,52 -91,-52" fill="#0A0A0C" stroke="url(#jvOffGrad)" stroke-width="4"/><polygon points="0,-95 83,-46 83,46 0,95 -83,46 -83,-46" fill="none" stroke="url(#jvOffGrad)" stroke-width="1.4" opacity="0.55"/><path d="M -15,-45 L -15,25 C -15,45 0,55 25,45 C 40,38 48,22 48,22" fill="none" stroke="url(#jvOffGrad)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M 28,-38 C 15,-48 -15,-42 -22,-25 C -28,-10 18,-2 12,20 C 6,38 -22,42 -35,30" fill="none" stroke="url(#jvOffGrad)" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M -50,-20 L 0,65 L 50,-20" fill="none" stroke="url(#jvOffLin)" stroke-width="3" opacity="0.4"/></g></svg></div>
+    <h1>JSVita</h1>
+    <div class="bar" aria-hidden="true"></div>
+    <p class="st" id="st">Validating session</p>
+  </div>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="jvOffGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F3E5AB"/><stop offset="35%" stop-color="#D4AF37"/><stop offset="70%" stop-color="#AA771C"/><stop offset="100%" stop-color="#F3E5AB"/></linearGradient><linearGradient id="jvOffLin" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#C5A059"/><stop offset="50%" stop-color="#FDF0CD"/><stop offset="100%" stop-color="#C5A059"/></linearGradient></defs></svg>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script>
+  (function () {
+    "use strict";
+    var st = document.getElementById("st");
+    function say(t) { if (st) st.textContent = t; }
+    var CFG = { apiKey: "AIzaSyAoEGzAL-WkAGttLArl_PpffJYbOYwc5yE", authDomain: "auth.jsvita.in", projectId: "jsvita-login", storageBucket: "jsvita-login.firebasestorage.app", messagingSenderId: "433927112110", appId: "1:433927112110:web:ad6186be9800780e8d343f" };
+    try { if (!firebase.apps.length) firebase.initializeApp(CFG); } catch (e) {}
+    var auth = firebase.auth();
+    /* HTTPS guard: never run the session bridge over plain http */
+    if (location.protocol === "http:" && location.hostname !== "localhost" && !location.hostname.startsWith("127.")) {
+      location.replace("https://" + location.host + location.pathname + location.search);
+      return;
+    }
+    /* honor an explicit ?next= target only when it is a same-origin path (open-redirect guard) */
+    function safeNext() {
+      try {
+        var n = new URLSearchParams(location.search).get("next") || "";
+        if (!n || n[0] !== "/" || n.indexOf("//") === 0) return null;
+        return n;
+      } catch (e) { return null; }
+    }
+    var went = false;
+    function go(path, note) {
+      if (went) return; went = true;
+      if (note) say(note);
+      var next = safeNext();
+      var target = next || path;
+      setTimeout(function () { location.replace(target); }, 420);
+    }
+    auth.onAuthStateChanged(function (u) {
+      if (went) return;
+      if (u && u.emailVerified === false && u.providerData[0] && u.providerData[0].providerId === "password") {
+        go("/jsvita/verify", "Email verification needed");
+        return;
+      }
+      if (u) { try { sessionStorage.setItem("jsgateSkip", "1"); } catch (e) {} go("/dashboard", "Session valid — entering dashboard"); }
+      else go("/jsvita/login", "No active session");
+    });
+    /* token-expiry handling: proactively refresh; on failure treat as signed out */
+    auth.onIdTokenChanged(function (u) {
+      if (!u || went) return;
+      u.getIdToken().catch(function () { go("/jsvita/login", "Session expired"); });
+    });
+    /* failsafe */
+    setTimeout(function () { if (!went) go("/jsvita/login", "Taking you to sign in"); }, 6000);
+  })();
+  </script>
+</body>
+</html>
