@@ -4,8 +4,6 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/jsvita-logo.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="robots" content="noindex, nofollow" />
   <meta name="theme-color" content="#050505" />
@@ -106,7 +104,7 @@
       <svg class="jv-logo" width="84" height="84" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><g transform="translate(120,120)"><polygon points="0,-105 91,-52 91,52 0,105 -91,52 -91,-52" fill="#0A0A0C" stroke="url(#jvOffGrad)" stroke-width="4"/><polygon points="0,-95 83,-46 83,46 0,95 -83,46 -83,-46" fill="none" stroke="url(#jvOffGrad)" stroke-width="1.4" opacity="0.55"/><path d="M -15,-45 L -15,25 C -15,45 0,55 25,45 C 40,38 48,22 48,22" fill="none" stroke="url(#jvOffGrad)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M 28,-38 C 15,-48 -15,-42 -22,-25 C -28,-10 18,-2 12,20 C 6,38 -22,42 -35,30" fill="none" stroke="url(#jvOffGrad)" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M -50,-20 L 0,65 L 50,-20" fill="none" stroke="url(#jvOffLin)" stroke-width="3" opacity="0.4"/></g></svg>
       <h1>Admin Console</h1>
       <p>Verifying your access…</p>
-      <div class="msg" id="gateMsg"></div>
+      <div class="msg" id="gateMsg" role="status" aria-live="polite" aria-atomic="true"></div>
     </div>
 
     <div id="panel" style="display:none">
@@ -123,7 +121,7 @@
           <span class="ic">👥</span>
           <span><b>Members</b><span>Manage accounts in Firebase Auth</span></span>
         </a>
-        <a class="card launch" href="/cv" target="_blank" rel="noopener">
+        <a class="card launch" href="/cv.html" target="_blank" rel="noopener">
           <span class="ic">📄</span>
           <span><b>Live CV</b><span>View the deployed resume PDF</span></span>
         </a>
@@ -136,7 +134,7 @@
       <div class="grid">
         <div class="card"><div class="k">Site</div><div class="v">jsvita.in</div><div class="s">GitHub Pages · HTTPS enforced</div></div>
         <div class="card"><div class="k">Auth domain</div><div class="v" style="font-size:20px">auth.jsvita.in</div><div class="s">Firebase Auth · jsvita-login</div></div>
-        <div class="card"><div class="k">Notifications</div><div class="v" style="font-size:20px">FormSubmit</div><div class="s">Signup · login · contact alerts</div></div>
+        <div class="card"><div class="k">Notifications</div><div class="v" style="font-size:20px">Firebase + contact</div><div class="s">Authentication events use Firebase; contact delivery requires a protected endpoint.</div></div>
       </div>
     </div>
   </main>
@@ -157,7 +155,7 @@
         document.getElementById("meta").innerHTML = tag;
       } else {
         document.getElementById("gateMsg").textContent = u ? "This account does not have admin access." : "Not signed in.";
-        setTimeout(function () { location.href = "/login"; }, 1200);
+        setTimeout(function () { location.href = "/login.html"; }, 1200);
       }
     });
   </script>

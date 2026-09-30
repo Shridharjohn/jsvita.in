@@ -9,8 +9,6 @@
   <title>Welcome — JSVita</title>
   <link rel="icon" type="image/svg+xml" href="/jsvita-logo.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&family=DM+Sans:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
@@ -186,7 +184,7 @@
     <a class="enter" id="enterBtn" href="https://jsvita.in/">Enter Dashboard <span class="arrow">→</span></a>
   </main>
 
-  <div class="status" id="status"><span class="spin"></span><span id="statusText">Preparing your experience</span></div>
+  <div class="status" id="status" role="status" aria-live="polite" aria-atomic="true"><span class="spin"></span><span id="statusText">Preparing your experience</span></div>
 
   <script>
     (function () {
@@ -278,36 +276,37 @@
         requestAnimationFrame(loop);
       }
 
-      /* ---------- auth gate ---------- */
+      /* ---------- auth gate (fail closed) ---------- */
+      var authConfig = {
+        apiKey: "AIzaSyAoEGzAL-WkAGttLArl_PpffJYbOYwc5yE",
+        authDomain: "auth.jsvita.in",
+        projectId: "jsvita-login",
+        storageBucket: "jsvita-login.firebasestorage.app",
+        messagingSenderId: "433927112110",
+        appId: "1:433927112110:web:ad6186be9800780e8d343f"
+      };
+      function deny() {
+        if (authDone) return;
+        authDone = true;
+        say("Sign-in could not be verified — returning to login");
+        setTimeout(function () { location.replace("/login.html"); }, 900);
+      }
       try {
-        firebase.initializeApp({
-          apiKey: "AIzaSyAoEGzAL-WkAGttLArl_PpffJYbOYwc5yE",
-          authDomain: "auth.jsvita.in",
-          projectId: "jsvita-login",
-          storageBucket: "jsvita-login.firebasestorage.app",
-          messagingSenderId: "433927112110",
-          appId: "1:433927112110:web:ad6186be9800780e8d343f"
-        });
-      } catch (e) {}
-      try {
+        if (!firebase.apps || !firebase.apps.length) firebase.initializeApp(authConfig);
         firebase.auth().onAuthStateChanged(function (u) {
           authDone = true;
-          if (u) { play(); }
+          if (u) play();
           else {
             say("Not signed in — taking you to login");
-            setTimeout(function () { location.replace("/login"); }, 1300);
+            setTimeout(function () { location.replace("/login.html"); }, 900);
           }
-        });
-      } catch (e) { play(); }
-      /* network failsafe: never trap the visitor on a blank screen */
-      setTimeout(function () { if (!authDone && !played) play(); }, 4500);
+        }, deny);
+      } catch (e) { deny(); }
+      /* Network/SDK failsafe: never expose the protected destination. */
+      setTimeout(function () { if (!authDone && !played) deny(); }, 8000);
       if (!played) say("Preparing your experience");
 
       /* ---------- Enter Dashboard ---------- */
-      document.getElementById("enterBtn").addEventListener("click", function () {
-        try { sessionStorage.setItem("jsgateSkip", "1"); } catch (e) {}
-      });
-
       /* ---------- ripple on the button ---------- */
       document.addEventListener("pointerdown", function (e) {
         var b = e.target.closest(".enter");

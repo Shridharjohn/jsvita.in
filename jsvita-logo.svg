@@ -1,1 +1,32 @@
-<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="JSVita logo"><defs><linearGradient id="jvGold" x1="12" y1="4" x2="52" y2="60" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#F7D774"/><stop offset=".45" stop-color="#D4AF37"/><stop offset=".78" stop-color="#B8860B"/><stop offset="1" stop-color="#F0D57C"/></linearGradient><linearGradient id="jvGoldDeep" x1="8" y1="0" x2="56" y2="64" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFE9A8"/><stop offset=".5" stop-color="#D4AF37"/><stop offset="1" stop-color="#8a6a14"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="url(#jvGoldDeep)"/><rect x="1" y="1" width="62" height="62" rx="15" fill="none" stroke="rgba(255,246,214,.55)" stroke-width="1.4"/><g fill="none" stroke="#1A1206" stroke-width="5.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 15 v21 a8.5 8.5 0 0 1 -8.5 8.5 h-1"/><path d="M42 49 V28 a8.5 8.5 0 0 1 8.5 -8.5 h1"/><path d="M42 22 c-9 -6 -22 -2 -20 8 c1.5 7.5 12 6.5 13 13 c1.5 8 -9 12 -17 7"/></g><path d="M32 6 l3.4 7.2 7.2 3.4 -7.2 3.4 -3.4 7.2 -3.4 -7.2 -7.2 -3.4 7.2 -3.4 z" fill="#FFF6D8" opacity=".92"/></svg>
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="JSVita logo">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1c1c22"/>
+      <stop offset="1" stop-color="#0e0e12"/>
+    </linearGradient>
+    <linearGradient id="platinumGold" x1="12" y1="4" x2="52" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset=".25" stop-color="#F7D774"/>
+      <stop offset=".6" stop-color="#D4AF37"/>
+      <stop offset=".85" stop-color="#E5C158"/>
+      <stop offset="1" stop-color="#FFF6D8"/>
+    </linearGradient>
+    <linearGradient id="goldGlow" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F7D774" stop-opacity=".3"/>
+      <stop offset="1" stop-color="#D4AF37" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <!-- Background with rounded corners -->
+  <rect width="64" height="64" rx="16" fill="url(#bgGrad)"/>
+  <rect width="64" height="64" rx="16" fill="url(#goldGlow)"/>
+  <!-- Elegant Platinum-Gold Border -->
+  <rect x="1" y="1" width="62" height="62" rx="15" fill="none" stroke="url(#platinumGold)" stroke-width="1.6" opacity="0.85"/>
+  <!-- Monogram/Symbol Paths in Platinum-Gold -->
+  <g fill="none" stroke="url(#platinumGold)" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 15 v21 a8.5 8.5 0 0 1 -8.5 8.5 h-1"/>
+    <path d="M42 49 V28 a8.5 8.5 0 0 1 8.5 -8.5 h1"/>
+    <path d="M42 22 c-9 -6 -22 -2 -20 8 c1.5 7.5 12 6.5 13 13 c1.5 8 -9 12 -17 7"/>
+  </g>
+  <!-- Accent Sparkle Star -->
+  <path d="M32 6 l3.2 7 7 3.2 -7 3.2 -3.2 7 -3.2 -7 -7 -3.2 7 -3.2 z" fill="#FFFFFF" opacity=".95"/>
+</svg>

@@ -6,9 +6,6 @@
     <link rel="icon" type="image/svg+xml" href="/jsvita-logo.svg" />
   <link rel="manifest" href="/manifest.json" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="apple-touch-icon" href="/favicon.svg" />
     <meta name="theme-color" content="#b8860b" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
@@ -2325,7 +2322,7 @@ html:not(.dark) .jsv-nav-view:hover { color: #241a05 !important; }
     if (!document.querySelector(".jsv-nav-switch")) {
       var sp = document.createElement("a");
       sp.className = "jsv-nav-switch";
-      sp.href = "/cv";
+      sp.href = "/cv.html";
       sp.setAttribute("aria-label", "Switch to CV view");
       sp.setAttribute("title", "Switch to CV view");
       sp.setAttribute("data-testid", "nav-switch-pill");
@@ -2336,7 +2333,7 @@ html:not(.dark) .jsv-nav-view:hover { color: #241a05 !important; }
     if (!document.querySelector(".jsv-nav-view")) {
       var vw = document.createElement("a");
       vw.className = "jsv-nav-cv jsv-nav-view";
-      vw.href = "/cv";
+      vw.href = "/cv.html";
       vw.setAttribute("aria-label", "View CV");
       vw.setAttribute("title", "View CV — interactive resume");
       vw.setAttribute("data-testid", "nav-cv-view-icon");
@@ -2380,7 +2377,7 @@ html:not(.dark) .jsv-nav-view:hover { color: #241a05 !important; }
         if (document.startViewTransition) return;
         e.preventDefault();
         sp.classList.add("page-out");
-        setTimeout(function () { location.href = "/cv"; }, 190);
+        setTimeout(function () { location.href = "/cv.html"; }, 190);
       });
     }
     so.addEventListener("pointerdown", function (e) {
@@ -2508,7 +2505,6 @@ html:not(.dark) .jsv-nav-view:hover { color: #241a05 !important; }
   }, 400);
 })();
 </script>
-</style>
 <style data-pg="jsv-brand">
 
 /* ================= JSVITA LUXURY DESIGN SYSTEM v3 (dark/light sync) ================= */
@@ -2584,7 +2580,7 @@ html:not(.dark) #jsvDust { opacity:.35; }
 }
 
 </style>
-  </head></head>
+  </head>
   <body>
     <div id="root"></div>
   <!-- Members login entry -->
