@@ -349,94 +349,84 @@ section#top > .mx-auto { position: relative; }
   50% { transform: translateY(-7px); }
 }
 
-/* ---------- 2c. Footer: futuristic luxury aura — energy core + rings + dust + wordmark ---------- */
+/* ---------- 2c. Infinity Luxury Footer — beam, drifting dust, legal row ---------- */
 footer.jsv-footer-aura {
   position: relative;
   overflow: hidden;
+  isolation: isolate;
   display: grid;
   place-items: center;
-  padding: 74px 20px 66px;
-  background: transparent !important;
+  padding: 88px 20px 56px;
+  min-height: 340px;
+  background: #000 !important;
   border-top: none !important;
-  min-height: 300px;
 }
-/* ambient background glow bleeding onto the black canvas (cinematic) */
+/* ultra-thin gold gradient top border */
 footer.jsv-footer-aura::before {
   content: "";
   position: absolute;
-  inset: -40% 0;
-  background: radial-gradient(52% 70% at 50% 62%, rgba(212, 175, 55, 0.13), rgba(212, 175, 55, 0.045) 48%, transparent 74%);
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 4%, rgba(212, 175, 55, 0.7) 28%, rgba(247, 215, 116, 0.95) 50%, rgba(212, 175, 55, 0.7) 72%, transparent 96%);
   pointer-events: none;
-  z-index: 0;
 }
-.jsv-aura {
+.jsv-infinity {
   position: relative;
   z-index: 1;
-  display: grid;
-  place-items: center;
-  width: min(560px, 92%);
-  height: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: min(680px, 94%);
 }
-/* energy core: layered glow (inner + outer + ambient) with a slow power pulse */
-.jsv-aura-glow {
+/* soft vertical gold light beam behind the mark (no circles) */
+.jv-beam {
   position: absolute;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  background:
-    radial-gradient(closest-side, rgba(247, 215, 116, 0.28), rgba(212, 175, 55, 0.12) 42%, transparent 70%);
-  animation: jsvCorePulse 4.4s ease-in-out infinite;
-  will-change: transform, opacity;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 310px;
   pointer-events: none;
+  background: linear-gradient(180deg, transparent 0%, rgba(212, 175, 55, 0.15) 34%, rgba(247, 215, 116, 0.18) 52%, rgba(212, 175, 55, 0.07) 74%, transparent 100%);
+  filter: blur(24px);
+  animation: jvBeam 7.5s ease-in-out infinite;
+  will-change: opacity, transform;
 }
-.jsv-aura-glow::after { /* inner hot core */
-  content: "";
-  position: absolute;
-  inset: 26%;
-  border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(255, 246, 214, 0.22), transparent 72%);
-  filter: blur(6px);
+@keyframes jvBeam {
+  0%, 100% { opacity: 0.55; transform: translateX(-50%) scaleY(0.96); }
+  50% { opacity: 1; transform: translateX(-50%) scaleY(1.05); }
 }
-@keyframes jsvCorePulse {
-  0%, 100% { transform: scale(0.92); opacity: 0.75; }
-  50% { transform: scale(1.08); opacity: 1; }
-}
-/* light rings: thin transparent gold, three depths, different speeds */
-.jsv-aura-ring {
-  position: absolute;
-  border-radius: 50%;
-  border: 1px solid rgba(212, 175, 55, 0.32);
-  box-shadow: 0 0 22px -6px rgba(212, 175, 55, 0.28), inset 0 0 18px -8px rgba(247, 215, 116, 0.2);
-  will-change: transform;
-  pointer-events: none;
-}
-.jsv-aura-ring.r1 { width: 250px; height: 250px; animation: jsvSpin 26s linear infinite; }
-.jsv-aura-ring.r2 {
-  width: 330px; height: 330px;
-  border-color: rgba(212, 175, 55, 0.2);
-  animation: jsvSpin 44s linear infinite reverse;
-}
-.jsv-aura-ring.r3 {
-  width: 420px; height: 420px;
-  border-style: dashed;
-  border-color: rgba(212, 175, 55, 0.12);
-  animation: jsvSpin 70s linear infinite;
-}
-@keyframes jsvSpin { to { transform: rotate(360deg); } }
-/* orbiting dust canvas */
-.jsv-aura-dust {
+.jv-dust {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
 }
-/* JSVita: metallic gold wordmark with glass sweep, floating gently */
-.jsv-aura-word {
+.jsv-infinity .jv-inf-logo {
   position: relative;
+  z-index: 1;
+  width: 56px;
+  height: 56px;
+  animation: jvInfFloat 7s ease-in-out infinite;
+  will-change: transform;
+}
+.jsv-infinity .jv-inf-logo .jv-logo {
+  width: 56px;
+  height: 56px;
+  display: block;
+  filter: drop-shadow(0 6px 18px rgba(212, 175, 55, 0.38));
+}
+@keyframes jvInfFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.jsv-infinity .jv-inf-word {
+  margin-top: 18px;
   font-family: "Playfair Display", Georgia, serif;
   font-weight: 800;
-  font-size: clamp(2.6rem, 7vw, 4.2rem);
+  font-size: clamp(1.7rem, 4vw, 2.3rem);
   letter-spacing: 0.12em;
   line-height: 1;
   background: linear-gradient(100deg, #fdf8ec 0%, #f7d774 24%, #d4af37 50%, #f0d57c 68%, #b8860b 86%, #f3e5ab 100%);
@@ -444,38 +434,57 @@ footer.jsv-footer-aura::before {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: none;
-  filter: drop-shadow(0 0 18px rgba(212, 175, 55, 0.35)) drop-shadow(0 4px 26px rgba(212, 175, 55, 0.28));
-  animation: jsvAuraFloat 6s ease-in-out infinite, jsvAuraSheen 7s ease-in-out 1.2s infinite;
-  will-change: transform, background-position;
-  cursor: default;
+  animation: jvInfSheen 6.5s ease-in-out 1.2s infinite;
 }
-@keyframes jsvAuraFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-7px); }
+@keyframes jvInfSheen {
+  0%, 62%, 100% { background-position: 220% 0; }
+  84% { background-position: -60% 0; }
 }
-@keyframes jsvAuraSheen {
-  0%, 55%, 100% { background-position: 220% 0; }
-  78% { background-position: -60% 0; }
+.jsv-infinity .jv-inf-tag {
+  margin-top: 10px;
+  font-family: "JetBrains Mono Variable", "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #b9ad99;
 }
-/* desktop hover: aura expands, dust activates (JS boost), shine intensifies */
-@media (hover: hover) and (pointer: fine) {
-  .jsv-aura:hover .jsv-aura-glow { transform: scale(1.16); opacity: 1; transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.6s ease; }
-  .jsv-aura:hover .jsv-aura-ring { border-color: rgba(247, 215, 116, 0.42); }
-  .jsv-aura:hover .jsv-aura-word { animation-duration: 6s, 3.2s; }
+.jv-inf-legal {
+  margin-top: 36px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px 14px;
+  font-size: 12px;
+  color: #8d8275;
 }
-.jsv-aura-glow { transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.6s ease; }
+.jv-inf-legal a {
+  color: #cfc6b8;
+  text-decoration: none;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+.jv-inf-legal a:hover { color: #f7d774; text-shadow: 0 0 12px rgba(247, 215, 116, 0.4); }
+.jv-inf-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.55);
+}
+/* fade-in on scroll */
+footer.jsv-footer-aura .jsv-infinity {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+footer.jsv-footer-aura.jv-in .jsv-infinity { opacity: 1; transform: none; }
 @media (max-width: 640px) {
-  footer.jsv-footer-aura { padding: 56px 14px 50px; min-height: 240px; }
-  .jsv-aura { height: 190px; }
-  .jsv-aura-glow { width: 220px; height: 220px; }
-  .jsv-aura-ring.r1 { width: 190px; height: 190px; }
-  .jsv-aura-ring.r2 { width: 250px; height: 250px; }
-  .jsv-aura-ring.r3 { width: 310px; height: 310px; }
+  footer.jsv-footer-aura { padding: 64px 16px 44px; min-height: 300px; }
+  .jv-beam { width: 110px; height: 250px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .jsv-aura-glow, .jsv-aura-ring, .jsv-aura-word { animation: none !important; }
-  .jsv-aura-dust { display: none; }
+  .jv-beam, .jsv-infinity .jv-inf-logo, .jsv-infinity .jv-inf-word { animation: none !important; }
+  .jsv-infinity .jv-dust { display: none; }
+  footer.jsv-footer-aura .jsv-infinity { opacity: 1; transform: none; transition: none; }
 }
 
 /* ---------- 2d. Navbar brand = logo only (wordmark retired) ---------- */
@@ -1907,12 +1916,7 @@ html:not(.dark) .jsv-nav-view:hover { color: #241a05 !important; }
       cv.setAttribute("aria-hidden", "true");
       sec.insertBefore(cv, sec.firstChild);
     }
-    if (!sec.querySelector(".jsv-contact-foot")) {
-      var foot = document.createElement("div");
-      foot.className = "jsv-contact-foot";
-      foot.textContent = "\u00A9 2026 JSVita. All Rights Reserved.";
-      sec.appendChild(foot);
-    }
+
 
     /* 4. floating labels: the label sits before the input, so JS tracks filled/focus state */
     function floatify(input) {
@@ -2014,70 +2018,72 @@ html:not(.dark) .jsv-nav-view:hover { color: #241a05 !important; }
     }
     return false;
   }
-  /* Footer: futuristic luxury aura — energy core + rotating rings + orbiting gold dust + JSVita wordmark only */
+  /* Footer: Infinity Luxury — small floating mark over a soft gold beam, drifting dust, legal row */
   function paintFooterLogo() {
     var footer = document.querySelector("footer");
     if (!footer) return false;
-    if (footer.querySelector(".jsv-aura")) return true;
-    var core = document.createElement("div");
-    core.className = "jsv-aura";
-    core.setAttribute("role", "img");
-    core.setAttribute("aria-label", "JSVita");
-    core.innerHTML =
-      '<span class="jsv-aura-glow" aria-hidden="true"></span>' +
-      '<span class="jsv-aura-ring r1" aria-hidden="true"></span>' +
-      '<span class="jsv-aura-ring r2" aria-hidden="true"></span>' +
-      '<span class="jsv-aura-ring r3" aria-hidden="true"></span>' +
-      '<canvas class="jsv-aura-dust" aria-hidden="true"></canvas>' +
-      '<span class="jsv-aura-word">JSVita</span>';
-    footer.insertBefore(core, footer.firstChild);
-    /* strip every other footer child — display ONLY the aura wordmark */
-    var kids = [].slice.call(footer.children);
-    kids.forEach(function (k) { if (k !== core && !k.classList.contains("jsv-aura")) k.remove(); });
+    if (footer.querySelector(".jsv-infinity")) return true;
     footer.classList.add("jsv-footer-aura");
-    /* orbiting gold dust — rAF canvas, pauses when tab hidden, reduced-motion aware */
+    var core = document.createElement("div");
+    core.className = "jsv-infinity";
+    core.setAttribute("role", "img");
+    core.setAttribute("aria-label", "JSVita — Building Digital Excellence");
+    core.innerHTML =
+      '<span class="jv-beam" aria-hidden="true"></span>' +
+      '<canvas class="jv-dust" aria-hidden="true"></canvas>' +
+      '<div class="jv-inf-logo">' + jvLogo.replace('width="38" height="38"', 'width="56" height="56"') + '</div>' +
+      '<div class="jv-inf-word">JSVita</div>' +
+      '<div class="jv-inf-tag">Building Digital Excellence</div>' +
+      '<div class="jv-inf-legal">' +
+        '<span>\u00A9 2026 JSVita. All Rights Reserved.</span>' +
+        '<span class="jv-inf-dot" aria-hidden="true"></span>' +
+        '<a href="/privacy">Privacy Policy</a>' +
+        '<span class="jv-inf-dot" aria-hidden="true"></span>' +
+        '<a href="/terms">Terms</a>' +
+        '<span class="jv-inf-dot" aria-hidden="true"></span>' +
+        '<a href="/connect">Contact</a>' +
+      '</div>';
+    var kids = [].slice.call(footer.children);
+    kids.forEach(function (k) { k.remove(); });
+    footer.appendChild(core);
+    /* drifting gold dust — slow horizontal travel, gentle twinkle */
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      var cv = core.querySelector(".jsv-aura-dust"), ctx = cv.getContext("2d");
+      var cv = core.querySelector(".jv-dust"), ctx = cv.getContext("2d");
       var W = 0, H = 0, ps = [];
       function size() {
-        var r = core.getBoundingClientRect();
-        W = cv.width = Math.max(120, Math.round(r.width));
-        H = cv.height = Math.max(90, Math.round(r.height));
+        var r = footer.getBoundingClientRect();
+        W = cv.width = Math.max(320, Math.round(r.width));
+        H = cv.height = Math.max(180, Math.round(r.height));
         ps = [];
-        for (var i = 0; i < 16; i++) ps.push({
-          rx: (W / 2) * (0.45 + Math.random() * 0.5),
-          ry: (H / 2) * (0.3 + Math.random() * 0.5),
-          a: Math.random() * 6.2832,
-          sp: (0.0016 + Math.random() * 0.0026) * (Math.random() > 0.5 ? 1 : -1),
-          r: 0.6 + Math.random() * 1.3,
-          tw: Math.random() * 6.2832
+        for (var i = 0; i < 14; i++) ps.push({
+          x: Math.random() * W, y: H * (0.15 + Math.random() * 0.7),
+          vx: 0.06 + Math.random() * 0.16, r: 0.5 + Math.random() * 1.1,
+          a: 0.14 + Math.random() * 0.3, tw: Math.random() * 6.2832
         });
       }
       size();
       window.addEventListener("resize", size, { passive: true });
-      var boost = 1;
-      core.addEventListener("pointerenter", function () { boost = 2.4; });
-      core.addEventListener("pointerleave", function () { boost = 1; });
       (function tick() {
         ctx.clearRect(0, 0, W, H);
-        var cx = W / 2, cy = H / 2;
         for (var i = 0; i < ps.length; i++) {
           var p = ps[i];
-          p.a += p.sp * boost;
-          p.tw += 0.03;
-          var x = cx + Math.cos(p.a) * p.rx;
-          var y = cy + Math.sin(p.a) * p.ry;
-          var al = (0.25 + 0.55 * Math.abs(Math.sin(p.tw))) * Math.min(1, boost);
+          p.x += p.vx; p.tw += 0.02;
+          if (p.x > W + 8) { p.x = -8; p.y = H * (0.15 + Math.random() * 0.7); }
           ctx.beginPath();
-          ctx.fillStyle = "rgba(247,215,116," + al.toFixed(3) + ")";
-          ctx.arc(x, y, p.r, 0, 6.2832);
+          ctx.fillStyle = "rgba(247,215,116," + (p.a * (.6 + .4 * Math.sin(p.tw))).toFixed(3) + ")";
+          ctx.arc(p.x, p.y, p.r, 0, 6.2832);
           ctx.fill();
         }
         if (!document.hidden) requestAnimationFrame(tick); else setTimeout(tick, 400);
       })();
     } else {
-      core.querySelector(".jsv-aura-dust").remove();
+      core.querySelector(".jv-dust").remove();
     }
+    /* fade-in on scroll */
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { footer.classList.add("jv-in"); io.disconnect(); } });
+    }, { threshold: 0.18 });
+    io.observe(footer);
     return true;
   }
 
