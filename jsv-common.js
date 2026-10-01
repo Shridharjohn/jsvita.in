@@ -3,12 +3,18 @@
    Phase 7 · Authority & Conversion
    ------------------------------------------------------------
    1. jvTrack        — one event fanned out to GTM / GA4 / Meta Pixel
-   2. Clarity        — set CLARITY_ID below to switch on heatmaps,
+   2. GA4 / GTM      — set GA4_ID / GTM_ID below; loaders are ID-gated
+                       (use GA4_ID alone, or GTM alone, or GTM with a
+                       GA4 tag inside it — not GA4+GTM on one property)
+   3. Clarity        — set CLARITY_ID below to switch on heatmaps,
                        session recordings and scroll tracking
-   3. Calendly modal — set CALENDLY_URL below to embed your booking
+   4. Calendly modal — set CALENDLY_URL below to embed your booking
                        page in a premium modal; while it is empty the
                        modal shows a graceful fallback (WhatsApp +
                        contact form) so the CTA still converts
+   5. Lead forms     — every form[data-jv-lead-form] posts its fields
+                       to LEAD_EMAIL. Set window.JSVITA_LEAD_ENDPOINT
+                       before this script to use your own backend.
    ------------------------------------------------------------
    No libraries. No layout shift. Everything is lazy: Clarity loads
    only when CLARITY_ID is set, Calendly's iframe only when opened.
@@ -16,10 +22,13 @@
 (function () {
   "use strict";
 
-  /* ---------- EDIT THESE TWO VALUES ---------- */
+  /* ---------- EDIT THESE VALUES ---------- */
   var CALENDLY_URL = ""; /* e.g. "https://calendly.com/jsvita/consultation" */
   var CLARITY_ID = "";   /* e.g. "abc123xyz" from clarity.microsoft.com */
-  /* -------------------------------------------- */
+  var GA4_ID = "";       /* e.g. "G-XXXXXXXXXX" from analytics.google.com */
+  var GTM_ID = "";       /* e.g. "GTM-XXXXXXX" from tagmanager.google.com */
+  var LEAD_EMAIL = "support@jsvita.in"; /* every lead form delivers here */
+  /* --------------------------------------- */
 
   /* ---- 1 · conversion tracking ---- */
   function jvTrack(event, params) {
@@ -31,6 +40,40 @@
       window.dataLayer.push(payload);
       if (typeof window.gtag === "function") window.gtag("event", event, params);
       if (typeof window.fbq === "function") window.fbq("trackCustom", event, params);
+    } catch (e) {}
+  }
+
+  /* ---- 1b · GA4 — Google Analytics 4 (ID-gated, no layout impact) ---- */
+  function initGA4() {
+    if (!GA4_ID) return;
+    try {
+      if (!document.querySelector("script[src*='googletagmanager.com/gtag/js']")) {
+        var s = document.createElement("script");
+        s.async = true;
+        s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA4_ID;
+        document.head.appendChild(s);
+      }
+      window.dataLayer = window.dataLayer || [];
+      if (!window.__jvGtagInit) {
+        window.__jvGtagInit = true;
+        if (typeof window.gtag !== "function") window.gtag = function () { window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", GA4_ID, { send_page_view: true });
+      }
+    } catch (e) {}
+  }
+
+  /* ---- 1c · GTM — Google Tag Manager (ID-gated, async, render-blocking-free) ---- */
+  function initGTM() {
+    if (!GTM_ID) return;
+    try {
+      if (document.querySelector("script[src*='googletagmanager.com/gtm.js']")) return;
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+      var s = document.createElement("script");
+      s.async = true;
+      s.src = "https://www.googletagmanager.com/gtm.js?id=" + GTM_ID;
+      document.head.appendChild(s);
     } catch (e) {}
   }
 
@@ -145,10 +188,73 @@
     document.body.classList.remove("jv-cal-lock");
   }
 
-  /* ---- delegation: [data-jv-calendly] opens · [data-jv-track] tracked ---- */
+  /* ---- 5 · lead capture — posts every form[data-jv-lead-form] to LEAD_EMAIL ----
+     Delivery: window.JSVITA_LEAD_ENDPOINT if set, else FormSubmit AJAX
+     (first ever submission emails LEAD_EMAIL a one-time activation link —
+     confirm it once and every lead after that lands in the inbox).
+     Success → data-jv-lead-redirect (premium Thank You page) or inline state.
+     Failure → inline recovery copy with the direct support email. */
+  function initLeadForm() {
+    var forms = document.querySelectorAll("form[data-jv-lead-form]");
+    if (!forms.length) return;
+    var ENDPOINT = window.JSVITA_LEAD_ENDPOINT || ("https://formsubmit.co/ajax/" + LEAD_EMAIL);
+    Array.prototype.forEach.call(forms, function (form) {
+      if (form.__jvLead) return;
+      form.__jvLead = true;
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var btn = form.querySelector("[type=submit]");
+        var btnTxt = btn ? btn.innerHTML : "";
+        var data = {};
+        try {
+          new FormData(form).forEach(function (v, k) { if (k.charAt(0) !== "_") data[k] = v; });
+        } catch (er) {}
+        var hp = form.querySelector('input[name="_honey"]');
+        if (hp && hp.value) return; /* bot — silently drop */
+        data._subject = form.getAttribute("data-jv-lead-subject") || ("New lead — " + (data.Name || data.name || "jsvita.in"));
+        data._template = "table";
+        data._captcha = "false";
+        var formId = form.getAttribute("data-jv-lead-form") || "lead";
+        function lock(txt) { if (btn) { btn.disabled = true; if (txt) btn.innerHTML = txt; } }
+        function unlock() { if (btn) { btn.disabled = false; btn.innerHTML = btnTxt; } }
+        function finishOk() {
+          var redirect = form.getAttribute("data-jv-lead-redirect");
+          if (redirect) { window.location.assign(redirect); return; }
+          lock("Request received \u2713");
+        }
+        function finishFail() {
+          unlock();
+          var note = form.querySelector(".jv-lead-error");
+          if (!note) {
+            note = document.createElement("p");
+            note.className = "jv-lead-error";
+            note.setAttribute("role", "alert");
+            form.appendChild(note);
+          }
+          note.innerHTML = 'Delivery hiccup \u2014 please email <a href="mailto:' + LEAD_EMAIL + '">' + LEAD_EMAIL + '</a> directly and we\u2019ll reply within 24 hours.';
+        }
+        lock("Sending\u2026");
+        jvTrack("lead_form_submit", { form: formId });
+        var ctrl = ("AbortController" in window) ? new AbortController() : null;
+        var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 12000) : null;
+        fetch(ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify(data),
+          signal: ctrl ? ctrl.signal : undefined
+        }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+          .then(function () { if (timer) clearTimeout(timer); jvTrack("lead_delivered", { form: formId }); finishOk(); })
+          .catch(function (err) { if (timer) clearTimeout(timer); jvTrack("lead_delivery_failed", { form: formId, error: String((err && err.message) || err) }); finishFail(); });
+      });
+    });
+  }
+
+  /* ---- delegation: [data-jv-calendly] opens · [data-jv-track] tracked · mailto counted ---- */
   document.addEventListener("click", function (e) {
     var t = e.target;
     if (!t || !t.closest) return;
+    var mail = t.closest('a[href^="mailto:"]');
+    if (mail) jvTrack("email_click", { to: (mail.getAttribute("href") || "").replace(/^mailto:/, "").split("?")[0] });
     var cal = t.closest("[data-jv-calendly]");
     if (cal) {
       e.preventDefault();
@@ -160,13 +266,18 @@
     if (trk) jvTrack(trk.getAttribute("data-jv-track"), { info: trk.getAttribute("data-jv-info") || "" });
   }, true);
 
-  window.jsvCommon = { track: jvTrack, openCalendly: open, closeCalendly: close };
+  window.jsvCommon = { track: jvTrack, openCalendly: open, closeCalendly: close, wireLeadForms: initLeadForm };
 
-  /* boot */
-  initClarity();
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initClarity);
-  } else {
+  /* boot — analytics layers + lead forms */
+  function boot() {
+    initGA4();
+    initGTM();
     initClarity();
+    initLeadForm();
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
   }
 })();

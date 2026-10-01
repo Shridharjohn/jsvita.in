@@ -5,5 +5,7 @@ Disallow: /admin.html
 Disallow: /welcome
 Disallow: /welcome.html
 Disallow: /dashboard
+Disallow: /thankyou
+Disallow: /thankyou.html
 
 Sitemap: https://jsvita.in/sitemap.xml
