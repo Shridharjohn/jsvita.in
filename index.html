@@ -557,6 +557,120 @@ header nav a[href^="#"]::after {
   .jv-inf-nav a { transition: none !important; }
 }
 
+/* ---- 30f. Why / Process / Stats / Network / FAQ bands ---- */
+.jv-band-dark {
+  background: linear-gradient(160deg, #0b0a08 0%, #141009 55%, #0b0a08 100%);
+  border-radius: 28px;
+  box-shadow: inset 0 1px 0 rgba(247, 215, 116, 0.14), 0 24px 60px rgba(0, 0, 0, 0.25);
+}
+html:not(.dark) .jv-band-dark .jsv-band-title { background: linear-gradient(100deg, #fdf8ec, #f7d774 30%, #e9c860 55%, #f3e5ab); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+html:not(.dark) .jv-band-dark .jsv-band-sub, html:not(.dark) .jv-band-dark .jsv-band-eyebrow { color: #b9ad99; }
+/* process steps */
+.jsv-proc-grid { display: grid; gap: 14px; grid-template-columns: repeat(2, 1fr); }
+.jsv-proc-step {
+  display: flex; gap: 16px; align-items: flex-start;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(212, 175, 55, 0.16);
+  border-radius: 18px;
+  padding: 20px 22px;
+  transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1), border-color 0.35s ease, background 0.35s ease;
+}
+.jsv-proc-step:hover { transform: translateY(-3px); border-color: rgba(247, 215, 116, 0.4); background: rgba(247, 215, 116, 0.06); }
+.jsv-proc-num {
+  font-family: "JetBrains Mono Variable", "JetBrains Mono", monospace;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.08em;
+  color: #0d0b07; background: linear-gradient(135deg, #f7d774, #d4af37);
+  width: 40px; height: 40px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  flex: 0 0 auto; box-shadow: 0 6px 18px rgba(212, 175, 55, 0.3);
+}
+.jsv-proc-step h3 { font-family: "Playfair Display", Georgia, serif; font-size: 1.05rem; font-weight: 700; color: #f3e5ab; }
+.jsv-proc-step p { margin-top: 5px; font-size: 0.9rem; line-height: 1.6; color: #b9ad99; }
+html:not(.dark) .jsv-proc-step { background: #fff; border-color: rgba(184, 134, 11, 0.22); }
+html:not(.dark) .jsv-proc-step p { color: #574e45; }
+html:not(.dark) .jsv-proc-step h3 { color: #241a05; }
+/* premium stats */
+.jsv-stat-grid { display: grid; gap: 14px; grid-template-columns: repeat(4, 1fr); }
+.jsv-stat-card {
+  text-align: center; padding: 30px 14px 26px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(212, 175, 55, 0.18);
+  border-radius: 20px;
+  transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1), border-color 0.35s ease;
+}
+.jsv-stat-card:hover { transform: translateY(-4px); border-color: rgba(247, 215, 116, 0.45); }
+.jsv-stat-num {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2.4rem, 4.5vw, 3.4rem); font-weight: 800; line-height: 1;
+  background: linear-gradient(100deg, #fdf8ec, #f7d774 35%, #d4af37 60%, #f3e5ab);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.jsv-stat-label { margin-top: 10px; font-size: 0.82rem; letter-spacing: 0.04em; color: #b9ad99; }
+html:not(.dark) .jsv-stat-label { color: #574e45; }
+/* network card */
+.jsv-net-card {
+  display: flex; gap: 22px; align-items: flex-start;
+  max-width: 720px; margin: 0 auto;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 22px; padding: 26px 28px;
+  transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1), border-color 0.35s ease;
+}
+.jsv-net-card:hover { transform: translateY(-3px); border-color: rgba(247, 215, 116, 0.42); }
+.jsv-net-avatar {
+  width: 64px; height: 64px; border-radius: 50%; flex: 0 0 auto;
+  display: flex; align-items: center; justify-content: center;
+  font-family: "Playfair Display", Georgia, serif; font-size: 1.6rem; font-weight: 800; color: #0d0b07;
+  background: linear-gradient(135deg, #f7d774, #d4af37 60%, #b8860b);
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.35);
+}
+.jsv-net-body h3 { font-family: "Playfair Display", Georgia, serif; font-size: 1.3rem; font-weight: 800; color: #f3e5ab; }
+.jsv-net-role { font-family: "JetBrains Mono Variable", "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.24em; color: #d4af37; }
+.jsv-net-body p { margin-top: 7px; font-size: 0.92rem; line-height: 1.65; color: #b9ad99; }
+.jsv-net-body .jsv-wc-tags { margin-top: 12px; }
+.jsv-net-note { margin: 14px auto 0; max-width: 720px; text-align: center; font-size: 0.8rem; color: #8d8275; }
+html:not(.dark) .jsv-net-card { background: #fff; border-color: rgba(184, 134, 11, 0.25); }
+html:not(.dark) .jsv-net-body p, html:not(.dark) .jsv-net-note { color: #574e45; }
+html:not(.dark) .jsv-net-body h3 { color: #241a05; }
+/* FAQ */
+.jsv-faq-list { max-width: 760px; margin: 0 auto; display: grid; gap: 10px; }
+.jsv-faq-item {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(212, 175, 55, 0.16);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+}
+.jsv-faq-item[open] { border-color: rgba(247, 215, 116, 0.4); }
+.jsv-faq-item summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  padding: 16px 20px;
+  font-family: "DM Sans Variable", system-ui, sans-serif; font-size: 0.95rem; font-weight: 600; color: #e8e0d0;
+}
+.jsv-faq-item summary::-webkit-details-marker { display: none; }
+.jsv-faq-x { position: relative; width: 14px; height: 14px; flex: 0 0 auto; }
+.jsv-faq-x::before, .jsv-faq-x::after {
+  content: ""; position: absolute; background: #d4af37; border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.jsv-faq-x::before { left: 0; top: 6px; width: 14px; height: 2px; }
+.jsv-faq-x::after { left: 6px; top: 0; width: 2px; height: 14px; }
+.jsv-faq-item[open] .jsv-faq-x::after { transform: scaleY(0); opacity: 0; }
+.jsv-faq-item > p { padding: 0 20px 18px; font-size: 0.9rem; line-height: 1.7; color: #b9ad99; }
+html:not(.dark) .jsv-faq-item { background: #fff; border-color: rgba(184, 134, 11, 0.2); }
+html:not(.dark) .jsv-faq-item summary { color: #241a05; }
+html:not(.dark) .jsv-faq-item > p { color: #574e45; }
+@media (max-width: 1080px) { .jsv-stat-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 720px) {
+  .jsv-proc-grid { grid-template-columns: 1fr; }
+  .jsv-stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .jsv-net-card { flex-direction: column; padding: 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .jsv-proc-step, .jsv-stat-card, .jsv-net-card { transition: none !important; }
+}
+
 /* ---------- 2d. Navbar brand = logo only (wordmark retired) ---------- */
 header [data-testid="logo-wordmark"],
 header [data-testid="brand-link"] .font-mono {
@@ -2413,6 +2527,8 @@ html:not(.dark) .jsv-bi { color: #8a6d1f; border-color: rgba(150,110,20,.35); ba
         '<a href="#about">About</a>' +
         '<a href="#work">Work</a>' +
         '<a href="#services">Services</a>' +
+        '<a href="#process">Process</a>' +
+        '<a href="#faq">FAQ</a>' +
         '<a href="/connect">Contact</a>' +
       '</nav>' +
       '<div class="jv-inf-legal">' +
@@ -2591,6 +2707,189 @@ html:not(.dark) .jsv-bi { color: #8a6d1f; border-color: rgba(150,110,20,.35); ba
     return true;
   }
 
+  /* ---- Why Choose JSVita — differentiators (after Work, before Skills) ---- */
+  var ICO_PRICE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1"/></svg>';
+  function initWhy() {
+    if (window.__jsvWhy) return true;
+    var skills = document.getElementById("skills");
+    if (!skills) return false;
+    window.__jsvWhy = true;
+    var sec = document.createElement("section");
+    sec.id = "why";
+    sec.className = "scroll-mt-20 border-t border-border/70 jsv-reveal";
+    sec.setAttribute("data-testid", "why-jsvita");
+    sec.setAttribute("aria-label", "Why choose JSVita");
+    function why(ico, t, p) {
+      return '<article class="jsv-story-card"><span class="jsv-bi" aria-hidden="true">' + ico + '</span><h3>' + t + '</h3><p>' + p + '</p></article>';
+    }
+    sec.innerHTML = '<div class="jv-band">' +
+      bandHead("WHY JSVITA", "Why businesses choose JSVita", "Not a freelancer. Not an agency. A premium digital partner.") +
+      '<div class="jsv-story-grid">' +
+      why(ICO_CODE, "End-to-end delivery", "One partner from domain to launch — nothing lost between vendors, nothing outsourced to chance.") +
+      why(ICO_SHIELD, "Operations-grade reliability", "Built by a working operator: audit-ready habits, checklists and zero-miss handovers.") +
+      why(ICO_PRICE, "Transparent pricing", "Fixed, itemised proposals. You approve every line before work begins — no hourly meters.") +
+      why(ICO_AI, "AI-native workflows", "Automation and assistants built in where they save real hours — never as a gimmick.") +
+      why(ICO_USER, "Personal accountability", "You work directly with the founder — no account managers, no relays, no dilution.") +
+      why(ICO_GEM, "The luxury standard", "Every pixel, interaction and word finished to the JSVita gold standard.") +
+      '</div></div>';
+    skills.parentNode.insertBefore(sec, skills);
+    revealIO(sec);
+    return true;
+  }
+
+  /* ---- Client Process — how an engagement runs (before Contact) ---- */
+  function initProcess() {
+    if (window.__jsvProc) return true;
+    var contact = document.getElementById("contact");
+    if (!contact) return false;
+    window.__jsvProc = true;
+    var steps = [
+      ["Discovery", "A focused call to understand your business, goals and constraints."],
+      ["Proposal", "A fixed, itemised scope with timeline and transparent pricing."],
+      ["Design & Build", "Design, development and content — reviewed with you at every milestone."],
+      ["Launch", "Domain, hosting, email and analytics configured; your brand goes live."],
+      ["Support", "Post-launch care, updates and growth — on retainer or on demand."]
+    ];
+    var rows = steps.map(function (s, i) {
+      return '<div class="jsv-proc-step"><span class="jsv-proc-num">0' + (i + 1) + '</span><div><h3>' + s[0] + '</h3><p>' + s[1] + '</p></div></div>';
+    }).join("");
+    var sec = document.createElement("section");
+    sec.id = "process";
+    sec.className = "scroll-mt-20 border-t border-border/70 jsv-reveal";
+    sec.setAttribute("data-testid", "client-process");
+    sec.setAttribute("aria-label", "Client process");
+    sec.innerHTML = '<div class="jv-band">' +
+      bandHead("CLIENT PROCESS", "From first call to launch", "Five steps. Zero ambiguity.") +
+      '<div class="jsv-proc-grid">' + rows + '</div></div>';
+    contact.parentNode.insertBefore(sec, contact);
+    revealIO(sec);
+    return true;
+  }
+
+  /* ---- Premium Statistics — JSVita by the numbers (after Process) ---- */
+  function initPremiumStats() {
+    if (window.__jsvPStats) return true;
+    var proc = document.getElementById("process");
+    if (!proc) return false;
+    window.__jsvPStats = true;
+    var data = [
+      [6, "", "Service lines, one standard"],
+      [48, "h", "From kickoff to first demo"],
+      [100, "%", "Bespoke builds — never templates"],
+      [24, "h", "Response window, always on"]
+    ];
+    var cards = data.map(function (d, i) {
+      return '<div class="jsv-stat-card"><p class="jsv-stat-num" data-count="' + d[0] + '" data-suffix="' + d[1] + '">0</p><p class="jsv-stat-label">' + d[2] + '</p></div>';
+    }).join("");
+    var sec = document.createElement("section");
+    sec.id = "jsv-stats";
+    sec.className = "scroll-mt-20 jsv-reveal";
+    sec.setAttribute("data-testid", "jsvita-statistics");
+    sec.setAttribute("aria-label", "JSVita statistics");
+    sec.innerHTML = '<div class="jv-band jv-band-dark">' +
+      bandHead("JSVITA IN NUMBERS", "Premium by the numbers", "A small studio with an enterprise work ethic.") +
+      '<div class="jsv-stat-grid">' + cards + '</div></div>';
+    proc.parentNode.insertBefore(sec, proc.nextSibling);
+    revealIO(sec);
+    /* count-up when visible */
+    var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        io.disconnect();
+        sec.querySelectorAll(".jsv-stat-num").forEach(function (el) {
+          var target = parseInt(el.getAttribute("data-count"), 10);
+          var suffix = el.getAttribute("data-suffix") || "";
+          if (reduced) { el.textContent = target + suffix; return; }
+          var t0 = null;
+          (function tick(ts) {
+            if (!t0) t0 = ts;
+            var k = Math.min(1, (ts - t0) / 1300);
+            k = 1 - Math.pow(1 - k, 3);
+            el.textContent = Math.round(target * k) + suffix;
+            if (k < 1) requestAnimationFrame(tick);
+          })(0);
+          requestAnimationFrame(function tick(ts) {
+          });
+        });
+      });
+    }, { threshold: 0.3 });
+    io.observe(sec);
+    return true;
+  }
+
+  /* ---- Professional Network — trusted specialists (CA Mahalakshmi) ---- */
+  function initNetwork() {
+    if (window.__jsvNet) return true;
+    var contact = document.getElementById("contact");
+    if (!contact) return false;
+    window.__jsvNet = true;
+    var sec = document.createElement("section");
+    sec.id = "network";
+    sec.className = "scroll-mt-20 border-t border-border/70 jsv-reveal";
+    sec.setAttribute("data-testid", "professional-network");
+    sec.setAttribute("aria-label", "Professional network");
+    sec.innerHTML = '<div class="jv-band">' +
+      bandHead("PROFESSIONAL NETWORK", "Specialists on call. A brand you can trust.", "JSVita builds the digital layer — and brings verified professionals for everything around it.") +
+      '<div class="jsv-net-card">' +
+        '<div class="jsv-net-avatar" aria-hidden="true">M</div>' +
+        '<div class="jsv-net-body">' +
+          '<p class="jsv-net-role">CHARTERED ACCOUNTANT · TRUSTED ADVISOR</p>' +
+          '<h3>CA Mahalakshmi</h3>' +
+          '<p>Guides JSVita clients through business registration, taxation and compliance — so new ventures start clean and stay clean from day one.</p>' +
+          '<div class="jsv-wc-tags"><span>Taxation</span><span>Compliance</span><span>Business Registration</span></div>' +
+        '</div>' +
+      '</div>' +
+      '<p class="jsv-net-note">Introductions are made freely to active JSVita clients.</p>' +
+      '</div>';
+    contact.parentNode.insertBefore(sec, contact);
+    revealIO(sec);
+    return true;
+  }
+
+  /* ---- FAQ — premium accordions (before Contact) ---- */
+  function initFaq() {
+    if (window.__jsvFaq) return true;
+    var contact = document.getElementById("contact");
+    if (!contact) return false;
+    window.__jsvFaq = true;
+    var qa = [
+      ["What does a JSVita project cost?", "Every build is scoped individually. After a short discovery call you receive a fixed, itemised proposal — no hourly meters, no surprise invoices."],
+      ["How long does a typical project take?", "Most websites launch within days of kickoff, not months. You get a clear timeline in the proposal and progress demos at every milestone."],
+      ["Do you handle domain, hosting and email?", "Yes — end to end. Domain registration, hosting, SSL and professional mailboxes on your own domain are set up and handed over fully owned by you."],
+      ["Can AI actually help my business?", "Used correctly, AI removes repetitive work — enquiries, scheduling, records. JSVita integrates it only where it pays for itself."],
+      ["Do you only work with Bangalore businesses?", "No. JSVita works remotely with clients anywhere; on-ground meetings can be arranged in and around Bangalore."],
+      ["How do payments work?", "A simple milestone split agreed up front — beginning, mid-build and launch. You always know what is due and when."]
+    ];
+    var items = qa.map(function (q, i) {
+      return '<details class="jsv-faq-item"' + (i === 0 ? " open" : "") + '><summary>' + q[0] + '<span class="jsv-faq-x" aria-hidden="true"></span></summary><p>' + q[1] + '</p></details>';
+    }).join("");
+    var sec = document.createElement("section");
+    sec.id = "faq";
+    sec.className = "scroll-mt-20 border-t border-border/70 jsv-reveal";
+    sec.setAttribute("data-testid", "faq");
+    sec.setAttribute("aria-label", "Frequently asked questions");
+    sec.innerHTML = '<div class="jv-band">' +
+      bandHead("FAQ", "Answers, before you ask", "Everything most clients want to know before the first call.") +
+      '<div class="jsv-faq-list">' + items + '</div></div>';
+    contact.parentNode.insertBefore(sec, contact);
+    /* FAQPage structured data for search */
+    try {
+      var ld = document.createElement("script");
+      ld.type = "application/ld+json";
+      ld.textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": qa.map(function (q) {
+          return { "@type": "Question", "name": q[0], "acceptedAnswer": { "@type": "Answer", "text": q[1] } };
+        })
+      });
+      document.head.appendChild(ld);
+    } catch (e) {}
+    revealIO(sec);
+    return true;
+  }
+
   function run() {
     var s1 = step1(), s2 = step2(), s3 = step3(), s4 = step4(), s5 = step5();
     var s6 = step6();
@@ -2609,8 +2908,8 @@ html:not(.dark) .jsv-bi { color: #8a6d1f; border-color: rgba(150,110,20,.35); ba
     })(20);
     /* brand bands depend on React sections — retry until mounted, then keep the nav link alive */
     (function bandLoop(tries) {
-      var a = initStory(), w = initWork(), v = initServices();
-      if (a && w && v && tries < 28) return;
+      var a = initStory(), w = initWork(), v = initServices(), y = initWhy(), p = initProcess(), t = initPremiumStats(), n = initNetwork(), f = initFaq();
+      if (a && w && v && y && p && t && n && f && tries < 28) return;
       if (tries > 0) setTimeout(function () { bandLoop(tries - 1); }, 350);
     })(30);
     return s1 && s2 && s3 && s4 && s5 && s6;
