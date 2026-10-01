@@ -6,22 +6,22 @@
     <link rel="icon" type="image/svg+xml" href="/jsvita-logo.svg" />
   <link rel="manifest" href="/manifest.json" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <meta name="theme-color" content="#b8860b" />
+    <meta name="theme-color" content="#050505" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Portfolio of Shridhar John — Bangalore-based cafe and operations manager with 3+ years across hospitality, retail operations, and team leadership."
+      content="JSVita is the premium technology brand by Shridhar John — creating luxury web experiences, AI solutions and digital innovation. Web Development • AI Solutions • Digital Innovation."
     />
     <meta name="author" content="Shridhar John" />
     <link rel="canonical" href="https://jsvita.in/" />
 
     <!-- Open Graph / social preview -->
-    <meta property="og:type" content="profile" />
-    <meta property="og:site_name" content="Shridhar John" />
-    <meta property="og:title" content="Shridhar John — Cafe & Operations Manager" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="JSVita" />
+    <meta property="og:title" content="JSVita — Building Digital Excellence" />
     <meta
       property="og:description"
-      content="Bangalore-based cafe and operations manager with 3+ years across hospitality, retail operations, inventory management, and team leadership."
+      content="Premium digital experiences by Shridhar John. Web Development • AI Solutions • Digital Innovation — jsvita.in."
     />
     <meta property="og:url" content="https://jsvita.in/" />
     <meta
@@ -30,7 +30,7 @@
     />
     <meta property="og:image:alt" content="JSVita — official logo" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Shridhar John — Cafe & Operations Manager" />
+    <meta name="twitter:title" content="JSVita — Building Digital Excellence" />
     <meta
       name="twitter:description"
       content="Bangalore-based cafe and operations manager with 3+ years across hospitality, retail operations, and team leadership."
@@ -39,7 +39,7 @@
       name="twitter:image"
       content="https://jsvita.in/jsvita-og.png"
     />
-    <title>Shridhar John — Hospitality Operations Leader | Entrepreneur</title>
+    <title>JSVita — Building Digital Excellence | Shridhar John</title>
     <script type="module" crossorigin src="/assets/index-BUFmtw49.js?v=8"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-DYG8YA2s.css">
   <style data-theme="obsidian-ember">
@@ -1667,6 +1667,271 @@ html:not(.dark) .jsv-nav-view:hover { color: #241a05 !important; }
 @media (prefers-reduced-motion: reduce) {
   .jv-logo, header nav a[href^="#"] { transition: none; }
 }
+/* ============================================================
+   30. Brand bands — hero headline/CTAs + Story + Work + Services
+   ============================================================ */
+/* hero headline + subheadline (brand positioning) */
+.jsv-hero-headline {
+  margin: 18px 0 0;
+  font-family: "Playfair Display Variable", "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(1.65rem, 3.4vw, 2.5rem);
+  line-height: 1.14;
+  letter-spacing: .005em;
+  color: #f7f1e8;
+}
+.jsv-hero-headline .jv-grad-gold {
+  background: linear-gradient(100deg, #f7d774 0%, #d4af37 42%, #f3e5ab 68%, #b8860b 100%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.jsv-fade-d3b { animation-delay: .46s; }
+.jsv-hero-subline {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 10px;
+  margin: 14px 0 0;
+  font-family: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+  font-size: clamp(.62rem, 1.5vw, .74rem);
+  font-weight: 500; letter-spacing: .22em; text-transform: uppercase;
+  color: #b9a26a;
+}
+.jsv-hero-subline i { width: 22px; height: 1px; flex: none; background: linear-gradient(90deg, transparent, #d4af37, transparent); }
+.jsv-fade-d3c { animation-delay: .58s; }
+
+/* premium CTA row */
+.jsv-hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
+.jsv-cta {
+  position: relative; overflow: hidden; isolation: isolate;
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 13px 26px; border-radius: 999px;
+  font-family: "DM Sans Variable", system-ui, sans-serif;
+  font-size: .95rem; font-weight: 700; letter-spacing: .02em; text-decoration: none;
+  transition: transform .3s cubic-bezier(.22,.61,.36,1), box-shadow .3s ease, border-color .3s ease;
+  will-change: transform;
+}
+.jsv-cta svg { width: 17px; height: 17px; transition: transform .3s cubic-bezier(.22,.61,.36,1); }
+.jsv-cta:hover { transform: translateY(-2px) scale(1.02); }
+.jsv-cta:active { transform: translateY(0) scale(.97); }
+.jsv-cta-gold {
+  color: #120c02;
+  border: 1px solid rgba(247,215,116,.65);
+  background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 38%, #aa771c 72%, #e9cf7d 100%);
+  box-shadow: 0 10px 28px -10px rgba(212,175,55,.55), 0 2px 8px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.35);
+}
+.jsv-cta-gold:hover { box-shadow: 0 16px 40px -12px rgba(212,175,55,.7), 0 2px 10px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.4); }
+.jsv-cta-gold:hover svg { transform: translateY(2px); }
+.jsv-cta-ghost {
+  color: #f7f1e8;
+  border: 1px solid rgba(212,175,55,.42);
+  background: rgba(10,10,10,.5);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px -12px rgba(0,0,0,.6);
+}
+.jsv-cta-ghost:hover { border-color: rgba(247,215,116,.75); box-shadow: 0 12px 32px -12px rgba(212,175,55,.35); }
+.jsv-cta-ghost:hover svg { transform: translateX(3px); }
+.jsv-cta-rip {
+  position: absolute; border-radius: 50%; pointer-events: none; z-index: 1;
+  background: radial-gradient(circle, rgba(247,215,116,.45) 0%, rgba(247,215,116,0) 62%);
+  transform: scale(0); animation: jsvSoRip .7s ease-out forwards;
+}
+
+/* shared band layout */
+.jv-band { max-width: 72rem; margin: 0 auto; padding: 64px 20px 72px; }
+.jsv-band-head { text-align: center; max-width: 640px; margin: 0 auto 44px; }
+.jsv-band-eyebrow {
+  margin: 0 0 14px;
+  font-family: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+  font-size: .68rem; font-weight: 600; letter-spacing: .34em; text-transform: uppercase;
+  color: #d4af37;
+}
+.jsv-band-title {
+  margin: 0 0 12px;
+  font-family: "Playfair Display Variable", "Playfair Display", Georgia, serif;
+  font-weight: 800;
+  font-size: clamp(1.8rem, 4.6vw, 2.7rem);
+  line-height: 1.1; letter-spacing: .01em;
+  background: linear-gradient(100deg, #fdf8ec 0%, #f7d774 24%, #d4af37 50%, #f0d57c 68%, #b8860b 86%, #f3e5ab 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  animation: jvCtSheen 8s ease-in-out 1.2s infinite;
+}
+.jsv-band-sub { margin: 0; color: #a89f8d; font-size: 1.02rem; line-height: 1.6; }
+
+/* thin-line gold icon chip (shared) */
+.jsv-bi {
+  display: inline-grid; place-items: center;
+  width: 46px; height: 46px; border-radius: 14px; flex: none;
+  color: #e9cf7d;
+  border: 1px solid rgba(212,175,55,.32);
+  background: linear-gradient(160deg, rgba(212,175,55,.12), rgba(212,175,55,.03));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+  transition: transform .35s cubic-bezier(.22,.61,.36,1), box-shadow .35s ease, border-color .35s ease;
+}
+.jsv-bi svg { width: 22px; height: 22px; }
+
+/* ---- story band (About) ---- */
+.jsv-story { max-width: 72rem; margin: 0 auto; padding: 0 20px 8px; }
+.jsv-story-grid { display: grid; gap: 16px; grid-template-columns: repeat(4, 1fr); }
+.jsv-story-card {
+  position: relative;
+  padding: 24px 22px;
+  border-radius: 18px;
+  border: 1px solid rgba(212,175,55,.2);
+  background: linear-gradient(180deg, rgba(212,175,55,.055), rgba(10,10,10,.25));
+  transition: transform .4s cubic-bezier(.22,.61,.36,1), border-color .4s ease, box-shadow .4s ease;
+  will-change: transform;
+}
+.jsv-story-card h3 {
+  margin: 16px 0 8px;
+  font-family: "DM Sans Variable", system-ui, sans-serif;
+  font-size: 1.02rem; font-weight: 700; letter-spacing: .01em; color: #f3ecdd;
+}
+.jsv-story-card p { margin: 0; color: #a89f8d; font-size: .92rem; line-height: 1.62; }
+.jsv-story-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(247,215,116,.5);
+  box-shadow: 0 18px 40px -18px rgba(212,175,55,.28), 0 4px 14px rgba(0,0,0,.35);
+}
+.jsv-story-card:hover .jsv-bi { transform: translateY(-2px) scale(1.06); border-color: rgba(247,215,116,.6); box-shadow: 0 8px 22px -8px rgba(212,175,55,.4); }
+
+/* ---- selected work band ---- */
+.jsv-work-grid { display: grid; gap: 16px; grid-template-columns: repeat(2, 1fr); }
+.jsv-work-card {
+  position: relative; overflow: hidden;
+  padding: 26px 26px 22px;
+  border-radius: 20px;
+  border: 1px solid rgba(212,175,55,.2);
+  background: linear-gradient(180deg, rgba(212,175,55,.05), rgba(10,10,10,.3));
+  transition: transform .4s cubic-bezier(.22,.61,.36,1), border-color .4s ease, box-shadow .4s ease;
+  will-change: transform;
+}
+.jsv-work-card::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(115deg, transparent 42%, rgba(247,215,116,.09) 50%, transparent 58%);
+  transform: translateX(-120%);
+  transition: transform .9s ease;
+}
+.jsv-work-card:hover::after { transform: translateX(120%); }
+.jsv-work-card h3 {
+  margin: 0 0 8px;
+  font-family: "Playfair Display Variable", "Playfair Display", Georgia, serif;
+  font-size: 1.34rem; font-weight: 700; letter-spacing: .01em; color: #f3ecdd;
+}
+.jsv-work-card p { margin: 0 0 18px; color: #a89f8d; font-size: .95rem; line-height: 1.62; }
+.jsv-wc-top { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 14px; }
+.jsv-wc-num {
+  font-family: "Playfair Display Variable", "Playfair Display", Georgia, serif;
+  font-size: 1.9rem; font-weight: 800; line-height: 1;
+  background: linear-gradient(180deg, #f3e5ab, #aa771c);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  opacity: .9;
+}
+.jsv-wc-kind {
+  font-family: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+  font-size: .58rem; font-weight: 600; letter-spacing: .28em; color: #b9a26a;
+  padding: 5px 10px; border-radius: 999px;
+  border: 1px solid rgba(212,175,55,.28);
+}
+.jsv-wc-flag { border-color: rgba(247,215,116,.38); }
+.jsv-wc-flag .jsv-wc-kind { color: #f7d774; border-color: rgba(247,215,116,.45); }
+.jsv-wc-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.jsv-wc-tags span {
+  font-size: .72rem; font-weight: 500; letter-spacing: .04em; color: #c8bfa8;
+  padding: 4px 11px; border-radius: 999px;
+  border: 1px solid rgba(212,175,55,.18);
+  background: rgba(212,175,55,.06);
+}
+.jsv-work-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(247,215,116,.5);
+  box-shadow: 0 20px 44px -18px rgba(212,175,55,.3), 0 4px 14px rgba(0,0,0,.35);
+}
+
+/* ---- services band ---- */
+.jsv-svc-grid { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); }
+.jsv-svc-card {
+  position: relative;
+  padding: 26px 24px;
+  border-radius: 20px;
+  border: 1px solid rgba(212,175,55,.2);
+  background: linear-gradient(180deg, rgba(212,175,55,.05), rgba(10,10,10,.3));
+  transition: transform .4s cubic-bezier(.22,.61,.36,1), border-color .4s ease, box-shadow .4s ease;
+  will-change: transform;
+}
+.jsv-svc-card h3 {
+  margin: 16px 0 8px;
+  font-family: "DM Sans Variable", system-ui, sans-serif;
+  font-size: 1.06rem; font-weight: 700; letter-spacing: .01em; color: #f3ecdd;
+}
+.jsv-svc-card p { margin: 0; color: #a89f8d; font-size: .92rem; line-height: 1.62; }
+.jsv-svc-card::before {
+  content: ""; position: absolute; left: 24px; right: 24px; top: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(247,215,116,.55), transparent);
+  opacity: 0; transition: opacity .4s ease;
+}
+.jsv-svc-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(247,215,116,.5);
+  box-shadow: 0 18px 40px -18px rgba(212,175,55,.28), 0 4px 14px rgba(0,0,0,.35);
+}
+.jsv-svc-card:hover::before { opacity: 1; }
+.jsv-svc-card:hover .jsv-bi { transform: translateY(-2px) scale(1.06); border-color: rgba(247,215,116,.6); }
+
+/* staggered reveal for band children */
+.jsv-story.jsv-reveal .jsv-story-card,
+.jsv-reveal .jsv-work-card,
+.jsv-reveal .jsv-svc-card {
+  opacity: 0; transform: translateY(26px);
+  transition: opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1), border-color .4s ease, box-shadow .4s ease;
+}
+.jsv-story.jsv-in .jsv-story-card:nth-child(1), .jsv-in .jsv-work-card:nth-child(1), .jsv-in .jsv-svc-card:nth-child(1) { transition-delay: .05s; }
+.jsv-story.jsv-in .jsv-story-card:nth-child(2), .jsv-in .jsv-work-card:nth-child(2), .jsv-in .jsv-svc-card:nth-child(2) { transition-delay: .14s; }
+.jsv-story.jsv-in .jsv-story-card:nth-child(3), .jsv-in .jsv-work-card:nth-child(3), .jsv-in .jsv-svc-card:nth-child(3) { transition-delay: .23s; }
+.jsv-story.jsv-in .jsv-story-card:nth-child(4), .jsv-in .jsv-work-card:nth-child(4), .jsv-in .jsv-svc-card:nth-child(4) { transition-delay: .32s; }
+.jsv-in .jsv-work-card, .jsv-in .jsv-svc-card, .jsv-story.jsv-in .jsv-story-card { opacity: 1; transform: translateY(0); }
+.jsv-reveal .jsv-band-head { opacity: 0; transform: translateY(20px); transition: opacity .7s ease .05s, transform .7s ease .05s; }
+.jsv-reveal.jsv-in .jsv-band-head { opacity: 1; transform: translateY(0); }
+
+/* ---- light theme symmetry ---- */
+html:not(.dark) .jsv-hero-headline { color: #2a2118; }
+html:not(.dark) .jsv-hero-subline { color: #8a6d1f; }
+html:not(.dark) .jsv-cta-gold { color: #221703; }
+html:not(.dark) .jsv-cta-ghost { color: #2a2118; background: rgba(255,255,255,.6); }
+html:not(.dark) .jsv-band-sub { color: #6b6154; }
+html:not(.dark) .jsv-story-card,
+html:not(.dark) .jsv-work-card,
+html:not(.dark) .jsv-svc-card {
+  background: linear-gradient(180deg, rgba(212,175,55,.08), rgba(255,255,255,.55));
+  border-color: rgba(150,110,20,.28);
+}
+html:not(.dark) .jsv-story-card h3,
+html:not(.dark) .jsv-work-card h3,
+html:not(.dark) .jsv-svc-card h3 { color: #2a2118; }
+html:not(.dark) .jsv-story-card p,
+html:not(.dark) .jsv-work-card p,
+html:not(.dark) .jsv-svc-card p { color: #6b6154; }
+html:not(.dark) .jsv-wc-tags span { color: #6d5a22; background: rgba(212,175,55,.12); border-color: rgba(150,110,20,.25); }
+html:not(.dark) .jsv-wc-kind { color: #8a6d1f; }
+html:not(.dark) .jsv-bi { color: #8a6d1f; border-color: rgba(150,110,20,.35); background: linear-gradient(160deg, rgba(212,175,55,.16), rgba(212,175,55,.05)); }
+
+/* ---- responsive ---- */
+@media (max-width: 1080px) {
+  .jsv-svc-grid { grid-template-columns: repeat(2, 1fr); }
+  .jsv-story-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 720px) {
+  .jv-band { padding: 48px 16px 56px; }
+  .jsv-work-grid, .jsv-svc-grid, .jsv-story-grid { grid-template-columns: 1fr; }
+  .jsv-hero-ctas { gap: 10px; }
+  .jsv-cta { flex: 1 1 auto; justify-content: center; padding: 13px 18px; }
+  .jsv-hero-subline { gap: 7px; letter-spacing: .16em; }
+  .jsv-hero-subline i { width: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .jsv-cta, .jsv-story-card, .jsv-work-card, .jsv-svc-card, .jsv-bi, .jsv-cta svg { transition: none !important; }
+  .jsv-cta:hover, .jsv-story-card:hover, .jsv-work-card:hover, .jsv-svc-card:hover { transform: none; }
+  .jsv-work-card::after { display: none; }
+  .jsv-band-title { animation: none; }
+  .jsv-story.jsv-reveal .jsv-story-card, .jsv-reveal .jsv-work-card, .jsv-reveal .jsv-svc-card, .jsv-reveal .jsv-band-head { opacity: 1; transform: none; transition: none; }
+}
 
     </style>
     <script data-pg="hero-premium">(function () {
@@ -1771,7 +2036,7 @@ html:not(.dark) .jsv-nav-view:hover { color: #241a05 !important; }
     '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.1 4.49.71.3 1.27.49 1.7.63.72.23 1.37.2 1.88.12.58-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 1 1 8.38 4.63m8.42-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.15 1.6 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.16-3.47-8.41"/></svg></a>' +
     '<a href="https://www.linkedin.com/in/jsvita" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn — linkedin.com/in/jsvita">' +
     '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z"/></svg></a>' +
-    '<a href="mailto:admin@jsvita.in" aria-label="Email" title="admin@jsvita.in">' +
+    '<a href="mailto:support@jsvita.in" aria-label="Email" title="support@jsvita.in">' +
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>' +
     '<a href="tel:+916361792699" aria-label="Call" title="Call — +91 63617 92699">' +
     '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></a>';
@@ -1791,6 +2056,19 @@ html:not(.dark) .jsv-nav-view:hover { color: #241a05 !important; }
         '<p class="jsv-brand-name">SHRIDHAR JOHN</p>' +
         '<p class="jsv-brand-tag">The Name Behind JSVita.</p>';
       anchor.parentNode.insertBefore(block, anchor.nextSibling);
+      /* brand positioning: headline + subheadline replace the old summary paragraph */
+      if (sub) sub.classList.add("jsv-hero-hide");
+      if (!document.querySelector(".jsv-hero-headline")) {
+        var hl = document.createElement("p");
+        hl.className = "jsv-hero-headline jsv-fade jsv-fade-d3b";
+        hl.innerHTML = 'Creating <span class="jv-grad-gold">Premium Digital</span> Experiences';
+        var sl = document.createElement("p");
+        sl.className = "jsv-hero-subline jsv-fade jsv-fade-d3c";
+        sl.setAttribute("aria-label", "Web Development, AI Solutions, Digital Innovation");
+        sl.innerHTML = '<span>Web Development</span><i aria-hidden="true"></i><span>AI Solutions</span><i aria-hidden="true"></i><span>Digital Innovation</span>';
+        block.parentNode.insertBefore(hl, block);
+        block.parentNode.insertBefore(sl, block);
+      }
       /* letter-by-letter reveal (1.5s total, starts immediately) */
       var word = block.querySelector(".jsv-brand-word");
       var letters = "JSVita".split("");
@@ -1829,13 +2107,36 @@ html:not(.dark) .jsv-nav-view:hover { color: #241a05 !important; }
         }, { passive: true });
       }
     }
-    if (!document.querySelector(".jsv-hero-social")) {
+    /* premium CTA row — Explore JSVita / Start a Project (replaces the old social icon row) */
+    if (!document.querySelector(".jsv-hero-ctas")) {
       var brandBlock = document.querySelector(".jsv-brand-block");
       if (!brandBlock) return false;
-      var soc = document.createElement("div");
-      soc.className = "jsv-hero-social jsv-fade jsv-fade-d5";
-      soc.innerHTML = SOCIAL;
-      brandBlock.parentNode.insertBefore(soc, brandBlock.nextSibling);
+      var ctas = document.createElement("div");
+      ctas.className = "jsv-hero-ctas jsv-fade jsv-fade-d5";
+      ctas.innerHTML =
+        '<a class="jsv-cta jsv-cta-gold" href="#about" data-testid="hero-cta-explore">' +
+          '<span>Explore JSVita</span>' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><polyline points="19 12 12 19 5 12"/></svg>' +
+        '</a>' +
+        '<a class="jsv-cta jsv-cta-ghost" href="#contact" data-testid="hero-cta-start">' +
+          '<span>Start a Project</span>' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>' +
+        '</a>';
+      brandBlock.parentNode.insertBefore(ctas, brandBlock.nextSibling);
+      /* gold ripple from the exact tap point */
+      ctas.addEventListener("pointerdown", function (e) {
+        var b = e.target.closest ? e.target.closest(".jsv-cta") : null;
+        if (!b) return;
+        var r = b.getBoundingClientRect();
+        var s = Math.max(r.width, r.height) * 2;
+        var rip = document.createElement("span");
+        rip.className = "jsv-cta-rip";
+        rip.style.width = rip.style.height = s + "px";
+        rip.style.left = (e.clientX - r.left - s / 2) + "px";
+        rip.style.top = (e.clientY - r.top - s / 2) + "px";
+        b.appendChild(rip);
+        setTimeout(function () { rip.remove(); }, 700);
+      }, { passive: true });
     }
     return true;
   }
@@ -1855,17 +2156,8 @@ html:not(.dark) .jsv-nav-view:hover { color: #241a05 !important; }
 
   /* ---- Step 5: premium contact icon row in the Contact section ---- */
   function step5() {
-    var sec = document.getElementById("contact");
-    if (!sec) return false;
-    if (sec.querySelector(".jsv-hero-social")) return true;
-    var ul = sec.querySelector("ul");
-    if (!ul) return false;
-    var row = document.createElement("div");
-    row.className = "jsv-hero-social jsv-fade jsv-centered";
-    row.style.marginTop = "24px";
-    row.innerHTML = SOCIAL;
-    ul.parentNode.insertBefore(row, ul.nextSibling);
-    return true;
+    /* contact section stays link-free — the glass form is the only call-to-action */
+    return !!document.getElementById("contact");
   }
 
   /* ---- Step 5f: contact section → Luxury JSVita Contact Experience ----
@@ -2084,9 +2376,130 @@ html:not(.dark) .jsv-nav-view:hover { color: #241a05 !important; }
     return true;
   }
 
+  /* ---- Step 8: brand bands — JSVita Story (About), Selected Work, Services ---- */
+  var ICO_USER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>';
+  var ICO_CODE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 6 3 12 8 18"/><polyline points="16 6 21 12 16 18"/><line x1="13.5" y1="4" x2="10.5" y2="20"/></svg>';
+  var ICO_SHIELD = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3.5v5.2c0 5-3.4 9.3-8 11.3-4.6-2-8-6.3-8-11.3V5.5z"/><polyline points="8.8 12 11 14.2 15.4 9.8"/></svg>';
+  var ICO_SPARK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l2.8 2.8M16.2 16.2L19 19M19 5l-2.8 2.8M7.8 16.2L5 19"/><circle cx="12" cy="12" r="3.2"/></svg>';
+  var ICO_MONITOR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>';
+  var ICO_AI = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.6L18 9.4l-4.2 1.8L12 16l-1.8-4.8L6 9.4l4.2-1.8z"/><path d="M19 15l.9 2.3L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.7z"/></svg>';
+  var ICO_GEM = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20"/><path d="M12 21L8 9l4-6 4 6z"/></svg>';
+  var ICO_FLOW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M7.2 6h9.6"/><path d="M6.2 7.8l4.6 8.2M17.8 7.8l-4.6 8.2"/></svg>';
+  var ICO_CARD = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="15" rx="2"/><circle cx="9" cy="11.5" r="2.2"/><path d="M5.8 17.5c.6-1.8 1.7-2.7 3.2-2.7s2.6.9 3.2 2.7"/><path d="M15 9.5h3.5M15 13h3.5"/></svg>';
+  var ICO_TERM = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><polyline points="7 9 10 12 7 15"/><path d="M12 15h5"/></svg>';
+
+  function revealIO(el) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("jsv-in"); io.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    io.observe(el);
+  }
+
+  function bandHead(eyebrow, title, subTxt) {
+    return '<div class="jsv-band-head">' +
+      '<p class="jsv-band-eyebrow">' + eyebrow + '</p>' +
+      '<h2 class="jsv-band-title">' + title + '</h2>' +
+      (subTxt ? '<p class="jsv-band-sub">' + subTxt + '</p>' : '') +
+      '</div>';
+  }
+
+  /* About → the JSVita story: who / what / why trust / vision */
+  function initStory() {
+    if (window.__jsvStory) return true;
+    var about = document.getElementById("about");
+    if (!about) return false;
+    var grid = about.querySelector(":scope > div");
+    if (!grid) return false;
+    window.__jsvStory = true;
+    var d = document.createElement("div");
+    d.className = "jsv-story jsv-reveal";
+    d.setAttribute("data-testid", "jsvita-story");
+    d.innerHTML = bandHead("THE JSVITA STORY", "A luxury technology brand, built on real operations") +
+      '<div class="jsv-story-grid">' +
+      '<article class="jsv-story-card"><span class="jsv-bi" aria-hidden="true">' + ICO_USER + '</span><h3>Who is JSVita</h3><p>The personal technology brand of Shridhar John — where operational discipline meets digital craft.</p></article>' +
+      '<article class="jsv-story-card"><span class="jsv-bi" aria-hidden="true">' + ICO_CODE + '</span><h3>What JSVita does</h3><p>Premium websites, AI-powered workflows and brand systems — engineered end-to-end.</p></article>' +
+      '<article class="jsv-story-card"><span class="jsv-bi" aria-hidden="true">' + ICO_SHIELD + '</span><h3>Why trust JSVita</h3><p>3+ years running real operations — cafes, front offices, recovery teams — with measurable results.</p></article>' +
+      '<article class="jsv-story-card"><span class="jsv-bi" aria-hidden="true">' + ICO_SPARK + '</span><h3>The vision</h3><p>A complete luxury digital ecosystem — every experience deliberate, every detail gold.</p></article>' +
+      '</div>';
+    grid.insertAdjacentElement("afterend", d);
+    revealIO(d);
+    return true;
+  }
+
+  /* Selected Work — case-study presentation of real engagements */
+  function initWork() {
+    if (window.__jsvWork) return true;
+    var skills = document.getElementById("skills");
+    if (!skills) return false;
+    window.__jsvWork = true;
+    var sec = document.createElement("section");
+    sec.id = "work";
+    sec.className = "scroll-mt-20 border-t border-border/70 jsv-reveal";
+    sec.setAttribute("data-testid", "selected-work");
+    sec.setAttribute("aria-label", "Selected work");
+    sec.innerHTML = '<div class="jv-band">' +
+      bandHead("SELECTED WORK", "Case studies from the floor", "Real operations, designed and delivered — the work that set the JSVita standard.") +
+      '<div class="jsv-work-grid">' +
+      '<article class="jsv-work-card"><div class="jsv-wc-top"><span class="jsv-wc-num">01</span><span class="jsv-wc-kind">CASE STUDY</span></div><h3>Cafe ICO Buildout</h3><p>Compact-format cafe designed, staffed and launched inside the Zepto rapid-delivery ecosystem.</p><div class="jsv-wc-tags"><span>Operations</span><span>Launch</span><span>Team Leadership</span></div></article>' +
+      '<article class="jsv-work-card"><div class="jsv-wc-top"><span class="jsv-wc-num">02</span><span class="jsv-wc-kind">CASE STUDY</span></div><h3>Front Office Systems</h3><p>Patient-first hospital reception with zero-miss documentation — calm, quick, exact.</p><div class="jsv-wc-tags"><span>Service Quality</span><span>Documentation</span></div></article>' +
+      '<article class="jsv-work-card"><div class="jsv-wc-top"><span class="jsv-wc-num">03</span><span class="jsv-wc-kind">CASE STUDY</span></div><h3>Hotel Front Desk</h3><p>Guest experience, coordination and recovery at scale across full-house days.</p><div class="jsv-wc-tags"><span>Hospitality</span><span>Guest Experience</span></div></article>' +
+      '<article class="jsv-work-card jsv-wc-flag"><div class="jsv-wc-top"><span class="jsv-wc-num">04</span><span class="jsv-wc-kind">FLAGSHIP</span></div><h3>The JSVita Platform</h3><p>This ecosystem — CV engine, member dashboard and client tooling — designed and engineered end-to-end.</p><div class="jsv-wc-tags"><span>Design</span><span>Engineering</span><span>AI</span></div></article>' +
+      '</div></div>';
+    skills.parentNode.insertBefore(sec, skills);
+    revealIO(sec);
+    return true;
+  }
+
+  /* Services — six disciplines, one standard */
+  function initServices() {
+    if (!window.__jsvSvc) {
+      var contact = document.getElementById("contact");
+      if (!contact) return false;
+      window.__jsvSvc = true;
+      function svc(ico, t, p) {
+        return '<article class="jsv-svc-card"><span class="jsv-bi" aria-hidden="true">' + ico + '</span><h3>' + t + '</h3><p>' + p + '</p></article>';
+      }
+      var sec = document.createElement("section");
+      sec.id = "services";
+      sec.className = "scroll-mt-20 border-t border-border/70 jsv-reveal";
+      sec.setAttribute("data-testid", "services");
+      sec.setAttribute("aria-label", "Services");
+      sec.innerHTML = '<div class="jv-band">' +
+        bandHead("SERVICES", "What JSVita builds", "Six disciplines. One standard: excellence.") +
+        '<div class="jsv-svc-grid">' +
+        svc(ICO_MONITOR, "Website Development", "Fast, elegant, conversion-ready sites — engineered for Chrome, Safari and everything between.") +
+        svc(ICO_AI, "AI Solutions", "Practical AI — automation, assistants and intelligence woven into daily operations.") +
+        svc(ICO_GEM, "Branding & Identity", "Marks, palettes and typography that make a brand impossible to forget.") +
+        svc(ICO_FLOW, "Business Automation", "Menus, inventory, bookings — systems that run themselves while you lead.") +
+        svc(ICO_CARD, "Portfolio Websites", "Executive-grade personal brands that open doors and close opportunities.") +
+        svc(ICO_TERM, "Custom Development", "One-off builds for one-of-a-kind ideas — if you can name it, it ships.") +
+        '</div></div>';
+      contact.parentNode.insertBefore(sec, contact);
+      revealIO(sec);
+    }
+    ensureSvcLink();
+    return true;
+  }
+
+  function ensureSvcLink() {
+    var nav = document.querySelector("header nav");
+    if (!nav) return false;
+    if (nav.querySelector('a[href="#services"]')) return true;
+    var a = document.createElement("a");
+    a.href = "#services";
+    a.setAttribute("data-testid", "nav-services-link");
+    a.className = "text-sm font-medium text-muted-foreground transition-colors hover:text-foreground";
+    a.textContent = "Services";
+    var anchor = nav.querySelector('a[data-testid="nav-contact-link"]') || nav.querySelector('a[href="#contact"]');
+    if (anchor) nav.insertBefore(a, anchor); else nav.appendChild(a);
+    try { window.dispatchEvent(new CustomEvent("jsv:nav-changed")); } catch (e) {}
+    return true;
+  }
+
   function run() {
     var s1 = step1(), s2 = step2(), s3 = step3(), s4 = step4(), s5 = step5();
     var s6 = step6();
+    initStory(); initWork(); initServices();
     initNavSpy(); initStagger(); initStats(); initDust(); initCurrently(); initNavScroll(); initCvAttention();
     paintBrandLogo();
     paintFooterLogo();
@@ -2099,6 +2512,12 @@ html:not(.dark) .jsv-nav-view:hover { color: #241a05 !important; }
       if (paintFooterLogo()) return;
       if (tries > 0) setTimeout(function () { footerLoop(tries - 1); }, 400);
     })(20);
+    /* brand bands depend on React sections — retry until mounted, then keep the nav link alive */
+    (function bandLoop(tries) {
+      var a = initStory(), w = initWork(), v = initServices();
+      if (a && w && v && tries < 28) return;
+      if (tries > 0) setTimeout(function () { bandLoop(tries - 1); }, 350);
+    })(30);
     return s1 && s2 && s3 && s4 && s5 && s6;
   }
 
@@ -2126,7 +2545,7 @@ html:not(.dark) .jsv-nav-view:hover { color: #241a05 !important; }
     setTimeout(function () { pulse("jsv-cv-hello", 1600); }, 1500);
     /* idle attention every 10s — brief, elegant, skipped while the tab is hidden */
     setInterval(function () {
-      if (!document.hidden) pulse("jsv-cv-att", 1400);
+      if (!document.hidden) { pulse("jsv-cv-att", 1400); ensureSvcLink(); }
     }, 10000);
     /* delegated click (capture): icon scale .95 + gold pulse + "Preparing CV…" — download still starts natively */
     document.addEventListener("click", function (e) {
@@ -2198,10 +2617,22 @@ html:not(.dark) .jsv-nav-view:hover { color: #241a05 !important; }
       ind.classList.add("on");
     }
     var map = {};
-    links.forEach(function (a) {
-      var id = a.getAttribute("href").slice(1);
-      var sec = document.getElementById(id);
-      if (sec) map[id] = a;
+    var observed = {};
+    function rebuildMap() {
+      map = {};
+      nav.querySelectorAll("a[href^='#']").forEach(function (a) {
+        var id = a.getAttribute("href").slice(1);
+        if (document.getElementById(id)) map[id] = a;
+      });
+    }
+    function observeAll() {
+      Object.keys(map).forEach(function (k) {
+        if (observed[k]) return;
+        observed[k] = 1;
+        io.observe(document.getElementById(k));
+      });
+    }
+    function bindLink(a) {
       /* comet follows the pointer, then returns to the active link */
       a.addEventListener("pointerenter", function () {
         if (window.matchMedia("(hover: hover)").matches) moveInd(a);
@@ -2210,6 +2641,18 @@ html:not(.dark) .jsv-nav-view:hover { color: #241a05 !important; }
         var act = document.querySelector("header nav a.jsv-active");
         if (act) moveInd(act); else if (ind) ind.classList.remove("on");
       }, { passive: true });
+    }
+    links.forEach(bindLink);
+    rebuildMap();
+    /* bands added later (Services/Work) re-map the comet without a reload */
+    window.addEventListener("jsv:nav-changed", function () {
+      nav.querySelectorAll("a[href^='#']").forEach(function (a) {
+        if (!a.__jsvBound) { a.__jsvBound = 1; bindLink(a); }
+      });
+      rebuildMap();
+      observeAll();
+      var act = nav.querySelector("a.jsv-active");
+      if (act) moveInd(act);
     });
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
@@ -2222,7 +2665,7 @@ html:not(.dark) .jsv-nav-view:hover { color: #241a05 !important; }
         }
       });
     }, { rootMargin: "-35% 0px -55% 0px" });
-    Object.keys(map).forEach(function (k) { io.observe(document.getElementById(k)); });
+    observeAll();
   }
 
   /* ---- Step 5c: staggered children for About/Experience/Skills lists ---- */
@@ -2580,6 +3023,32 @@ html:not(.dark) #jsvDust { opacity:.35; }
 }
 
 </style>
+      <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://jsvita.in/#org",
+          "name": "JSVita",
+          "url": "https://jsvita.in/",
+          "logo": "https://jsvita.in/jsvita-logo.svg",
+          "slogan": "Building Digital Excellence",
+          "email": "support@jsvita.in",
+          "founder": { "@type": "Person", "@id": "https://jsvita.in/#founder", "name": "Shridhar John", "jobTitle": "Founder", "url": "https://jsvita.in/", "sameAs": ["https://www.linkedin.com/in/jsvita"] },
+          "sameAs": ["https://www.linkedin.com/in/jsvita"]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://jsvita.in/#site",
+          "url": "https://jsvita.in/",
+          "name": "JSVita",
+          "inLanguage": "en",
+          "publisher": { "@id": "https://jsvita.in/#org" }
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

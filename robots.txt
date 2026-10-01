@@ -4,4 +4,6 @@ Disallow: /admin
 Disallow: /admin.html
 Disallow: /welcome
 Disallow: /welcome.html
+Disallow: /dashboard
+
 Sitemap: https://jsvita.in/sitemap.xml
