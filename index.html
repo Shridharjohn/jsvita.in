@@ -40,9 +40,7 @@
       content="https://jsvita.in/jsvita-og.png"
     />
     <title>JSVita — Building Digital Excellence | Shridhar John</title>
-    <script type="module" crossorigin src="/assets/index-BUFmtw49.js?v=8"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-DYG8YA2s.css">
-  <style data-theme="obsidian-ember">
+    <style data-theme="obsidian-ember">
 /* ===== Obsidian Ember — premium dark theme ===== */
 html.dark {
   --background:#0b0806; --foreground:#f7f1e8; --card:#14100c; --card-foreground:#f7f1e8;
@@ -2331,6 +2329,8 @@ html:not(.dark) .jsv-bi { color: #8a6d1f; border-color: rgba(150,110,20,.35); ba
         '<a href="/terms">Terms</a>' +
         '<span class="jv-inf-dot" aria-hidden="true"></span>' +
         '<a href="/connect">Contact</a>' +
+        '<span class="jv-inf-dot" aria-hidden="true"></span>' +
+        '<a href="/jsvita/login">Member Login</a>' +
       '</div>';
     var kids = [].slice.call(footer.children);
     kids.forEach(function (k) { k.remove(); });
@@ -3052,19 +3052,5 @@ html:not(.dark) #jsvDust { opacity:.35; }
   </head>
   <body>
     <div id="root"></div>
-  <!-- Members login entry -->
-<script>
-/* JSVita gate v2 — signed-out visitors go to /login; splash removed */
-(function(){
-  try{ if(sessionStorage.getItem('jsgateSkip')==='1'){ sessionStorage.removeItem('jsgateSkip'); return; } }catch(e){}
-  var s=document.createElement("script");s.src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js";document.head.appendChild(s);
-  var s2=document.createElement("script");s2.src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js";s2.onload=boot;document.head.appendChild(s2);
-  function boot(){
-    if(typeof firebase==='undefined') return;
-    try{ firebase.initializeApp({apiKey:'AIzaSyAoEGzAL-WkAGttLArl_PpffJYbOYwc5yE',authDomain:'auth.jsvita.in',projectId:'jsvita-login',storageBucket:'jsvita-login.firebasestorage.app',messagingSenderId:'433927112110',appId:'1:433927112110:web:ad6186be9800780e8d343f'}); }catch(e){}
-    firebase.auth().onAuthStateChanged(function(u){ if(!u){ location.replace('/jsvita/login'); } });
-  }
-})();
-</script>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="jvOffGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F3E5AB"/><stop offset="35%" stop-color="#D4AF37"/><stop offset="70%" stop-color="#AA771C"/><stop offset="100%" stop-color="#F3E5AB"/></linearGradient><linearGradient id="jvOffLin" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#C5A059"/><stop offset="50%" stop-color="#FDF0CD"/><stop offset="100%" stop-color="#C5A059"/></linearGradient></defs></svg></body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="jvOffGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F3E5AB"/><stop offset="35%" stop-color="#D4AF37"/><stop offset="70%" stop-color="#AA771C"/><stop offset="100%" stop-color="#F3E5AB"/></linearGradient><linearGradient id="jvOffLin" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#C5A059"/><stop offset="50%" stop-color="#FDF0CD"/><stop offset="100%" stop-color="#C5A059"/></linearGradient></defs></svg></body>
 </html>
