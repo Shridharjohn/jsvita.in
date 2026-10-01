@@ -2126,6 +2126,28 @@ html:not(.dark) .jsv-bi { color: #8a6d1f; border-color: rgba(150,110,20,.35); ba
   if (window.__jsvHeroV10) return;
   window.__jsvHeroV10 = true;
 
+  /* ---- Dark by default: applied BEFORE any paint — no white flash ----
+     Preference lives in localStorage ("jv-theme"); default = dark. */
+  try {
+    var __t = null;
+    try { __t = localStorage.getItem("jv-theme"); } catch (e) {}
+    if (__t !== "light") {
+      document.documentElement.classList.add("dark");
+      document.documentElement.style.colorScheme = "dark";
+    } else {
+      document.documentElement.style.colorScheme = "light";
+    }
+  } catch (e) {
+    document.documentElement.classList.add("dark");
+    document.documentElement.style.colorScheme = "dark";
+  }
+  /* paint the background immediately so first frame is dark even before CSS variables land */
+  try {
+    var __bg = document.createElement("style");
+    __bg.textContent = "html.dark{background:#1E1813!important}html:not(.dark){background:#FAF6EE}";
+    document.documentElement.appendChild(__bg);
+  } catch (e) {}
+
   /* boot state: hide raw (unstyled) hero until step1/step2 enhance it — prevents old-style flash on refresh.
    * CSS includes a 3s failsafe auto-reveal in case enhancement ever fails. */
   try { document.documentElement.classList.add("jsv-boot"); } catch (e) {}
@@ -3176,6 +3198,15 @@ html:not(.dark) .jsv-bi { color: #8a6d1f; border-color: rgba(150,110,20,.35); ba
       vw.setAttribute("data-testid", "nav-cv-view-icon");
       vw.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><circle cx="9.2" cy="9.5" r="1.4"></circle><path d="M8.5 13.5h7"></path><path d="M8.5 17h5"></path></svg><span>View CV</span>';
       toggle.parentNode.insertBefore(vw, toggle.nextSibling);
+    }
+    /* theme toggle: dark default + localStorage persistence (original handler retired with the bundle) */
+    if (!toggle.dataset.jsvTheme) {
+      toggle.dataset.jsvTheme = "1";
+      toggle.addEventListener("click", function () {
+        var isDark = document.documentElement.classList.toggle("dark");
+        document.documentElement.style.colorScheme = isDark ? "dark" : "light";
+        try { localStorage.setItem("jv-theme", isDark ? "dark" : "light"); } catch (e) {}
+      });
     }
     var a = document.createElement("a");
     a.className = "jsv-nav-cv";
