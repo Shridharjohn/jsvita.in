@@ -14,6 +14,7 @@
     />
     <meta name="author" content="Shridhar John" />
     <link rel="canonical" href="https://jsvita.in/" />
+    <script src="/jsv-common.js" defer></script>
 
     <!-- Open Graph / social preview -->
     <meta property="og:type" content="website" />
@@ -2386,7 +2387,7 @@ html:not(.dark) .jv-quote-mark{color:rgba(176,132,38,.35)}
 .jv-consult-inner{max-width:680px;margin:0 auto;text-align:center}
 .jv-consult-points{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;margin:22px 0 0;padding:0;list-style:none}
 .jv-consult-points li{position:relative;padding-left:20px;font:600 13.5px/1.6 "DM Sans Variable","DM Sans",sans-serif;color:#E4C878}
-.jv-consult-points li::before{content:"\\2713";position:absolute;left:0;top:0;color:#D4AF37;font-weight:700}
+.jv-consult-points li::before{content:"\2713";position:absolute;left:0;top:0;color:#D4AF37;font-weight:700}
 .jv-consult-cta{display:inline-flex;align-items:center;gap:10px;margin-top:26px;padding:16px 34px;border-radius:999px;font:700 15px "DM Sans Variable","DM Sans",sans-serif;color:#17110C;text-decoration:none;background:linear-gradient(120deg,#F3E5AB,#D4AF37 55%,#F7D774);box-shadow:0 16px 44px -14px rgba(212,175,55,.6),inset 0 1px 0 rgba(255,255,255,.5);transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
 .jv-consult-cta:hover{transform:translateY(-2px);filter:brightness(1.06);box-shadow:0 22px 54px -16px rgba(212,175,55,.7),inset 0 1px 0 rgba(255,255,255,.5)}
 .jv-consult-cta svg{width:17px;height:17px}
@@ -2424,97 +2425,107 @@ html:not(.dark) .jv-ct-v{color:#7C5A12}
 html:not(.dark) .jsv-work-card .jsv-cs-out p{color:#7C5A12}
 
 /* ============================================================
-   30k · Phase 6 — Trust, Authority & Conversion
-   Marquee · glass trust cards · testimonials · lead magnet ·
-   contact trust grid · stats expansion · light + a11y variants
+   30l · Phase 7 — Authority & Conversion
+   Comparison table · case visuals/metrics/badges · detail modal ·
+   service-page links · testimonial avatars/logos
    ============================================================ */
 
-/* --- social-proof marquee --- */
-.jv-marquee{position:relative;overflow:hidden;border-top:1px solid rgba(212,175,55,.14);border-bottom:1px solid rgba(212,175,55,.14);background:linear-gradient(180deg,rgba(212,175,55,.05),rgba(212,175,55,.02));padding:16px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-.jv-mq-track{display:flex;width:max-content;animation:jvMq 30s linear infinite}
-.jv-marquee:hover .jv-mq-track{animation-play-state:paused}
-.jv-mq-seq{display:flex;align-items:center;gap:26px;padding-right:26px}
-.jv-mq-item{font:600 12.5px/1 "JetBrains Mono Variable","JetBrains Mono",monospace;letter-spacing:.22em;text-transform:uppercase;color:#C9BCAE;white-space:nowrap}
-.jv-mq-dot{width:5px;height:5px;border-radius:50%;background:radial-gradient(circle,#F7D774,#AA771C);box-shadow:0 0 8px rgba(212,175,55,.8);flex:0 0 auto}
-@keyframes jvMq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-html:not(.dark) .jv-mq-item{color:#6B5F51}
-html:not(.dark) .jv-marquee{border-color:rgba(176,132,38,.25);background:linear-gradient(180deg,rgba(184,134,11,.06),rgba(184,134,11,.02))}
+/* --- why-choose comparison table --- */
+.jv-cmp-wrap{margin-top:34px;overflow-x:auto;border-radius:18px;border:1px solid rgba(212,175,55,.22);background:linear-gradient(165deg,rgba(255,255,255,.045),rgba(255,255,255,.012));-webkit-overflow-scrolling:touch}
+.jv-cmp-table{width:100%;min-width:640px;border-collapse:collapse;font-size:13.5px}
+.jv-cmp-table thead th{padding:16px 18px;text-align:left;font:700 11px/1.3 "JetBrains Mono Variable","JetBrains Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:#8D8275;border-bottom:1px solid rgba(212,175,55,.25);white-space:nowrap}
+.jv-cmp-table thead th.jv-cmp-hero-col{color:#17110C;background:linear-gradient(120deg,#F3E5AB,#D4AF37 55%,#F7D774)}
+.jv-cmp-table tbody th{padding:14px 18px;text-align:left;font:700 13px "DM Sans Variable","DM Sans",sans-serif;color:#F7D774;border-bottom:1px solid rgba(212,175,55,.12);white-space:nowrap}
+.jv-cmp-table tbody td{padding:14px 18px;color:#C9BCAE;border-bottom:1px solid rgba(212,175,55,.1);vertical-align:top}
+.jv-cmp-table tbody tr:last-child th,.jv-cmp-table tbody tr:last-child td{border-bottom:0}
+.jv-cmp-table tbody td.jv-cmp-hero-col{color:#F7D774;font-weight:600;background:rgba(212,175,55,.07)}
+.jv-cmp-check{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;margin-right:8px;border-radius:50%;background:linear-gradient(120deg,#F3E5AB,#D4AF37);color:#17110C;font-size:11px;font-weight:800;vertical-align:-4px}
+.jv-cmp-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+html:not(.dark) .jv-cmp-wrap{background:linear-gradient(165deg,rgba(255,252,244,.95),rgba(246,238,221,.92));border-color:rgba(176,132,38,.3)}
+html:not(.dark) .jv-cmp-table tbody th{color:#7C5A12}
+html:not(.dark) .jv-cmp-table tbody td{color:#5C5244}
+html:not(.dark) .jv-cmp-table thead th{color:#8D8275}
 
-/* --- trust glass cards (between Pricing and Case Studies) --- */
-.jv-trust-grid{display:grid;gap:16px;margin-top:34px;grid-template-columns:repeat(3,1fr)}
-.jv-trust-card{position:relative;overflow:hidden;padding:24px 22px 22px;border-radius:18px;border:1px solid rgba(212,175,55,.2);background:linear-gradient(160deg,rgba(255,255,255,.055),rgba(255,255,255,.015));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .3s cubic-bezier(.22,.61,.36,1),border-color .3s,box-shadow .3s}
-.jv-trust-card::before{content:"";position:absolute;inset:-40% 55% 60% -40%;background:radial-gradient(closest-side,rgba(212,175,55,.16),transparent 70%);pointer-events:none;transition:opacity .3s;opacity:.6}
-.jv-trust-card:hover{transform:translateY(-4px);border-color:rgba(247,215,116,.5);box-shadow:0 24px 54px -30px rgba(212,175,55,.45)}
-.jv-trust-card:hover::before{opacity:1}
-.jv-trust-card h3{font:700 16px "DM Sans Variable","DM Sans",sans-serif;color:#F7D774;margin-top:12px}
-.jv-trust-card p{margin-top:7px;color:#B9AC9E;font-size:14px;line-height:1.6}
-html:not(.dark) .jv-trust-card{background:linear-gradient(160deg,rgba(255,252,244,.92),rgba(246,238,221,.88));border-color:rgba(176,132,38,.3)}
-html:not(.dark) .jv-trust-card h3{color:#7C5A12}
-html:not(.dark) .jv-trust-card p{color:#5C5244}
-@media (max-width:1024px){.jv-trust-grid{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:640px){.jv-trust-grid{grid-template-columns:1fr}.jv-trust-card{padding:20px 18px 18px}}
+/* --- four pillars --- */
+.jv-pillar-grid{display:grid;gap:14px;margin-top:18px;grid-template-columns:repeat(2,1fr)}
+.jv-pillar-card{display:flex;gap:14px;align-items:flex-start;padding:20px;border-radius:16px;border:1px solid rgba(212,175,55,.2);background:rgba(255,255,255,.035);transition:transform .3s,border-color .3s,box-shadow .3s}
+.jv-pillar-card:hover{transform:translateY(-3px);border-color:rgba(247,215,116,.5);box-shadow:0 20px 44px -26px rgba(212,175,55,.45)}
+.jv-pillar-card h3{font:700 15px "DM Sans Variable","DM Sans",sans-serif;color:#F7D774}
+.jv-pillar-card p{margin-top:6px;color:#B9AC9E;font-size:13.5px;line-height:1.6}
+html:not(.dark) .jv-pillar-card{background:rgba(255,252,244,.9);border-color:rgba(176,132,38,.3)}
+html:not(.dark) .jv-pillar-card h3{color:#7C5A12}
+html:not(.dark) .jv-pillar-card p{color:#5C5244}
+@media (max-width:860px){.jv-pillar-grid{grid-template-columns:1fr}}
 
-/* --- testimonials --- */
-.jv-tst-grid{display:grid;gap:16px;margin-top:34px;grid-template-columns:repeat(3,1fr)}
-.jv-tst-card{position:relative;margin:0;padding:26px 24px 22px;border-radius:18px;border:1px solid rgba(212,175,55,.2);background:linear-gradient(165deg,rgba(36,28,21,.75),rgba(23,17,12,.75));display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.22,.61,.36,1),border-color .3s,box-shadow .3s}
-.jv-tst-card:hover{transform:translateY(-4px);border-color:rgba(247,215,116,.5);box-shadow:0 24px 54px -30px rgba(212,175,55,.4)}
-.jv-quote-mark{position:absolute;top:6px;right:18px;font:800 64px/1 "Playfair Display",Georgia,serif;color:rgba(212,175,55,.28);pointer-events:none}
-.jv-tst-stars{color:#D4AF37;font-size:14px;letter-spacing:3px;text-shadow:0 0 12px rgba(212,175,55,.45)}
-.jv-tst-card blockquote{margin:12px 0 18px;color:#E7DCCB;font-size:14.5px;line-height:1.7;flex:1}
-.jv-tst-card figcaption{display:flex;flex-direction:column;gap:2px;border-top:1px solid rgba(212,175,55,.16);padding-top:14px}
-.jv-tst-name{font:700 14px "DM Sans Variable","DM Sans",sans-serif;color:#F7D774}
-.jv-tst-role{font:600 11px/1.4 "JetBrains Mono Variable","JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:#8D8275}
-html:not(.dark) .jv-tst-card{background:linear-gradient(165deg,rgba(255,252,244,.95),rgba(246,238,221,.92));border-color:rgba(176,132,38,.3)}
-html:not(.dark) .jv-tst-card blockquote{color:#4A4136}
-html:not(.dark) .jv-tst-name{color:#7C5A12}
-html:not(.dark) .jv-quote-mark{color:rgba(176,132,38,.35)}
-/* mobile: smooth snap carousel */
-@media (max-width:860px){
-  .jv-tst-grid{grid-auto-flow:column;grid-auto-columns:86%;grid-template-columns:none;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:6px;padding-bottom:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .jv-tst-grid::-webkit-scrollbar{display:none}
-  .jv-tst-card{scroll-snap-align:center}
-}
+/* --- case-study visuals, metrics, stack badges --- */
+.jsv-wc-visual{margin:-4px -4px 16px;border-radius:14px;overflow:hidden;border:1px solid rgba(212,175,55,.2);background:rgba(20,14,8,.5)}
+.jsv-wc-mock{display:block;width:100%;height:auto}
+.jsv-wc-shot{display:block;width:100%;height:auto;object-fit:cover}
+.jsv-wc-metrics{display:grid;gap:10px;grid-template-columns:repeat(2,1fr);margin:14px 0 4px}
+.jsv-wc-metric{padding:12px 14px;border-radius:12px;border:1px solid rgba(212,175,55,.22);background:rgba(212,175,55,.06);text-align:center}
+.jsv-wc-metric strong{display:block;font:800 20px/1.1 "Playfair Display",Georgia,serif;background:linear-gradient(100deg,#fdf8ec,#f7d774 45%,#d4af37);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.jsv-wc-metric span{display:block;margin-top:4px;font:600 10.5px/1.3 "JetBrains Mono Variable","JetBrains Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:#8D8275}
+.jsv-wc-stack{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin:12px 0 2px}
+.jsv-wc-stack-k{font:700 9.5px/1 "JetBrains Mono Variable","JetBrains Mono",monospace;letter-spacing:.2em;text-transform:uppercase;color:#8D8275;margin-right:3px}
+.jsv-wc-chip{font:600 10.5px/1 "JetBrains Mono Variable","JetBrains Mono",monospace;letter-spacing:.06em;color:#F7D774;border:1px solid rgba(212,175,55,.4);background:rgba(212,175,55,.07);border-radius:999px;padding:6px 11px}
+.jsv-wc-cta{display:inline-flex;align-items:center;gap:9px;margin-top:16px;padding:12px 22px;border-radius:999px;border:1px solid rgba(212,175,55,.45);background:rgba(212,175,55,.07);color:#F7D774;font:700 13px "DM Sans Variable","DM Sans",sans-serif;cursor:pointer;transition:transform .25s,background .25s,box-shadow .25s}
+.jsv-wc-cta:hover{transform:translateY(-2px);background:rgba(212,175,55,.16);box-shadow:0 14px 34px -16px rgba(212,175,55,.5)}
+.jsv-wc-cta svg{width:15px;height:15px}
+html:not(.dark) .jsv-wc-visual{border-color:rgba(176,132,38,.3);background:rgba(255,252,244,.7)}
+html:not(.dark) .jsv-wc-metric{border-color:rgba(176,132,38,.3);background:rgba(184,134,11,.08)}
+html:not(.dark) .jsv-wc-metric span{color:#8D8275}
+html:not(.dark) .jsv-wc-chip{color:#7C5A12;border-color:rgba(176,132,38,.45);background:rgba(184,134,11,.08)}
+html:not(.dark) .jsv-wc-cta{color:#7C5A12;border-color:rgba(176,132,38,.5);background:rgba(184,134,11,.08)}
 
-/* --- free consultation lead magnet --- */
-.jv-consult-band{background:radial-gradient(60% 90% at 50% 0%,rgba(212,175,55,.1),transparent 70%)}
-.jv-consult-inner{max-width:680px;margin:0 auto;text-align:center}
-.jv-consult-points{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;margin:22px 0 0;padding:0;list-style:none}
-.jv-consult-points li{position:relative;padding-left:20px;font:600 13.5px/1.6 "DM Sans Variable","DM Sans",sans-serif;color:#E4C878}
-.jv-consult-points li::before{content:"\2713";position:absolute;left:0;top:0;color:#D4AF37;font-weight:700}
-.jv-consult-cta{display:inline-flex;align-items:center;gap:10px;margin-top:26px;padding:16px 34px;border-radius:999px;font:700 15px "DM Sans Variable","DM Sans",sans-serif;color:#17110C;text-decoration:none;background:linear-gradient(120deg,#F3E5AB,#D4AF37 55%,#F7D774);box-shadow:0 16px 44px -14px rgba(212,175,55,.6),inset 0 1px 0 rgba(255,255,255,.5);transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
-.jv-consult-cta:hover{transform:translateY(-2px);filter:brightness(1.06);box-shadow:0 22px 54px -16px rgba(212,175,55,.7),inset 0 1px 0 rgba(255,255,255,.5)}
-.jv-consult-cta svg{width:17px;height:17px}
-.jv-consult-note{margin-top:14px;font:500 12px/1.6 "JetBrains Mono Variable","JetBrains Mono",monospace;letter-spacing:.05em;color:#8D8275}
-html:not(.dark) .jv-consult-points li{color:#7C5A12}
-html:not(.dark) .jv-consult-note{color:#8D8275}
+/* --- case-details modal (homepage) --- */
+.jv-case-ov{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(8,6,4,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.jv-case-ov.jv-open{display:flex;animation:jvCalFade .25s ease}
+.jv-case-panel{position:relative;width:100%;max-width:640px;max-height:88vh;display:flex;flex-direction:column;border-radius:22px;border:1px solid rgba(212,175,55,.45);background:linear-gradient(165deg,#241C15,#17110C);box-shadow:0 40px 90px -30px rgba(0,0,0,.85),0 0 60px -18px rgba(212,175,55,.35);overflow:hidden;animation:jvCalRise .3s cubic-bezier(.22,.61,.36,1)}
+.jv-case-x{position:absolute;top:14px;right:14px;z-index:2;width:36px;height:36px;border-radius:50%;border:1px solid rgba(212,175,55,.35);background:rgba(20,14,8,.8);color:#F7D774;font-size:16px;line-height:1;cursor:pointer;transition:transform .2s,border-color .2s}
+.jv-case-x:hover{transform:rotate(90deg);border-color:#F7D774}
+.jv-case-body{padding:30px 30px 28px;overflow-y:auto}
+.jv-case-kind{font:600 10.5px/1.3 "JetBrains Mono Variable","JetBrains Mono",monospace;letter-spacing:.2em;text-transform:uppercase;color:#D4AF37}
+.jv-case-title{margin:8px 0 0;font:700 26px/1.2 "Playfair Display",Georgia,serif;color:#FAF6F0}
+.jv-case-p{margin:14px 0 0;color:#C9BCAE;font-size:14.5px;line-height:1.7}
+.jv-case-out{margin-top:18px;padding:12px 16px;border-left:3px solid #D4AF37;border-radius:0 12px 12px 0;background:rgba(212,175,55,.09)}
+.jv-case-out span{font:700 10px/1 "JetBrains Mono Variable","JetBrains Mono",monospace;letter-spacing:.2em;text-transform:uppercase;color:#F7D774}
+.jv-case-out p{margin:6px 0 0;color:#F1E7D8;font-weight:600;font-size:14px}
+.jv-case-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.jv-case-cta{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:999px;font:700 13.5px "DM Sans Variable","DM Sans",sans-serif;text-decoration:none;color:#17110C;background:linear-gradient(120deg,#F3E5AB,#D4AF37 55%,#F7D774);box-shadow:0 14px 40px -14px rgba(212,175,55,.6);transition:transform .2s,filter .2s}
+.jv-case-cta:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.jv-case-ghost{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:999px;font:600 13px "DM Sans Variable","DM Sans",sans-serif;text-decoration:none;color:#F7D774;border:1px solid rgba(212,175,55,.45);background:rgba(212,175,55,.07);transition:transform .2s,background .2s}
+.jv-case-ghost:hover{transform:translateY(-2px);background:rgba(212,175,55,.16)}
+body.jv-case-lock{overflow:hidden}
+html:not(.dark) .jv-case-panel{background:linear-gradient(165deg,#FFFAF0,#F6EEDD)}
+html:not(.dark) .jv-case-title{color:#241C15}
+html:not(.dark) .jv-case-p{color:#5C5244}
+html:not(.dark) .jv-case-out p{color:#3D352E}
+@media (max-width:640px){.jv-case-body{padding:24px 20px 22px}.jv-case-actions{flex-direction:column}.jv-case-actions a{justify-content:center}}
 
-/* --- contact trust grid (above the form) --- */
-.jv-contact-trust{display:grid;gap:12px;grid-template-columns:repeat(4,1fr);margin:0 0 18px}
-.jv-ct-card{display:flex;flex-direction:column;gap:4px;padding:14px 16px;border-radius:14px;border:1px solid rgba(212,175,55,.2);background:rgba(255,255,255,.035);transition:border-color .25s,transform .25s}
-.jv-ct-card:hover{border-color:rgba(247,215,116,.45);transform:translateY(-2px)}
-.jv-ct-k{font:600 10.5px/1.3 "JetBrains Mono Variable","JetBrains Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:#8D8275}
-.jv-ct-v{font:700 13.5px/1.4 "DM Sans Variable","DM Sans",sans-serif;color:#F7D774}
-html:not(.dark) .jv-ct-card{background:rgba(255,252,244,.85);border-color:rgba(176,132,38,.3)}
-html:not(.dark) .jv-ct-k{color:#8D8275}
-html:not(.dark) .jv-ct-v{color:#7C5A12}
-@media (max-width:860px){.jv-contact-trust{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:420px){.jv-contact-trust{gap:10px}.jv-ct-card{padding:12px 12px}.jv-ct-v{font-size:12.5px}}
+/* --- booking links on the homepage --- */
+.jsv-conv-cal{display:inline-block;margin-top:10px;font:600 12.5px/1.4 "DM Sans Variable","DM Sans",sans-serif;color:#F7D774;text-decoration:none;border-bottom:1px solid rgba(212,175,55,.4);padding-bottom:2px;transition:color .2s,border-color .2s}
+.jsv-conv-cal:hover{color:#FDF0CD;border-color:#FDF0CD}
+.jv-consult-more{color:#F7D774;text-decoration:none;border-bottom:1px solid rgba(212,175,55,.4);padding-bottom:1px;transition:color .2s,border-color .2s}
+.jv-consult-more:hover{color:#FDF0CD;border-color:#FDF0CD}
+html:not(.dark) .jsv-conv-cal{color:#8B6914;border-color:rgba(139,105,20,.45)}
+html:not(.dark) .jv-consult-more{color:#8B6914;border-color:rgba(139,105,20,.45)}
 
-/* --- stats band: 6 premium counters --- */
-#jsv-stats .jsv-stat-grid{grid-template-columns:repeat(3,1fr);gap:16px}
-#jsv-stats .jsv-stat-num{font-size:clamp(2rem,3.4vw,2.8rem);white-space:nowrap}
-@media (max-width:1080px){#jsv-stats .jsv-stat-grid{grid-template-columns:repeat(2,1fr)}}
+/* --- service cards: explore-page links --- */
+.jsv-svc-page{display:inline-block;margin:10px 0 0 18px;font:600 11.5px/1 "JetBrains Mono Variable","JetBrains Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:#C9BCAE;text-decoration:none;border-bottom:1px solid rgba(212,175,55,.3);padding-bottom:3px;transition:color .2s,border-color .2s}
+.jsv-svc-page:hover{color:#F7D774;border-color:#F7D774}
+html:not(.dark) .jsv-svc-page{color:#6B5F51;border-color:rgba(176,132,38,.4)}
+html:not(.dark) .jsv-svc-page:hover{color:#5C430B;border-color:#5C430B}
+@media (max-width:640px){.jsv-svc-page{margin-left:0}}
 
-/* --- accessibility / motion --- */
-@media (max-width:720px){
-  .jv-consult-points{gap:8px 18px}
-  .jv-consult-cta{width:100%;justify-content:center}
-}
-@media (prefers-reduced-motion:reduce){
-  .jv-mq-track{animation:none;flex-wrap:wrap;width:auto}
-  .jv-mq-seq[aria-hidden="true"]{display:none}
-  .jv-trust-card,.jv-tst-card,.jv-ct-card,.jv-consult-cta{transition:none}
-}
+/* --- testimonials: avatars + company logos --- */
+.jv-tst-id{display:flex;align-items:center;gap:12px}
+.jv-tst-avatar{width:44px;height:44px;border-radius:50%;flex:0 0 auto;object-fit:cover;border:1.5px solid rgba(212,175,55,.55);box-shadow:0 0 0 3px rgba(212,175,55,.1)}
+.jv-tst-initials{display:inline-flex;align-items:center;justify-content:center;font:700 14px "Playfair Display",Georgia,serif;color:#17110C;background:linear-gradient(120deg,#F3E5AB,#D4AF37 60%,#F7D774)}
+.jv-tst-meta{display:flex;flex-direction:column;gap:2px}
+.jv-tst-logo{margin-left:auto;max-height:26px;max-width:110px;object-fit:contain;opacity:.85;filter:brightness(0) invert(.85)}
+html:not(.dark) .jv-tst-logo{filter:none;opacity:.9}
+.jv-tst-card figcaption{flex-direction:row;align-items:center}
+@media (max-width:640px){.jv-tst-logo{display:none}}
 
     </style>
     <script data-pg="hero-premium">(function () {
@@ -2550,6 +2561,25 @@ html:not(.dark) .jv-ct-v{color:#7C5A12}
 
   var NAME = "Shridhar John";
   var SUB_KEY = "hospitality professional";
+
+  /* ============================================================
+     TESTIMONIALS — the "What Clients Say" CMS block (Phase 7).
+     Edit this array to update the section; nothing else to touch.
+       name    — display name or initials shown on the card
+       role    — job title / descriptor
+       company — company or city line ("" hides it)
+       quote   — the feedback text
+       rating  — 1–5 (drives the gold star row)
+       photo   — path to a real client photo, e.g. "/clients/ar.jpg"
+                 ("" renders a gold initials avatar instead)
+       logo    — path to a company logo, e.g. "/clients/acme.svg"
+                 ("" hides the logo slot)
+     ============================================================ */
+  var TESTIMONIALS = [
+    { name: "A. R.", role: "Cafe Owner", company: "Bangalore", quote: "The proposal was itemised to the hour and the first demo arrived in two days. It felt like working with a firm ten times the size.", rating: 5, photo: "", logo: "" },
+    { name: "S. K.", role: "Retail Founder", company: "", quote: "Automation now handles our weekly reporting — hours back every single week, with records I can actually audit.", rating: 5, photo: "", logo: "" },
+    { name: "M. P.", role: "Practice Manager", company: "", quote: "Direct, honest and fast. The site looks like a global brand, loads instantly, and enquiries started within the first week.", rating: 5, photo: "", logo: "" }
+  ];
 
   /* ---- Step 1: badge + h1 transform (name + positioning line) ---- */
   function step1() {
@@ -3073,10 +3103,35 @@ html:not(.dark) .jv-ct-v{color:#7C5A12}
     sec.className = "scroll-mt-20 border-t border-border/70 jsv-reveal";
     sec.setAttribute("data-testid", "selected-work");
     sec.setAttribute("aria-label", "Selected work");
-    function cs(n, kind, title, rows, tags) {
-      return '<article class="jsv-work-card jsv-case"><div class="jsv-wc-top"><span class="jsv-wc-num">' + n + '</span><span class="jsv-wc-kind">' + kind + '</span></div><h3>' + title + '</h3>' +
+    /* abstract UI mock — shown when a case has no real screenshot yet (shot: "")
+       drop a real image into CASE_DETAILS[n].shot and the card renders it instead */
+    function mockSvg() {
+      return '<svg class="jsv-wc-mock" viewBox="0 0 320 150" role="img" aria-label="Project preview">' +
+        '<rect x="0" y="0" width="320" height="150" rx="12" fill="rgba(20,14,8,.75)" stroke="rgba(212,175,55,.28)"/>' +
+        '<rect x="0" y="0" width="320" height="26" rx="12" fill="rgba(212,175,55,.08)"/>' +
+        '<circle cx="16" cy="13" r="3.4" fill="#D4AF37" opacity=".8"/><circle cx="28" cy="13" r="3.4" fill="#D4AF37" opacity=".5"/><circle cx="40" cy="13" r="3.4" fill="#D4AF37" opacity=".3"/>' +
+        '<rect x="16" y="42" width="118" height="10" rx="5" fill="#F7D774" opacity=".85"/>' +
+        '<rect x="16" y="60" width="88" height="6" rx="3" fill="#B9AC9E" opacity=".5"/>' +
+        '<rect x="172" y="42" width="60" height="8" rx="4" fill="#D4AF37" opacity=".65"/><rect x="244" y="42" width="48" height="8" rx="4" fill="#B9AC9E" opacity=".35"/>' +
+        '<rect x="16" y="86" width="132" height="44" rx="8" fill="none" stroke="rgba(212,175,55,.4)"/>' +
+        '<path d="M28 120 L52 108 L76 116 L100 100 L124 106" fill="none" stroke="#F7D774" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>' +
+        '<rect x="172" y="86" width="132" height="44" rx="8" fill="none" stroke="rgba(212,175,55,.4)"/>' +
+        '<rect x="184" y="112" width="10" height="12" rx="2" fill="#D4AF37" opacity=".55"/><rect x="202" y="104" width="10" height="20" rx="2" fill="#D4AF37" opacity=".7"/><rect x="220" y="96" width="10" height="28" rx="2" fill="#F7D774" opacity=".9"/>' +
+        '<rect x="248" y="100" width="44" height="6" rx="3" fill="#B9AC9E" opacity=".4"/><rect x="248" y="114" width="32" height="6" rx="3" fill="#B9AC9E" opacity=".28"/>' +
+        '</svg>';
+    }
+    function cs(n, kind, title, rows, tags, stack, metrics, shot) {
+      var visual = shot
+        ? '<div class="jsv-wc-visual"><img class="jsv-wc-shot" src="' + shot + '" alt="' + title + ' — project screenshot" loading="lazy"></div>'
+        : '<div class="jsv-wc-visual" aria-hidden="true">' + mockSvg() + '</div>';
+      return '<article class="jsv-work-card jsv-case">' + visual +
+        '<div class="jsv-wc-top"><span class="jsv-wc-num">' + n + '</span><span class="jsv-wc-kind">' + kind + '</span></div><h3>' + title + '</h3>' +
         '<div class="jsv-cs-rows">' + rows.map(function (r) { return '<div class="jsv-cs-row' + (r[0] === "Outcome" ? ' jsv-cs-out' : '') + '"><span>' + r[0] + '</span><p>' + r[1] + '</p></div>'; }).join("") + '</div>' +
-        '<div class="jsv-wc-tags">' + tags + '</div></article>';
+        '<div class="jsv-wc-metrics">' + metrics.map(function (m) { return '<div class="jsv-wc-metric"><strong>' + m[0] + '</strong><span>' + m[1] + '</span></div>'; }).join("") + '</div>' +
+        '<div class="jsv-wc-stack"><span class="jsv-wc-stack-k">Stack</span>' + stack.map(function (s) { return '<span class="jsv-wc-chip">' + s + '</span>'; }).join("") + '</div>' +
+        '<div class="jsv-wc-tags">' + tags + '</div>' +
+        '<button type="button" class="jsv-wc-cta" data-case="' + n + '">View Project Details' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg></button></article>';
     }
     sec.innerHTML = '<div class="jv-band">' +
       bandHead("SELECTED WORK", "Case studies from the floor", "Real operations, designed and delivered — the work that set the JSVita standard.") +
@@ -3086,28 +3141,130 @@ html:not(.dark) .jv-ct-v{color:#7C5A12}
          ["Solution", "Full buildout — layout, staffing plan, service flow and a launch playbook executed to the hour."],
          ["Technology", "Operations checklists · rapid-delivery tooling · live service trackers."],
          ["Outcome", "Serving customers from day one of launch, inside a demanding SLA environment."]],
-        '<span>Operations</span><span>Launch</span><span>Team Leadership</span>') +
+        '<span>Operations</span><span>Launch</span><span>Team Leadership</span>',
+        ["Operations checklists", "Rapid-delivery tooling", "Live service trackers"],
+        [["Day 1", "Live from launch"], ["0", "Orders delayed"]], "") +
       cs("02", "CASE STUDY", "Front Office Systems",
         [["Challenge", "Hospital reception buried in paperwork, with zero-miss documentation demanded every hour."],
          ["Solution", "A patient-first reception system — calm flows, exact records, quick handoffs."],
          ["Technology", "Structured documentation · digital records discipline · escalation routing."],
          ["Outcome", "Zero-miss documentation with faster, calmer patient intake."]],
-        '<span>Service Quality</span><span>Documentation</span>') +
+        '<span>Service Quality</span><span>Documentation</span>',
+        ["Structured documentation", "Digital records", "Escalation routing"],
+        [["0", "Documents missed"], ["Faster", "Patient intake"]], "") +
       cs("03", "CASE STUDY", "Hotel Front Desk",
         [["Challenge", "Guest experience and coordination at scale across relentless full-house days."],
          ["Solution", "A front-desk operating playbook — coordination, recovery and guest delight in one system."],
          ["Technology", "Front-office coordination · recovery scripts · upsell flows."],
          ["Outcome", "Smooth full-house operations with a consistently premium guest experience."]],
-        '<span>Hospitality</span><span>Guest Experience</span>') +
+        '<span>Hospitality</span><span>Guest Experience</span>',
+        ["Front-office coordination", "Recovery scripts", "Upsell flows"],
+        [["Full-house", "Zero escalations"], ["Premium", "Guest experience"]], "") +
       cs("04", "FLAGSHIP", "The JSVita Platform",
         [["Challenge", "One brand, zero fragmentation — brand site, member dashboard and client tooling in a single ecosystem."],
          ["Solution", "Designed and engineered end-to-end as one luxury digital platform."],
          ["Technology", "React · custom engines · AI tooling · premium design system."],
          ["Outcome", "The site you are on — a living demonstration of the JSVita standard."]],
-        '<span>Design</span><span>Engineering</span><span>AI</span>') +
+        '<span>Design</span><span>Engineering</span><span>AI</span>',
+        ["React", "Custom engines", "AI tooling", "Premium design system"],
+        [["48h", "First demo"], ["100%", "Bespoke build"]], "") +
       '</div></div>';
     skills.parentNode.insertBefore(sec, skills);
     revealIO(sec);
+    return true;
+  }
+
+  /* ---- Phase 7 · extended case-study details — powers the premium detail modal.
+     Add `shot: "/screenshots/case-01.png"` to any entry once a real screenshot
+     exists and both the card and this modal will show it instead of the mock. ---- */
+  var CASE_DETAILS = {
+    "01": {
+      title: "Cafe ICO Buildout", kind: "CASE STUDY — OPERATIONS",
+      metrics: [["Day 1", "Live from launch"], ["0", "Orders delayed"]],
+      stack: ["Operations checklists", "Rapid-delivery tooling", "Live service trackers"],
+      shot: "",
+      detail: [
+        "Zepto\u2019s rapid-delivery ecosystem runs on tight SLAs — the brief was to open a compact-format cafe inside it without slowing a single order. Layout, staffing plan, service flow and supplier coordination all had to land before day one.",
+        "The build was executed as a launch playbook: every task timed, every station specified, every hand-off rehearsed. The cafe opened serving customers from day one, with live trackers keeping quality visible through the first weeks of trade."
+      ],
+      outcome: "Serving customers from day one of launch, inside a demanding SLA environment."
+    },
+    "02": {
+      title: "Front Office Systems", kind: "CASE STUDY — HEALTHCARE",
+      metrics: [["0", "Documents missed"], ["Faster", "Patient intake"]],
+      stack: ["Structured documentation", "Digital records", "Escalation routing"],
+      shot: "",
+      detail: [
+        "A hospital reception buried in paperwork, with zero-miss documentation demanded every hour of every shift. Errors were not an option and calm was a requirement.",
+        "The result was a patient-first reception system: structured documentation flows, digital records discipline and clear escalation routing — faster intake without a single missed document."
+      ],
+      outcome: "Zero-miss documentation with faster, calmer patient intake."
+    },
+    "03": {
+      title: "Hotel Front Desk", kind: "CASE STUDY — HOSPITALITY",
+      metrics: [["Full-house", "Zero escalations"], ["Premium", "Guest experience"]],
+      stack: ["Front-office coordination", "Recovery scripts", "Upsell flows"],
+      shot: "",
+      detail: [
+        "Guest experience and coordination at scale, across relentless full-house days where every detail is visible to the guest and nothing can slip.",
+        "The front-desk operating playbook brought coordination, service recovery and guest delight into one system — smooth full-house operations with a consistently premium experience."
+      ],
+      outcome: "Smooth full-house operations with a consistently premium guest experience."
+    },
+    "04": {
+      title: "The JSVita Platform", kind: "FLAGSHIP — PRODUCT",
+      metrics: [["48h", "First demo"], ["100%", "Bespoke build"]],
+      stack: ["React", "Custom engines", "AI tooling", "Premium design system"],
+      shot: "",
+      detail: [
+        "One brand, zero fragmentation — brand site, member dashboard and client tooling engineered as a single luxury ecosystem rather than a patchwork of templates.",
+        "Designed and built end-to-end by the founder: a living demonstration of the JSVita standard, from the 48-hour first demo to a design system that scales with every new capability."
+      ],
+      outcome: "The site you are on — a living demonstration of the JSVita standard."
+    }
+  };
+
+  /* ---- Phase 7 · premium case-details modal ---- */
+  function initCaseModal() {
+    if (window.__jsvCaseModal) return true;
+    if (!document.body) return false;
+    window.__jsvCaseModal = true;
+    var ov = document.createElement("div");
+    ov.className = "jv-case-ov";
+    ov.setAttribute("role", "dialog");
+    ov.setAttribute("aria-modal", "true");
+    ov.setAttribute("aria-label", "Project details");
+    ov.innerHTML = '<div class="jv-case-panel"><button type="button" class="jv-case-x" aria-label="Close project details">\u2715</button><div class="jv-case-body"></div></div>';
+    document.body.appendChild(ov);
+    function close() { ov.classList.remove("jv-open"); document.body.classList.remove("jv-case-lock"); }
+    ov.addEventListener("click", function (e) { if (e.target === ov) close(); });
+    ov.querySelector(".jv-case-x").addEventListener("click", close);
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+    document.addEventListener("click", function (e) {
+      var t = e.target;
+      if (!t || !t.closest) return;
+      /* booking / starting from inside the modal closes it first (the target action continues) */
+      if (ov.classList.contains("jv-open") && t.closest("[data-jv-calendly], [data-case-contact]")) close();
+      var btn = t.closest("[data-case]");
+      if (!btn) return;
+      var d = CASE_DETAILS[btn.getAttribute("data-case")];
+      if (!d) return;
+      var body = ov.querySelector(".jv-case-body");
+      body.innerHTML =
+        '<p class="jv-case-kind">' + d.kind + '</p><h3 class="jv-case-title">' + d.title + '</h3>' +
+        (d.shot ? '<img class="jv-case-shot" src="' + d.shot + '" alt="' + d.title + ' — screenshot" loading="lazy">' : '') +
+        d.detail.map(function (p) { return '<p class="jv-case-p">' + p + '</p>'; }).join("") +
+        '<div class="jsv-wc-metrics">' + d.metrics.map(function (m) { return '<div class="jsv-wc-metric"><strong>' + m[0] + '</strong><span>' + m[1] + '</span></div>'; }).join("") + '</div>' +
+        '<div class="jsv-wc-stack"><span class="jsv-wc-stack-k">Stack</span>' + d.stack.map(function (s) { return '<span class="jsv-wc-chip">' + s + '</span>'; }).join("") + '</div>' +
+        '<div class="jv-case-out"><span>Outcome</span><p>' + d.outcome + '</p></div>' +
+        '<div class="jv-case-actions">' +
+          '<a class="jv-case-cta" href="#contact" data-case-contact>Start a similar project</a>' +
+          '<a class="jv-case-ghost" href="#contact" data-jv-calendly>Book Free Consultation</a>' +
+        '</div>';
+      ov.classList.add("jv-open");
+      document.body.classList.add("jv-case-lock");
+      jvTrack("case_details_open", { project: d.title });
+    }, true);
     return true;
   }
 
@@ -3117,8 +3274,9 @@ html:not(.dark) .jv-ct-v{color:#7C5A12}
       var contact = document.getElementById("contact");
       if (!contact) return false;
       window.__jsvSvc = true;
-      function svc(ico, t, p, out) {
-        return '<article class="jsv-svc-card"><span class="jsv-bi" aria-hidden="true">' + ico + '</span><h3>' + t + '</h3><p>' + p + '</p><p class="jsv-svc-out">' + out + '</p><a class="jsv-svc-cta" href="#pricing">See packages &amp; pricing</a></article>';
+      function svc(ico, t, p, out, page, pageLabel) {
+        return '<article class="jsv-svc-card"><span class="jsv-bi" aria-hidden="true">' + ico + '</span><h3>' + t + '</h3><p>' + p + '</p><p class="jsv-svc-out">' + out + '</p><a class="jsv-svc-cta" href="#pricing">See packages &amp; pricing</a>' +
+          (page ? '<a class="jsv-svc-page" href="' + page + '" data-jv-track="service_page_click" data-jv-info="' + t + '">' + pageLabel + '</a>' : '') + '</article>';
       }
       var sec = document.createElement("section");
       sec.id = "services";
@@ -3128,12 +3286,12 @@ html:not(.dark) .jv-ct-v{color:#7C5A12}
       sec.innerHTML = '<div class="jv-band">' +
         bandHead("SERVICES", "What JSVita builds", "Six disciplines. One standard: excellence.") +
         '<div class="jsv-svc-grid">' +
-        svc(ICO_MONITOR, "Website Development", "Fast, elegant, conversion-ready sites — engineered for Chrome, Safari and everything between.", "Outcome: a website that turns visitors into enquiries.") +
+        svc(ICO_MONITOR, "Website Development", "Fast, elegant, conversion-ready sites — engineered for Chrome, Safari and everything between.", "Outcome: a website that turns visitors into enquiries.", "/web-development", "Explore web development \u2192") +
         svc(ICO_GLOBE, "Domain Setup", "Domain research, registration and DNS — a clean, ownable address for your brand.", "Outcome: a brand address you own outright, day one.") +
         svc(ICO_SERVER, "Hosting Setup", "Fast, reliable hosting configured end-to-end — SSL, uptime and deploy pipelines included.", "Outcome: a fast, secure site — zero infrastructure headaches.") +
         svc(ICO_MAIL, "Professional Email Setup", "Branded mailboxes on your own domain — you@yourbrand.com, delivered with SPF, DKIM and DMARC.", "Outcome: instant credibility in every inbox.") +
-        svc(ICO_AI, "AI Integration", "Assistants, automation and intelligence woven into your site and daily operations.", "Outcome: hours back every week, automations that never sleep.") +
-        svc(ICO_GEM, "Digital Branding", "Marks, palettes and typography that make a brand impossible to forget.", "Outcome: a brand that commands premium prices.") +
+        svc(ICO_AI, "AI Integration", "Assistants, automation and intelligence woven into your site and daily operations.", "Outcome: hours back every week, automations that never sleep.", "/ai-automation", "Explore AI &amp; automation \u2192") +
+        svc(ICO_GEM, "Digital Branding", "Marks, palettes and typography that make a brand impossible to forget.", "Outcome: a brand that commands premium prices.", "/branding", "Explore branding \u2192") +
         '</div></div>';
       contact.parentNode.insertBefore(sec, contact);
       revealIO(sec);
@@ -3173,7 +3331,7 @@ html:not(.dark) .jv-ct-v{color:#7C5A12}
       return '<article class="jsv-story-card"><span class="jsv-bi" aria-hidden="true">' + ico + '</span><h3>' + t + '</h3><p>' + p + '</p></article>';
     }
     sec.innerHTML = '<div class="jv-band">' +
-      bandHead("WHY JSVITA", "Why businesses choose JSVita", "Not a freelancer. Not an agency. A premium digital partner.") +
+      bandHead("WHY JSVITA", "The JSVita working standard", "How every engagement runs — the details that protect your project.") +
       '<div class="jsv-story-grid">' +
       why(ICO_SPARK, "Fast delivery", "Most builds go from kickoff to a working demo within 48 hours — momentum without cutting corners.") +
       why(ICO_GEM, "Premium design", "Bespoke, luxury-grade design on every page — never templates, never generic.") +
@@ -3470,14 +3628,16 @@ html:not(.dark) .jv-ct-v{color:#7C5A12}
     var pricing = document.getElementById("pricing");
     var work = document.getElementById("work");
     var trust = document.getElementById("trust");
+    var whyChoose = document.getElementById("why-choose");
     var tst = document.getElementById("testimonials");
     var consult = document.getElementById("consult");
     var process = document.getElementById("process");
-    if (!pricing || !work || !trust || !tst || !consult || !process) return false;
+    if (!pricing || !work || !trust || !whyChoose || !tst || !consult || !process) return false;
     window.__jsvOrder = true;
     var parent = process.parentNode;
     parent.insertBefore(pricing, process);
     parent.insertBefore(trust, process);
+    parent.insertBefore(whyChoose, process);
     parent.insertBefore(work, process);
     parent.insertBefore(tst, process);
     parent.insertBefore(consult, process);
@@ -3572,7 +3732,8 @@ html:not(.dark) .jv-ct-v{color:#7C5A12}
       var strip = document.createElement("div");
       strip.className = "jsv-conv-strip";
       strip.innerHTML = '<div class="jsv-conv-head"><h3>Ready to start your project?</h3><p>Let\u2019s discuss your website, AI solution, automation, or digital brand.</p></div>' +
-        '<ul class="jsv-conv-points"><li>Response within 24 hours</li><li>Free discovery call</li><li>Fixed, itemised proposal</li></ul>';
+        '<ul class="jsv-conv-points"><li>Response within 24 hours</li><li>Free discovery call</li><li>Fixed, itemised proposal</li></ul>' +
+        '<a class="jsv-conv-cal" href="#contact" data-jv-calendly data-jv-track="consultation_request" data-jv-info="conv-strip">or book a free consultation call \u2192</a>';
       intro.insertAdjacentElement("afterend", strip);
     }
     /* form-level trust microcopy — the reassurance sits beside the button that asks for effort */
@@ -3761,18 +3922,67 @@ html:not(.dark) .jv-ct-v{color:#7C5A12}
     return true;
   }
 
-  /* ---- Phase 6 · client testimonials (SAMPLE copy — swap in real client quotes) ---- */
+  /* ---- Phase 7 · Why Choose JSVita — comparison table + four pillars (between Trust and Case Studies) ---- */
+  function initWhyChoose() {
+    if (window.__jsvWhyChoose) return true;
+    var work = document.getElementById("work");
+    if (!work) return false;
+    window.__jsvWhyChoose = true;
+    var rows = [
+      ["First working demo", "Within 48 hours of kickoff", "Whenever it happens", "After weeks of onboarding"],
+      ["Who you talk to", "The founder — directly", "Delayed replies, one person", "Account managers and relays"],
+      ["Design standard", "Bespoke, luxury-grade", "Templates, recycled", "Safe and generic"],
+      ["AI & automation", "Built in where it pays", "Rarely offered", "Billed as an extra"],
+      ["After launch", "24-hour response window", "Best effort", "Ticket queues"],
+      ["Pricing", "Fixed, itemised proposal", "Hourly guesswork", "Retainers and markups"]
+    ];
+    var pillars = [
+      [ICO_USER, "Founder-led development", "Every build is designed and engineered by the founder — accountability never leaves the room."],
+      [ICO_AI, "AI-powered solutions", "Assistants and automations integrated only where they measurably pay for themselves."],
+      [ICO_MAIL, "Direct communication", "One channel, one human. Questions answered within hours, not ticket cycles."],
+      [ICO_SHIELD, "Long-term support", "A 24-hour response window that continues long after launch — retainer or on demand."]
+    ];
+    var table = '<div class="jv-cmp-wrap"><table class="jv-cmp-table">' +
+      '<thead><tr><th scope="col"><span class="jv-cmp-sr">Criteria</span></th><th scope="col" class="jv-cmp-hero-col">JSVita</th><th scope="col">Typical freelancer</th><th scope="col">Traditional agency</th></tr></thead><tbody>' +
+      rows.map(function (r) {
+        return '<tr><th scope="row">' + r[0] + '</th><td class="jv-cmp-hero-col"><span class="jv-cmp-check" aria-hidden="true">\u2713</span>' + r[1] + '</td><td>' + r[2] + '</td><td>' + r[3] + '</td></tr>';
+      }).join("") +
+      '</tbody></table></div>';
+    var sec = document.createElement("section");
+    sec.id = "why-choose";
+    sec.className = "scroll-mt-20 border-t border-border/70 jsv-reveal";
+    sec.setAttribute("data-testid", "why-choose-jsvita");
+    sec.setAttribute("aria-label", "Why choose JSVita");
+    sec.innerHTML = '<div class="jv-band">' +
+      bandHead("WHY CHOOSE JSVITA", "Why Choose JSVita", "The difference is structural — not a discount, not a template.") +
+      table +
+      '<div class="jv-pillar-grid">' +
+      pillars.map(function (p) {
+        return '<article class="jv-pillar-card"><span class="jsv-bi" aria-hidden="true">' + p[0] + '</span><div><h3>' + p[1] + '</h3><p>' + p[2] + '</p></div></article>';
+      }).join("") +
+      '</div></div>';
+    work.parentNode.insertBefore(sec, work);
+    revealIO(sec);
+    return true;
+  }
+
+  /* ---- Phase 6/7 · testimonials — rendered from the TESTIMONIALS CMS block above.
+     SAMPLE copy: replace quotes with real client feedback; drop photos/logos into
+     the `photo` / `logo` fields when available (initials avatars render meanwhile). ---- */
   function initTestimonials() {
     if (window.__jsvTst) return true;
     var process = document.getElementById("process");
     if (!process) return false;
     window.__jsvTst = true;
-    var STARS = '<span class="jv-tst-stars" aria-label="5 out of 5 stars">\u2605\u2605\u2605\u2605\u2605</span>';
-    var quotes = [
-      ["A. R.", "Cafe Owner \u00b7 Bangalore", "The proposal was itemised to the hour and the first demo arrived in two days. It felt like working with a firm ten times the size."],
-      ["S. K.", "Retail Founder", "Automation now handles our weekly reporting — hours back every single week, with records I can actually audit."],
-      ["M. P.", "Practice Manager", "Direct, honest and fast. The site looks like a global brand, loads instantly, and enquiries started within the first week."]
-    ];
+    function stars(n) {
+      n = Math.max(1, Math.min(5, parseInt(n, 10) || 5));
+      var s = "";
+      for (var i = 0; i < 5; i++) s += i < n ? "\u2605" : "\u2606";
+      return '<span class="jv-tst-stars" role="img" aria-label="' + n + ' out of 5 stars">' + s + '</span>';
+    }
+    function initials(name) {
+      return (name || "?").split(/[\s.]+/).filter(Boolean).map(function (p) { return p.charAt(0).toUpperCase(); }).slice(0, 2).join("");
+    }
     var sec = document.createElement("section");
     sec.id = "testimonials";
     sec.className = "scroll-mt-20 border-t border-border/70 jsv-reveal";
@@ -3781,10 +3991,17 @@ html:not(.dark) .jv-ct-v{color:#7C5A12}
     sec.innerHTML = '<div class="jv-band">' +
       bandHead("TESTIMONIALS", "What Clients Say", "Early engagements, measured by the only standard that matters — the client\u2019s.") +
       '<div class="jv-tst-grid">' +
-      quotes.map(function (q) {
-        return '<figure class="jv-tst-card"><span class="jv-quote-mark" aria-hidden="true">\u201C</span>' + STARS +
-          '<blockquote>' + q[2] + '</blockquote>' +
-          '<figcaption><span class="jv-tst-name">' + q[0] + '</span><span class="jv-tst-role">' + q[1] + '</span></figcaption></figure>';
+      TESTIMONIALS.map(function (q) {
+        var avatar = q.photo
+          ? '<img class="jv-tst-avatar" src="' + q.photo + '" alt="' + q.name + '" loading="lazy">'
+          : '<span class="jv-tst-avatar jv-tst-initials" aria-hidden="true">' + initials(q.name) + '</span>';
+        var roleLine = [q.role, q.company].filter(Boolean).join(" \u00b7 ");
+        var logo = q.logo ? '<img class="jv-tst-logo" src="' + q.logo + '" alt="' + (q.company || q.name) + '" loading="lazy">' : "";
+        return '<figure class="jv-tst-card"><span class="jv-quote-mark" aria-hidden="true">\u201C</span>' + stars(q.rating) +
+          '<blockquote>' + q.quote + '</blockquote>' +
+          '<figcaption><span class="jv-tst-id">' + avatar +
+            '<span class="jv-tst-meta"><span class="jv-tst-name">' + q.name + '</span><span class="jv-tst-role">' + roleLine + '</span></span>' +
+          '</span>' + logo + '</figcaption></figure>';
       }).join("") +
       '</div></div>';
     process.parentNode.insertBefore(sec, process);
@@ -3810,9 +4027,9 @@ html:not(.dark) .jv-ct-v{color:#7C5A12}
         '<h2 class="jv-band-title">Get a Free Project Consultation</h2>' +
         '<p class="jv-band-sub">Discuss your website, automation, AI solution, or digital growth strategy with JSVita.</p>' +
         '<ul class="jv-consult-points">' + benefits.map(function (b) { return '<li>' + b + '</li>'; }).join("") + '</ul>' +
-        '<a class="jv-consult-cta" href="#contact" data-testid="consult-cta">Book Free Consultation' +
+        '<a class="jv-consult-cta" href="#contact" data-testid="consult-cta" data-jv-calendly>Book Free Consultation' +
           '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg></a>' +
-        '<p class="jv-consult-note">Response within 24 hours \u00b7 You speak directly with the founder</p>' +
+        '<p class="jv-consult-note">Response within 24 hours \u00b7 You speak directly with the founder \u00b7 <a class="jv-consult-more" href="/consultation" data-jv-track="service_page_click" data-jv-info="consultation">See what a consultation includes \u2192</a></p>' +
       '</div></div>';
     process.parentNode.insertBefore(sec, process);
     revealIO(sec);
@@ -3869,6 +4086,7 @@ html:not(.dark) .jv-ct-v{color:#7C5A12}
     initStory(); initWork(); initServices();
     initNavSpy(); initStagger(); initStats(); initDust(); initCurrently(); initNavScroll(); initCvAttention();
     initTracking();
+    initCaseModal();
     initHeroBiz(); initBrandNav(); initFooterCv(); initRecast(); initReframe(); initContactRebrand();
     initContactTrust();
     initPricing(); initWhatsapp(); initBizSchema();
@@ -3886,10 +4104,10 @@ html:not(.dark) .jv-ct-v{color:#7C5A12}
     /* brand bands depend on React sections — retry until mounted, then keep the nav link alive */
     (function bandLoop(tries) {
       var a = initStory(), w = initWork(), v = initServices(), y = initWhy(), p = initProcess(), t = initPremiumStats(), n = initNetwork(), f = initFaq();
-      var mq = initMarquee(), tr = initTrust(), ts = initTestimonials(), co = initConsult();
-      initHeroBiz(); initBrandNav(); initFooterCv(); initContactRebrand(); initReframe(); initContactTrust(); initPricing(); initWhatsapp(); initBizSchema(); initTracking();
+      var mq = initMarquee(), tr = initTrust(), wc = initWhyChoose(), ts = initTestimonials(), co = initConsult();
+      initHeroBiz(); initBrandNav(); initFooterCv(); initContactRebrand(); initReframe(); initContactTrust(); initPricing(); initWhatsapp(); initBizSchema(); initTracking(); initCaseModal();
       var o = initConversionOrder();
-      if (a && w && v && y && p && t && n && f && mq && tr && ts && co && o && tries < 28) return;
+      if (a && w && v && y && p && t && n && f && mq && tr && wc && ts && co && o && tries < 28) return;
       if (tries > 0) setTimeout(function () { bandLoop(tries - 1); }, 350);
     })(30);
     return s1 && s2 && s3 && s4 && s5 && s6;
