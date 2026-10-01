@@ -2190,6 +2190,51 @@ html:not(.dark) .jsv-bi { color: #8a6d1f; border-color: rgba(150,110,20,.35); ba
   .jsv-story.jsv-reveal .jsv-story-card, .jsv-reveal .jsv-work-card, .jsv-reveal .jsv-svc-card, .jsv-reveal .jsv-band-head { opacity: 1; transform: none; transition: none; }
 }
 
+/* ============================================================
+   30h · Phase 2 — Brand-First Hero Visual (founder photo retires)
+   Animated Vita Mark, gold orbits, service chips, tech ticks
+   ============================================================ */
+.jsv-brand-visual{position:relative;display:grid;place-items:center;min-height:520px;height:100%;overflow:hidden;border-radius:24px;border:1px solid rgba(212,175,55,.22);background:radial-gradient(120% 90% at 50% 15%, #241C15 0%, #17110C 55%, #100C08 100%);box-shadow:0 30px 80px -40px rgba(0,0,0,.85), inset 0 1px 0 rgba(247,215,116,.08)}
+.jv-halo{position:absolute;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle, rgba(212,175,55,.16) 0%, rgba(212,175,55,.05) 45%, transparent 70%);animation:jvHalo 7s ease-in-out infinite}
+@keyframes jvHalo{0%,100%{transform:scale(1);opacity:.75}50%{transform:scale(1.12);opacity:1}}
+.jv-orbit{position:absolute;border:1px solid rgba(212,175,55,.14);border-radius:50%}
+.jv-orbit.o1{width:78%;aspect-ratio:1}
+.jv-orbit.o2{width:100%;aspect-ratio:1;border-style:dashed;border-color:rgba(212,175,55,.1)}
+.jv-orbit.o3{width:122%;aspect-ratio:1;border-color:rgba(212,175,55,.07)}
+.jv-orbit i{position:absolute;top:-3px;left:50%;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:#F7D774;box-shadow:0 0 12px 2px rgba(247,215,116,.8)}
+.jv-orbit.o1 i{animation:jvSpin 14s linear infinite}
+.jv-orbit.o2 i{animation:jvSpin 26s linear infinite reverse;background:#D4AF37}
+.jv-orbit.o3 i{animation:jvSpin 44s linear infinite;opacity:.7}
+@keyframes jvSpin{to{transform:rotate(360deg)}}
+.jv-hex{position:relative;z-index:2;filter:drop-shadow(0 0 26px rgba(212,175,55,.45)) drop-shadow(0 18px 50px rgba(0,0,0,.6));animation:jvFloat 6s ease-in-out infinite}
+@keyframes jvFloat{0%,100%{transform:translateY(-6px)}50%{transform:translateY(8px)}}
+.jv-chip{position:absolute;z-index:3;display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:999px;font:600 11.5px/1 "JetBrains Mono Variable","JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:#F7D774;background:rgba(20,14,8,.78);border:1px solid rgba(212,175,55,.35);backdrop-filter:blur(6px);box-shadow:0 10px 26px -12px rgba(0,0,0,.8), inset 0 1px 0 rgba(247,215,116,.12);animation:jvChipIn .8s cubic-bezier(.2,.7,.2,1) both}
+.jv-chip::before{content:"";width:5px;height:5px;border-radius:50%;background:#D4AF37;box-shadow:0 0 8px rgba(212,175,55,.9)}
+.jv-chip.c1{top:14%;left:7%;animation-delay:.15s}
+.jv-chip.c2{top:26%;right:6%;animation-delay:.3s}
+.jv-chip.c3{bottom:16%;left:9%;animation-delay:.45s}
+.jv-chip.c4{bottom:7%;right:8%;animation-delay:.6s}
+@keyframes jvChipIn{from{opacity:0;transform:translateY(10px) scale(.96)}to{opacity:1;transform:none}}
+.jv-tick{position:absolute;width:2px;background:linear-gradient(180deg, transparent, rgba(212,175,55,.55), transparent);animation:jvTick 4.5s linear infinite}
+.jv-tick.t1{left:14%;top:8%;height:34%}
+.jv-tick.t2{left:50%;top:0;height:22%;animation-delay:1.4s;opacity:.7}
+.jv-tick.t3{right:12%;bottom:6%;height:30%;animation-delay:2.6s;opacity:.6}
+@keyframes jvTick{0%{transform:translateY(-8px);opacity:0}20%{opacity:1}80%{opacity:1}100%{transform:translateY(14px);opacity:0}}
+.jsv-founder-link{color:#D4AF37;text-decoration:none;border-bottom:1px solid rgba(212,175,55,.4);font-weight:700}
+.jsv-founder-link:hover{color:#F7D774;border-color:#F7D774}
+/* light theme */
+html:not(.dark) .jsv-brand-visual{background:radial-gradient(120% 90% at 50% 15%, #FFFFFF 0%, #F6EEDD 55%, #EFE2C6 100%);border-color:rgba(176,132,38,.3);box-shadow:0 30px 70px -42px rgba(146,106,22,.45)}
+html:not(.dark) .jv-chip{color:#7C5A12;background:rgba(255,252,244,.85);border-color:rgba(176,132,38,.45)}
+html:not(.dark) .jv-orbit{border-color:rgba(176,132,38,.22)}
+html:not(.dark) .jv-orbit.o2{border-color:rgba(176,132,38,.16)}
+html:not(.dark) .jv-orbit.o3{border-color:rgba(176,132,38,.12)}
+html:not(.dark) .jv-orbit i{background:#B8860B;box-shadow:0 0 10px 2px rgba(184,134,11,.5)}
+html:not(.dark) .jv-hex{filter:drop-shadow(0 0 22px rgba(184,134,11,.28))}
+html:not(.dark) .jsv-founder-link{color:#8B6914;border-color:rgba(139,105,20,.5)}
+html:not(.dark) .jsv-founder-link:hover{color:#5C430B}
+@media (max-width:720px){.jsv-brand-visual{min-height:360px;margin-top:8px}.jv-chip{font-size:10px;padding:6px 10px}.jv-chip.c1{top:6%;left:4%}.jv-chip.c2{top:14%;right:4%}.jv-chip.c3{bottom:10%;left:5%}.jv-chip.c4{bottom:4%;right:5%}.jv-hex svg{width:96px;height:96px}}
+@media (prefers-reduced-motion:reduce){.jv-halo,.jv-orbit i,.jv-hex,.jv-tick,.jv-chip{animation:none}.jv-tick{display:none}}
+
     </style>
     <script data-pg="hero-premium">(function () {
   "use strict";
@@ -3004,6 +3049,33 @@ html:not(.dark) .jsv-bi { color: #8a6d1f; border-color: rgba(150,110,20,.35); ba
       var cap = document.querySelector(".jsv-brand-tag");
       if (cap && cap.textContent.indexOf("Founded by") === -1) cap.textContent = "Founded by Shridhar John";
     }
+    /* ---- Phase 2: brand-first hero — the founder photo yields to the JSVita brand mark ---- */
+    if (!document.documentElement.dataset.jsvP2Hero) {
+      var portrait = document.querySelector('[data-testid="hero-portrait"]');
+      var pane = portrait ? portrait.parentElement : null; /* .relative.h-full column */
+      if (pane && !pane.querySelector(".jsv-brand-visual")) {
+        document.documentElement.dataset.jsvP2Hero = "1";
+        ensureSharedDefs();
+        portrait.classList.add("jsv-hero-hide");
+        var roleCard = document.querySelector('[data-testid="hero-current-role-card"]');
+        if (roleCard && roleCard !== card) roleCard.classList.add("jsv-hero-hide");
+        pane.insertAdjacentHTML("beforeend",
+          '<div class="jsv-brand-visual" role="img" aria-label="JSVita — premium digital services">' +
+            '<span class="jv-halo" aria-hidden="true"></span>' +
+            '<span class="jv-orbit o1" aria-hidden="true"><i></i></span>' +
+            '<span class="jv-orbit o2" aria-hidden="true"><i></i></span>' +
+            '<span class="jv-orbit o3" aria-hidden="true"><i></i></span>' +
+            '<div class="jv-hex">' + jvLogo.replace('width="38" height="38"', 'width="128" height="128"') + '</div>' +
+            '<span class="jv-chip c1">6 service lines</span>' +
+            '<span class="jv-chip c2">48h first demo</span>' +
+            '<span class="jv-chip c3">100% bespoke</span>' +
+            '<span class="jv-chip c4">24h response</span>' +
+            '<span class="jv-tick t1" aria-hidden="true"></span>' +
+            '<span class="jv-tick t2" aria-hidden="true"></span>' +
+            '<span class="jv-tick t3" aria-hidden="true"></span>' +
+          '</div>');
+      }
+    }
     return done;
   }
 
@@ -3065,9 +3137,11 @@ html:not(.dark) .jsv-bi { color: #8a6d1f; border-color: rgba(150,110,20,.35); ba
     var row = document.createElement("div");
     row.className = "jv-inf-cv";
     row.innerHTML =
-      '<a href="/cv.html">Founder\u2019s CV — interactive</a>' +
+      '<a href="/founder">About the founder</a>' +
       '<span class="jv-inf-dot" aria-hidden="true"></span>' +
-      '<a href="/Shridhar-John-CV.pdf" download="Shridhar-John-CV.pdf">Download CV (PDF)</a>' +
+      '<a href="/cv.html">CV</a>' +
+      '<span class="jv-inf-dot" aria-hidden="true"></span>' +
+      '<a href="/Shridhar-John-CV.pdf" download="Shridhar-John-CV.pdf">CV (PDF)</a>' +
       '<span class="jv-inf-dot" aria-hidden="true"></span>' +
       '<a href="/experience">Track record</a>';
     legal.appendChild(row);
@@ -3110,17 +3184,26 @@ html:not(.dark) .jsv-bi { color: #8a6d1f; border-color: rgba(150,110,20,.35); ba
       sub.textContent = "Premium websites, AI-powered workflows and brand systems — delivered end-to-end with an operator\u2019s discipline.";
       head.appendChild(sub);
     }
-    /* founder's three paragraphs become a secondary, clearly-labelled story block */
-    var founderWrap = document.createElement("div");
-    founderWrap.className = "jsv-founder-note jsv-reveal";
-    founderWrap.innerHTML =
-      '<p class="jsv-founder-eyebrow">THE STANDARD BEHIND IT</p>' +
-      '<p class="jsv-founder-line">JSVita is founded and run by <strong>Shridhar John</strong> — three years running real operations: cafe floors under Roots Corporation, Zepto\u2019s quick-commerce kitchens, hospital receptions and hotel front desks. That discipline is why JSVita ships on time, documented, and finished to the last detail.</p>';
+    /* Phase 2: the founder story moves to /founder — About stays JSVita-first with a quiet credibility line */
     var paras = about.querySelectorAll(".space-y-4");
     if (paras.length) {
       paras[0].classList.add("jsv-hero-hide");
-      paras[0].parentNode.insertBefore(founderWrap, paras[0]);
+      var prev = paras[0].previousElementSibling;
+      if (!prev || !prev.classList.contains("jsv-founder-note")) {
+        var founderWrap = document.createElement("div");
+        founderWrap.className = "jsv-founder-note";
+        founderWrap.innerHTML =
+          '<p class="jsv-founder-eyebrow">WHO STANDS BEHIND THE STANDARD</p>' +
+          '<p class="jsv-founder-line">Founded and operated by <strong>Shridhar John</strong> — three years of operating discipline behind every JSVita build. ' +
+          '<a class="jsv-founder-link" href="/founder">About the founder \u2192</a></p>';
+        paras[0].parentNode.insertBefore(founderWrap, paras[0]);
+      }
     }
+    /* detailed personal bands (experience / skills / interests) live on the founder page now */
+    Array.prototype.forEach.call(["experience", "skills", "interests"], function (id) {
+      var s = document.getElementById(id);
+      if (s) s.classList.add("jsv-hero-hide");
+    });
     return true;
   }
 
@@ -3170,7 +3253,7 @@ html:not(.dark) .jsv-bi { color: #8a6d1f; border-color: rgba(150,110,20,.35); ba
     /* brand bands depend on React sections — retry until mounted, then keep the nav link alive */
     (function bandLoop(tries) {
       var a = initStory(), w = initWork(), v = initServices(), y = initWhy(), p = initProcess(), t = initPremiumStats(), n = initNetwork(), f = initFaq();
-      initHeroBiz(); initBrandNav(); initFooterCv(); initContactRebrand();
+      initHeroBiz(); initBrandNav(); initFooterCv(); initContactRebrand(); initReframe();
       if (a && w && v && y && p && t && n && f && tries < 28) return;
       if (tries > 0) setTimeout(function () { bandLoop(tries - 1); }, 350);
     })(30);
