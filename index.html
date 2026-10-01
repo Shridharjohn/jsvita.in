@@ -18,7 +18,8 @@
     <!-- Open Graph / social preview -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JSVita" />
-    <meta property="og:title" content="JSVita — Building Digital Excellence" />
+    <meta property="og:title" content="JSVita — Premium Digital Services Company" />
+    <meta name="description" content="JSVita is a premium digital services company: bespoke websites, AI solutions, automation and digital branding — delivered end to end with a 24-hour response window. Start your project today." />
     <meta
       property="og:description"
       content="Premium digital experiences by Shridhar John. Web Development • AI Solutions • Digital Innovation — jsvita.in."
@@ -39,7 +40,7 @@
       name="twitter:image"
       content="https://jsvita.in/jsvita-og.png"
     />
-    <title>JSVita — Building Digital Excellence | Shridhar John</title>
+    <title>JSVita — Premium Digital Services Company | Web, AI & Brand</title>
     <style data-theme="obsidian-ember">
 /* ===== Obsidian Ember — premium dark theme ===== */
 html.dark {
@@ -2302,6 +2303,34 @@ html:not(.dark) .jsv-cs-out p{color:#3D352E}
 html:not(.dark) .jv-wa-tip{background:rgba(255,252,244,.95);color:#7C5A12;border-color:rgba(176,132,38,.45)}
 @media (prefers-reduced-motion:reduce){.jv-wa-ring{animation:none;display:none}.jsv-price-card,.jv-wa-fab{transition:none}}
 
+/* ============================================================
+   30j · Phase 4 — Brand audit polish
+   Trust microcopy · outcome lines · service CTAs · corporate calm
+   ============================================================ */
+.jsv-hero-trust{margin-top:14px;font:500 12.5px/1.6 "JetBrains Mono Variable","JetBrains Mono",monospace;letter-spacing:.04em;color:#B9AC9E}
+.jsv-form-trust{margin-top:12px;text-align:center;font-size:12.5px;color:#8D8275}
+.jsv-svc-out{margin-top:10px;padding-top:10px;border-top:1px solid rgba(212,175,55,.18);color:#E4C878 !important;font-size:13px !important;line-height:1.5 !important}
+.jsv-svc-cta{display:inline-block;margin-top:12px;font:700 12px/1 "JetBrains Mono Variable","JetBrains Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:#D4AF37;text-decoration:none;border-bottom:1px solid rgba(212,175,55,.35);padding-bottom:3px;transition:color .2s, border-color .2s}
+.jsv-svc-cta:hover{color:#F7D774;border-color:#F7D774}
+.jsv-price-out{margin:0 0 14px;padding:9px 12px;border-radius:10px;border-left:2px solid #D4AF37;background:rgba(212,175,55,.07);color:#F1E7D8;font-size:12.5px;line-height:1.5}
+.jsv-work-card .jsv-cs-out{margin-top:4px;padding:11px 14px;border-left-width:3px;background:rgba(212,175,55,.1);box-shadow:inset 0 1px 0 rgba(247,215,116,.08)}
+.jsv-work-card .jsv-cs-out p{font-size:14px;font-weight:600;color:#F7D774}
+.jv-band{scroll-margin-top:96px}
+/* mobile calm: one accent per card, tighter reveals */
+@media (max-width:720px){
+  .jsv-hero-trust{font-size:11.5px}
+  .jsv-svc-out{font-size:12.5px !important}
+  .jsv-price-out{font-size:12px}
+}
+/* light theme */
+html:not(.dark) .jsv-hero-trust{color:#8D8275}
+html:not(.dark) .jsv-form-trust{color:#8D8275}
+html:not(.dark) .jsv-svc-out{color:#7C5A12 !important;border-color:rgba(176,132,38,.25)}
+html:not(.dark) .jsv-svc-cta{color:#8B6914;border-color:rgba(139,105,20,.4)}
+html:not(.dark) .jsv-svc-cta:hover{color:#5C430B;border-color:#5C430B}
+html:not(.dark) .jsv-price-out{background:rgba(184,134,11,.08);color:#3D352E}
+html:not(.dark) .jsv-work-card .jsv-cs-out p{color:#7C5A12}
+
     </style>
     <script data-pg="hero-premium">(function () {
   "use strict";
@@ -2444,7 +2473,7 @@ html:not(.dark) .jv-wa-tip{background:rgba(255,252,244,.95);color:#7C5A12;border
       block.innerHTML =
         '<div class="jsv-brand-logo" aria-hidden="true">' + jvLogo.replace('width="38" height="38"', 'width="64" height="64"') + '</div>' +
         '<div class="jsv-brand-word" role="heading" aria-level="2" aria-label="JSVita"></div>' +
-        '<p class="jsv-brand-tag">Founded by Shridhar John</p>';
+        '<p class="jsv-brand-tag">Founded by Shridhar John. JSVita is a premium technology brand focused on web development, AI solutions, automation, and digital innovation.</p>';
       anchor.parentNode.insertBefore(block, anchor.nextSibling);
       /* JSVita primary: lift the brand block to the top of the hero column; old static
          founder name + career tagline retire (founder stays visible, secondary) */
@@ -2516,17 +2545,24 @@ html:not(.dark) .jv-wa-tip{background:rgba(255,252,244,.95);color:#7C5A12;border
       var ctas = document.createElement("div");
       ctas.className = "jsv-hero-ctas jsv-fade jsv-fade-d5";
       ctas.innerHTML =
-        '<a class="jsv-cta jsv-cta-gold" href="#about" data-testid="hero-cta-explore">' +
-          '<span>Explore JSVita</span>' +
-          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><polyline points="19 12 12 19 5 12"/></svg>' +
-        '</a>' +
-        '<a class="jsv-cta jsv-cta-ghost" href="#contact" data-testid="hero-cta-start">' +
-          '<span>Start a Project</span>' +
+        '<a class="jsv-cta jsv-cta-gold" href="#contact" data-testid="hero-cta-start">' +
+          '<span>Start Your Project</span>' +
           '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>' +
+        '</a>' +
+        '<a class="jsv-cta jsv-cta-ghost" href="#pricing" data-testid="hero-cta-pricing">' +
+          '<span>View Services &amp; Pricing</span>' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><polyline points="19 12 12 19 5 12"/></svg>' +
         '</a>';
       var subline = document.querySelector(".jsv-hero-subline");
       if (subline) subline.parentNode.insertBefore(ctas, subline.nextSibling);
       else brandBlock.parentNode.insertBefore(ctas, brandBlock.nextSibling);
+      /* trust microcopy under the CTAs — answers the next question before it is asked */
+      if (!document.querySelector(".jsv-hero-trust")) {
+        var trust = document.createElement("p");
+        trust.className = "jsv-hero-trust";
+        trust.textContent = "Response within 24 hours · Free discovery call · Fixed, itemised proposals";
+        ctas.parentNode.insertBefore(trust, ctas.nextSibling);
+      }
       /* gold ripple from the exact tap point */
       ctas.addEventListener("pointerdown", function (e) {
         var b = e.target.closest ? e.target.closest(".jsv-cta") : null;
@@ -2832,9 +2868,9 @@ html:not(.dark) .jv-wa-tip{background:rgba(255,252,244,.95);color:#7C5A12;border
     d.innerHTML = bandHead("THE JSVITA STORY", "A luxury technology brand, built on real operations") +
       '<div class="jsv-story-grid">' +
       '<article class="jsv-story-card"><span class="jsv-bi" aria-hidden="true">' + ICO_USER + '</span><h3>Who is JSVita</h3><p>The personal technology brand of Shridhar John — where operational discipline meets digital craft.</p></article>' +
-      '<article class="jsv-story-card"><span class="jsv-bi" aria-hidden="true">' + ICO_CODE + '</span><h3>What JSVita does</h3><p>Premium websites, AI-powered workflows and brand systems — engineered end-to-end.</p></article>' +
-      '<article class="jsv-story-card"><span class="jsv-bi" aria-hidden="true">' + ICO_SHIELD + '</span><h3>Why trust JSVita</h3><p>3+ years running real operations — cafes, front offices, recovery teams — with measurable results.</p></article>' +
-      '<article class="jsv-story-card"><span class="jsv-bi" aria-hidden="true">' + ICO_SPARK + '</span><h3>The vision</h3><p>A complete luxury digital ecosystem — every experience deliberate, every detail gold.</p></article>' +
+      '<article class="jsv-story-card"><span class="jsv-bi" aria-hidden="true">' + ICO_CODE + '</span><h3>What JSVita delivers</h3><p>Premium websites, AI-powered workflows and brand systems — engineered end-to-end by one accountable team.</p></article>' +
+      '<article class="jsv-story-card"><span class="jsv-bi" aria-hidden="true">' + ICO_SHIELD + '</span><h3>How JSVita works</h3><p>Fixed, itemised proposals. Milestone demos. A 24-hour response window on every engagement.</p></article>' +
+      '<article class="jsv-story-card"><span class="jsv-bi" aria-hidden="true">' + ICO_SPARK + '</span><h3>The standard</h3><p>Every build leaves the studio finished to the same bar: luxury design, documented delivery, measurable results.</p></article>' +
       '</div>';
     grid.insertAdjacentElement("afterend", d);
     revealIO(d);
@@ -2896,8 +2932,8 @@ html:not(.dark) .jv-wa-tip{background:rgba(255,252,244,.95);color:#7C5A12;border
       var contact = document.getElementById("contact");
       if (!contact) return false;
       window.__jsvSvc = true;
-      function svc(ico, t, p) {
-        return '<article class="jsv-svc-card"><span class="jsv-bi" aria-hidden="true">' + ico + '</span><h3>' + t + '</h3><p>' + p + '</p></article>';
+      function svc(ico, t, p, out) {
+        return '<article class="jsv-svc-card"><span class="jsv-bi" aria-hidden="true">' + ico + '</span><h3>' + t + '</h3><p>' + p + '</p><p class="jsv-svc-out">' + out + '</p><a class="jsv-svc-cta" href="#pricing">See packages &amp; pricing</a></article>';
       }
       var sec = document.createElement("section");
       sec.id = "services";
@@ -2907,12 +2943,12 @@ html:not(.dark) .jv-wa-tip{background:rgba(255,252,244,.95);color:#7C5A12;border
       sec.innerHTML = '<div class="jv-band">' +
         bandHead("SERVICES", "What JSVita builds", "Six disciplines. One standard: excellence.") +
         '<div class="jsv-svc-grid">' +
-        svc(ICO_MONITOR, "Website Development", "Fast, elegant, conversion-ready sites — engineered for Chrome, Safari and everything between.") +
-        svc(ICO_GLOBE, "Domain Setup", "Domain research, registration and DNS — a clean, ownable address for your brand.") +
-        svc(ICO_SERVER, "Hosting Setup", "Fast, reliable hosting configured end-to-end — SSL, uptime and deploy pipelines included.") +
-        svc(ICO_MAIL, "Professional Email Setup", "Branded mailboxes on your own domain — you@yourbrand.com, delivered with SPF, DKIM and DMARC.") +
-        svc(ICO_AI, "AI Integration", "Assistants, automation and intelligence woven into your site and daily operations.") +
-        svc(ICO_GEM, "Digital Branding", "Marks, palettes and typography that make a brand impossible to forget.") +
+        svc(ICO_MONITOR, "Website Development", "Fast, elegant, conversion-ready sites — engineered for Chrome, Safari and everything between.", "Outcome: a website that turns visitors into enquiries.") +
+        svc(ICO_GLOBE, "Domain Setup", "Domain research, registration and DNS — a clean, ownable address for your brand.", "Outcome: a brand address you own outright, day one.") +
+        svc(ICO_SERVER, "Hosting Setup", "Fast, reliable hosting configured end-to-end — SSL, uptime and deploy pipelines included.", "Outcome: a fast, secure site — zero infrastructure headaches.") +
+        svc(ICO_MAIL, "Professional Email Setup", "Branded mailboxes on your own domain — you@yourbrand.com, delivered with SPF, DKIM and DMARC.", "Outcome: instant credibility in every inbox.") +
+        svc(ICO_AI, "AI Integration", "Assistants, automation and intelligence woven into your site and daily operations.", "Outcome: hours back every week, automations that never sleep.") +
+        svc(ICO_GEM, "Digital Branding", "Marks, palettes and typography that make a brand impossible to forget.", "Outcome: a brand that commands premium prices.") +
         '</div></div>';
       contact.parentNode.insertBefore(sec, contact);
       revealIO(sec);
@@ -3289,13 +3325,13 @@ html:not(.dark) .jv-wa-tip{background:rgba(255,252,244,.95);color:#7C5A12;border
         founderWrap.className = "jsv-founder-note";
         founderWrap.innerHTML =
           '<p class="jsv-founder-eyebrow">WHO STANDS BEHIND THE STANDARD</p>' +
-          '<p class="jsv-founder-line">Founded and operated by <strong>Shridhar John</strong> — three years of operating discipline behind every JSVita build. ' +
+          '<p class="jsv-founder-line">Founded by Shridhar John. JSVita is a premium technology brand focused on web development, AI solutions, automation, and digital innovation. ' +
           '<a class="jsv-founder-link" href="/founder">About the founder \u2192</a></p>';
         paras[0].parentNode.insertBefore(founderWrap, paras[0]);
       }
     }
-    /* detailed personal bands (experience / skills / interests) live on the founder page now */
-    Array.prototype.forEach.call(["experience", "skills", "interests"], function (id) {
+    /* detailed personal bands (experience / skills / interests / education) live on the founder page now */
+    Array.prototype.forEach.call(["experience", "skills", "interests", "education"], function (id) {
       var s = document.getElementById(id);
       if (s) s.classList.add("jsv-hero-hide");
     });
@@ -3334,6 +3370,14 @@ html:not(.dark) .jv-wa-tip{background:rgba(255,252,244,.95);color:#7C5A12;border
         '<ul class="jsv-conv-points"><li>Response within 24 hours</li><li>Free discovery call</li><li>Fixed, itemised proposal</li></ul>';
       intro.insertAdjacentElement("afterend", strip);
     }
+    /* form-level trust microcopy — the reassurance sits beside the button that asks for effort */
+    var form = contact.querySelector('form[data-testid="contact-form"]');
+    if (form && !form.querySelector(".jsv-form-trust")) {
+      var tr = document.createElement("p");
+      tr.className = "jsv-form-trust";
+      tr.textContent = "No obligation — you receive a fixed, itemised proposal before any work begins.";
+      form.appendChild(tr);
+    }
     return true;
   }
 
@@ -3344,13 +3388,14 @@ html:not(.dark) .jv-wa-tip{background:rgba(255,252,244,.95);color:#7C5A12;border
     var process = document.getElementById("process");
     if (!services || !process) return false;
     window.__jsvPricing = true;
-    function pack(name, forWho, items, featured) {
+    function pack(name, forWho, items, featured, out) {
       return '<article class="jsv-price-card' + (featured ? ' jsv-price-featured' : '') + '">' +
         (featured ? '<span class="jsv-price-flag">MOST CHOSEN</span>' : '') +
         '<h3>' + name + '</h3><p class="jsv-price-for">' + forWho + '</p>' +
         '<p class="jsv-price-amt">Bespoke quote</p>' +
         '<p class="jsv-price-note">Fixed, itemised proposal after your discovery call — no hourly meters.</p>' +
         '<ul>' + items.map(function (i) { return '<li>' + i + '</li>'; }).join("") + '</ul>' +
+        '<p class="jsv-price-out">' + out + '</p>' +
         '<a class="jsv-price-cta" href="#contact">' + (featured ? 'Start your project' : 'Request a proposal') + '</a></article>';
     }
     var sec = document.createElement("section");
@@ -3362,13 +3407,17 @@ html:not(.dark) .jv-wa-tip{background:rgba(255,252,244,.95);color:#7C5A12;border
       bandHead("INVESTMENT", "Premium service packages", "Transparent scopes. Luxury delivery. No hourly meters.") +
       '<div class="jsv-price-grid">' +
       pack("Starter Website", "For new ventures that need to exist — beautifully.",
-        ["1–3 page bespoke website", "Domain, hosting &amp; SSL setup", "Mobile-first luxury design", "WhatsApp &amp; contact actions", "Launch in days, not months"], false) +
+        ["1–3 page bespoke website", "Domain, hosting &amp; SSL setup", "Mobile-first luxury design", "WhatsApp &amp; contact actions", "Launch in days, not months"], false,
+        "Outcome: a credible, fast web presence you can hand to any client.") +
       pack("Business Website", "For operating businesses that want to win.",
-        ["Up to 8 bespoke pages", "Professional email on your domain", "SEO foundations &amp; sitemap", "Analytics &amp; conversion tracking", "AI enquiry assistant", "24h response window"], false) +
+        ["Up to 8 bespoke pages", "Professional email on your domain", "SEO foundations &amp; sitemap", "Analytics &amp; conversion tracking", "AI enquiry assistant", "24h response window"], false,
+        "Outcome: a site that converts — enquiries, bookings, sales.") +
       pack("Premium Business Presence", "The full JSVita standard — brand to launch.",
-        ["Everything in Business", "Full digital branding — mark, palette, type", "AI automation &amp; integrations", "Copywriting &amp; launch content", "Priority founder-led delivery", "Post-launch care window"], true) +
+        ["Everything in Business", "Full digital branding — mark, palette, type", "AI automation &amp; integrations", "Copywriting &amp; launch content", "Priority founder-led delivery", "Post-launch care window"], true,
+        "Outcome: a complete premium presence that wins premium clients.") +
       pack("Custom Enterprise Solution", "Scoped to your ambition — web, AI, internal tools.",
-        ["Bespoke platforms &amp; dashboards", "AI workflows &amp; integrations", "Multi-stakeholder scoping", "Audit-grade documentation", "SLA-backed support retainer", "Direct line to the founder"], false) +
+        ["Bespoke platforms &amp; dashboards", "AI workflows &amp; integrations", "Multi-stakeholder scoping", "Audit-grade documentation", "SLA-backed support retainer", "Direct line to the founder"], false,
+        "Outcome: a private digital platform your business runs on.") +
       '</div></div>';
     process.parentNode.insertBefore(sec, process);
     revealIO(sec);
