@@ -22,19 +22,18 @@
     <meta name="description" content="JSVita is a premium digital services company: bespoke websites, AI solutions, automation and digital branding — delivered end to end with a 24-hour response window. Start your project today." />
     <meta
       property="og:description"
-      content="Premium digital experiences by Shridhar John. Web Development • AI Solutions • Digital Innovation — jsvita.in."
+      content="Premium websites, AI solutions, automation and digital branding — delivered end to end with a 24-hour response window. Trusted by growing businesses."
     />
     <meta property="og:url" content="https://jsvita.in/" />
-    <meta
-      property="og:image"
-      content="https://jsvita.in/jsvita-og.png"
-    />
-    <meta property="og:image:alt" content="JSVita — official logo" />
+    <meta property="og:image" content="https://jsvita.in/jsvita-og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="JSVita — Premium Digital Services Company" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="JSVita — Building Digital Excellence" />
+    <meta name="twitter:title" content="JSVita — Premium Digital Services Company" />
     <meta
       name="twitter:description"
-      content="Bangalore-based cafe and operations manager with 3+ years across hospitality, retail operations, and team leadership."
+      content="Premium websites, AI solutions, automation and digital branding — 24-hour response window, fixed itemised proposals."
     />
     <meta
       name="twitter:image"
@@ -2329,7 +2328,193 @@ html:not(.dark) .jsv-svc-out{color:#7C5A12 !important;border-color:rgba(176,132,
 html:not(.dark) .jsv-svc-cta{color:#8B6914;border-color:rgba(139,105,20,.4)}
 html:not(.dark) .jsv-svc-cta:hover{color:#5C430B;border-color:#5C430B}
 html:not(.dark) .jsv-price-out{background:rgba(184,134,11,.08);color:#3D352E}
+
+/* ============================================================
+   30k · Phase 6 — Trust, Authority & Conversion
+   Marquee · glass trust cards · testimonials · lead magnet ·
+   contact trust grid · stats expansion · light + a11y variants
+   ============================================================ */
+
+/* --- social-proof marquee --- */
+.jv-marquee{position:relative;overflow:hidden;border-top:1px solid rgba(212,175,55,.14);border-bottom:1px solid rgba(212,175,55,.14);background:linear-gradient(180deg,rgba(212,175,55,.05),rgba(212,175,55,.02));padding:16px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.jv-mq-track{display:flex;width:max-content;animation:jvMq 30s linear infinite}
+.jv-marquee:hover .jv-mq-track{animation-play-state:paused}
+.jv-mq-seq{display:flex;align-items:center;gap:26px;padding-right:26px}
+.jv-mq-item{font:600 12.5px/1 "JetBrains Mono Variable","JetBrains Mono",monospace;letter-spacing:.22em;text-transform:uppercase;color:#C9BCAE;white-space:nowrap}
+.jv-mq-dot{width:5px;height:5px;border-radius:50%;background:radial-gradient(circle,#F7D774,#AA771C);box-shadow:0 0 8px rgba(212,175,55,.8);flex:0 0 auto}
+@keyframes jvMq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+html:not(.dark) .jv-mq-item{color:#6B5F51}
+html:not(.dark) .jv-marquee{border-color:rgba(176,132,38,.25);background:linear-gradient(180deg,rgba(184,134,11,.06),rgba(184,134,11,.02))}
+
+/* --- trust glass cards (between Pricing and Case Studies) --- */
+.jv-trust-grid{display:grid;gap:16px;margin-top:34px;grid-template-columns:repeat(3,1fr)}
+.jv-trust-card{position:relative;overflow:hidden;padding:24px 22px 22px;border-radius:18px;border:1px solid rgba(212,175,55,.2);background:linear-gradient(160deg,rgba(255,255,255,.055),rgba(255,255,255,.015));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .3s cubic-bezier(.22,.61,.36,1),border-color .3s,box-shadow .3s}
+.jv-trust-card::before{content:"";position:absolute;inset:-40% 55% 60% -40%;background:radial-gradient(closest-side,rgba(212,175,55,.16),transparent 70%);pointer-events:none;transition:opacity .3s;opacity:.6}
+.jv-trust-card:hover{transform:translateY(-4px);border-color:rgba(247,215,116,.5);box-shadow:0 24px 54px -30px rgba(212,175,55,.45)}
+.jv-trust-card:hover::before{opacity:1}
+.jv-trust-card h3{font:700 16px "DM Sans Variable","DM Sans",sans-serif;color:#F7D774;margin-top:12px}
+.jv-trust-card p{margin-top:7px;color:#B9AC9E;font-size:14px;line-height:1.6}
+html:not(.dark) .jv-trust-card{background:linear-gradient(160deg,rgba(255,252,244,.92),rgba(246,238,221,.88));border-color:rgba(176,132,38,.3)}
+html:not(.dark) .jv-trust-card h3{color:#7C5A12}
+html:not(.dark) .jv-trust-card p{color:#5C5244}
+@media (max-width:1024px){.jv-trust-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.jv-trust-grid{grid-template-columns:1fr}.jv-trust-card{padding:20px 18px 18px}}
+
+/* --- testimonials --- */
+.jv-tst-grid{display:grid;gap:16px;margin-top:34px;grid-template-columns:repeat(3,1fr)}
+.jv-tst-card{position:relative;margin:0;padding:26px 24px 22px;border-radius:18px;border:1px solid rgba(212,175,55,.2);background:linear-gradient(165deg,rgba(36,28,21,.75),rgba(23,17,12,.75));display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.22,.61,.36,1),border-color .3s,box-shadow .3s}
+.jv-tst-card:hover{transform:translateY(-4px);border-color:rgba(247,215,116,.5);box-shadow:0 24px 54px -30px rgba(212,175,55,.4)}
+.jv-quote-mark{position:absolute;top:6px;right:18px;font:800 64px/1 "Playfair Display",Georgia,serif;color:rgba(212,175,55,.28);pointer-events:none}
+.jv-tst-stars{color:#D4AF37;font-size:14px;letter-spacing:3px;text-shadow:0 0 12px rgba(212,175,55,.45)}
+.jv-tst-card blockquote{margin:12px 0 18px;color:#E7DCCB;font-size:14.5px;line-height:1.7;flex:1}
+.jv-tst-card figcaption{display:flex;flex-direction:column;gap:2px;border-top:1px solid rgba(212,175,55,.16);padding-top:14px}
+.jv-tst-name{font:700 14px "DM Sans Variable","DM Sans",sans-serif;color:#F7D774}
+.jv-tst-role{font:600 11px/1.4 "JetBrains Mono Variable","JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:#8D8275}
+html:not(.dark) .jv-tst-card{background:linear-gradient(165deg,rgba(255,252,244,.95),rgba(246,238,221,.92));border-color:rgba(176,132,38,.3)}
+html:not(.dark) .jv-tst-card blockquote{color:#4A4136}
+html:not(.dark) .jv-tst-name{color:#7C5A12}
+html:not(.dark) .jv-quote-mark{color:rgba(176,132,38,.35)}
+/* mobile: smooth snap carousel */
+@media (max-width:860px){
+  .jv-tst-grid{grid-auto-flow:column;grid-auto-columns:86%;grid-template-columns:none;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:6px;padding-bottom:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .jv-tst-grid::-webkit-scrollbar{display:none}
+  .jv-tst-card{scroll-snap-align:center}
+}
+
+/* --- free consultation lead magnet --- */
+.jv-consult-band{background:radial-gradient(60% 90% at 50% 0%,rgba(212,175,55,.1),transparent 70%)}
+.jv-consult-inner{max-width:680px;margin:0 auto;text-align:center}
+.jv-consult-points{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;margin:22px 0 0;padding:0;list-style:none}
+.jv-consult-points li{position:relative;padding-left:20px;font:600 13.5px/1.6 "DM Sans Variable","DM Sans",sans-serif;color:#E4C878}
+.jv-consult-points li::before{content:"\\2713";position:absolute;left:0;top:0;color:#D4AF37;font-weight:700}
+.jv-consult-cta{display:inline-flex;align-items:center;gap:10px;margin-top:26px;padding:16px 34px;border-radius:999px;font:700 15px "DM Sans Variable","DM Sans",sans-serif;color:#17110C;text-decoration:none;background:linear-gradient(120deg,#F3E5AB,#D4AF37 55%,#F7D774);box-shadow:0 16px 44px -14px rgba(212,175,55,.6),inset 0 1px 0 rgba(255,255,255,.5);transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
+.jv-consult-cta:hover{transform:translateY(-2px);filter:brightness(1.06);box-shadow:0 22px 54px -16px rgba(212,175,55,.7),inset 0 1px 0 rgba(255,255,255,.5)}
+.jv-consult-cta svg{width:17px;height:17px}
+.jv-consult-note{margin-top:14px;font:500 12px/1.6 "JetBrains Mono Variable","JetBrains Mono",monospace;letter-spacing:.05em;color:#8D8275}
+html:not(.dark) .jv-consult-points li{color:#7C5A12}
+html:not(.dark) .jv-consult-note{color:#8D8275}
+
+/* --- contact trust grid (above the form) --- */
+.jv-contact-trust{display:grid;gap:12px;grid-template-columns:repeat(4,1fr);margin:0 0 18px}
+.jv-ct-card{display:flex;flex-direction:column;gap:4px;padding:14px 16px;border-radius:14px;border:1px solid rgba(212,175,55,.2);background:rgba(255,255,255,.035);transition:border-color .25s,transform .25s}
+.jv-ct-card:hover{border-color:rgba(247,215,116,.45);transform:translateY(-2px)}
+.jv-ct-k{font:600 10.5px/1.3 "JetBrains Mono Variable","JetBrains Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:#8D8275}
+.jv-ct-v{font:700 13.5px/1.4 "DM Sans Variable","DM Sans",sans-serif;color:#F7D774}
+html:not(.dark) .jv-ct-card{background:rgba(255,252,244,.85);border-color:rgba(176,132,38,.3)}
+html:not(.dark) .jv-ct-k{color:#8D8275}
+html:not(.dark) .jv-ct-v{color:#7C5A12}
+@media (max-width:860px){.jv-contact-trust{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:420px){.jv-contact-trust{gap:10px}.jv-ct-card{padding:12px 12px}.jv-ct-v{font-size:12.5px}}
+
+/* --- stats band: 6 premium counters --- */
+#jsv-stats .jsv-stat-grid{grid-template-columns:repeat(3,1fr);gap:16px}
+#jsv-stats .jsv-stat-num{font-size:clamp(2rem,3.4vw,2.8rem);white-space:nowrap}
+@media (max-width:1080px){#jsv-stats .jsv-stat-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* --- accessibility / motion --- */
+@media (max-width:720px){
+  .jv-consult-points{gap:8px 18px}
+  .jv-consult-cta{width:100%;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){
+  .jv-mq-track{animation:none;flex-wrap:wrap;width:auto}
+  .jv-mq-seq[aria-hidden="true"]{display:none}
+  .jv-trust-card,.jv-tst-card,.jv-ct-card,.jv-consult-cta{transition:none}
+}
 html:not(.dark) .jsv-work-card .jsv-cs-out p{color:#7C5A12}
+
+/* ============================================================
+   30k · Phase 6 — Trust, Authority & Conversion
+   Marquee · glass trust cards · testimonials · lead magnet ·
+   contact trust grid · stats expansion · light + a11y variants
+   ============================================================ */
+
+/* --- social-proof marquee --- */
+.jv-marquee{position:relative;overflow:hidden;border-top:1px solid rgba(212,175,55,.14);border-bottom:1px solid rgba(212,175,55,.14);background:linear-gradient(180deg,rgba(212,175,55,.05),rgba(212,175,55,.02));padding:16px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.jv-mq-track{display:flex;width:max-content;animation:jvMq 30s linear infinite}
+.jv-marquee:hover .jv-mq-track{animation-play-state:paused}
+.jv-mq-seq{display:flex;align-items:center;gap:26px;padding-right:26px}
+.jv-mq-item{font:600 12.5px/1 "JetBrains Mono Variable","JetBrains Mono",monospace;letter-spacing:.22em;text-transform:uppercase;color:#C9BCAE;white-space:nowrap}
+.jv-mq-dot{width:5px;height:5px;border-radius:50%;background:radial-gradient(circle,#F7D774,#AA771C);box-shadow:0 0 8px rgba(212,175,55,.8);flex:0 0 auto}
+@keyframes jvMq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+html:not(.dark) .jv-mq-item{color:#6B5F51}
+html:not(.dark) .jv-marquee{border-color:rgba(176,132,38,.25);background:linear-gradient(180deg,rgba(184,134,11,.06),rgba(184,134,11,.02))}
+
+/* --- trust glass cards (between Pricing and Case Studies) --- */
+.jv-trust-grid{display:grid;gap:16px;margin-top:34px;grid-template-columns:repeat(3,1fr)}
+.jv-trust-card{position:relative;overflow:hidden;padding:24px 22px 22px;border-radius:18px;border:1px solid rgba(212,175,55,.2);background:linear-gradient(160deg,rgba(255,255,255,.055),rgba(255,255,255,.015));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .3s cubic-bezier(.22,.61,.36,1),border-color .3s,box-shadow .3s}
+.jv-trust-card::before{content:"";position:absolute;inset:-40% 55% 60% -40%;background:radial-gradient(closest-side,rgba(212,175,55,.16),transparent 70%);pointer-events:none;transition:opacity .3s;opacity:.6}
+.jv-trust-card:hover{transform:translateY(-4px);border-color:rgba(247,215,116,.5);box-shadow:0 24px 54px -30px rgba(212,175,55,.45)}
+.jv-trust-card:hover::before{opacity:1}
+.jv-trust-card h3{font:700 16px "DM Sans Variable","DM Sans",sans-serif;color:#F7D774;margin-top:12px}
+.jv-trust-card p{margin-top:7px;color:#B9AC9E;font-size:14px;line-height:1.6}
+html:not(.dark) .jv-trust-card{background:linear-gradient(160deg,rgba(255,252,244,.92),rgba(246,238,221,.88));border-color:rgba(176,132,38,.3)}
+html:not(.dark) .jv-trust-card h3{color:#7C5A12}
+html:not(.dark) .jv-trust-card p{color:#5C5244}
+@media (max-width:1024px){.jv-trust-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.jv-trust-grid{grid-template-columns:1fr}.jv-trust-card{padding:20px 18px 18px}}
+
+/* --- testimonials --- */
+.jv-tst-grid{display:grid;gap:16px;margin-top:34px;grid-template-columns:repeat(3,1fr)}
+.jv-tst-card{position:relative;margin:0;padding:26px 24px 22px;border-radius:18px;border:1px solid rgba(212,175,55,.2);background:linear-gradient(165deg,rgba(36,28,21,.75),rgba(23,17,12,.75));display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.22,.61,.36,1),border-color .3s,box-shadow .3s}
+.jv-tst-card:hover{transform:translateY(-4px);border-color:rgba(247,215,116,.5);box-shadow:0 24px 54px -30px rgba(212,175,55,.4)}
+.jv-quote-mark{position:absolute;top:6px;right:18px;font:800 64px/1 "Playfair Display",Georgia,serif;color:rgba(212,175,55,.28);pointer-events:none}
+.jv-tst-stars{color:#D4AF37;font-size:14px;letter-spacing:3px;text-shadow:0 0 12px rgba(212,175,55,.45)}
+.jv-tst-card blockquote{margin:12px 0 18px;color:#E7DCCB;font-size:14.5px;line-height:1.7;flex:1}
+.jv-tst-card figcaption{display:flex;flex-direction:column;gap:2px;border-top:1px solid rgba(212,175,55,.16);padding-top:14px}
+.jv-tst-name{font:700 14px "DM Sans Variable","DM Sans",sans-serif;color:#F7D774}
+.jv-tst-role{font:600 11px/1.4 "JetBrains Mono Variable","JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:#8D8275}
+html:not(.dark) .jv-tst-card{background:linear-gradient(165deg,rgba(255,252,244,.95),rgba(246,238,221,.92));border-color:rgba(176,132,38,.3)}
+html:not(.dark) .jv-tst-card blockquote{color:#4A4136}
+html:not(.dark) .jv-tst-name{color:#7C5A12}
+html:not(.dark) .jv-quote-mark{color:rgba(176,132,38,.35)}
+/* mobile: smooth snap carousel */
+@media (max-width:860px){
+  .jv-tst-grid{grid-auto-flow:column;grid-auto-columns:86%;grid-template-columns:none;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:6px;padding-bottom:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .jv-tst-grid::-webkit-scrollbar{display:none}
+  .jv-tst-card{scroll-snap-align:center}
+}
+
+/* --- free consultation lead magnet --- */
+.jv-consult-band{background:radial-gradient(60% 90% at 50% 0%,rgba(212,175,55,.1),transparent 70%)}
+.jv-consult-inner{max-width:680px;margin:0 auto;text-align:center}
+.jv-consult-points{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;margin:22px 0 0;padding:0;list-style:none}
+.jv-consult-points li{position:relative;padding-left:20px;font:600 13.5px/1.6 "DM Sans Variable","DM Sans",sans-serif;color:#E4C878}
+.jv-consult-points li::before{content:"\2713";position:absolute;left:0;top:0;color:#D4AF37;font-weight:700}
+.jv-consult-cta{display:inline-flex;align-items:center;gap:10px;margin-top:26px;padding:16px 34px;border-radius:999px;font:700 15px "DM Sans Variable","DM Sans",sans-serif;color:#17110C;text-decoration:none;background:linear-gradient(120deg,#F3E5AB,#D4AF37 55%,#F7D774);box-shadow:0 16px 44px -14px rgba(212,175,55,.6),inset 0 1px 0 rgba(255,255,255,.5);transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
+.jv-consult-cta:hover{transform:translateY(-2px);filter:brightness(1.06);box-shadow:0 22px 54px -16px rgba(212,175,55,.7),inset 0 1px 0 rgba(255,255,255,.5)}
+.jv-consult-cta svg{width:17px;height:17px}
+.jv-consult-note{margin-top:14px;font:500 12px/1.6 "JetBrains Mono Variable","JetBrains Mono",monospace;letter-spacing:.05em;color:#8D8275}
+html:not(.dark) .jv-consult-points li{color:#7C5A12}
+html:not(.dark) .jv-consult-note{color:#8D8275}
+
+/* --- contact trust grid (above the form) --- */
+.jv-contact-trust{display:grid;gap:12px;grid-template-columns:repeat(4,1fr);margin:0 0 18px}
+.jv-ct-card{display:flex;flex-direction:column;gap:4px;padding:14px 16px;border-radius:14px;border:1px solid rgba(212,175,55,.2);background:rgba(255,255,255,.035);transition:border-color .25s,transform .25s}
+.jv-ct-card:hover{border-color:rgba(247,215,116,.45);transform:translateY(-2px)}
+.jv-ct-k{font:600 10.5px/1.3 "JetBrains Mono Variable","JetBrains Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:#8D8275}
+.jv-ct-v{font:700 13.5px/1.4 "DM Sans Variable","DM Sans",sans-serif;color:#F7D774}
+html:not(.dark) .jv-ct-card{background:rgba(255,252,244,.85);border-color:rgba(176,132,38,.3)}
+html:not(.dark) .jv-ct-k{color:#8D8275}
+html:not(.dark) .jv-ct-v{color:#7C5A12}
+@media (max-width:860px){.jv-contact-trust{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:420px){.jv-contact-trust{gap:10px}.jv-ct-card{padding:12px 12px}.jv-ct-v{font-size:12.5px}}
+
+/* --- stats band: 6 premium counters --- */
+#jsv-stats .jsv-stat-grid{grid-template-columns:repeat(3,1fr);gap:16px}
+#jsv-stats .jsv-stat-num{font-size:clamp(2rem,3.4vw,2.8rem);white-space:nowrap}
+@media (max-width:1080px){#jsv-stats .jsv-stat-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* --- accessibility / motion --- */
+@media (max-width:720px){
+  .jv-consult-points{gap:8px 18px}
+  .jv-consult-cta{width:100%;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){
+  .jv-mq-track{animation:none;flex-wrap:wrap;width:auto}
+  .jv-mq-seq[aria-hidden="true"]{display:none}
+  .jv-trust-card,.jv-tst-card,.jv-ct-card,.jv-consult-cta{transition:none}
+}
 
     </style>
     <script data-pg="hero-premium">(function () {
@@ -3041,10 +3226,12 @@ html:not(.dark) .jsv-work-card .jsv-cs-out p{color:#7C5A12}
       [6, "", "Service lines, one standard"],
       [48, "h", "From kickoff to first demo"],
       [100, "%", "Bespoke builds — never templates"],
-      [24, "h", "Response window, always on"]
+      [24, "h", "Response window, always on"],
+      ["Premium", "", "Support, founder-led"],
+      ["Modern", "", "Technology stack"],
     ];
-    var cards = data.map(function (d, i) {
-      return '<div class="jsv-stat-card"><p class="jsv-stat-num" data-count="' + d[0] + '" data-suffix="' + d[1] + '">0</p><p class="jsv-stat-label">' + d[2] + '</p></div>';
+    var cards = data.map(function (d) {
+      return '<div class="jsv-stat-card"><p class="jsv-stat-num" data-count="' + d[0] + '" data-suffix="' + d[1] + '">' + (typeof d[0] === "number" ? "0" : d[0]) + '</p><p class="jsv-stat-label">' + d[2] + '</p></div>';
     }).join("");
     var sec = document.createElement("section");
     sec.id = "jsv-stats";
@@ -3065,6 +3252,7 @@ html:not(.dark) .jsv-work-card .jsv-cs-out p{color:#7C5A12}
         sec.querySelectorAll(".jsv-stat-num").forEach(function (el) {
           var target = parseInt(el.getAttribute("data-count"), 10);
           var suffix = el.getAttribute("data-suffix") || "";
+          if (isNaN(target)) { el.textContent = el.getAttribute("data-count"); return; }
           if (reduced) { el.textContent = target + suffix; return; }
           var t0 = null;
           (function tick(ts) {
@@ -3074,8 +3262,6 @@ html:not(.dark) .jsv-work-card .jsv-cs-out p{color:#7C5A12}
             el.textContent = Math.round(target * k) + suffix;
             if (k < 1) requestAnimationFrame(tick);
           })(0);
-          requestAnimationFrame(function tick(ts) {
-          });
         });
       });
     }, { threshold: 0.3 });
@@ -3276,18 +3462,25 @@ html:not(.dark) .jsv-work-card .jsv-cs-out p{color:#7C5A12}
     return true;
   }
 
-  /* ---- Phase 5 · conversion order — Hero → Services → Pricing → Case Studies → Contact ---- */
+  /* ---- Phase 5/6 · conversion order — deterministic final band sequence ----
+     All moved sections are script-created (never React-owned), so reordering is safe.
+     Target: Services → Pricing → Trust → Case Studies → Testimonials → Consultation → Process */
   function initConversionOrder() {
     if (window.__jsvOrder) return true;
-    var work = document.getElementById("work");
     var pricing = document.getElementById("pricing");
+    var work = document.getElementById("work");
+    var trust = document.getElementById("trust");
+    var tst = document.getElementById("testimonials");
+    var consult = document.getElementById("consult");
     var process = document.getElementById("process");
-    if (!work || !pricing || !process) return false;
+    if (!pricing || !work || !trust || !tst || !consult || !process) return false;
     window.__jsvOrder = true;
-    /* move Case Studies below Pricing only while they still sit in the original position */
-    if (work.compareDocumentPosition(pricing) & Node.DOCUMENT_POSITION_FOLLOWING) {
-      process.parentNode.insertBefore(work, process);
-    }
+    var parent = process.parentNode;
+    parent.insertBefore(pricing, process);
+    parent.insertBefore(trust, process);
+    parent.insertBefore(work, process);
+    parent.insertBefore(tst, process);
+    parent.insertBefore(consult, process);
     return true;
   }
 
@@ -3454,6 +3647,201 @@ html:not(.dark) .jsv-work-card .jsv-cs-out p{color:#7C5A12}
     return true;
   }
 
+  /* ---- Phase 6 · conversion tracking — GTM/GA4/Meta-ready event layer ----
+     jvTrack fans one event out to every installed analytics layer:
+       · window.dataLayer        → Google Tag Manager data model
+       · window.gtag('event')    → GA4 (when gtag.js is present)
+       · window.fbq('trackCustom') → Meta Pixel (when pixel is present)
+     No network calls, no libraries — pushes only. Add the GTM/GA4/Pixel
+     snippet to <head> later and these events flow without code changes. */
+  function jvTrack(event, params) {
+    try {
+      params = params || {};
+      window.dataLayer = window.dataLayer || [];
+      var payload = { event: event };
+      for (var k in params) { if (Object.prototype.hasOwnProperty.call(params, k)) payload[k] = params[k]; }
+      window.dataLayer.push(payload);
+      if (typeof window.gtag === "function") window.gtag("event", event, params);
+      if (typeof window.fbq === "function") window.fbq("trackCustom", event, params);
+    } catch (e) {}
+  }
+
+  function initTracking() {
+    if (window.__jsvTrack) return true;
+    if (!document.body) return false;
+    window.__jsvTrack = true;
+    window.dataLayer = window.dataLayer || [];
+    jvTrack("page_view", { page: "home" });
+    /* one capture-phase click listener — survives React re-renders, never blocks */
+    document.addEventListener("click", function (e) {
+      var t = e.target;
+      if (!t || !t.closest) return;
+      var el;
+      if ((el = t.closest(".jsv-hero-ctas a"))) {
+        jvTrack("hero_cta_click", { cta: el.getAttribute("data-testid") || el.textContent.trim() });
+        return;
+      }
+      if ((el = t.closest("#pricing a"))) {
+        var card = el.closest(".jsv-price-card");
+        var pkg = card ? (card.querySelector("h3") || {}).textContent : "";
+        jvTrack("pricing_cta_click", { package: (pkg || "").trim() });
+        return;
+      }
+      if ((el = t.closest(".jv-wa-fab"))) {
+        jvTrack("whatsapp_click", { location: "fab" });
+        return;
+      }
+      if ((el = t.closest("#consult a"))) {
+        jvTrack("consultation_request", { location: "lead-magnet" });
+        return;
+      }
+      if ((el = t.closest('a[href="/founder"], a[href="/founder#track-record"]'))) {
+        jvTrack("founder_link_click", { source: el.className || "footer" });
+        return;
+      }
+      if ((el = t.closest("#contact form button, #contact form [type=submit]"))) {
+        jvTrack("contact_form_submit", { method: "form" });
+      }
+    }, true);
+    /* submit also fires via Enter key — cover it at the form level */
+    document.addEventListener("submit", function (e) {
+      var f = e.target;
+      if (f && f.closest && f.closest("#contact")) jvTrack("contact_form_submit", { method: "form" });
+    }, true);
+    return true;
+  }
+
+  /* ---- Phase 6 · premium social-proof marquee (under the hero stats) ---- */
+  function initMarquee() {
+    if (window.__jsvMarquee) return true;
+    var about = document.getElementById("about");
+    if (!about) return false;
+    window.__jsvMarquee = true;
+    var items = ["Professional Websites", "AI Solutions", "Automation Systems", "Business Branding", "Digital Innovation"];
+    var row = items.map(function (s) { return '<span class="jv-mq-item">' + s + '</span><span class="jv-mq-dot" aria-hidden="true"></span>'; }).join("");
+    var strip = document.createElement("div");
+    strip.className = "jv-marquee jsv-reveal";
+    strip.setAttribute("aria-label", "What JSVita delivers");
+    strip.setAttribute("data-testid", "social-proof-strip");
+    strip.innerHTML = '<div class="jv-mq-track"><div class="jv-mq-seq">' + row + '</div><div class="jv-mq-seq" aria-hidden="true">' + row + '</div></div>';
+    about.parentNode.insertBefore(strip, about);
+    revealIO(strip);
+    return true;
+  }
+
+  /* ---- Phase 6 · trust signals — between Pricing and Case Studies ---- */
+  function initTrust() {
+    if (window.__jsvTrust) return true;
+    var work = document.getElementById("work");
+    if (!work) return false;
+    window.__jsvTrust = true;
+    var ICO_CLOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>';
+    var cards = [
+      [ICO_GEM, "Premium Design", "Design that signals quality before a single word is read."],
+      [ICO_SPARK, "Fast Delivery", "Kickoff to working demo in as little as 48 hours."],
+      [ICO_USER, "Direct Founder Involvement", "The founder leads every build personally — no handoffs, no dilution."],
+      [ICO_CODE, "Custom Development", "Zero templates — every line engineered for your business."],
+      [ICO_SHIELD, "Ongoing Support", "A 24-hour response window that does not end at launch."],
+      [ICO_CLOCK, "Business-Focused Solutions", "Every feature justified by the outcome it earns you."]
+    ];
+    var sec = document.createElement("section");
+    sec.id = "trust";
+    sec.className = "scroll-mt-20 border-t border-border/70 jsv-reveal";
+    sec.setAttribute("data-testid", "trust-signals");
+    sec.setAttribute("aria-label", "Trusted by growing businesses");
+    sec.innerHTML = '<div class="jv-band">' +
+      bandHead("TRUST", "Trusted By Growing Businesses", "Businesses choose JSVita for premium digital solutions, transparent communication, and long-term support.") +
+      '<div class="jv-trust-grid">' +
+      cards.map(function (c) {
+        return '<article class="jv-trust-card"><span class="jsv-bi" aria-hidden="true">' + c[0] + '</span><h3>' + c[1] + '</h3><p>' + c[2] + '</p></article>';
+      }).join("") +
+      '</div></div>';
+    work.parentNode.insertBefore(sec, work);
+    revealIO(sec);
+    return true;
+  }
+
+  /* ---- Phase 6 · client testimonials (SAMPLE copy — swap in real client quotes) ---- */
+  function initTestimonials() {
+    if (window.__jsvTst) return true;
+    var process = document.getElementById("process");
+    if (!process) return false;
+    window.__jsvTst = true;
+    var STARS = '<span class="jv-tst-stars" aria-label="5 out of 5 stars">\u2605\u2605\u2605\u2605\u2605</span>';
+    var quotes = [
+      ["A. R.", "Cafe Owner \u00b7 Bangalore", "The proposal was itemised to the hour and the first demo arrived in two days. It felt like working with a firm ten times the size."],
+      ["S. K.", "Retail Founder", "Automation now handles our weekly reporting — hours back every single week, with records I can actually audit."],
+      ["M. P.", "Practice Manager", "Direct, honest and fast. The site looks like a global brand, loads instantly, and enquiries started within the first week."]
+    ];
+    var sec = document.createElement("section");
+    sec.id = "testimonials";
+    sec.className = "scroll-mt-20 border-t border-border/70 jsv-reveal";
+    sec.setAttribute("data-testid", "testimonials");
+    sec.setAttribute("aria-label", "What clients say");
+    sec.innerHTML = '<div class="jv-band">' +
+      bandHead("TESTIMONIALS", "What Clients Say", "Early engagements, measured by the only standard that matters — the client\u2019s.") +
+      '<div class="jv-tst-grid">' +
+      quotes.map(function (q) {
+        return '<figure class="jv-tst-card"><span class="jv-quote-mark" aria-hidden="true">\u201C</span>' + STARS +
+          '<blockquote>' + q[2] + '</blockquote>' +
+          '<figcaption><span class="jv-tst-name">' + q[0] + '</span><span class="jv-tst-role">' + q[1] + '</span></figcaption></figure>';
+      }).join("") +
+      '</div></div>';
+    process.parentNode.insertBefore(sec, process);
+    revealIO(sec);
+    return true;
+  }
+
+  /* ---- Phase 6 · free consultation lead magnet (before Process) ---- */
+  function initConsult() {
+    if (window.__jsvConsult) return true;
+    var process = document.getElementById("process");
+    if (!process) return false;
+    window.__jsvConsult = true;
+    var benefits = ["Free discovery call", "Project roadmap", "Transparent proposal", "No obligation"];
+    var sec = document.createElement("section");
+    sec.id = "consult";
+    sec.className = "scroll-mt-20 jsv-reveal";
+    sec.setAttribute("data-testid", "free-consultation");
+    sec.setAttribute("aria-label", "Get a free project consultation");
+    sec.innerHTML = '<div class="jv-band jv-consult-band">' +
+      '<div class="jv-consult-inner">' +
+        '<p class="jv-band-eyebrow">FREE CONSULTATION</p>' +
+        '<h2 class="jv-band-title">Get a Free Project Consultation</h2>' +
+        '<p class="jv-band-sub">Discuss your website, automation, AI solution, or digital growth strategy with JSVita.</p>' +
+        '<ul class="jv-consult-points">' + benefits.map(function (b) { return '<li>' + b + '</li>'; }).join("") + '</ul>' +
+        '<a class="jv-consult-cta" href="#contact" data-testid="consult-cta">Book Free Consultation' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg></a>' +
+        '<p class="jv-consult-note">Response within 24 hours \u00b7 You speak directly with the founder</p>' +
+      '</div></div>';
+    process.parentNode.insertBefore(sec, process);
+    revealIO(sec);
+    return true;
+  }
+
+  /* ---- Phase 6 · contact trust cards — the reassurance grid above the form ---- */
+  function initContactTrust() {
+    if (window.__jsvContactTrust) return true;
+    var form = document.querySelector('#contact form[data-testid="contact-form"]');
+    if (!form) return false;
+    window.__jsvContactTrust = true;
+    var facts = [
+      ["Response time", "Within 24 hours"],
+      ["Project consultation", "Free"],
+      ["Proposal", "Itemised & transparent"],
+      ["Support", "Direct communication"]
+    ];
+    var grid = document.createElement("div");
+    grid.className = "jv-contact-trust";
+    grid.setAttribute("aria-label", "What working with JSVita includes");
+    grid.innerHTML = facts.map(function (f) {
+      return '<div class="jv-ct-card"><span class="jv-ct-k">' + f[0] + '</span><span class="jv-ct-v">' + f[1] + '</span></div>';
+    }).join("");
+    var pane = form.parentElement;
+    pane.parentNode.insertBefore(grid, pane);
+    return true;
+  }
+
   /* ---- Phase 3 · business schema — Organization + ProfessionalService (LocalBusiness) ---- */
   function initBizSchema() {
     if (window.__jsvBizSchema) return true;
@@ -3464,7 +3852,8 @@ html:not(.dark) .jsv-work-card .jsv-cs-out p{color:#7C5A12}
       var founder = { "@type": "Person", "name": "Shridhar John", "jobTitle": "Founder", "url": "https://jsvita.in/founder" };
       var org = { "@context": "https://schema.org", "@type": "Organization", "name": "JSVita", "url": "https://jsvita.in/", "logo": "https://jsvita.in/jsvita-logo.svg", "description": "Premium digital services company — websites, AI solutions, automation and digital branding.", "founder": founder, "email": "admin@jsvita.in", "telephone": "+916361792699", "address": addr, "contactPoint": { "@type": "ContactPoint", "contactType": "sales", "telephone": "+916361792699", "email": "admin@jsvita.in", "availableLanguage": ["en", "kn", "hi"] } };
       var svc = { "@context": "https://schema.org", "@type": "ProfessionalService", "name": "JSVita — Premium Digital Services", "url": "https://jsvita.in/", "image": "https://jsvita.in/jsvita-logo.svg", "priceRange": "₹₹", "telephone": "+916361792699", "email": "admin@jsvita.in", "address": addr, "areaServed": ["Bangalore", "India", "Worldwide"], "founder": founder, "knowsAbout": ["Website Development", "Web Design", "AI Integration", "AI Automation", "Domain Setup", "Hosting Setup", "Professional Email Setup", "Digital Branding", "Digital Marketing"], "openingHoursSpecification": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "opens": "09:00", "closes": "19:00" } };
-      [org, svc].forEach(function (o) {
+      var website = { "@context": "https://schema.org", "@type": "WebSite", "name": "JSVita", "url": "https://jsvita.in/", "publisher": { "@type": "Organization", "name": "JSVita", "url": "https://jsvita.in/" }, "inLanguage": "en" };
+      [website, org, svc].forEach(function (o) {
         var s = document.createElement("script");
         s.type = "application/ld+json";
         s.textContent = JSON.stringify(o);
@@ -3479,7 +3868,9 @@ html:not(.dark) .jsv-work-card .jsv-cs-out p{color:#7C5A12}
     var s6 = step6();
     initStory(); initWork(); initServices();
     initNavSpy(); initStagger(); initStats(); initDust(); initCurrently(); initNavScroll(); initCvAttention();
+    initTracking();
     initHeroBiz(); initBrandNav(); initFooterCv(); initRecast(); initReframe(); initContactRebrand();
+    initContactTrust();
     initPricing(); initWhatsapp(); initBizSchema();
     paintBrandLogo();
     paintFooterLogo();
@@ -3494,9 +3885,11 @@ html:not(.dark) .jsv-work-card .jsv-cs-out p{color:#7C5A12}
     })(20);
     /* brand bands depend on React sections — retry until mounted, then keep the nav link alive */
     (function bandLoop(tries) {
-      var a = initStory(), w = initWork(), v = initServices(), y = initWhy(), p = initProcess(), t = initPremiumStats(), n = initNetwork(), f = initFaq(), o = initConversionOrder();
-      initHeroBiz(); initBrandNav(); initFooterCv(); initContactRebrand(); initReframe(); initPricing(); initWhatsapp(); initBizSchema();
-      if (a && w && v && y && p && t && n && f && o && tries < 28) return;
+      var a = initStory(), w = initWork(), v = initServices(), y = initWhy(), p = initProcess(), t = initPremiumStats(), n = initNetwork(), f = initFaq();
+      var mq = initMarquee(), tr = initTrust(), ts = initTestimonials(), co = initConsult();
+      initHeroBiz(); initBrandNav(); initFooterCv(); initContactRebrand(); initReframe(); initContactTrust(); initPricing(); initWhatsapp(); initBizSchema(); initTracking();
+      var o = initConversionOrder();
+      if (a && w && v && y && p && t && n && f && mq && tr && ts && co && o && tries < 28) return;
       if (tries > 0) setTimeout(function () { bandLoop(tries - 1); }, 350);
     })(30);
     return s1 && s2 && s3 && s4 && s5 && s6;
