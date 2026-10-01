@@ -2915,7 +2915,7 @@ html:not(.dark) .jsv-work-card .jsv-cs-out p{color:#7C5A12}
          ["Outcome", "Smooth full-house operations with a consistently premium guest experience."]],
         '<span>Hospitality</span><span>Guest Experience</span>') +
       cs("04", "FLAGSHIP", "The JSVita Platform",
-        [["Challenge", "One brand, zero fragmentation — CV engine, member dashboard and client tooling in a single ecosystem."],
+        [["Challenge", "One brand, zero fragmentation — brand site, member dashboard and client tooling in a single ecosystem."],
          ["Solution", "Designed and engineered end-to-end as one luxury digital platform."],
          ["Technology", "React · custom engines · AI tooling · premium design system."],
          ["Outcome", "The site you are on — a living demonstration of the JSVita standard."]],
@@ -3267,15 +3267,27 @@ html:not(.dark) .jsv-work-card .jsv-cs-out p{color:#7C5A12}
     if (!legal || document.querySelector(".jv-inf-cv")) return false;
     var row = document.createElement("div");
     row.className = "jv-inf-cv";
+    /* Phase 5: CV references leave the homepage — CV links live on /founder only */
     row.innerHTML =
       '<a href="/founder">About the founder</a>' +
       '<span class="jv-inf-dot" aria-hidden="true"></span>' +
-      '<a href="/cv.html">CV</a>' +
-      '<span class="jv-inf-dot" aria-hidden="true"></span>' +
-      '<a href="/Shridhar-John-CV.pdf" download="Shridhar-John-CV.pdf">CV (PDF)</a>' +
-      '<span class="jv-inf-dot" aria-hidden="true"></span>' +
       '<a href="/experience">Track record</a>';
     legal.appendChild(row);
+    return true;
+  }
+
+  /* ---- Phase 5 · conversion order — Hero → Services → Pricing → Case Studies → Contact ---- */
+  function initConversionOrder() {
+    if (window.__jsvOrder) return true;
+    var work = document.getElementById("work");
+    var pricing = document.getElementById("pricing");
+    var process = document.getElementById("process");
+    if (!work || !pricing || !process) return false;
+    window.__jsvOrder = true;
+    /* move Case Studies below Pricing only while they still sit in the original position */
+    if (work.compareDocumentPosition(pricing) & Node.DOCUMENT_POSITION_FOLLOWING) {
+      process.parentNode.insertBefore(work, process);
+    }
     return true;
   }
 
@@ -3482,9 +3494,9 @@ html:not(.dark) .jsv-work-card .jsv-cs-out p{color:#7C5A12}
     })(20);
     /* brand bands depend on React sections — retry until mounted, then keep the nav link alive */
     (function bandLoop(tries) {
-      var a = initStory(), w = initWork(), v = initServices(), y = initWhy(), p = initProcess(), t = initPremiumStats(), n = initNetwork(), f = initFaq();
+      var a = initStory(), w = initWork(), v = initServices(), y = initWhy(), p = initProcess(), t = initPremiumStats(), n = initNetwork(), f = initFaq(), o = initConversionOrder();
       initHeroBiz(); initBrandNav(); initFooterCv(); initContactRebrand(); initReframe(); initPricing(); initWhatsapp(); initBizSchema();
-      if (a && w && v && y && p && t && n && f && tries < 28) return;
+      if (a && w && v && y && p && t && n && f && o && tries < 28) return;
       if (tries > 0) setTimeout(function () { bandLoop(tries - 1); }, 350);
     })(30);
     return s1 && s2 && s3 && s4 && s5 && s6;
