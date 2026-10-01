@@ -24,11 +24,14 @@
 
   /* ---------- EDIT THESE VALUES ---------- */
   var CALENDLY_URL = ""; /* e.g. "https://calendly.com/jsvita/consultation" */
-  var CLARITY_ID = "";   /* e.g. "abc123xyz" from clarity.microsoft.com */
-  var GA4_ID = "";       /* e.g. "G-XXXXXXXXXX" from analytics.google.com */
-  var GTM_ID = "";       /* e.g. "GTM-XXXXXXX" from tagmanager.google.com */
+  var CLARITY_ID = "XXXXXXXX";   /* Microsoft Clarity project ID */
+  var GA4_ID = "G-XXXXXXXXXX";       /* Google Analytics 4 measurement ID */
+  var GTM_ID = "GTM-XXXXXXX";        /* Google Tag Manager container ID */
   var LEAD_EMAIL = "support@jsvita.in"; /* every lead form delivers here */
   /* --------------------------------------- */
+  /* Placeholder guard — these example IDs load nothing until replaced with
+     the real values from the GA4 / GTM / Clarity dashboards. */
+  function realId(id, pattern) { return !!id && new RegExp(pattern).test(id); }
 
   /* ---- 1 · conversion tracking ---- */
   function jvTrack(event, params) {
@@ -45,7 +48,7 @@
 
   /* ---- 1b · GA4 — Google Analytics 4 (ID-gated, no layout impact) ---- */
   function initGA4() {
-    if (!GA4_ID) return;
+    if (!realId(GA4_ID, "^G-[A-Z0-9]{4,}$") || GA4_ID.indexOf("XXXX") !== -1) return;
     try {
       if (!document.querySelector("script[src*='googletagmanager.com/gtag/js']")) {
         var s = document.createElement("script");
@@ -65,7 +68,7 @@
 
   /* ---- 1c · GTM — Google Tag Manager (ID-gated, async, render-blocking-free) ---- */
   function initGTM() {
-    if (!GTM_ID) return;
+    if (!realId(GTM_ID, "^GTM-[A-Z0-9]+$") || GTM_ID.indexOf("XXXX") !== -1) return;
     try {
       if (document.querySelector("script[src*='googletagmanager.com/gtm.js']")) return;
       window.dataLayer = window.dataLayer || [];
@@ -79,7 +82,7 @@
 
   /* ---- 2 · Microsoft Clarity (heatmaps · recordings · scroll depth) ---- */
   function initClarity() {
-    if (!CLARITY_ID) return;
+    if (!realId(CLARITY_ID, "^[a-z0-9]{6,}$") || CLARITY_ID.indexOf("XXXX") !== -1) return;
     try {
       (function (c, l, a, r, i, t, y) {
         c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };

@@ -3264,6 +3264,7 @@ html:not(.dark) .jv-tst-logo{filter:none;opacity:.9}
       ov.classList.add("jv-open");
       document.body.classList.add("jv-case-lock");
       jvTrack("case_details_open", { project: d.title });
+      jvTrack("case_study_view", { project: d.title, view: "modal" });
     }, true);
     return true;
   }
@@ -3895,6 +3896,16 @@ html:not(.dark) .jv-tst-logo{filter:none;opacity:.9}
       }
       if ((el = t.closest(".jv-wa-fab"))) {
         jvTrack("whatsapp_click", { location: "fab" });
+        return;
+      }
+      /* any other WhatsApp link (contact card, modal fallback, footer, …) */
+      if ((el = t.closest('a[href*="wa.me"]'))) {
+        jvTrack("whatsapp_click", { location: el.getAttribute("data-jv-info") || "link" });
+        return;
+      }
+      /* Work With Us nav pill */
+      if ((el = t.closest(".jsv-hire-pill"))) {
+        jvTrack("work_with_us_click", { location: "nav" });
         return;
       }
       if ((el = t.closest("#consult a"))) {
