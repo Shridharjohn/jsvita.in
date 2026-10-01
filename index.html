@@ -482,6 +482,81 @@ footer.jsv-footer-aura.jv-in .jsv-infinity { opacity: 1; transform: none; }
   footer.jsv-footer-aura .jsv-infinity { opacity: 1; transform: none; transition: none; }
 }
 
+/* ---- 30c. Brand-first hero: bigger logo, founder secondary ---- */
+.jsv-brand-logo { width: 168px; height: 168px; margin-bottom: 28px; }
+.jsv-brand-logo .jv-logo { width: 168px; height: 168px; }
+@media (max-width: 720px) {
+  .jsv-brand-logo { width: 128px; height: 128px; }
+  .jsv-brand-logo .jv-logo { width: 128px; height: 128px; }
+}
+/* founder line: quiet, supporting, clearly secondary to JSVita */
+.jsv-brand-name { margin-top: 14px; font-size: clamp(0.78rem, 1.6vw, 0.92rem); letter-spacing: 0.3em; text-indent: 0.3em; font-weight: 600; }
+.jsv-brand-name::after { width: min(260px, 50%); margin-top: 10px; opacity: 0.75; }
+.jsv-brand-tag { margin-top: 8px; font-size: clamp(0.8rem, 1.5vw, 0.9rem); color: #a89d8d; }
+
+/* ---- 30d. Luxury glass navbar: depth, spacing, gold hover ---- */
+header {
+  backdrop-filter: blur(20px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+  background: rgba(10, 10, 12, 0.55) !important;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.22) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(247, 215, 116, 0.08) !important;
+}
+html:not(.dark) header {
+  background: rgba(250, 246, 238, 0.6) !important;
+  border-bottom: 1px solid rgba(184, 134, 11, 0.25) !important;
+  box-shadow: 0 8px 28px rgba(120, 90, 20, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+}
+header nav { gap: 36px !important; }
+header nav a[href^="#"] { padding: 12px 2px; letter-spacing: 0.06em; }
+header nav a[href^="#"]::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  width: 0;
+  height: 1.5px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #b8860b, #f7d774);
+  transform: translateX(-50%);
+  transition: width 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+  pointer-events: none;
+}
+@media (hover: hover) {
+  header nav a[href^="#"]:hover::after { width: 100%; }
+}
+@media (max-width: 1080px) { header nav { gap: 22px !important; } }
+
+/* ---- 30e. Luxury footer: JSVita-primary, structured, quiet motion ---- */
+.jsv-infinity .jv-inf-logo { width: 72px; height: 72px; }
+.jsv-infinity .jv-inf-logo .jv-logo { width: 72px; height: 72px; }
+.jsv-infinity .jv-inf-word { font-size: clamp(2.1rem, 5vw, 2.9rem); }
+.jv-inf-nav {
+  margin-top: 26px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px 30px;
+}
+.jv-inf-nav a {
+  font-family: "DM Sans Variable", system-ui, sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #d8cfbf;
+  text-decoration: none;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+.jv-inf-nav a:hover { color: #f7d774; text-shadow: 0 0 14px rgba(247, 215, 116, 0.45); }
+.jv-inf-legal { margin-top: 30px; }
+@media (max-width: 640px) {
+  .jv-inf-nav { gap: 10px 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .jv-inf-nav a { transition: none !important; }
+}
+
 /* ---------- 2d. Navbar brand = logo only (wordmark retired) ---------- */
 header [data-testid="logo-wordmark"],
 header [data-testid="brand-link"] .font-mono {
@@ -2049,11 +2124,22 @@ html:not(.dark) .jsv-bi { color: #8a6d1f; border-color: rgba(150,110,20,.35); ba
       block.className = "jsv-brand-block";
       block.setAttribute("data-testid", "hero-brand-block");
       block.innerHTML =
-        '<div class="jsv-brand-logo" aria-hidden="true">' + jvLogo + '</div>' +
+        '<div class="jsv-brand-logo" aria-hidden="true">' + jvLogo.replace('width="38" height="38"', 'width="64" height="64"') + '</div>' +
         '<div class="jsv-brand-word" role="heading" aria-level="2" aria-label="JSVita"></div>' +
-        '<p class="jsv-brand-name">SHRIDHAR JOHN</p>' +
-        '<p class="jsv-brand-tag">The Name Behind JSVita.</p>';
+        '<p class="jsv-brand-tag">Founded by Shridhar John</p>';
       anchor.parentNode.insertBefore(block, anchor.nextSibling);
+      /* JSVita primary: lift the brand block to the top of the hero column; old static
+         founder name + career tagline retire (founder stays visible, secondary) */
+      var heroH1 = root.querySelector("h1");
+      if (heroH1) {
+        heroH1.classList.add("jsv-hero-hide");
+        heroH1.parentNode.insertBefore(block, heroH1);
+      }
+      /* retire all other legacy hero content (old summary, retired CTAs, location row) */
+      var wrapper = root.firstElementChild;
+      Array.prototype.forEach.call(root.children, function (c) {
+        if (c !== wrapper) c.classList.add("jsv-hero-hide");
+      });
       /* brand positioning: headline + subheadline replace the old summary paragraph */
       if (sub) sub.classList.add("jsv-hero-hide");
       if (!document.querySelector(".jsv-hero-headline")) {
@@ -2064,8 +2150,8 @@ html:not(.dark) .jsv-bi { color: #8a6d1f; border-color: rgba(150,110,20,.35); ba
         sl.className = "jsv-hero-subline jsv-fade jsv-fade-d3c";
         sl.setAttribute("aria-label", "Web Development, AI Solutions, Digital Innovation");
         sl.innerHTML = '<span>Web Development</span><i aria-hidden="true"></i><span>AI Solutions</span><i aria-hidden="true"></i><span>Digital Innovation</span>';
-        block.parentNode.insertBefore(hl, block);
-        block.parentNode.insertBefore(sl, block);
+        block.parentNode.insertBefore(hl, block.nextSibling);
+        block.parentNode.insertBefore(sl, hl.nextSibling);
       }
       /* letter-by-letter reveal (1.5s total, starts immediately) */
       var word = block.querySelector(".jsv-brand-word");
@@ -2120,7 +2206,9 @@ html:not(.dark) .jsv-bi { color: #8a6d1f; border-color: rgba(150,110,20,.35); ba
           '<span>Start a Project</span>' +
           '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>' +
         '</a>';
-      brandBlock.parentNode.insertBefore(ctas, brandBlock.nextSibling);
+      var subline = document.querySelector(".jsv-hero-subline");
+      if (subline) subline.parentNode.insertBefore(ctas, subline.nextSibling);
+      else brandBlock.parentNode.insertBefore(ctas, brandBlock.nextSibling);
       /* gold ripple from the exact tap point */
       ctas.addEventListener("pointerdown", function (e) {
         var b = e.target.closest ? e.target.closest(".jsv-cta") : null;
@@ -2318,17 +2406,21 @@ html:not(.dark) .jsv-bi { color: #8a6d1f; border-color: rgba(150,110,20,.35); ba
     core.innerHTML =
       '<span class="jv-beam" aria-hidden="true"></span>' +
       '<canvas class="jv-dust" aria-hidden="true"></canvas>' +
-      '<div class="jv-inf-logo">' + jvLogo.replace('width="38" height="38"', 'width="56" height="56"') + '</div>' +
+      '<div class="jv-inf-logo">' + jvLogo.replace('width="38" height="38"', 'width="72" height="72"') + '</div>' +
       '<div class="jv-inf-word">JSVita</div>' +
       '<div class="jv-inf-tag">Building Digital Excellence</div>' +
+      '<nav class="jv-inf-nav" aria-label="Footer">' +
+        '<a href="#about">About</a>' +
+        '<a href="#work">Work</a>' +
+        '<a href="#services">Services</a>' +
+        '<a href="/connect">Contact</a>' +
+      '</nav>' +
       '<div class="jv-inf-legal">' +
         '<span>\u00A9 2026 JSVita. All Rights Reserved.</span>' +
         '<span class="jv-inf-dot" aria-hidden="true"></span>' +
-        '<a href="/privacy">Privacy Policy</a>' +
+        '<a href="/privacy">Privacy</a>' +
         '<span class="jv-inf-dot" aria-hidden="true"></span>' +
         '<a href="/terms">Terms</a>' +
-        '<span class="jv-inf-dot" aria-hidden="true"></span>' +
-        '<a href="/connect">Contact</a>' +
         '<span class="jv-inf-dot" aria-hidden="true"></span>' +
         '<a href="/jsvita/login">Member Login</a>' +
       '</div>';
@@ -2387,6 +2479,9 @@ html:not(.dark) .jsv-bi { color: #8a6d1f; border-color: rgba(150,110,20,.35); ba
   var ICO_FLOW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M7.2 6h9.6"/><path d="M6.2 7.8l4.6 8.2M17.8 7.8l-4.6 8.2"/></svg>';
   var ICO_CARD = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="15" rx="2"/><circle cx="9" cy="11.5" r="2.2"/><path d="M5.8 17.5c.6-1.8 1.7-2.7 3.2-2.7s2.6.9 3.2 2.7"/><path d="M15 9.5h3.5M15 13h3.5"/></svg>';
   var ICO_TERM = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><polyline points="7 9 10 12 7 15"/><path d="M12 15h5"/></svg>';
+  var ICO_GLOBE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15.3 15.3 0 0 1 0 18M12 3a15.3 15.3 0 0 0 0 18"/></svg>';
+  var ICO_SERVER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></svg>';
+  var ICO_MAIL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>';
 
   function revealIO(el) {
     var io = new IntersectionObserver(function (es) {
@@ -2468,11 +2563,11 @@ html:not(.dark) .jsv-bi { color: #8a6d1f; border-color: rgba(150,110,20,.35); ba
         bandHead("SERVICES", "What JSVita builds", "Six disciplines. One standard: excellence.") +
         '<div class="jsv-svc-grid">' +
         svc(ICO_MONITOR, "Website Development", "Fast, elegant, conversion-ready sites — engineered for Chrome, Safari and everything between.") +
-        svc(ICO_AI, "AI Solutions", "Practical AI — automation, assistants and intelligence woven into daily operations.") +
-        svc(ICO_GEM, "Branding & Identity", "Marks, palettes and typography that make a brand impossible to forget.") +
-        svc(ICO_FLOW, "Business Automation", "Menus, inventory, bookings — systems that run themselves while you lead.") +
-        svc(ICO_CARD, "Portfolio Websites", "Executive-grade personal brands that open doors and close opportunities.") +
-        svc(ICO_TERM, "Custom Development", "One-off builds for one-of-a-kind ideas — if you can name it, it ships.") +
+        svc(ICO_GLOBE, "Domain Setup", "Domain research, registration and DNS — a clean, ownable address for your brand.") +
+        svc(ICO_SERVER, "Hosting Setup", "Fast, reliable hosting configured end-to-end — SSL, uptime and deploy pipelines included.") +
+        svc(ICO_MAIL, "Professional Email Setup", "Branded mailboxes on your own domain — you@yourbrand.com, delivered with SPF, DKIM and DMARC.") +
+        svc(ICO_AI, "AI Integration", "Assistants, automation and intelligence woven into your site and daily operations.") +
+        svc(ICO_GEM, "Digital Branding", "Marks, palettes and typography that make a brand impossible to forget.") +
         '</div></div>';
       contact.parentNode.insertBefore(sec, contact);
       revealIO(sec);
