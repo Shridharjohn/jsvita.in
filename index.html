@@ -671,6 +671,76 @@ html:not(.dark) .jsv-faq-item > p { color: #574e45; }
   .jsv-proc-step, .jsv-stat-card, .jsv-net-card { transition: none !important; }
 }
 
+/* ---- 30g. Phase 1: client-journey nav, footer CV row, recast stats, founder note ---- */
+/* Work With Us pill (replaces the gold View CV slot) */
+.jsv-hire-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 36px; padding: 0 18px; border-radius: 999px;
+  font-family: "DM Sans Variable", system-ui, sans-serif;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.05em;
+  color: #17120a !important; text-decoration: none;
+  background: linear-gradient(135deg, #f7d774, #d4af37 55%, #b8860b);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35), inset 0 1px 0 rgba(255, 251, 235, 0.7);
+  transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.3s ease, filter 0.3s ease;
+}
+.jsv-hire-pill:hover { transform: translateY(-1px); filter: brightness(1.06); box-shadow: 0 10px 26px rgba(212, 175, 55, 0.45); }
+.jsv-hire-pill:active { transform: scale(0.97); }
+/* footer CV row (relocated actions) */
+.jv-inf-cv {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(212, 175, 55, 0.15);
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+  gap: 10px 14px; width: 100%;
+  font-size: 12px;
+}
+.jv-inf-cv a { color: #cfc6b8; text-decoration: none; transition: color 0.25s ease, text-shadow 0.25s ease; }
+.jv-inf-cv a:hover { color: #f7d774; text-shadow: 0 0 12px rgba(247, 215, 116, 0.4); }
+/* recast stats band (light-surface cards, dark variants handled by .jsv-stat-card) */
+.jsv-stat-light {
+  background: linear-gradient(150deg, rgba(24, 18, 10, 0.92), rgba(12, 9, 6, 0.96)) !important;
+  border: 1px solid rgba(212, 175, 55, 0.28) !important;
+  border-radius: 20px !important;
+  padding: 26px 18px 24px !important;
+  transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1), border-color 0.35s ease;
+}
+.jsv-stat-light:hover { transform: translateY(-4px); border-color: rgba(247, 215, 116, 0.5) !important; }
+.jsv-stat-light .jsv-stat-num { font-size: clamp(2.1rem, 3.6vw, 2.9rem); }
+html:not(.dark) .jsv-stat-light {
+  background: linear-gradient(150deg, #fffdf6, #faf3e0) !important;
+  border-color: rgba(184, 134, 11, 0.3) !important;
+  box-shadow: 0 10px 26px rgba(150, 110, 20, 0.1);
+}
+/* founder note (About reframe) */
+.jsv-founder-note {
+  max-width: 640px;
+  margin-top: 26px;
+  padding: 18px 20px;
+  border-left: 2px solid rgba(212, 175, 55, 0.55);
+  background: rgba(212, 175, 55, 0.06);
+  border-radius: 0 14px 14px 0;
+}
+.jsv-founder-eyebrow {
+  font-family: "JetBrains Mono Variable", "JetBrains Mono", monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.26em; color: #d4af37;
+}
+.jsv-founder-line { margin-top: 8px; font-size: 0.9rem; line-height: 1.7; color: #b9ad99; }
+.jsv-founder-line strong { color: #f3e5ab; font-weight: 700; }
+html:not(.dark) .jsv-founder-note { background: rgba(184, 134, 11, 0.07); }
+html:not(.dark) .jsv-founder-line { color: #574e45; }
+html:not(.dark) .jsv-founder-line strong { color: #8a6a14; }
+/* business status card (hero) */
+.jsv-biz-card { border-color: rgba(212, 175, 55, 0.45) !important; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.18) !important; }
+.jsv-biz-card [data-testid="hero-status-line"] { color: #d4af37 !important; }
+html:not(.dark) .jsv-biz-card [data-testid="hero-status-line"] { color: #8a6a14 !important; }
+@media (max-width: 720px) {
+  .jsv-hire-pill { height: 34px; padding: 0 14px; font-size: 12px; }
+  .jv-inf-cv { flex-direction: column; gap: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .jsv-hire-pill, .jsv-stat-light { transition: none !important; }
+}
+
 /* ---------- 2d. Navbar brand = logo only (wordmark retired) ---------- */
 header [data-testid="logo-wordmark"],
 header [data-testid="brand-link"] .font-mono {
@@ -2912,11 +2982,180 @@ html:not(.dark) .jsv-bi { color: #8a6d1f; border-color: rgba(150,110,20,.35); ba
     return true;
   }
 
+  /* ---- Phase 1 · 1+2: hero business status (NOW card recast) + founder badge merge ---- */
+  function initHeroBiz() {
+    var done = true;
+    /* NOW card → business status */
+    var card = document.querySelector('[data-testid="hero-current-role-card"]');
+    if (card && !card.dataset.jsvBiz) {
+      card.dataset.jsvBiz = "1";
+      var role = card.querySelector("p:nth-of-type(2)");
+      var org = card.querySelector("p:nth-of-type(3)");
+      var k = card.querySelector("p");
+      if (k) { k.textContent = "Now"; }
+      if (role) { role.textContent = "Onboarding — Limited Client Slots"; role.setAttribute("data-testid", "hero-status-line"); }
+      if (org) { org.textContent = "Accepting new projects"; }
+      card.classList.add("jsv-biz-card");
+    }
+    /* FOUNDER badge folds into the founder caption */
+    var badge = document.querySelector(".jsv-hero-badge");
+    if (badge) {
+      badge.classList.add("jsv-hero-hide");
+      var cap = document.querySelector(".jsv-brand-tag");
+      if (cap && cap.textContent.indexOf("Founded by") === -1) cap.textContent = "Founded by Shridhar John";
+    }
+    return done;
+  }
+
+  /* ---- Phase 1 · 3: client-journey nav — build Services/Work/Process/Why JSVita/FAQ links; hide CV actions from navbar ---- */
+  function initBrandNav() {
+    var nav = document.querySelector("header nav");
+    if (!nav) return false;
+    var plan = [
+      ["#services", "Services", "nav-services-link"],
+      ["#work", "Work", "nav-work-link"],
+      ["#process", "Process", "nav-process-link"],
+      ["#why", "Why JSVita", "nav-why-link"],
+      ["#faq", "FAQ", "nav-faq-link"]
+    ];
+    var contact = nav.querySelector('a[href="#contact"]');
+    var last = contact || nav.lastElementChild;
+    plan.forEach(function (p) {
+      if (nav.querySelector('a[href="' + p[0] + '"]')) return;
+      var a = document.createElement("a");
+      a.href = p[0];
+      a.setAttribute("data-testid", p[2]);
+      a.className = "text-sm font-medium text-muted-foreground transition-colors hover:text-foreground";
+      a.textContent = p[1];
+      nav.insertBefore(a, last);
+    });
+    /* About/Experience/Skills/Passions links hide (content stays on page, reachable in founder panel + footer) */
+    Array.prototype.forEach.call(nav.querySelectorAll('a[href="#experience"], a[href="#skills"], a[href="#interests"], a[href="#about"]'), function (a) {
+      a.classList.add("jsv-hero-hide");
+    });
+    /* navbar CV actions (Switch pill, View CV icon, download icon) move to footer */
+    Array.prototype.forEach.call(document.querySelectorAll("header .jsv-nav-switch, header .jsv-nav-cv"), function (el) {
+      el.classList.add("jsv-hero-hide");
+      if (!el.dataset.jsvFooterHome) {
+        el.dataset.jsvFooterHome = "1";
+        el.setAttribute("data-jsv-footer-cv", "1");
+      }
+    });
+    /* baked gold View CV button (React header action) → footer */
+    var goldView = document.querySelector('[data-testid="cv-view-btn"]');
+    if (goldView) goldView.classList.add("jsv-hero-hide");
+    /* Work With Us pill — replaces the retired gold View CV slot */
+    var actions = nav.nextElementSibling || document.querySelector("header .flex.items-center.gap-2");
+    if (actions && !document.querySelector(".jsv-hire-pill")) {
+      var pill = document.createElement("a");
+      pill.className = "jsv-hire-pill";
+      pill.href = "#contact";
+      pill.setAttribute("data-testid", "nav-hire-pill");
+      pill.innerHTML = '<span>Work With Us</span>';
+      actions.insertBefore(pill, actions.querySelector('[data-testid="theme-toggle-btn"]'));
+    }
+    try { window.dispatchEvent(new CustomEvent("jsv:nav-changed")); } catch (e) {}
+    return true;
+  }
+
+  /* ---- Phase 1 · 3b: CV row in footer (nothing deleted — relocated) ---- */
+  function initFooterCv() {
+    var legal = document.querySelector(".jv-inf-legal");
+    if (!legal || document.querySelector(".jv-inf-cv")) return false;
+    var row = document.createElement("div");
+    row.className = "jv-inf-cv";
+    row.innerHTML =
+      '<a href="/cv.html">Founder\u2019s CV — interactive</a>' +
+      '<span class="jv-inf-dot" aria-hidden="true"></span>' +
+      '<a href="/Shridhar-John-CV.pdf" download="Shridhar-John-CV.pdf">Download CV (PDF)</a>' +
+      '<span class="jv-inf-dot" aria-hidden="true"></span>' +
+      '<a href="/experience">Track record</a>';
+    legal.appendChild(row);
+    return true;
+  }
+
+  /* ---- Phase 1 · 4: recast the career-stats band into JSVita business metrics ---- */
+  function initRecast() {
+    var region = document.querySelector("section[aria-label='Career statistics']");
+    if (!region || region.dataset.jsvRecast) return;
+    region.dataset.jsvRecast = "1";
+    region.setAttribute("aria-label", "JSVita statistics");
+    var cards = [
+      ["6", "Service lines — one standard of delivery"],
+      ["48h", "From kickoff call to first working demo"],
+      ["100%", "Bespoke builds — never templates"],
+      ["24h", "Response window, every working day"]
+    ];
+    var grid = region.querySelector(".grid");
+    if (!grid) return;
+    grid.classList.add("jsv-stat-grid");
+    grid.innerHTML = cards.map(function (c) {
+      return '<div class="h-full"><div data-testid="jv-stat-card" class="jsv-stat-card jsv-stat-light"><p class="jsv-stat-num">' + c[0] + '</p><p class="jsv-stat-label">' + c[1] + '</p></div></div>';
+    }).join("");
+  }
+
+  /* ---- Phase 1 · 5: About — JSVita first, founder story second ---- */
+  function initReframe() {
+    var about = document.getElementById("about");
+    if (!about || about.dataset.jsvReframe) return;
+    about.dataset.jsvReframe = "1";
+    var head = about.querySelector(".max-w-2xl");
+    if (head) {
+      var eyebrow = head.querySelector("p");
+      if (eyebrow) eyebrow.textContent = "About JSVita";
+      var h2 = head.querySelector("h2");
+      if (h2) h2.textContent = "The digital partner for businesses that refuse the ordinary";
+      var sub = document.createElement("p");
+      sub.className = "mt-3 text-base text-muted-foreground sm:text-lg";
+      sub.textContent = "Premium websites, AI-powered workflows and brand systems — delivered end-to-end with an operator\u2019s discipline.";
+      head.appendChild(sub);
+    }
+    /* founder's three paragraphs become a secondary, clearly-labelled story block */
+    var founderWrap = document.createElement("div");
+    founderWrap.className = "jsv-founder-note jsv-reveal";
+    founderWrap.innerHTML =
+      '<p class="jsv-founder-eyebrow">THE STANDARD BEHIND IT</p>' +
+      '<p class="jsv-founder-line">JSVita is founded and run by <strong>Shridhar John</strong> — three years running real operations: cafe floors under Roots Corporation, Zepto\u2019s quick-commerce kitchens, hospital receptions and hotel front desks. That discipline is why JSVita ships on time, documented, and finished to the last detail.</p>';
+    var paras = about.querySelectorAll(".space-y-4");
+    if (paras.length) {
+      paras[0].classList.add("jsv-hero-hide");
+      paras[0].parentNode.insertBefore(founderWrap, paras[0]);
+    }
+    return true;
+  }
+
+  /* ---- Phase 1 · 6: Contact → Start Your Project ---- */
+  function initContactRebrand() {
+    var contact = document.getElementById("contact");
+    if (!contact || contact.dataset.jsvRebrand) return;
+    contact.dataset.jsvRebrand = "1";
+    var head = contact.querySelector(".max-w-2xl");
+    if (head) {
+      var eyebrow = head.querySelector("p");
+      if (eyebrow) eyebrow.textContent = "Contact";
+      var h2 = head.querySelector("h2");
+      if (h2) h2.textContent = "Start your project";
+      var sub = head.querySelector("p:nth-of-type(2)") || head.lastElementChild;
+      if (sub) sub.textContent = "Tell us what you\u2019re building — you\u2019ll hear back within 24 hours with next steps.";
+    }
+    /* retire the cafe-context note under Direct lines */
+    var note = contact.querySelector('[data-testid="contact-current-role-note"]');
+    if (note) {
+      note.setAttribute("data-testid", "contact-response-note");
+      note.textContent = "Average first reply: under 24 hours. Projects start weekly.";
+    }
+    /* the visible luxury intro (built by initCurrently) must carry the Phase-1 title */
+    var visTitle = contact.querySelector(".jsv-contact-title");
+    if (visTitle) visTitle.textContent = "Start your project";
+    return true;
+  }
+
   function run() {
     var s1 = step1(), s2 = step2(), s3 = step3(), s4 = step4(), s5 = step5();
     var s6 = step6();
     initStory(); initWork(); initServices();
     initNavSpy(); initStagger(); initStats(); initDust(); initCurrently(); initNavScroll(); initCvAttention();
+    initHeroBiz(); initBrandNav(); initFooterCv(); initRecast(); initReframe(); initContactRebrand();
     paintBrandLogo();
     paintFooterLogo();
     /* React mounts asynchronously — retry until the monogram exists (max ~8s) */
@@ -2931,6 +3170,7 @@ html:not(.dark) .jsv-bi { color: #8a6d1f; border-color: rgba(150,110,20,.35); ba
     /* brand bands depend on React sections — retry until mounted, then keep the nav link alive */
     (function bandLoop(tries) {
       var a = initStory(), w = initWork(), v = initServices(), y = initWhy(), p = initProcess(), t = initPremiumStats(), n = initNetwork(), f = initFaq();
+      initHeroBiz(); initBrandNav(); initFooterCv(); initContactRebrand();
       if (a && w && v && y && p && t && n && f && tries < 28) return;
       if (tries > 0) setTimeout(function () { bandLoop(tries - 1); }, 350);
     })(30);
