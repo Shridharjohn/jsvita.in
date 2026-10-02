@@ -200,10 +200,11 @@
   function initLeadForm() {
     var forms = document.querySelectorAll("form[data-jv-lead-form]");
     if (!forms.length) return;
-    var ENDPOINT = window.JSVITA_LEAD_ENDPOINT || ("https://formsubmit.co/ajax/" + LEAD_EMAIL);
     Array.prototype.forEach.call(forms, function (form) {
       if (form.__jvLead) return;
       form.__jvLead = true;
+      var FORM_EMAIL = form.getAttribute("data-jv-lead-email") || LEAD_EMAIL;
+      var ENDPOINT = window.JSVITA_LEAD_ENDPOINT || ("https://formsubmit.co/ajax/" + FORM_EMAIL);
       form.addEventListener("submit", function (e) {
         e.preventDefault();
         var btn = form.querySelector("[type=submit]");
@@ -234,7 +235,7 @@
             note.setAttribute("role", "alert");
             form.appendChild(note);
           }
-          note.innerHTML = 'Delivery hiccup \u2014 please email <a href="mailto:' + LEAD_EMAIL + '">' + LEAD_EMAIL + '</a> directly and we\u2019ll reply within 24 hours.';
+          note.innerHTML = 'Delivery hiccup \u2014 please email <a href="mailto:' + FORM_EMAIL + '">' + FORM_EMAIL + '</a> directly and we\u2019ll reply within 24 hours.';
         }
         lock("Sending\u2026");
         jvTrack("lead_form_submit", { form: formId });
