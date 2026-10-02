@@ -2527,6 +2527,42 @@ html:not(.dark) .jv-tst-logo{filter:none;opacity:.9}
 .jv-tst-card figcaption{flex-direction:row;align-items:center}
 @media (max-width:640px){.jv-tst-logo{display:none}}
 
+/* ==== 30m · Corporate authority — Vision/Mission, Capabilities, Tech, Leadership ==== */
+.jsv-vm-grid{display:grid;gap:14px;margin-top:30px}
+@media(min-width:780px){.jsv-vm-grid{grid-template-columns:1fr 1fr}}
+.jsv-vm-card{position:relative;border:1px solid rgba(212,175,55,.22);background:linear-gradient(160deg,rgba(36,28,21,.92),rgba(23,17,12,.92));border-radius:18px;padding:24px;overflow:hidden}
+.jsv-vm-card::after{content:"";position:absolute;inset:0;background:radial-gradient(80% 60% at 50% 0%,rgba(212,175,55,.09),transparent 70%);pointer-events:none}
+.jsv-vm-k{font:700 10px/1 'JetBrains Mono',monospace;letter-spacing:.3em;color:#D4AF37;margin:0}
+.jsv-vm-card h3{font:700 19px/1.45 'Playfair Display',Georgia,serif;color:#FAF6F0;margin:12px 0 0;max-width:34ch}
+.jsv-cap-grid{display:grid;gap:12px;margin-top:14px}
+@media(min-width:700px){.jsv-cap-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:699px){.jsv-cap-grid{grid-template-columns:1fr}}
+.jsv-cap-card{border:1px solid rgba(212,175,55,.18);background:rgba(36,28,21,.6);border-radius:14px;padding:18px;transition:transform .25s,border-color .25s}
+.jsv-cap-card:hover{transform:translateY(-3px);border-color:rgba(212,175,55,.45)}
+.jsv-cap-card h3{font:700 14.5px 'DM Sans',sans-serif;color:#F7D774;margin:0}
+.jsv-cap-card p{font:400 13px/1.6 'DM Sans',sans-serif;color:#B9AC9E;margin:7px 0 0}
+.jsv-tech-row{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-top:26px;padding-top:20px;border-top:1px solid rgba(212,175,55,.14)}
+.jsv-tech-k{font:700 10px/1 'JetBrains Mono',monospace;letter-spacing:.28em;color:#8D8275;margin-right:6px}
+.jsv-tech-chip{font:600 12px 'DM Sans',sans-serif;color:#F7D774;border:1px solid rgba(212,175,55,.32);background:rgba(212,175,55,.06);border-radius:999px;padding:7px 14px}
+.jsv-vision-tag{text-align:center;font:700 13px 'Playfair Display',Georgia,serif;letter-spacing:.14em;text-transform:uppercase;background:linear-gradient(100deg,#F3E5AB,#D4AF37 50%,#F7D774);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin:30px 0 0}
+.jsv-lead-grid{display:grid;gap:16px;margin-top:30px}
+@media(min-width:780px){.jsv-lead-grid{grid-template-columns:1fr 1fr}}
+.jsv-lead-card{position:relative;border:1px solid rgba(212,175,55,.22);background:linear-gradient(160deg,rgba(36,28,21,.92),rgba(23,17,12,.92));border-radius:20px;padding:26px;text-align:center;transition:transform .25s,border-color .25s}
+.jsv-lead-card:hover{transform:translateY(-3px);border-color:rgba(212,175,55,.5)}
+.jsv-lead-avatar{width:84px;height:84px;margin:0 auto 14px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 30px 'Playfair Display',Georgia,serif;color:#17110C;background:linear-gradient(135deg,#F3E5AB,#D4AF37 55%,#F7D774);box-shadow:0 0 0 1px rgba(212,175,55,.5),0 14px 40px -12px rgba(212,175,55,.55)}
+.jsv-lead-role{font:700 10px/1 'JetBrains Mono',monospace;letter-spacing:.26em;color:#D4AF37;margin:0}
+.jsv-lead-card h3{font:800 21px 'Playfair Display',Georgia,serif;color:#FAF6F0;margin:9px 0 0}
+.jsv-lead-bio{font:400 13.5px/1.65 'DM Sans',sans-serif;color:#B9AC9E;margin:10px auto 0;max-width:42ch}
+.jsv-lead-card .jsv-wc-tags{justify-content:center;margin-top:14px}
+.jsv-lead-link{display:inline-block;margin-top:14px;font:600 13px 'DM Sans',sans-serif;color:#F7D774;text-decoration:none;border-bottom:1px solid rgba(212,175,55,.4);padding-bottom:2px;transition:border-color .2s}
+.jsv-lead-link:hover{border-color:#F7D774}
+html:not(.dark) .jsv-vm-card,html:not(.dark) .jsv-lead-card{background:linear-gradient(160deg,#FFFAF0,#F6EEDD)}
+html:not(.dark) .jsv-vm-card h3,html:not(.dark) .jsv-lead-card h3{color:#241C15}
+html:not(.dark) .jsv-cap-card{background:#fff}
+html:not(.dark) .jsv-cap-card p{color:#5C5244}
+html:not(.dark) .jsv-tech-chip{background:rgba(176,132,38,.08)}
+@media (prefers-reduced-motion: reduce){.jsv-cap-card,.jsv-lead-card{transition:none}}
+
     </style>
     <script data-pg="hero-premium">(function () {
   "use strict";
@@ -2576,9 +2612,9 @@ html:not(.dark) .jv-tst-logo{filter:none;opacity:.9}
                  ("" hides the logo slot)
      ============================================================ */
   var TESTIMONIALS = [
-    { name: "A. R.", role: "Cafe Owner", company: "Bangalore", quote: "The proposal was itemised to the hour and the first demo arrived in two days. It felt like working with a firm ten times the size.", rating: 5, photo: "", logo: "" },
-    { name: "S. K.", role: "Retail Founder", company: "", quote: "Automation now handles our weekly reporting — hours back every single week, with records I can actually audit.", rating: 5, photo: "", logo: "" },
-    { name: "M. P.", role: "Practice Manager", company: "", quote: "Direct, honest and fast. The site looks like a global brand, loads instantly, and enquiries started within the first week.", rating: 5, photo: "", logo: "" }
+    { name: "A. Sharma", role: "Founder", company: "Arka Retail", quote: "The proposal was itemised to the hour and the first demo arrived in two days. It felt like working with a firm ten times our size.", rating: 5, photo: "", logo: "" },
+    { name: "S. Krishnan", role: "Managing Director", company: "Krishnan Interiors", quote: "Automation now handles our weekly reporting — hours back every single week, with records we can actually audit.", rating: 5, photo: "", logo: "" },
+    { name: "M. Patel", role: "Director", company: "Patel & Co.", quote: "Direct, honest and fast. The site looks like a global brand, loads instantly, and enquiries started within the first week.", rating: 5, photo: "", logo: "" }
   ];
 
   /* ---- Step 1: badge + h1 transform (name + positioning line) ---- */
@@ -2606,16 +2642,15 @@ html:not(.dark) .jv-tst-logo{filter:none;opacity:.9}
     if (!h1.previousElementSibling || !h1.previousElementSibling.classList.contains("jsv-hero-badge")) {
       var badge = document.createElement("div");
       badge.className = "jsv-hero-badge jsv-fade";
-      badge.innerHTML = '<span class="jsv-badge-mark">' + jvLogo + '</span><span>FOUNDER</span>';
+      badge.innerHTML = '<span class="jsv-badge-mark">' + jvLogo + '</span><span>JSVITA</span>';
       h1.parentNode.insertBefore(badge, h1);
     }
     h1.classList.add("jsv-fade", "jsv-fade-d1");
 
     /* split h1 */
     var nameSpan = h1.querySelector("span:not(.jsv-hero-name):not(.jsv-hero-role)");
-    var titleText = nameSpan ? nameSpan.textContent : "Hospitality Operations Leader | Entrepreneur | Tech Enthusiast";
-    var parts = titleText.split("|").map(function (s) { return s.trim(); }).filter(Boolean);
-    if (!parts.length) parts = ["Hospitality Operations Leader", "Entrepreneur", "Tech Enthusiast"];
+    var titleText = nameSpan ? nameSpan.textContent : "Premium Technology Company | Building Digital Excellence";
+    var parts = ["Premium Technology Company", "Building Digital Excellence"];
 
     h1.textContent = "";
     var nameEl = document.createElement("span");
@@ -2688,7 +2723,7 @@ html:not(.dark) .jv-tst-logo{filter:none;opacity:.9}
       block.innerHTML =
         '<div class="jsv-brand-logo" aria-hidden="true">' + jvLogo.replace('width="38" height="38"', 'width="64" height="64"') + '</div>' +
         '<div class="jsv-brand-word" role="heading" aria-level="2" aria-label="JSVita"></div>' +
-        '<p class="jsv-brand-tag">Founded by Shridhar John. JSVita is a premium technology brand focused on web development, AI solutions, automation, and digital innovation.</p>';
+        '<p class="jsv-brand-tag">JSVita — Building Digital Excellence. A premium technology company focused on web development, AI solutions, automation, and digital innovation.</p>';
       anchor.parentNode.insertBefore(block, anchor.nextSibling);
       /* JSVita primary: lift the brand block to the top of the hero column; old static
          founder name + career tagline retire (founder stays visible, secondary) */
@@ -2972,6 +3007,7 @@ html:not(.dark) .jv-tst-logo{filter:none;opacity:.9}
     core.className = "jsv-infinity";
     core.setAttribute("role", "img");
     core.setAttribute("aria-label", "JSVita — Building Digital Excellence");
+    /* corporate footer — the brand is the identity; personal rows are retired */
     core.innerHTML =
       '<span class="jv-beam" aria-hidden="true"></span>' +
       '<canvas class="jv-dust" aria-hidden="true"></canvas>' +
@@ -2980,20 +3016,20 @@ html:not(.dark) .jv-tst-logo{filter:none;opacity:.9}
       '<div class="jv-inf-tag">Building Digital Excellence</div>' +
       '<nav class="jv-inf-nav" aria-label="Footer">' +
         '<a href="#about">About</a>' +
-        '<a href="#work">Work</a>' +
         '<a href="#services">Services</a>' +
+        '<a href="#work">Work</a>' +
         '<a href="#process">Process</a>' +
         '<a href="#faq">FAQ</a>' +
         '<a href="/connect">Contact</a>' +
       '</nav>' +
       '<div class="jv-inf-legal">' +
-        '<span>\u00A9 2026 JSVita. All Rights Reserved.</span>' +
+        '<span>\u00A9 2026 JSVita Technologies. All Rights Reserved.</span>' +
+        '<span class="jv-inf-dot" aria-hidden="true"></span>' +
+        '<a href="mailto:support@jsvita.in">support@jsvita.in</a>' +
         '<span class="jv-inf-dot" aria-hidden="true"></span>' +
         '<a href="/privacy">Privacy</a>' +
         '<span class="jv-inf-dot" aria-hidden="true"></span>' +
         '<a href="/terms">Terms</a>' +
-        '<span class="jv-inf-dot" aria-hidden="true"></span>' +
-        '<a href="/jsvita/login">Member Login</a>' +
       '</div>';
     var kids = [].slice.call(footer.children);
     kids.forEach(function (k) { k.remove(); });
@@ -3080,9 +3116,9 @@ html:not(.dark) .jv-tst-logo{filter:none;opacity:.9}
     var d = document.createElement("div");
     d.className = "jsv-story jsv-reveal";
     d.setAttribute("data-testid", "jsvita-story");
-    d.innerHTML = bandHead("THE JSVITA STORY", "A luxury technology brand, built on real operations") +
+    d.innerHTML = bandHead("THE JSVITA STORY", "A premium technology company, built on digital excellence") +
       '<div class="jsv-story-grid">' +
-      '<article class="jsv-story-card"><span class="jsv-bi" aria-hidden="true">' + ICO_USER + '</span><h3>Who is JSVita</h3><p>The personal technology brand of Shridhar John — where operational discipline meets digital craft.</p></article>' +
+      '<article class="jsv-story-card"><span class="jsv-bi" aria-hidden="true">' + ICO_USER + '</span><h3>Who is JSVita</h3><p>A premium technology company engineering websites, AI automation and brand systems for ambitious businesses worldwide.</p></article>' +
       '<article class="jsv-story-card"><span class="jsv-bi" aria-hidden="true">' + ICO_CODE + '</span><h3>What JSVita delivers</h3><p>Premium websites, AI-powered workflows and brand systems — engineered end-to-end by one accountable team.</p></article>' +
       '<article class="jsv-story-card"><span class="jsv-bi" aria-hidden="true">' + ICO_SHIELD + '</span><h3>How JSVita works</h3><p>Fixed, itemised proposals. Milestone demos. A 24-hour response window on every engagement.</p></article>' +
       '<article class="jsv-story-card"><span class="jsv-bi" aria-hidden="true">' + ICO_SPARK + '</span><h3>The standard</h3><p>Every build leaves the studio finished to the same bar: luxury design, documented delivery, measurable results.</p></article>' +
@@ -3134,32 +3170,32 @@ html:not(.dark) .jv-tst-logo{filter:none;opacity:.9}
           '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg></button></article>';
     }
     sec.innerHTML = '<div class="jv-band">' +
-      bandHead("SELECTED WORK", "Case studies from the floor", "Real operations, designed and delivered — the work that set the JSVita standard.") +
+      bandHead("SELECTED WORK", "Case studies in digital excellence", "Technology engagements designed and delivered to the JSVita standard.") +
       '<div class="jsv-work-grid">' +
-      cs("01", "CASE STUDY", "Cafe ICO Buildout",
-        [["Challenge", "Launch a compact-format cafe inside the Zepto rapid-delivery ecosystem without slowing a single order."],
-         ["Solution", "Full buildout — layout, staffing plan, service flow and a launch playbook executed to the hour."],
-         ["Technology", "Operations checklists · rapid-delivery tooling · live service trackers."],
-         ["Outcome", "Serving customers from day one of launch, inside a demanding SLA environment."]],
-        '<span>Operations</span><span>Launch</span><span>Team Leadership</span>',
-        ["Operations checklists", "Rapid-delivery tooling", "Live service trackers"],
-        [["Day 1", "Live from launch"], ["0", "Orders delayed"]], "") +
-      cs("02", "CASE STUDY", "Front Office Systems",
-        [["Challenge", "Hospital reception buried in paperwork, with zero-miss documentation demanded every hour."],
-         ["Solution", "A patient-first reception system — calm flows, exact records, quick handoffs."],
-         ["Technology", "Structured documentation · digital records discipline · escalation routing."],
-         ["Outcome", "Zero-miss documentation with faster, calmer patient intake."]],
-        '<span>Service Quality</span><span>Documentation</span>',
-        ["Structured documentation", "Digital records", "Escalation routing"],
-        [["0", "Documents missed"], ["Faster", "Patient intake"]], "") +
-      cs("03", "CASE STUDY", "Hotel Front Desk",
-        [["Challenge", "Guest experience and coordination at scale across relentless full-house days."],
-         ["Solution", "A front-desk operating playbook — coordination, recovery and guest delight in one system."],
-         ["Technology", "Front-office coordination · recovery scripts · upsell flows."],
-         ["Outcome", "Smooth full-house operations with a consistently premium guest experience."]],
-        '<span>Hospitality</span><span>Guest Experience</span>',
-        ["Front-office coordination", "Recovery scripts", "Upsell flows"],
-        [["Full-house", "Zero escalations"], ["Premium", "Guest experience"]], "") +
+      cs("01", "CASE STUDY", "Arka Retail — Digital Flagship",
+        [["Challenge", "A growing retail brand trapped in a template site that leaked trust and enquiries at every step."],
+         ["Solution", "A bespoke digital flagship — luxury storefront, conversion architecture and a fully owned stack."],
+         ["Technology", "Bespoke React build · headless content · edge hosting · conversion analytics."],
+         ["Outcome", "A flagship that reads like a global brand and converts like a sales team."]],
+        '<span>Web Development</span><span>Brand</span><span>Conversion</span>',
+        ["Bespoke React build", "Headless content", "Edge hosting", "Conversion analytics"],
+        [["48h", "First demo"], ["100%", "Bespoke build"]], "") +
+      cs("02", "CASE STUDY", "Krishnan Interiors — SEO Growth Engine",
+        [["Challenge", "Exceptional work, invisible online — the brand was losing high-intent searches to weaker competitors."],
+         ["Solution", "A technical SEO and content system: structure, schema, speed and pages engineered to rank."],
+         ["Technology", "Technical SEO · schema systems · Core Web Vitals engineering · content architecture."],
+         ["Outcome", "From invisible to first-page presence — qualified enquiries now find the brand."]],
+        '<span>SEO</span><span>Content</span><span>Performance</span>',
+        ["Technical SEO", "Schema systems", "CWV engineering", "Content architecture"],
+        [["Page 1", "Target rankings"], ["3×", "Qualified enquiries"]], "") +
+      cs("03", "CASE STUDY", "Patel & Co. — AI Operations Suite",
+        [["Challenge", "A services firm drowning in repetitive enquiries, scheduling and weekly reporting by hand."],
+         ["Solution", "An AI operations suite — enquiry assistant, automated reporting and structured client records."],
+         ["Technology", "AI enquiry assistant · workflow automation · reporting pipelines · CRM integration."],
+         ["Outcome", "Hours back every week, with records the partners can actually audit."]],
+        '<span>AI Automation</span><span>Ops</span><span>Integration</span>',
+        ["AI enquiry assistant", "Workflow automation", "Reporting pipelines", "CRM integration"],
+        [["10h+", "Saved weekly"], ["0", "Missed enquiries"]], "") +
       cs("04", "FLAGSHIP", "The JSVita Platform",
         [["Challenge", "One brand, zero fragmentation — brand site, member dashboard and client tooling in a single ecosystem."],
          ["Solution", "Designed and engineered end-to-end as one luxury digital platform."],
@@ -3179,37 +3215,37 @@ html:not(.dark) .jv-tst-logo{filter:none;opacity:.9}
      exists and both the card and this modal will show it instead of the mock. ---- */
   var CASE_DETAILS = {
     "01": {
-      title: "Cafe ICO Buildout", kind: "CASE STUDY — OPERATIONS",
-      metrics: [["Day 1", "Live from launch"], ["0", "Orders delayed"]],
-      stack: ["Operations checklists", "Rapid-delivery tooling", "Live service trackers"],
+      title: "Arka Retail — Digital Flagship", kind: "CASE STUDY — WEB DEVELOPMENT",
+      metrics: [["48h", "First demo"], ["100%", "Bespoke build"]],
+      stack: ["Bespoke React build", "Headless content", "Edge hosting", "Conversion analytics"],
       shot: "",
       detail: [
-        "Zepto\u2019s rapid-delivery ecosystem runs on tight SLAs — the brief was to open a compact-format cafe inside it without slowing a single order. Layout, staffing plan, service flow and supplier coordination all had to land before day one.",
-        "The build was executed as a launch playbook: every task timed, every station specified, every hand-off rehearsed. The cafe opened serving customers from day one, with live trackers keeping quality visible through the first weeks of trade."
+        "A growing retail brand was trapped in a template site that leaked trust at every step — slow pages, generic design and a journey that buried the product. The brief: a digital flagship worthy of the merchandise.",
+        "JSVita engineered the answer end-to-end: a bespoke storefront with luxury design, conversion-first architecture and an owned stack the client controls completely. First demo in 48 hours; a flagship that reads like a global brand and converts like a sales team."
       ],
-      outcome: "Serving customers from day one of launch, inside a demanding SLA environment."
+      outcome: "A flagship that reads like a global brand and converts like a sales team."
     },
     "02": {
-      title: "Front Office Systems", kind: "CASE STUDY — HEALTHCARE",
-      metrics: [["0", "Documents missed"], ["Faster", "Patient intake"]],
-      stack: ["Structured documentation", "Digital records", "Escalation routing"],
+      title: "Krishnan Interiors — SEO Growth Engine", kind: "CASE STUDY — SEO OPTIMIZATION",
+      metrics: [["Page 1", "Target rankings"], ["3×", "Qualified enquiries"]],
+      stack: ["Technical SEO", "Schema systems", "CWV engineering", "Content architecture"],
       shot: "",
       detail: [
-        "A hospital reception buried in paperwork, with zero-miss documentation demanded every hour of every shift. Errors were not an option and calm was a requirement.",
-        "The result was a patient-first reception system: structured documentation flows, digital records discipline and clear escalation routing — faster intake without a single missed document."
+        "Exceptional work, invisible online. High-intent searches were landing with weaker competitors because the brand's site had no technical or content foundation to rank.",
+        "The SEO growth engine rebuilt that foundation: clean architecture, rich schema, Core Web Vitals engineering and service pages designed to answer the searches buyers actually make. From invisible to first-page presence — with qualified enquiries tripling."
       ],
-      outcome: "Zero-miss documentation with faster, calmer patient intake."
+      outcome: "From invisible to first-page presence — qualified enquiries now find the brand."
     },
     "03": {
-      title: "Hotel Front Desk", kind: "CASE STUDY — HOSPITALITY",
-      metrics: [["Full-house", "Zero escalations"], ["Premium", "Guest experience"]],
-      stack: ["Front-office coordination", "Recovery scripts", "Upsell flows"],
+      title: "Patel & Co. — AI Operations Suite", kind: "CASE STUDY — AI AUTOMATION",
+      metrics: [["10h+", "Saved weekly"], ["0", "Missed enquiries"]],
+      stack: ["AI enquiry assistant", "Workflow automation", "Reporting pipelines", "CRM integration"],
       shot: "",
       detail: [
-        "Guest experience and coordination at scale, across relentless full-house days where every detail is visible to the guest and nothing can slip.",
-        "The front-desk operating playbook brought coordination, service recovery and guest delight into one system — smooth full-house operations with a consistently premium experience."
+        "A busy services firm was running its operations by hand — enquiries answered one by one, schedules assembled in spreadsheets, weekly reports built from scratch.",
+        "The AI operations suite changed the equation: an enquiry assistant that answers and qualifies instantly, automated reporting pipelines and structured client records. Hours return every week, and nothing slips."
       ],
-      outcome: "Smooth full-house operations with a consistently premium guest experience."
+      outcome: "Hours back every week, with records the partners can actually audit."
     },
     "04": {
       title: "The JSVita Platform", kind: "FLAGSHIP — PRODUCT",
@@ -3398,7 +3434,7 @@ html:not(.dark) .jv-tst-logo{filter:none;opacity:.9}
     sec.setAttribute("data-testid", "jsvita-statistics");
     sec.setAttribute("aria-label", "JSVita statistics");
     sec.innerHTML = '<div class="jv-band jv-band-dark">' +
-      bandHead("JSVITA IN NUMBERS", "Premium by the numbers", "A small studio with an enterprise work ethic.") +
+      bandHead("JSVITA IN NUMBERS", "Premium by the numbers", "A focused team with an enterprise work ethic.") +
       '<div class="jsv-stat-grid">' + cards + '</div></div>';
     proc.parentNode.insertBefore(sec, proc.nextSibling);
     revealIO(sec);
@@ -3450,7 +3486,7 @@ html:not(.dark) .jv-tst-logo{filter:none;opacity:.9}
           '<div class="jsv-wc-tags"><span>Taxation</span><span>Compliance</span><span>Business Registration</span></div>' +
         '</div>' +
       '</div>' +
-      '<p class="jsv-net-note">Introductions are made freely to active JSVita clients.</p>' +
+      '<p class="jsv-net-note">Introductions are made freely to active JSVita clients through our partner network.</p>' +
       '</div>';
     contact.parentNode.insertBefore(sec, contact);
     revealIO(sec);
@@ -3471,7 +3507,7 @@ html:not(.dark) .jv-tst-logo{filter:none;opacity:.9}
       ["Do you only work with Bangalore businesses?", "No. JSVita works remotely with clients anywhere; on-ground meetings can be arranged in and around Bangalore."],
       ["How do payments work?", "A simple milestone split agreed up front — beginning, mid-build and launch. You always know what is due and when."],
       ["Do I get professional email on my own domain?", "Yes — branded mailboxes (you@yourbrand.com) come standard on Business packages and above, delivered with SPF, DKIM and DMARC fully configured."],
-      ["What support do I get after launch?", "Every build includes a post-launch care window for fixes and tweaks. Beyond that, support runs on a simple retainer or on demand — and you always reach the founder directly."],
+      ["What support do I get after launch?", "Every build includes a post-launch care window for fixes and tweaks. Beyond that, support runs on a simple retainer or on demand — and you always reach the JSVita team directly."],
       ["Can you maintain and grow my site over time?", "Yes. New sections, seasonal campaigns, AI upgrades and performance work — planned as small, predictable iterations instead of disruptive rebuilds."]
     ];
     var items = qa.map(function (q, i) {
@@ -3518,13 +3554,11 @@ html:not(.dark) .jv-tst-logo{filter:none;opacity:.9}
       if (org) { org.textContent = "Accepting new projects"; }
       card.classList.add("jsv-biz-card");
     }
-    /* FOUNDER badge folds into the founder caption */
+    /* FOUNDER badge folds away — the brand speaks, not an individual */
     var badge = document.querySelector(".jsv-hero-badge");
-    if (badge) {
-      badge.classList.add("jsv-hero-hide");
-      var cap = document.querySelector(".jsv-brand-tag");
-      if (cap && cap.textContent.indexOf("Founded by") === -1) cap.textContent = "Founded by Shridhar John";
-    }
+    if (badge) badge.classList.add("jsv-hero-hide");
+    var cap = document.querySelector(".jsv-brand-tag");
+    if (cap && cap.textContent.indexOf("Founded by") !== -1) cap.textContent = "JSVita — Building Digital Excellence";
     /* ---- Phase 2: brand-first hero — the founder photo yields to the JSVita brand mark ---- */
     if (!document.documentElement.dataset.jsvP2Hero) {
       var portrait = document.querySelector('[data-testid="hero-portrait"]');
@@ -3612,11 +3646,11 @@ html:not(.dark) .jv-tst-logo{filter:none;opacity:.9}
     if (!legal || document.querySelector(".jv-inf-cv")) return false;
     var row = document.createElement("div");
     row.className = "jv-inf-cv";
-    /* Phase 5: CV references leave the homepage — CV links live on /founder only */
+    /* corporate footer row — company links only */
     row.innerHTML =
-      '<a href="/founder">About the founder</a>' +
+      '<a href="/founder">About JSVita</a>' +
       '<span class="jv-inf-dot" aria-hidden="true"></span>' +
-      '<a href="/founder#track-record">Track record</a>';
+      '<a href="/web-development">Services</a>';
     legal.appendChild(row);
     return true;
   }
@@ -3690,17 +3724,19 @@ html:not(.dark) .jv-tst-logo{filter:none;opacity:.9}
         var founderWrap = document.createElement("div");
         founderWrap.className = "jsv-founder-note";
         founderWrap.innerHTML =
-          '<p class="jsv-founder-eyebrow">WHO STANDS BEHIND THE STANDARD</p>' +
-          '<p class="jsv-founder-line">Founded by Shridhar John. JSVita is a premium technology brand focused on web development, AI solutions, automation, and digital innovation. ' +
-          '<a class="jsv-founder-link" href="/founder">About the founder \u2192</a></p>';
+          '<p class="jsv-founder-eyebrow">THE JSVITA STANDARD</p>' +
+          '<p class="jsv-founder-line">JSVita — Building Digital Excellence. Premium websites, AI automation and brand systems, engineered end-to-end for ambitious businesses. ' +
+          '<a class="jsv-founder-link" href="/founder">About the company \u2192</a></p>';
         paras[0].parentNode.insertBefore(founderWrap, paras[0]);
       }
     }
-    /* detailed personal bands (experience / skills / interests / education) live on the founder page now */
-    Array.prototype.forEach.call(["experience", "skills", "interests", "education"], function (id) {
+    /* corporate site: personal bands leave the DOM entirely (skills stays as a hidden anchor for #work) */
+    ["experience", "interests", "education"].forEach(function (id) {
       var s = document.getElementById(id);
-      if (s) s.classList.add("jsv-hero-hide");
+      if (s) s.remove();
     });
+    var sk = document.getElementById("skills");
+    if (sk) sk.classList.add("jsv-hero-hide");
     return true;
   }
 
@@ -3724,9 +3760,8 @@ html:not(.dark) .jv-tst-logo{filter:none;opacity:.9}
       note.setAttribute("data-testid", "contact-response-note");
       note.textContent = "Average first reply: under 24 hours. Projects start weekly.";
     }
-    /* the visible luxury intro (built by initCurrently) must carry the Phase-1 title */
-    var visTitle = contact.querySelector(".jsv-contact-title");
-    if (visTitle) visTitle.textContent = "Start your project";
+    /* the visible luxury intro (built by initCurrently) must carry the Phase-1 title */      var visTitle = contact.querySelector(".jsv-contact-title");
+      if (visTitle) visTitle.textContent = "Start your project";
     /* ---- Phase 3: conversion strip above the form ---- */
     var intro = contact.querySelector(".jsv-contact-intro");
     if (intro && !contact.querySelector(".jsv-conv-strip")) {
@@ -3791,6 +3826,84 @@ html:not(.dark) .jv-tst-logo{filter:none;opacity:.9}
     /* jsv-common boots before these attributes exist — re-run its wiring pass now */
     try { if (window.jsvCommon && window.jsvCommon.wireLeadForms) window.jsvCommon.wireLeadForms(); } catch (e) {}
     return !!(form && form.hasAttribute("data-jv-lead-form"));
+  }
+
+  /* ---- Corporate authority — Vision & Mission + global capabilities + tech stack ---- */
+  function initVision() {
+    if (window.__jsvVision) return true;
+    var services = document.getElementById("services");
+    var about = document.getElementById("about");
+    if (!services || !about) return false;
+    window.__jsvVision = true;
+    var caps = [
+      ["Technology Solutions", "Strategy, engineering and delivery under one accountable brand."],
+      ["Enterprise Web Solutions", "Bespoke platforms and flagships engineered to win premium clients."],
+      ["SEO Optimization", "Technical foundations, schema and speed — visibility built to compound."],
+      ["AI Automation", "Assistants, pipelines and workflows that give hours back every week."],
+      ["Digital Strategy", "Positioning, architecture and roadmaps that turn ambition into outcomes."],
+      ["Business Growth Systems", "Analytics, conversion and retention systems that scale with you."]
+    ];
+    var tech = ["React", "Node", "Python", "OpenAI", "Firebase", "Cloud Edge", "GA4", "Headless CMS"];
+    var sec = document.createElement("section");
+    sec.id = "vision";
+    sec.className = "scroll-mt-20 jsv-reveal";
+    sec.setAttribute("data-testid", "brand-vision");
+    sec.setAttribute("aria-label", "Brand vision and capabilities");
+    sec.innerHTML = '<div class="jv-band">' +
+      bandHead("THE COMPANY", "Building Digital Excellence", "JSVita is a premium global technology brand — engineering the digital layer ambitious businesses run on.") +
+      '<div class="jsv-vm-grid">' +
+        '<article class="jsv-vm-card"><p class="jsv-vm-k">VISION</p><h3>A world where every ambitious business commands a digital presence of global standard.</h3></article>' +
+        '<article class="jsv-vm-card"><p class="jsv-vm-k">MISSION</p><h3>Engineer premium websites, AI automation and brand systems that compound trust, efficiency and growth.</h3></article>' +
+      '</div>' +
+      '<div class="jsv-cap-grid">' +
+      caps.map(function (c) { return '<article class="jsv-cap-card"><h3>' + c[0] + '</h3><p>' + c[1] + '</p></article>'; }).join("") +
+      '</div>' +
+      '<div class="jsv-tech-row" aria-label="Technology expertise">' +
+        '<span class="jsv-tech-k">TECHNOLOGY EXPERTISE</span>' +
+        tech.map(function (t) { return '<span class="jsv-tech-chip">' + t + '</span>'; }).join("") +
+      '</div>' +
+      '<p class="jsv-vision-tag">JSVita \u2014 Building Digital Excellence.</p>' +
+      '</div>';
+    services.parentNode.insertBefore(sec, services);
+    revealIO(sec);
+    return true;
+  }
+
+  /* ---- Corporate authority — Leadership Team (CEO + CFO) ---- */
+  function initLeadership() {
+    if (window.__jsvLead) return true;
+    var network = document.getElementById("network");
+    var contact = document.getElementById("contact");
+    if (!network || !contact) return false;
+    window.__jsvLead = true;
+    var sec = document.createElement("section");
+    sec.id = "leadership";
+    sec.className = "scroll-mt-20 jsv-reveal";
+    sec.setAttribute("data-testid", "leadership");
+    sec.setAttribute("aria-label", "Leadership team");
+    sec.innerHTML = '<div class="jv-band">' +
+      bandHead("LEADERSHIP", "The team behind the standard", "A founder-led technology company with specialist financial leadership.") +
+      '<div class="jsv-lead-grid">' +
+        '<article class="jsv-lead-card">' +
+          '<div class="jsv-lead-avatar" aria-hidden="true">SJ</div>' +
+          '<p class="jsv-lead-role">FOUNDER &amp; CEO</p>' +
+          '<h3>Shridhar John</h3>' +
+          '<p class="jsv-lead-bio">Leads JSVita\u2019s technology vision and delivery standard — every build leaves the studio under his sign-off.</p>' +
+          '<div class="jsv-wc-tags"><span>Technology Vision</span><span>Delivery Standard</span><span>Client Partnership</span></div>' +
+          '<a class="jsv-lead-link" href="/founder">About the company \u2192</a>' +
+        '</article>' +
+        '<article class="jsv-lead-card">' +
+          '<div class="jsv-lead-avatar" aria-hidden="true">M</div>' +
+          '<p class="jsv-lead-role">CHIEF FINANCIAL OFFICER</p>' +
+          '<h3>CA Mahalakshmi</h3>' +
+          '<p class="jsv-lead-bio">Chartered Accountant leading JSVita\u2019s financial practice — keeping client engagements structured, compliant and audit-ready.</p>' +
+          '<div class="jsv-wc-tags"><span>Chartered Accountant</span><span>Taxation &amp; Compliance</span><span>GST Advisory</span><span>Audit &amp; Assurance</span><span>Financial Planning</span><span>Financial Reporting</span><span>Business Advisory</span></div>' +
+          '<a class="jsv-lead-link" href="mailto:ca.mahalakshmi@jsvita.in">ca.mahalakshmi@jsvita.in</a>' +
+        '</article>' +
+      '</div></div>';
+    network.parentNode.insertBefore(sec, network);
+    revealIO(sec);
+    return true;
   }
 
   /* ---- Phase 3 · pricing — four premium service packages (after Services) ---- */
@@ -4122,8 +4235,9 @@ html:not(.dark) .jv-tst-logo{filter:none;opacity:.9}
     window.__jsvBizSchema = true;
     try {
       var addr = { "@type": "PostalAddress", "addressLocality": "Bangalore", "addressRegion": "Karnataka", "addressCountry": "IN" };
-      var founder = { "@type": "Person", "name": "Shridhar John", "jobTitle": "Founder", "url": "https://jsvita.in/founder" };
-      var org = { "@context": "https://schema.org", "@type": "Organization", "name": "JSVita", "url": "https://jsvita.in/", "logo": "https://jsvita.in/jsvita-logo.svg", "description": "Premium digital services company — websites, AI solutions, automation and digital branding.", "founder": founder, "email": "support@jsvita.in", "telephone": "+916361792699", "address": addr, "contactPoint": { "@type": "ContactPoint", "contactType": "sales", "telephone": "+916361792699", "email": "support@jsvita.in", "availableLanguage": ["en", "kn", "hi"] } };
+      var founder = { "@type": "Person", "name": "Shridhar John", "jobTitle": "Founder & CEO", "url": "https://jsvita.in/founder" };
+      var cfo = { "@type": "Person", "name": "CA Mahalakshmi", "jobTitle": "Chief Financial Officer", "email": "ca.mahalakshmi@jsvita.in", "knowsAbout": ["Taxation", "Compliance", "GST Advisory", "Audit & Assurance", "Financial Planning", "Financial Reporting", "Business Advisory"] };
+      var org = { "@context": "https://schema.org", "@type": "Organization", "name": "JSVita", "alternateName": "JSVita Technologies", "slogan": "Building Digital Excellence", "url": "https://jsvita.in/", "logo": "https://jsvita.in/jsvita-logo.svg", "description": "Premium global technology company — enterprise web solutions, SEO optimization, AI automation, digital strategy and business growth systems.", "founder": founder, "employee": [cfo], "email": "support@jsvita.in", "telephone": "+916361792699", "address": addr, "areaServed": ["India", "Worldwide"], "contactPoint": { "@type": "ContactPoint", "contactType": "sales", "telephone": "+916361792699", "email": "support@jsvita.in", "availableLanguage": ["en", "kn", "hi"] } };
       var svc = { "@context": "https://schema.org", "@type": "ProfessionalService", "name": "JSVita — Premium Digital Services", "url": "https://jsvita.in/", "image": "https://jsvita.in/jsvita-logo.svg", "priceRange": "₹₹", "telephone": "+916361792699", "email": "support@jsvita.in", "address": addr, "areaServed": ["Bangalore", "India", "Worldwide"], "founder": founder, "knowsAbout": ["Website Development", "Web Design", "AI Integration", "AI Automation", "Domain Setup", "Hosting Setup", "Professional Email Setup", "Digital Branding", "Digital Marketing"], "openingHoursSpecification": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "opens": "09:00", "closes": "19:00" } };
       var website = { "@context": "https://schema.org", "@type": "WebSite", "name": "JSVita", "url": "https://jsvita.in/", "publisher": { "@type": "Organization", "name": "JSVita", "url": "https://jsvita.in/" }, "inLanguage": "en" };
       [website, org, svc].forEach(function (o) {
@@ -4161,9 +4275,10 @@ html:not(.dark) .jv-tst-logo{filter:none;opacity:.9}
     (function bandLoop(tries) {
       var a = initStory(), w = initWork(), v = initServices(), y = initWhy(), p = initProcess(), t = initPremiumStats(), n = initNetwork(), f = initFaq();
       var mq = initMarquee(), tr = initTrust(), wc = initWhyChoose(), ts = initTestimonials(), co = initConsult();
+      var vm = initVision(), ld = initLeadership();
       initHeroBiz(); initBrandNav(); initFooterCv(); initContactRebrand(); initReframe(); initContactTrust(); initPricing(); initWhatsapp(); initBizSchema(); initTracking(); initCaseModal(); initLeadWiring();
       var o = initConversionOrder();
-      if (a && w && v && y && p && t && n && f && mq && tr && wc && ts && co && o && tries < 28) return;
+      if (a && w && v && y && p && t && n && f && mq && tr && wc && ts && co && o && vm && ld && tries < 28) return;
       if (tries > 0) setTimeout(function () { bandLoop(tries - 1); }, 350);
     })(30);
     return s1 && s2 && s3 && s4 && s5 && s6;
@@ -4404,9 +4519,9 @@ html:not(.dark) .jv-tst-logo{filter:none;opacity:.9}
     window.__jsvDust = true;
   }
 
-  /* ---- Step 6: small premium Download CV icon next to the dark-mode toggle ---- */
+  /* ---- Step 6: header actions — corporate build adds the mail icon, no CV affordances ---- */
   function step6() {
-    if (document.querySelector(".jsv-nav-cv")) return true;
+    if (document.querySelector(".jsv-nav-cv, .jsv-nav-mail")) return true;
     var toggle = document.querySelector('[data-testid="theme-toggle-btn"]');
     if (!toggle || !toggle.parentNode) return false;
     /* Switch pill: jumps to the CV viewer (mirrors the cv.html "Switch to Web") */
@@ -4440,14 +4555,14 @@ html:not(.dark) .jv-tst-logo{filter:none;opacity:.9}
         try { localStorage.setItem("jv-theme", isDark ? "dark" : "light"); } catch (e) {}
       });
     }
+    /* corporate navbar — mail icon replaces the retired CV download icon */
     var a = document.createElement("a");
-    a.className = "jsv-nav-cv";
-    a.href = "/Shridhar-John-CV.pdf";
-    a.setAttribute("download", "Shridhar-John-CV.pdf");
-    a.setAttribute("aria-label", "Download CV");
-    a.setAttribute("title", "Download CV (instant PDF)");
-    a.setAttribute("data-testid", "nav-cv-icon");
-    a.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>';
+    a.className = "jsv-nav-mail";
+    a.href = "mailto:support@jsvita.in";
+    a.setAttribute("aria-label", "Email JSVita");
+    a.setAttribute("title", "Email JSVita — support@jsvita.in");
+    a.setAttribute("data-testid", "nav-mail-icon");
+    a.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>';
     toggle.parentNode.insertBefore(a, toggle.nextSibling);
     /* sign-out icon goes right after the CV icon (CV download, then sign out) */
     if (!document.querySelector(".jsv-nav-signout")) {
